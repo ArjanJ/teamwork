@@ -1,13 +1,15 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
+import { store } from '../store/store';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { Routes } from './routes/Routes';
 
 const App = () => (
-  <React.Fragment>
+  <Provider store={store}>
     <GlobalStyles />
     <Routes />
-  </React.Fragment>
+  </Provider>
 );
 
 export default App;
