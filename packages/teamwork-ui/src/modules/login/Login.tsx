@@ -4,14 +4,14 @@ import React, { SFC, useState } from 'react';
 import { auth, firebase } from '../../firebase';
 import { useForm } from '../../hooks/useForm';
 
-interface SignupProps {
+interface LoginProps {
   path: string;
 }
 
-export const Signup: SFC<SignupProps> = () => {
+export const Login: SFC<LoginProps> = () => {
   const [hasError, setError] = useState(false);
 
-  const signupWithGoogle = async () => {
+  const signInWithGoogle = async () => {
     try {
       await auth.doSignInWithPopup(firebase.GoogleProvider);
       navigate('/');
@@ -24,22 +24,22 @@ export const Signup: SFC<SignupProps> = () => {
     const { email, password } = values;
 
     try {
-      await auth.doCreateUserWithEmailAndPassword(email, password);
+      await auth.doSignInWithEmailAndPassword(email, password);
     } catch (err) {
       setError(true);
     }
   };
 
   const { handleInputChange, handleSubmit, values } = useForm({
-    initialValues: { email: '', password: '', confirmPassword: '' },
+    initialValues: { email: '', password: '' },
     onSubmit,
   });
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Signup</h1>
-      <button onClick={signupWithGoogle} type="button">
-        Register with Google
+    <form>
+      <h1>Login</h1>
+      <button onClick={signInWithGoogle} type="button">
+        Login with Google
       </button>
       <div>
         <label>Email</label>
@@ -62,20 +62,10 @@ export const Signup: SFC<SignupProps> = () => {
         />
       </div>
       <div>
-        <label>Confirm Password</label>
-        <input
-          id="confirmPassword"
-          name="confirmPassword"
-          onChange={handleInputChange}
-          type="password"
-          value={values.confirmPassword}
-        />
-      </div>
-      <div>
-        <button type="submit">Create account</button>
+        <button type="submit">Login</button>
       </div>
     </form>
   );
 };
 
-export default Signup;
+export default Login;
