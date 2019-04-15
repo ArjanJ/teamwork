@@ -16,7 +16,6 @@ export const Dashboard: SFC<DashboardProps> = () => (
 );
 
 const DashboardWrapper = styled(Flex)`
-  background-color: #022c43;
   min-height: 100vh;
 `;
 

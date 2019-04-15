@@ -2,15 +2,10 @@ import { Router } from '@reach/router';
 import React from 'react';
 import Loadable from 'react-loadable';
 
-// const Login = Loadable({
-//   loader: () => import('../Login/Login'),
-//   loading: () => null,
-// });
-
-// const Signup = Loadable({
-//   loader: () => import('../Signup/Signup'),
-//   loading: () => null,
-// });
+const Signup = Loadable({
+  loader: () => import('../signup/Signup'),
+  loading: () => null,
+});
 
 const Dashboard = Loadable({
   loader: () => import('../dashboard/Dashboard'),
@@ -19,8 +14,7 @@ const Dashboard = Loadable({
 
 export const Routes = () => (
   <Router>
-    {/* <Login path="/login" /> */}
-    {/* <Signup path="/signup" /> */}
+    <Signup path="/signup" />
     <Dashboard path="/*" />
   </Router>
 );
