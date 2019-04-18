@@ -1,15 +1,15 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { StoreContext } from 'redux-react-hook';
 
 import { store } from '../store/store';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { Routes } from './routes/Routes';
 
 const App = () => (
-  <Provider store={store}>
+  <StoreContext.Provider value={store}>
     <GlobalStyles />
     <Routes />
-  </Provider>
+  </StoreContext.Provider>
 );
 
 export default App;
