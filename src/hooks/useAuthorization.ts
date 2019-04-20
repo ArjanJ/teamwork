@@ -8,7 +8,7 @@ import { useAuthUser } from './useAuthUser';
 
 export const useAuthorization = (path: string): { user: User | void } => {
   const { initialising, user } = useAuthState(firebase.auth);
-  const { setAuthUser } = useAuthUser();
+  const { authUser, setAuthUser } = useAuthUser();
 
   // If no user and not loading then redirect to some path.
   useEffect(() => {
@@ -16,7 +16,13 @@ export const useAuthorization = (path: string): { user: User | void } => {
       navigate(path);
     }
 
-    if (!!user && !!user.email && !!user.displayName && !!user.uid) {
+    if (
+      !authUser &&
+      !!user &&
+      !!user.email &&
+      !!user.displayName &&
+      !!user.uid
+    ) {
       setAuthUser({
         displayName: user.displayName,
         email: user.email,
