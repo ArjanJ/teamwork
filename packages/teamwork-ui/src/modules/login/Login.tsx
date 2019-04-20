@@ -1,32 +1,35 @@
 import { navigate } from '@reach/router';
 import React, { SFC, useState } from 'react';
 
-import { auth, firebase } from '../../firebase';
+import { auth } from '../../firebase';
 import { useForm } from '../../hooks/useForm';
+import { useSocialSignIn } from '../../hooks/useSocialSignIn';
 
 interface LoginProps {
   path: string;
 }
 
 export const Login: SFC<LoginProps> = () => {
-  const [hasError, setError] = useState(false);
-
-  const signInWithGoogle = async () => {
-    try {
-      await auth.doSignInWithPopup(firebase.GoogleProvider);
+  const onSocialSignInSuccess = () => {
+    if (isNewUser) {
+      navigate('/onboarding');
+    } else {
       navigate('/');
-    } catch (err) {
-      setError(true);
     }
   };
 
+  const { hasError, isNewUser, signIn } = useSocialSignIn({
+    onSuccess: onSocialSignInSuccess,
+  });
+
   const onSubmit = async () => {
     const { email, password } = values;
+    const [emailPasswordError, setEmailPasswordError] = useState(false);
 
     try {
       await auth.doSignInWithEmailAndPassword(email, password);
     } catch (err) {
-      setError(true);
+      setEmailPasswordError(true);
     }
   };
 
@@ -36,9 +39,9 @@ export const Login: SFC<LoginProps> = () => {
   });
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h1>Login</h1>
-      <button onClick={signInWithGoogle} type="button">
+      <button onClick={signIn} type="button">
         Login with Google
       </button>
       <div>

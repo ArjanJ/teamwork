@@ -1,44 +1,53 @@
 import { navigate } from '@reach/router';
 import React, { SFC, useState } from 'react';
 
-import { auth, firebase } from '../../firebase';
+import { auth } from '../../firebase';
 import { useForm } from '../../hooks/useForm';
+import { useSocialSignIn } from '../../hooks/useSocialSignIn';
 
 interface SignupProps {
   path: string;
 }
 
 export const Signup: SFC<SignupProps> = () => {
-  const [hasError, setError] = useState(false);
-
-  const signupWithGoogle = async () => {
-    try {
-      await auth.doSignInWithPopup(firebase.GoogleProvider);
+  const onSocialSignInSuccess = () => {
+    if (isNewUser) {
+      navigate('/onboarding');
+    } else {
       navigate('/');
-    } catch (err) {
-      setError(true);
     }
   };
 
-  const onSubmit = async () => {
+  const { hasError, isNewUser, signIn } = useSocialSignIn({
+    onSuccess: onSocialSignInSuccess,
+  });
+
+  const onEmailPasswordSignInSuccess = async () => {
     const { email, password } = values;
+    const [emailPasswordError, setEmailPasswordError] = useState(false);
 
     try {
       await auth.doCreateUserWithEmailAndPassword(email, password);
     } catch (err) {
-      setError(true);
+      setEmailPasswordError(true);
     }
   };
 
+  const initialFormValues = {
+    email: '',
+    password: '',
+    confirmPassword: '',
+  };
+
   const { handleInputChange, handleSubmit, values } = useForm({
-    initialValues: { email: '', password: '', confirmPassword: '' },
-    onSubmit,
+    initialValues: initialFormValues,
+    onSubmit: onEmailPasswordSignInSuccess,
   });
 
   return (
     <form onSubmit={handleSubmit}>
       <h1>Signup</h1>
-      <button onClick={signupWithGoogle} type="button">
+      <button onClick={signIn} type="button">
         Register with Google
       </button>
       <div>

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-interface UseForm {
+interface IUseForm {
   initialValues: { [index: string]: any };
   onSubmit(): any;
 }
 
-export const useForm = ({ initialValues, onSubmit }: UseForm) => {
+export const useForm = ({ initialValues, onSubmit }: IUseForm) => {
   const [values, setValues] = useState(initialValues);
 
   const handleSubmit = (event: React.FormEvent) => {
