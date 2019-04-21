@@ -17,11 +17,12 @@
     "typescript": "3.4.3"
   },
   "scripts": {
-    "deploy": "npm run build && firebase deploy --project dev --only hosting",
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "deploy": "npm run build && firebase deploy --project dev --only hosting",
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "start:api": "cd functions && concurrently \"npm run watch\" \"npm run serve\"",
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,6 +43,7 @@
     "@types/react": "16.8.13",
     "@types/rebass": "^3.0.3",
     "@types/styled-components": "^4.1.14",
+    "concurrently": "^4.1.0",
     "firebase-tools": "^6.7.0",
     "prettier": "^1.16.4"
   }
