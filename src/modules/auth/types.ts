@@ -7,9 +7,9 @@ export interface IAuthUser {
   uid: string | null;
 }
 
-export interface SetAuthUser {
+export interface ISetAuthUser {
   type: typeof SET_AUTH_USER;
   payload: IAuthUser;
 }
 
-export type AuthActions = SetAuthUser;
+export type AuthActions = ISetAuthUser;
