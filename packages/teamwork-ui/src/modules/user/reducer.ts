@@ -1,8 +1,18 @@
 import { IUser, UserActions } from './types';
 
-type UserState = IUser | null;
+type User = IUser | null;
 
-const initialState: UserState = null;
+interface IUserState {
+  isCreating: boolean;
+  isFetching: boolean;
+  user: User;
+}
+
+const initialState: IUserState = {
+  isCreating: false,
+  isFetching: false,
+  user: null,
+};
 
 export default function(state = initialState, action: UserActions) {
   switch (action.type) {
