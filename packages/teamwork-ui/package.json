@@ -16,6 +16,7 @@
     "styled-components": "^4.2.0",
     "typescript": "3.4.3"
   },
+  "proxy": "http://localhost:5000/teamwork-dev-74882/us-central1",
   "scripts": {
     "build": "react-scripts build",
     "deploy": "npm run build && firebase deploy --project dev --only hosting",

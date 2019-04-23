@@ -21,15 +21,26 @@ const signOut = async () => {
 };
 
 const createUser = async () => {
-  const res = await fetch(
-    'http://localhost:5000/teamwork-dev-74882/us-central1/webApi/api/v1/users',
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        test: 'test',
-      }),
+  const res = await fetch('/api/users', {
+    headers: {
+      'content-type': 'application/json',
     },
-  );
+    method: 'POST',
+    body: JSON.stringify({
+      email: 'test',
+    }),
+  });
+  const json = await res.json();
+  console.log({ json });
+};
+
+const getUser = async (userId: string) => {
+  const res = await fetch(`/api/users/${userId}`, {
+    headers: {
+      'content-type': 'application/json',
+    },
+    method: 'GET',
+  });
   const json = await res.json();
   console.log({ json });
 };
@@ -44,6 +55,7 @@ export const Dashboard: SFC<DashboardProps> = () => {
       <Box>
         <button onClick={signOut}>Sign out</button>
         <button onClick={createUser}>create user</button>
+        <button onClick={() => getUser('test@gmail.com')}>get user</button>
       </Box>
     </DashboardWrapper>
   );
