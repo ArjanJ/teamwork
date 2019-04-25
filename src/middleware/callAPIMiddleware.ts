@@ -37,7 +37,14 @@ export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
 
   type Response = any;
 
-  return callAPI().then(
+  const { auth } = getState();
+
+  const headers = {
+    Authorization: `Bearer ${auth.token}`,
+    'Content-Type': 'application/json',
+  };
+
+  return callAPI(headers).then(
     (response: Response) =>
       dispatch(
         Object.assign({}, payload, {

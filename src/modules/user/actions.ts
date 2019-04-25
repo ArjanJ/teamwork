@@ -3,9 +3,9 @@ import { createUserTypes, IUser } from './types';
 
 export function createUser(user: IUser) {
   return {
-    callAPI: () =>
+    callAPI: (headers = {}) =>
       fetch('/api/users', {
-        headers: {},
+        headers,
         method: 'POST',
       }),
     payload: user,
