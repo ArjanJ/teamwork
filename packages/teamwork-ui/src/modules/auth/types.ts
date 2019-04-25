@@ -1,3 +1,4 @@
+export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const SET_AUTH_USER = 'SET_AUTH_USER';
 
 export interface IAuthUser {
@@ -7,9 +8,9 @@ export interface IAuthUser {
   uid: string | null;
 }
 
-export interface ISetAuthUser {
-  type: typeof SET_AUTH_USER;
-  payload: IAuthUser;
-}
+// export interface ISetAuthUser {
+//   type: typeof SET_AUTH_USER;
+//   payload: IAuthUser;
+// }
 
-export type AuthActions = ISetAuthUser;
+// export type AuthActions = ISetAuthUser;
