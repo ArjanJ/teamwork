@@ -5,6 +5,7 @@ export function createUser(user: IUser) {
   return {
     callAPI: (headers = {}) =>
       fetch('/api/users', {
+        body: JSON.stringify(user),
         headers,
         method: 'POST',
       }),

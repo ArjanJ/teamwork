@@ -1,16 +1,9 @@
 import * as functions from 'firebase-functions';
-import admin from 'firebase-admin';
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 
-const serviceAccount = require('../keys/teamwork-dev-74882-firebase-adminsdk-zbdex-3cdaaf7b04.json');
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://teamwork-dev-74882.firebaseio.com',
-});
-
-export const db = admin.firestore();
+import { verifyIdToken } from './middleware/verifyIdToken';
+import { db } from './config/firebase';
 
 const app = express();
 
@@ -18,15 +11,20 @@ const usersCollection = 'users';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(verifyIdToken);
 
 export const api = functions.https.onRequest(app);
 
 app.post('/users', (req: Request, res: Response) => {
-  db.collection(usersCollection)
-    .doc(req.body.email)
-    .set(req.body)
-    .then(() => res.status(200).send({ success: true }))
-    .catch(() => res.status(500).send({ error: true }));
+  const { decodedToken } = req;
+
+  if (decodedToken) {
+    db.collection(usersCollection)
+      .doc(decodedToken.email)
+      .set(req.body)
+      .then(() => res.status(200).send(req.body))
+      .catch(() => res.status(500).send({ error: true }));
+  }
 });
 
 app.get('/users/:userId', (req: Request, res: Response) => {

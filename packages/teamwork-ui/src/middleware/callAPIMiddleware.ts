@@ -2,7 +2,7 @@ import { AnyAction, Dispatch, MiddlewareAPI } from 'redux';
 
 export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
   next: Dispatch,
-) => (action: AnyAction) => {
+) => async (action: AnyAction) => {
   const { callAPI, payload = {}, shouldCallAPI = () => true, types } = action;
 
   if (!types) {
@@ -35,8 +35,6 @@ export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
     }),
   );
 
-  type Response = any;
-
   const { auth } = getState();
 
   const headers = {
@@ -44,20 +42,24 @@ export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
     'Content-Type': 'application/json',
   };
 
-  return callAPI(headers).then(
-    (response: Response) =>
+  try {
+    const response = await callAPI(headers);
+    const json = await response.json();
+
+    if (response) {
       dispatch(
         Object.assign({}, payload, {
-          response,
+          data: json,
           type: successType,
         }),
-      ),
-    (error: any) =>
-      dispatch(
-        Object.assign({}, payload, {
-          error,
-          type: failureType,
-        }),
-      ),
-  );
+      );
+    }
+  } catch (error) {
+    dispatch(
+      Object.assign({}, payload, {
+        error,
+        type: failureType,
+      }),
+    );
+  }
 };
