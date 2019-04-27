@@ -6,10 +6,17 @@ import { verifyIdToken } from './middleware/verifyIdToken';
 import { userRouter } from './routes/users';
 
 const app = express();
+const main = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(verifyIdToken);
 app.use(userRouter);
 
-export const api = functions.https.onRequest(app);
+/**
+ * This is needed because Firebase hosting rewrite adds an extra /api
+ * in the url.
+ */
+main.use('/api', app);
+
+export const api = functions.https.onRequest(main);

@@ -19,10 +19,13 @@ export const useAuthorization = (path: string): { user: User | void } => {
       navigate(path);
     }
 
+    const getIdToken = () =>
+      user && user.getIdToken().then(token => dispatch(setAuthToken(token)));
+
     // Get ID Token from firebase state and store in store.
-    if (user) {
-      user.getIdToken().then(token => dispatch(setAuthToken(token)));
-    }
+    getIdToken();
+    // Every 15mins get a new token. (expires every hour unless it's refreshed)
+    setInterval(() => getIdToken, 60000 * 15);
 
     if (
       !authUser &&
