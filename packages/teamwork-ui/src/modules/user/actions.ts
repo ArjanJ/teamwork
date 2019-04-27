@@ -1,5 +1,5 @@
 import { AppState } from '../../store/store';
-import { createUserTypes, IUser } from './types';
+import { createUserTypes, getUserTypes, IUser } from './types';
 
 export function createUser(user: IUser) {
   return {
@@ -19,4 +19,19 @@ export function createUser(user: IUser) {
   };
 }
 
-export function getUser() {}
+export function getUser(email: string) {
+  return {
+    callAPI: (headers = {}) =>
+      fetch(`/api/users/${email}`, {
+        headers,
+        method: 'GET',
+      }),
+    payload: email,
+    shouldCallAPI: (state: AppState) => !state.user.user,
+    types: [
+      getUserTypes.GET_USER_REQUEST,
+      getUserTypes.GET_USER_SUCCESS,
+      getUserTypes.GET_USER_FAILURE,
+    ],
+  };
+}

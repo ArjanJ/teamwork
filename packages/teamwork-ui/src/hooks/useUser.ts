@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useDispatch, StoreContext } from 'redux-react-hook';
 
-import { createUser } from '../modules/user/actions';
+import { createUser, getUser } from '../modules/user/actions';
 import { IUser } from '../modules/user/types';
 
 export const useUser = () => {
@@ -10,6 +10,7 @@ export const useUser = () => {
   const { user } = store.getState();
 
   const create = (user: IUser) => dispatch(createUser(user));
+  const get = (email: string) => dispatch(getUser(email));
 
-  return { createUser: create, user: user };
+  return { createUser: create, getUser: get, user: user };
 };

@@ -21,35 +21,10 @@ const signOut = async () => {
   }
 };
 
-// const createUser = async () => {
-//   const res = await fetch('/api/users', {
-//     headers: {
-//       'content-type': 'application/json',
-//     },
-//     method: 'POST',
-//     body: JSON.stringify({
-//       email: 'test',
-//     }),
-//   });
-//   const json = await res.json();
-//   console.log({ json });
-// };
-
-const getUser = async (userId: string) => {
-  const res = await fetch(`/api/users/${userId}`, {
-    headers: {
-      'content-type': 'application/json',
-    },
-    method: 'GET',
-  });
-  const json = await res.json();
-  console.log({ json });
-};
-
 export const Dashboard: SFC<DashboardProps> = () => {
   // Go to login page if not logged in.
   useAuthorization('/login');
-  const { createUser, user } = useUser();
+  const { createUser, getUser, user } = useUser();
   const fakeUser = {
     firstName: 'elon',
     lastName: 'musk',
@@ -61,7 +36,9 @@ export const Dashboard: SFC<DashboardProps> = () => {
       <Box>
         <button onClick={signOut}>Sign out</button>
         <button onClick={() => createUser(fakeUser)}>create user</button>
-        <button onClick={() => getUser('test@gmail.com')}>get user</button>
+        <button onClick={() => getUser('arjan.jassal.27@gmail.com')}>
+          get user
+        </button>
       </Box>
     </DashboardWrapper>
   );
