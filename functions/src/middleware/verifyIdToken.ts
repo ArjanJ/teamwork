@@ -23,15 +23,15 @@ export const verifyIdToken = async (
     try {
       const decodedToken = await admin.auth().verifyIdToken(token);
       req.decodedToken = decodedToken;
-      return next();
+      next();
     } catch (error) {
-      return res
+      res
         .status(401)
         .send(UNAUTHORIZED_ERROR(error.message))
         .end();
     }
   } else {
-    return res
+    res
       .status(401)
       .send(UNAUTHORIZED_ERROR())
       .end();
