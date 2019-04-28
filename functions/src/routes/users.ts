@@ -10,9 +10,7 @@ userRouter.post('/users', async (req: Request, res: Response) => {
 
   if (decodedToken) {
     try {
-      const response = await usersCollection
-        .doc(decodedToken.email)
-        .set(req.body);
+      await usersCollection.doc(decodedToken.uid).set(req.body);
       res.status(200).send({ data: req.body });
     } catch (error) {
       res.status(500).send({ error });
@@ -33,4 +31,8 @@ userRouter.get('/users/:userId', async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).send({ error });
   }
+});
+
+userRouter.put('/users/:userId', async (req: Request, res: Response) => {
+  const { userId } = req.params;
 });
