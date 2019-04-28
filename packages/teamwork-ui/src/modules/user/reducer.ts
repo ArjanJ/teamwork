@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { createUserTypes, IUser } from './types';
+import { createUserTypes, getUserTypes, IUser } from './types';
 
 type User = IUser | null;
 
@@ -26,13 +26,30 @@ export default function(state = initialState, action: AnyAction) {
       return {
         ...state,
         isCreating: false,
-        user: action.payload,
+        user: action.data,
       };
     case createUserTypes.CREATE_USER_FAILURE:
       return {
         ...state,
-        error: action.payload,
+        error: action.error,
         isCreating: false,
+      };
+    case getUserTypes.GET_USER_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case getUserTypes.GET_USER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        user: action.data,
+      };
+    case getUserTypes.GET_USER_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        isFetching: false,
       };
     default:
       return state;
