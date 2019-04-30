@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { auth, firebase } from '../firebase';
 
 interface IUseSocialSignIn {
-  onSuccess(): any;
+  onSuccess(isNewUser: boolean): any;
 }
 
 export const useSocialSignIn = ({ onSuccess }: IUseSocialSignIn) => {
@@ -21,11 +21,15 @@ export const useSocialSignIn = ({ onSuccess }: IUseSocialSignIn) => {
         setUser(user);
       }
 
-      if (additionalUserInfo && additionalUserInfo.isNewUser) {
+      const isNewUser = additionalUserInfo
+        ? additionalUserInfo.isNewUser
+        : false;
+
+      if (isNewUser) {
         setIsNewUser(true);
       }
 
-      onSuccess();
+      onSuccess(isNewUser);
     } catch (err) {
       setError(true);
     }

@@ -9,7 +9,7 @@ import { useAuthUser } from '../../hooks/useAuthUser';
 import { useUser } from '../../hooks/useUser';
 import { Sidebar } from '../sidebar/Sidebar';
 
-interface DashboardProps {
+interface IDashboardProps {
   path: string;
 }
 
@@ -22,7 +22,7 @@ const signOut = async () => {
   }
 };
 
-export const Dashboard: SFC<DashboardProps> = () => {
+export const Dashboard: SFC<IDashboardProps> = () => {
   // Go to login page if not logged in.
   useAuthorization('/login');
 
@@ -32,6 +32,7 @@ export const Dashboard: SFC<DashboardProps> = () => {
   const fakeUser = {
     firstName: 'elon',
     lastName: 'musk',
+    role: 'Software Engineer',
   };
 
   return (
