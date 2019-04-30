@@ -7,4 +7,5 @@ export const updateUserTypes = generateActionTypes('UPDATE_USER');
 export interface IUser {
   firstName: string;
   lastName: string;
+  role: string;
 }

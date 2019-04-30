@@ -4,21 +4,28 @@ import React, { SFC, useState } from 'react';
 import { auth } from '../../firebase';
 import { useForm } from '../../hooks/useForm';
 import { useSocialSignIn } from '../../hooks/useSocialSignIn';
+import { useUser } from '../../hooks/useUser';
 
 interface SignupProps {
   path: string;
 }
 
 export const Signup: SFC<SignupProps> = () => {
-  const onSocialSignInSuccess = () => {
+  const { createUser } = useUser();
+  const onSocialSignInSuccess = (isNewUser: boolean) => {
     if (isNewUser) {
+      createUser({
+        firstName: '',
+        lastName: '',
+        role: '',
+      });
       navigate('/onboarding');
     } else {
       navigate('/');
     }
   };
 
-  const { hasError, isNewUser, signIn } = useSocialSignIn({
+  const { hasError, signIn } = useSocialSignIn({
     onSuccess: onSocialSignInSuccess,
   });
 

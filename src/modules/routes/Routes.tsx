@@ -17,10 +17,16 @@ const Dashboard = Loadable({
   loading: () => null,
 });
 
+const Onboarding = Loadable({
+  loader: () => import('../onboarding/Onboarding'),
+  loading: () => null,
+});
+
 export const Routes = () => (
   <Router>
     <Login path="/login" />
     <Signup path="/signup" />
+    <Onboarding path="onboarding" />
     <Dashboard path="/*" />
   </Router>
 );
