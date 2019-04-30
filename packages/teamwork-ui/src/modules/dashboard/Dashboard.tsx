@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { auth } from '../../firebase';
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { useAuthUser } from '../../hooks/useAuthUser';
-import { useAuthToken } from '../../hooks/useAuthToken';
 import { useUser } from '../../hooks/useUser';
 import { Sidebar } from '../sidebar/Sidebar';
 
@@ -26,10 +25,10 @@ const signOut = async () => {
 export const Dashboard: SFC<DashboardProps> = () => {
   // Go to login page if not logged in.
   useAuthorization('/login');
-  useAuthToken();
+
   const { authUser } = useAuthUser();
 
-  const { createUser, getUser, user } = useUser();
+  const { createUser, getUser, updateUser } = useUser();
   const fakeUser = {
     firstName: 'elon',
     lastName: 'musk',
@@ -42,6 +41,11 @@ export const Dashboard: SFC<DashboardProps> = () => {
         <button onClick={signOut}>Sign out</button>
         <button onClick={() => createUser(fakeUser)}>create user</button>
         <button onClick={() => getUser(authUser.uid)}>get user</button>
+        <button
+          onClick={() => updateUser(authUser.uid, { firstName: 'elongated' })}
+        >
+          update user
+        </button>
       </Box>
     </DashboardWrapper>
   );

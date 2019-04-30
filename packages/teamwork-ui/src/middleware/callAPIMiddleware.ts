@@ -1,5 +1,7 @@
 import { AnyAction, Dispatch, MiddlewareAPI } from 'redux';
 
+import { firebase } from '../firebase';
+
 export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
   next: Dispatch,
 ) => async (action: AnyAction) => {
@@ -29,35 +31,42 @@ export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
 
   const [requestType, successType, failureType] = types;
 
-  dispatch(
-    Object.assign({}, payload, {
-      type: requestType,
-    }),
-  );
+  const { currentUser } = firebase.auth;
 
-  const { auth } = getState();
+  if (currentUser) {
+    // Fetch idToken first, otherwise API will return 401.
+    const token = await currentUser.getIdToken(false);
 
-  const headers = {
-    Authorization: `Bearer ${auth.token}`,
-    'Content-Type': 'application/json',
-  };
+    if (token) {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      };
 
-  try {
-    const response = await callAPI(headers);
-    const { data } = await response.json();
+      dispatch(
+        Object.assign({}, payload, {
+          type: requestType,
+        }),
+      );
 
-    if (response) {
-      dispatch({
-        data,
-        payload,
-        type: successType,
-      });
+      try {
+        const response = await callAPI(headers);
+        const { data } = await response.json();
+
+        if (response) {
+          dispatch({
+            data,
+            payload,
+            type: successType,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          error,
+          payload,
+          type: failureType,
+        });
+      }
     }
-  } catch (error) {
-    dispatch({
-      error,
-      payload,
-      type: failureType,
-    });
   }
 };

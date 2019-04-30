@@ -19,10 +19,16 @@ userRouter.post('/users', async (req: Request, res: Response) => {
 });
 
 userRouter.get('/users/:userId', async (req: Request, res: Response) => {
-  const { userId } = req.params;
+  const { decodedToken, params } = req;
+  const { userId } = params;
+
+  if (decodedToken && decodedToken.uid !== userId) {
+    return res.sendStatus(401);
+  }
 
   try {
     const doc = await usersCollection.doc(userId).get();
+
     if (!doc.exists) {
       res.status(200).send({ data: null });
     } else {
@@ -34,5 +40,18 @@ userRouter.get('/users/:userId', async (req: Request, res: Response) => {
 });
 
 userRouter.put('/users/:userId', async (req: Request, res: Response) => {
-  const { userId } = req.params;
+  const { body, decodedToken, params } = req;
+  const { userId } = params;
+
+  if (decodedToken && decodedToken.uid !== userId) {
+    return res.sendStatus(401);
+  }
+
+  try {
+    const doc = await usersCollection.doc(userId);
+    await doc.update(body);
+    res.status(200).send({ data: body });
+  } catch (error) {
+    res.status(500).send({ error });
+  }
 });
