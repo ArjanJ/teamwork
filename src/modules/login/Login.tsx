@@ -1,4 +1,4 @@
-import { navigate } from '@reach/router';
+import { Link, navigate } from '@reach/router';
 import React, { SFC, useState } from 'react';
 
 import { auth } from '../../firebase';
@@ -66,6 +66,11 @@ export const Login: SFC<LoginProps> = () => {
       </div>
       <div>
         <button type="submit">Login</button>
+      </div>
+      <div>
+        <p>
+          Don't have an account? <Link to="/signup">Signup</Link>
+        </p>
       </div>
     </form>
   );
