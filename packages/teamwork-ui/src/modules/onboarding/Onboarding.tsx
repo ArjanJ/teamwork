@@ -1,5 +1,5 @@
 import { navigate } from '@reach/router';
-import React, { SFC, useState } from 'react';
+import React, { SFC, useEffect, useState } from 'react';
 
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { useAuthUser } from '../../hooks/useAuthUser';
@@ -113,6 +113,23 @@ const RoleForm: SFC<IStepFormProps> = ({ updateStep }) => {
 
 export const Onboarding: SFC<IOnboardingProps> = () => {
   useAuthorization('/login');
+
+  const { authUser } = useAuthUser();
+  const { getUser, isFetching, user } = useUser();
+
+  useEffect(() => {
+    if (authUser) {
+      // Fetch user if we haven't already.
+      if (!user && !isFetching) {
+        getUser(authUser.uid);
+      }
+
+      // If the user has filled out the info already go to dashboard.
+      if (user && user.firstName && user.lastName && user.role) {
+        navigate('/');
+      }
+    }
+  });
 
   const [step, updateStep] = useState<Step>('NAME');
 
