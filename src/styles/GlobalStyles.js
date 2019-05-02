@@ -90,9 +90,20 @@ export const GlobalStyles = createGlobalStyle`
   button,
   input,
   select {
+    border: none;
     color: inherit;
     font-family: inherit;
     font-size: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  input {
+    &:focus {
+      outline: none;
+    }
   }
 
   ul {
