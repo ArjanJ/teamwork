@@ -1,9 +1,23 @@
 import { Link, navigate } from '@reach/router';
 import React, { SFC, useState } from 'react';
+import { Box, Flex } from 'rebass';
 
+import { GoogleLogo, TeamworkLogo } from '../../components/logos/logos';
 import { auth } from '../../firebase';
 import { useForm } from '../../hooks/useForm';
 import { useSocialSignIn } from '../../hooks/useSocialSignIn';
+import {
+  Backdrop,
+  BigButton,
+  Button,
+  Form,
+  Header,
+  Heading,
+  Input,
+  Label,
+  P,
+  Separator,
+} from '../signup/Shared';
 
 interface LoginProps {
   path: string;
@@ -39,40 +53,63 @@ export const Login: SFC<LoginProps> = () => {
   });
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Login</h1>
-      <button onClick={signIn} type="button">
-        Login with Google
-      </button>
-      <div>
-        <label>Email</label>
-        <input
-          id="email"
-          name="email"
-          onChange={handleInputChange}
-          type="email"
-          value={values.email}
-        />
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          id="password"
-          name="password"
-          onChange={handleInputChange}
-          type="password"
-          value={values.password}
-        />
-      </div>
-      <div>
-        <button type="submit">Login</button>
-      </div>
-      <div>
-        <p>
-          Don't have an account? <Link to="/signup">Signup</Link>
-        </p>
-      </div>
-    </form>
+    <Backdrop>
+      <Header>
+        <a href="#">
+          <TeamworkLogo />
+        </a>
+      </Header>
+      <Form onSubmit={handleSubmit}>
+        <Box mb="24px">
+          <Heading>Login</Heading>
+          <P>Login with your work Google account</P>
+        </Box>
+        <Box mb="24px">
+          <BigButton onClick={signIn} type="button">
+            <GoogleLogo />
+            <span>Log in with Google</span>
+          </BigButton>
+        </Box>
+        <Separator mb="36px">
+          <P>Or, log in with your email</P>
+        </Separator>
+        <Box mb="24px">
+          <Label>Email</Label>
+          <Input
+            id="email"
+            name="email"
+            onChange={handleInputChange}
+            placeholder="Your email"
+            required
+            type="email"
+            value={values.email}
+          />
+        </Box>
+        <Box mb="24px">
+          <Label>Password</Label>
+          <Input
+            id="password"
+            name="password"
+            onChange={handleInputChange}
+            placeholder="Create password"
+            required
+            type="password"
+            value={values.password}
+          />
+        </Box>
+        <Flex justifyContent="center" mb="24px">
+          <Button type="submit">Log in</Button>
+        </Flex>
+        <Box>
+          <P>
+            Dont' have an account?{' '}
+            <Link to="/signup">
+              <strong>Signup</strong>
+            </Link>
+          </P>
+        </Box>
+      </Form>
+    </Backdrop>
   );
 };
 
