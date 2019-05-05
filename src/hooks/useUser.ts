@@ -8,7 +8,7 @@ export const useUser = () => {
   const dispatch = useDispatch();
 
   const mapState = useCallback(state => state.user, []);
-  const user = useMappedState(mapState);
+  const userState = useMappedState(mapState);
 
   const create = (user: IUser) => dispatch(createUser(user));
   const get = (uid: string) => dispatch(getUser(uid));
@@ -17,8 +17,10 @@ export const useUser = () => {
   return {
     createUser: create,
     getUser: get,
-    isFetching: user.isFetching,
+    isCreating: userState.isCreating,
+    isFetching: userState.isFetching,
+    isUpdating: userState.isUpdating,
     updateUser: update,
-    user: user.user,
+    user: userState.user,
   };
 };

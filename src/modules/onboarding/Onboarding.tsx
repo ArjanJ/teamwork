@@ -1,10 +1,23 @@
 import { navigate } from '@reach/router';
-import React, { SFC, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
+import posed, { PoseGroup } from 'react-pose';
+import { Box, Flex } from 'rebass';
+import styled from 'styled-components';
 
+import { Header } from '../../components/header/Header';
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { useAuthUser } from '../../hooks/useAuthUser';
 import { useForm } from '../../hooks/useForm';
 import { useUser } from '../../hooks/useUser';
+import {
+  Backdrop,
+  Button,
+  Field,
+  Heading,
+  Input,
+  Label,
+} from '../signup/Shared';
+import { delay } from '../../utils/delay';
 
 interface IOnboardingProps {
   path: string;
@@ -14,14 +27,17 @@ interface IStepFormProps {
   updateStep(step: Step): void;
 }
 
-type Step = 'NAME' | 'ROLE';
+type Step = 'NAME' | 'ROLE' | 'DONE';
 
-const NameForm: SFC<IStepFormProps> = ({ updateStep }) => {
+const NameForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
   const { authUser } = useAuthUser();
   const { updateUser } = useUser();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async () => {
+    setIsSubmitting(true);
     await updateUser(authUser.uid, values);
+    await delay(1600);
     updateStep('ROLE');
   };
 
@@ -36,42 +52,57 @@ const NameForm: SFC<IStepFormProps> = ({ updateStep }) => {
   });
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>First name</label>
-        <input
-          id="firstName"
-          name="firstName"
-          onChange={handleInputChange}
-          required
-          type="firstName"
-          value={values.firstName}
-        />
-      </div>
-      <div>
-        <label>Last name</label>
-        <input
-          id="lastName"
-          name="lastName"
-          onChange={handleInputChange}
-          required
-          type="lastName"
-          value={values.lastName}
-        />
-      </div>
-      <div>
-        <button type="submit">Next</button>
-      </div>
-    </form>
+    <React.Fragment>
+      <Box mb="24px">
+        <Heading>What's your name?</Heading>
+      </Box>
+      <form onSubmit={handleSubmit}>
+        <Field mb="24px">
+          <Input
+            autoFocus={true}
+            id="firstName"
+            name="firstName"
+            onChange={handleInputChange}
+            placeholder="Your first name"
+            required
+            type="firstName"
+            value={values.firstName}
+          />
+          <Label>First name</Label>
+        </Field>
+        <Field mb="36px">
+          <Input
+            id="lastName"
+            name="lastName"
+            onChange={handleInputChange}
+            placeholder="Your last name"
+            required
+            type="lastName"
+            value={values.lastName}
+          />
+          <Label>Last name</Label>
+        </Field>
+        <Flex justifyContent="flex-end">
+          <Button isSubmitting={isSubmitting} type="submit">
+            {!isSubmitting && 'Next'}
+          </Button>
+        </Flex>
+      </form>
+    </React.Fragment>
   );
 };
 
-const RoleForm: SFC<IStepFormProps> = ({ updateStep }) => {
+const RoleForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
   const { authUser } = useAuthUser();
   const { updateUser } = useUser();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async () => {
+    setIsSubmitting(true);
     await updateUser(authUser.uid, values);
+    await delay(1600);
+    updateStep('ROLE');
+    await delay(300);
     navigate('/');
   };
 
@@ -87,31 +118,42 @@ const RoleForm: SFC<IStepFormProps> = ({ updateStep }) => {
   const handleBackClick = () => updateStep('NAME');
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Role</label>
-        <input
-          id="role"
-          name="role"
-          onChange={handleInputChange}
-          required
-          type="role"
-          value={values.role}
-        />
-      </div>
-      <div>
-        <button onClick={handleBackClick} type="button">
-          Back
-        </button>
-      </div>
-      <div>
-        <button type="submit">Finish</button>
-      </div>
-    </form>
+    <React.Fragment>
+      <Box mb="24px">
+        <Heading>What's your role?</Heading>
+      </Box>
+      <form onSubmit={handleSubmit}>
+        <Field mb="36px">
+          <Input
+            autoFocus={true}
+            id="role"
+            name="role"
+            onChange={handleInputChange}
+            placeholder="Your role"
+            required
+            type="role"
+            value={values.role}
+          />
+          <Label>Role</Label>
+        </Field>
+        <Flex justifyContent="space-between">
+          <Box>
+            <Button onClick={handleBackClick} type="button">
+              Back
+            </Button>
+          </Box>
+          <Box>
+            <Button isSubmitting={isSubmitting} type="submit">
+              {!isSubmitting && 'Finish'}
+            </Button>
+          </Box>
+        </Flex>
+      </form>
+    </React.Fragment>
   );
 };
 
-export const Onboarding: SFC<IOnboardingProps> = () => {
+export const Onboarding: FunctionComponent<IOnboardingProps> = () => {
   useAuthorization('/login');
 
   const { authUser } = useAuthUser();
@@ -126,7 +168,7 @@ export const Onboarding: SFC<IOnboardingProps> = () => {
 
       // If the user has filled out the info already go to dashboard.
       if (user && user.firstName && user.lastName && user.role) {
-        navigate('/');
+        // navigate('/');
       }
     }
   });
@@ -134,12 +176,50 @@ export const Onboarding: SFC<IOnboardingProps> = () => {
   const [step, updateStep] = useState<Step>('NAME');
 
   return (
-    <div>
-      <h1>Onboarding</h1>
-      {step === 'NAME' && <NameForm updateStep={updateStep} />}
-      {step === 'ROLE' && <RoleForm updateStep={updateStep} />}
-    </div>
+    <Backdrop>
+      <Header />
+      <Wrapper>
+        <Title>Welcome to Teamwork!</Title>
+        <PoseGroup>
+          {step === 'NAME' && (
+            <FormAnimation key="shade">
+              <NameForm updateStep={updateStep} />
+            </FormAnimation>
+          )}
+          {step === 'ROLE' && (
+            <FormAnimation key="shade2">
+              <RoleForm updateStep={updateStep} />
+            </FormAnimation>
+          )}
+        </PoseGroup>
+      </Wrapper>
+    </Backdrop>
   );
 };
+
+const FormAnimation = posed.div({
+  enter: {
+    opacity: 1,
+    delay: 300,
+  },
+  exit: {
+    y: 80,
+    opacity: 0,
+    transition: { duration: 300 },
+  },
+});
+
+const Wrapper = styled.div`
+  justify-self: center;
+  margin-bottom: 148px;
+  min-height: 405px;
+  width: 460px;
+`;
+
+const Title = styled.h1`
+  color: #f8cf83;
+  font-size: 36px;
+  margin-bottom: 64px;
+`;
 
 export default Onboarding;

@@ -1,8 +1,9 @@
 import { Link, navigate } from '@reach/router';
-import React, { SFC, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Box, Flex } from 'rebass';
 
-import { GoogleLogo, TeamworkLogo } from '../../components/logos/logos';
+import { Header } from '../../components/header/Header';
+import { GoogleLogo } from '../../components/logos/logos';
 import { auth } from '../../firebase';
 import { useForm } from '../../hooks/useForm';
 import { useSocialSignIn } from '../../hooks/useSocialSignIn';
@@ -11,8 +12,8 @@ import {
   Backdrop,
   BigButton,
   Button,
+  Field,
   Form,
-  Header,
   Heading,
   Input,
   Label,
@@ -24,7 +25,7 @@ interface SignupProps {
   path: string;
 }
 
-export const Signup: SFC<SignupProps> = () => {
+export const Signup: FunctionComponent<SignupProps> = () => {
   const { createUser } = useUser();
 
   const onSocialSignInSuccess = (isNewUser: boolean) => {
@@ -68,11 +69,7 @@ export const Signup: SFC<SignupProps> = () => {
 
   return (
     <Backdrop>
-      <Header>
-        <a href="#">
-          <TeamworkLogo />
-        </a>
-      </Header>
+      <Header />
       <Form onSubmit={handleSubmit}>
         <Box mb="24px">
           <Heading>Create your account</Heading>
@@ -87,8 +84,7 @@ export const Signup: SFC<SignupProps> = () => {
         <Separator mb="36px">
           <P>Or, register with your email</P>
         </Separator>
-        <Box mb="24px">
-          <Label>Email</Label>
+        <Field mb="24px">
           <Input
             id="email"
             name="email"
@@ -98,9 +94,9 @@ export const Signup: SFC<SignupProps> = () => {
             type="email"
             value={values.email}
           />
-        </Box>
-        <Box mb="24px">
-          <Label>Password</Label>
+          <Label>Email</Label>
+        </Field>
+        <Field mb="24px">
           <Input
             id="password"
             name="password"
@@ -110,9 +106,9 @@ export const Signup: SFC<SignupProps> = () => {
             type="password"
             value={values.password}
           />
-        </Box>
-        <Box mb="36px">
-          <Label>Confirm Password</Label>
+          <Label>Password</Label>
+        </Field>
+        <Field mb="36px">
           <Input
             id="confirmPassword"
             name="confirmPassword"
@@ -122,7 +118,8 @@ export const Signup: SFC<SignupProps> = () => {
             type="password"
             value={values.confirmPassword}
           />
-        </Box>
+          <Label>Confirm Password</Label>
+        </Field>
         <Flex justifyContent="center" mb="24px">
           <Button type="submit">Create account</Button>
         </Flex>
