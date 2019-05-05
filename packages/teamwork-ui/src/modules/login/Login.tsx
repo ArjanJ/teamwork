@@ -1,8 +1,9 @@
 import { Link, navigate } from '@reach/router';
-import React, { SFC, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Box, Flex } from 'rebass';
 
-import { GoogleLogo, TeamworkLogo } from '../../components/logos/logos';
+import { Header } from '../../components/header/Header';
+import { GoogleLogo } from '../../components/logos/logos';
 import { auth } from '../../firebase';
 import { useForm } from '../../hooks/useForm';
 import { useSocialSignIn } from '../../hooks/useSocialSignIn';
@@ -10,8 +11,8 @@ import {
   Backdrop,
   BigButton,
   Button,
+  Field,
   Form,
-  Header,
   Heading,
   Input,
   Label,
@@ -23,7 +24,7 @@ interface LoginProps {
   path: string;
 }
 
-export const Login: SFC<LoginProps> = () => {
+export const Login: FunctionComponent<LoginProps> = () => {
   const onSocialSignInSuccess = () => {
     if (isNewUser) {
       navigate('/onboarding');
@@ -54,15 +55,11 @@ export const Login: SFC<LoginProps> = () => {
 
   return (
     <Backdrop>
-      <Header>
-        <a href="#">
-          <TeamworkLogo />
-        </a>
-      </Header>
+      <Header />
       <Form onSubmit={handleSubmit}>
         <Box mb="24px">
-          <Heading>Login</Heading>
-          <P>Login with your work Google account</P>
+          <Heading>Log in</Heading>
+          <P>Log in with your work Google account</P>
         </Box>
         <Box mb="24px">
           <BigButton onClick={signIn} type="button">
@@ -73,8 +70,7 @@ export const Login: SFC<LoginProps> = () => {
         <Separator mb="36px">
           <P>Or, log in with your email</P>
         </Separator>
-        <Box mb="24px">
-          <Label>Email</Label>
+        <Field mb="24px">
           <Input
             id="email"
             name="email"
@@ -84,9 +80,9 @@ export const Login: SFC<LoginProps> = () => {
             type="email"
             value={values.email}
           />
-        </Box>
-        <Box mb="24px">
-          <Label>Password</Label>
+          <Label>Email</Label>
+        </Field>
+        <Field mb="24px">
           <Input
             id="password"
             name="password"
@@ -96,7 +92,8 @@ export const Login: SFC<LoginProps> = () => {
             type="password"
             value={values.password}
           />
-        </Box>
+          <Label>Password</Label>
+        </Field>
         <Flex justifyContent="center" mb="24px">
           <Button type="submit">Log in</Button>
         </Flex>

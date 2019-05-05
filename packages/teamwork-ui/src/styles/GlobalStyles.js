@@ -98,6 +98,11 @@ export const GlobalStyles = createGlobalStyle`
 
   button {
     cursor: pointer;
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
   }
 
   input {

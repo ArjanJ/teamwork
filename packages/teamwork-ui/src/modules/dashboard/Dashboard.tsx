@@ -1,5 +1,5 @@
 import { navigate } from '@reach/router';
-import React, { SFC } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
@@ -22,7 +22,7 @@ const signOut = async () => {
   }
 };
 
-export const Dashboard: SFC<IDashboardProps> = () => {
+export const Dashboard: FunctionComponent<IDashboardProps> = () => {
   // Go to login page if not logged in.
   useAuthorization('/login');
 

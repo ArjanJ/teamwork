@@ -1,5 +1,8 @@
+import { darken } from 'polished';
 import { Box } from 'rebass';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+import { Easing } from '../../styles/Easing';
 
 export const Backdrop = styled.div`
   background-color: #0900c3;
@@ -7,14 +10,10 @@ export const Backdrop = styled.div`
   min-height: 100vh;
 `;
 
-export const Header = styled.header`
-  padding: 24px;
-`;
-
 export const Heading = styled.h1`
-  color: #f8cf83;
-  font-size: 30px;
-  margin-bottom: 10px;
+  color: white;
+  font-size: 24px;
+  font-weight: 500;
 `;
 
 export const P = styled.p`
@@ -23,8 +22,6 @@ export const P = styled.p`
 `;
 
 export const Form = styled.form`
-  justify-self: center;
-  max-width: 360px;
   text-align: center;
   width: 100%;
 `;
@@ -46,10 +43,14 @@ export const BigButton = styled.button`
   }
 `;
 
+export const Field = styled(Box)`
+  position: relative;
+`;
+
 export const Input = styled.input`
   background: rgba(255, 255, 255, 0.2);
   color: white;
-  height: 48px;
+  height: 64px;
   padding: 0 16px;
   transition: all 0.2s ease-out;
   width: 100%;
@@ -60,24 +61,69 @@ export const Input = styled.input`
 
   &:focus,
   &:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  &:focus + label,
+  &:valid + label {
+    opacity: 1;
+  }
+
+  &:focus,
+  &:valid {
+    padding-top: 18px;
   }
 `;
 
 export const Label = styled.label`
-  display: block;
-  height: 0;
-  visibility: hidden;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  left: 16px;
+  opacity: 0;
+  position: absolute;
+  top: 10px;
+  transition: all 0.5s ${Easing.OUT};
 `;
 
-export const Button = styled.button`
+const loading = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-100%);
+  }
+  
+  100% {
+    transform: translateX(0);
+  }
+`;
+
+export const Button = styled.button<{ isSubmitting?: boolean }>`
   background: #2d77ee;
   border-radius: 99px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0);
   color: white;
   font-size: 15px;
   font-weight: 700;
   height: 40px;
   padding: 0 24px;
+  transition: all 0.5s ${Easing.OUT};
+
+  &:hover {
+    background: ${darken(0.05, '#2d77ee')};
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+  }
+
+  ${props =>
+    props.isSubmitting
+      ? css`
+          animation: 1s ${loading} ${Easing.IN_OUT} infinite;
+          padding: 0;
+          width: 40px;
+        `
+      : ''}
 `;
 
 export const Separator = styled(Box)`
