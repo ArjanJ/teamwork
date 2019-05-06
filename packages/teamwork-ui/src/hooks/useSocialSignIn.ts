@@ -9,17 +9,12 @@ interface IUseSocialSignIn {
 export const useSocialSignIn = ({ onSuccess }: IUseSocialSignIn) => {
   const [hasError, setError] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
-  const [user, setUser] = useState<null | object>(null);
 
   async function signIn() {
     try {
       const { additionalUserInfo, user } = await auth.doSignInWithPopup(
         firebase.GoogleProvider,
       );
-
-      if (user) {
-        setUser(user);
-      }
 
       const isNewUser = additionalUserInfo
         ? additionalUserInfo.isNewUser
@@ -35,5 +30,5 @@ export const useSocialSignIn = ({ onSuccess }: IUseSocialSignIn) => {
     }
   }
 
-  return { hasError, isNewUser, signIn, user };
+  return { hasError, isNewUser, signIn };
 };

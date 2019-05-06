@@ -1,11 +1,12 @@
 import { Link, navigate } from '@reach/router';
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
+import styled from 'styled-components';
 
 import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
-import { auth } from '../../firebase';
 import { useForm } from '../../hooks/useForm';
+import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
 import { useSocialSignIn } from '../../hooks/useSocialSignIn';
 import { useUser } from '../../hooks/useUser';
 import {
@@ -14,7 +15,6 @@ import {
   Button,
   Field,
   Form,
-  Heading,
   Input,
   Label,
   P,
@@ -45,16 +45,9 @@ export const Signup: FunctionComponent<SignupProps> = () => {
     onSuccess: onSocialSignInSuccess,
   });
 
-  const onEmailPasswordSignInSuccess = async () => {
-    const { email, password } = values;
-    const [emailPasswordError, setEmailPasswordError] = useState(false);
-
-    try {
-      await auth.doCreateUserWithEmailAndPassword(email, password);
-    } catch (err) {
-      setEmailPasswordError(true);
-    }
-  };
+  const { signUp } = useEmailPassSignUp({
+    onSuccess: onSocialSignInSuccess,
+  });
 
   const initialFormValues = {
     email: '',
@@ -64,7 +57,7 @@ export const Signup: FunctionComponent<SignupProps> = () => {
 
   const { handleInputChange, handleSubmit, values } = useForm({
     initialValues: initialFormValues,
-    onSubmit: onEmailPasswordSignInSuccess,
+    onSubmit: () => signUp(values.email, values.password),
   });
 
   return (
@@ -72,7 +65,7 @@ export const Signup: FunctionComponent<SignupProps> = () => {
       <Header />
       <Form onSubmit={handleSubmit}>
         <Box mb="24px">
-          <Heading>Create your account</Heading>
+          <Title>Create your account</Title>
           <P>Register with your work Google account</P>
         </Box>
         <Box mb="24px">
@@ -135,5 +128,11 @@ export const Signup: FunctionComponent<SignupProps> = () => {
     </Backdrop>
   );
 };
+
+const Title = styled.h1`
+  color: #f8cf83;
+  font-size: 30px;
+  margin-bottom: 10px;
+`;
 
 export default Signup;

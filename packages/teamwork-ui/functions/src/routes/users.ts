@@ -30,7 +30,7 @@ userRouter.get('/users/:userId', async (req: Request, res: Response) => {
     const doc = await usersCollection.doc(userId).get();
 
     if (!doc.exists) {
-      res.status(200).send({ data: null });
+      res.status(200).send({ data: {} });
     } else {
       res.status(200).send({ data: doc.data() });
     }
