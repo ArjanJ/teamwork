@@ -1,6 +1,7 @@
 import { darken, lighten, rgba } from 'polished';
 import styled, { css, keyframes } from 'styled-components';
 
+import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 
 const rotate = keyframes`
@@ -9,9 +10,9 @@ const rotate = keyframes`
 `;
 
 export const ButtonSpinner = styled.button<{ isSubmitting?: boolean }>`
-  background: #2d77ee;
+  background: ${Color.BLUE_SKY};
   border-radius: 99px;
-  box-shadow: 0 0 0 3px ${rgba('#2d77ee', 1)};
+  box-shadow: 0 0 0 3px ${rgba(Color.BLUE_SKY, 1)};
   color: white;
   font-size: 15px;
   font-weight: 700;
@@ -24,14 +25,14 @@ export const ButtonSpinner = styled.button<{ isSubmitting?: boolean }>`
     box-shadow 0.5s 0.25s ${Easing.IN_OUT};
 
   &:hover {
-    background: ${darken(0.05, '#2d77ee')};
+    background: ${darken(0.05, Color.BLUE_SKY)};
   }
 
   ${props =>
     props.isSubmitting
       ? css`
-          background: #0900c3 !important;
-          box-shadow: 0 0 0 3px ${rgba('#2d77ee', 0)};
+          background: ${Color.BLUE_RAGE} !important;
+          box-shadow: 0 0 0 3px ${rgba(Color.BLUE_SKY, 0)};
           min-width: 36px;
           padding: 0;
         `
@@ -39,7 +40,10 @@ export const ButtonSpinner = styled.button<{ isSubmitting?: boolean }>`
 
   &::before {
     animation: 1s ${rotate} linear infinite;
-    background: linear-gradient(#2d77ee, ${lighten(0.25, '#2d77ee')});
+    background: linear-gradient(
+      ${Color.BLUE_SKY},
+      ${lighten(0.25, Color.BLUE_SKY)}
+    );
     border-radius: 50%;
     box-sizing: content-box;
     content: '';

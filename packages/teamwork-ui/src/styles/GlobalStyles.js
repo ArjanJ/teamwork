@@ -4,6 +4,8 @@ import BasisGrotesqueRegular from './fonts/regular.woff2';
 import BasisGrotesqueMedium from './fonts/medium.woff2';
 import BasisGrotesqueBold from './fonts/bold.woff2';
 
+import { Color } from './Color';
+
 export const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Basis Grotesque';
@@ -59,7 +61,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background: #0900c3;
+    background: ${Color.BLUE_RAGE};
     font-size: 1.6rem;
     line-height: 1.5;
     margin: 0;
