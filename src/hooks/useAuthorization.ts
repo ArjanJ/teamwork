@@ -20,17 +20,11 @@ export const useAuthorization = (path: string): { user: User | void } => {
       navigate(path);
     }
 
-    if (
-      !authUser &&
-      !!user &&
-      !!user.email &&
-      !!user.displayName &&
-      !!user.uid
-    ) {
+    if (!authUser && !!user && !!user.email && !!user.uid) {
       setAuthUser({
-        displayName: user.displayName,
+        displayName: user.displayName || '',
         email: user.email,
-        photoURL: user.photoURL,
+        photoURL: user.photoURL || '',
         uid: user.uid,
       });
     }

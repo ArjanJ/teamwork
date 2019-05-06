@@ -1,11 +1,12 @@
 import { Link, navigate } from '@reach/router';
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
+import styled from 'styled-components';
 
 import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
-import { auth } from '../../firebase';
 import { useForm } from '../../hooks/useForm';
+import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
 import { useSocialSignIn } from '../../hooks/useSocialSignIn';
 import {
   Backdrop,
@@ -13,7 +14,6 @@ import {
   Button,
   Field,
   Form,
-  Heading,
   Input,
   Label,
   P,
@@ -37,20 +37,13 @@ export const Login: FunctionComponent<LoginProps> = () => {
     onSuccess: onSocialSignInSuccess,
   });
 
-  const onSubmit = async () => {
-    const { email, password } = values;
-    const [emailPasswordError, setEmailPasswordError] = useState(false);
-
-    try {
-      await auth.doSignInWithEmailAndPassword(email, password);
-    } catch (err) {
-      setEmailPasswordError(true);
-    }
-  };
+  const { login } = useEmailPassSignUp({
+    onSuccess: onSocialSignInSuccess,
+  });
 
   const { handleInputChange, handleSubmit, values } = useForm({
     initialValues: { email: '', password: '' },
-    onSubmit,
+    onSubmit: () => login(values.email, values.password),
   });
 
   return (
@@ -58,7 +51,7 @@ export const Login: FunctionComponent<LoginProps> = () => {
       <Header />
       <Form onSubmit={handleSubmit}>
         <Box mb="24px">
-          <Heading>Log in</Heading>
+          <Title>Log in</Title>
           <P>Log in with your work Google account</P>
         </Box>
         <Box mb="24px">
@@ -109,5 +102,11 @@ export const Login: FunctionComponent<LoginProps> = () => {
     </Backdrop>
   );
 };
+
+const Title = styled.h1`
+  color: #f8cf83;
+  font-size: 30px;
+  margin-bottom: 10px;
+`;
 
 export default Login;

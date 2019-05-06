@@ -22,6 +22,8 @@ export const P = styled.p`
 `;
 
 export const Form = styled.form`
+  margin: 0 auto;
+  max-width: 420px;
   text-align: center;
   width: 100%;
 `;
