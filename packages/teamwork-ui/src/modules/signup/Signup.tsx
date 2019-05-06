@@ -3,6 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
+import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
 import { useForm } from '../../hooks/useForm';
@@ -12,7 +13,6 @@ import { useUser } from '../../hooks/useUser';
 import {
   Backdrop,
   BigButton,
-  Button,
   Field,
   Form,
   Input,
@@ -114,7 +114,7 @@ export const Signup: FunctionComponent<SignupProps> = () => {
           <Label>Confirm Password</Label>
         </Field>
         <Flex justifyContent="center" mb="24px">
-          <Button type="submit">Create account</Button>
+          <ButtonSpinner type="submit">Create account</ButtonSpinner>
         </Flex>
         <Box>
           <P>

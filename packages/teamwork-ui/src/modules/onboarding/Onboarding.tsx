@@ -4,19 +4,13 @@ import posed, { PoseGroup } from 'react-pose';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
+import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Header } from '../../components/header/Header';
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { useAuthUser } from '../../hooks/useAuthUser';
 import { useForm } from '../../hooks/useForm';
 import { useUser } from '../../hooks/useUser';
-import {
-  Backdrop,
-  Button,
-  Field,
-  Heading,
-  Input,
-  Label,
-} from '../signup/Shared';
+import { Backdrop, Field, Heading, Input, Label } from '../signup/Shared';
 import { delay } from '../../utils/delay';
 
 interface IOnboardingProps {
@@ -83,9 +77,9 @@ const NameForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
           <Label>Last name</Label>
         </Field>
         <Flex justifyContent="flex-end">
-          <Button isSubmitting={isSubmitting} type="submit">
+          <ButtonSpinner isSubmitting={isSubmitting} type="submit">
             {!isSubmitting && 'Next'}
-          </Button>
+          </ButtonSpinner>
         </Flex>
       </form>
     </React.Fragment>
@@ -138,14 +132,14 @@ const RoleForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
         </Field>
         <Flex justifyContent="space-between">
           <Box>
-            <Button onClick={handleBackClick} type="button">
+            <button onClick={handleBackClick} type="button">
               Back
-            </Button>
+            </button>
           </Box>
           <Box>
-            <Button isSubmitting={isSubmitting} type="submit">
+            <ButtonSpinner isSubmitting={isSubmitting} type="submit">
               {!isSubmitting && 'Finish'}
-            </Button>
+            </ButtonSpinner>
           </Box>
         </Flex>
       </form>
