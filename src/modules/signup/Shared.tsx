@@ -1,6 +1,5 @@
-import { darken, lighten, rgba } from 'polished';
 import { Box } from 'rebass';
-import styled, { css, keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import { Easing } from '../../styles/Easing';
 
@@ -9,7 +8,7 @@ export const Backdrop = styled.div`
   min-height: 100vh;
 `;
 
-export const Heading = styled.h1`
+export const Heading = styled.h2`
   color: white;
   font-size: 24px;
   font-weight: 500;
@@ -35,7 +34,7 @@ export const BigButton = styled.button`
   display: flex;
   font-size: 15px;
   font-weight: 600;
-  height: 40px;
+  height: 48px;
   padding: 0 12px;
   width: 100%;
 
@@ -114,4 +113,10 @@ export const Separator = styled(Box)`
     width: 64%;
     z-index: -1;
   }
+`;
+
+export const Title = styled.h1`
+  color: #f8cf83;
+  font-size: 30px;
+  margin-bottom: 10px;
 `;

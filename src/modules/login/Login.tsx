@@ -1,7 +1,6 @@
 import { Link, navigate } from '@reach/router';
 import React, { FunctionComponent, useState } from 'react';
 import { Box, Flex } from 'rebass';
-import styled from 'styled-components';
 
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Header } from '../../components/header/Header';
@@ -19,6 +18,7 @@ import {
   Label,
   P,
   Separator,
+  Title,
 } from '../signup/Shared';
 
 interface LoginProps {
@@ -114,11 +114,5 @@ export const Login: FunctionComponent<LoginProps> = () => {
     </Backdrop>
   );
 };
-
-const Title = styled.h1`
-  color: #f8cf83;
-  font-size: 30px;
-  margin-bottom: 10px;
-`;
 
 export default Login;

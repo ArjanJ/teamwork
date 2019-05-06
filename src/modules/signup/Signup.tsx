@@ -1,7 +1,6 @@
 import { Link, navigate } from '@reach/router';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Box, Flex } from 'rebass';
-import styled from 'styled-components';
 
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Header } from '../../components/header/Header';
@@ -10,6 +9,7 @@ import { useForm } from '../../hooks/useForm';
 import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
 import { useSocialSignIn } from '../../hooks/useSocialSignIn';
 import { useUser } from '../../hooks/useUser';
+import { delay } from '../../utils/delay';
 import {
   Backdrop,
   BigButton,
@@ -19,6 +19,7 @@ import {
   Label,
   P,
   Separator,
+  Title,
 } from './Shared';
 
 interface SignupProps {
@@ -26,6 +27,7 @@ interface SignupProps {
 }
 
 export const Signup: FunctionComponent<SignupProps> = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { createUser } = useUser();
 
   const onSocialSignInSuccess = (isNewUser: boolean) => {
@@ -55,9 +57,16 @@ export const Signup: FunctionComponent<SignupProps> = () => {
     confirmPassword: '',
   };
 
+  const onSubmit = async () => {
+    setIsSubmitting(true);
+    await delay(1500);
+    await signUp(values.email, values.password);
+    setIsSubmitting(false);
+  };
+
   const { handleInputChange, handleSubmit, values } = useForm({
     initialValues: initialFormValues,
-    onSubmit: () => signUp(values.email, values.password),
+    onSubmit,
   });
 
   return (
@@ -114,7 +123,9 @@ export const Signup: FunctionComponent<SignupProps> = () => {
           <Label>Confirm Password</Label>
         </Field>
         <Flex justifyContent="center" mb="24px">
-          <ButtonSpinner type="submit">Create account</ButtonSpinner>
+          <ButtonSpinner isSubmitting={isSubmitting} type="submit">
+            {!isSubmitting && 'Create account'}
+          </ButtonSpinner>
         </Flex>
         <Box>
           <P>
@@ -128,11 +139,5 @@ export const Signup: FunctionComponent<SignupProps> = () => {
     </Backdrop>
   );
 };
-
-const Title = styled.h1`
-  color: #f8cf83;
-  font-size: 30px;
-  margin-bottom: 10px;
-`;
 
 export default Signup;
