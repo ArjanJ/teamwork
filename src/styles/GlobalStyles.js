@@ -59,6 +59,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    background: #0900c3;
     font-size: 1.6rem;
     line-height: 1.5;
     margin: 0;

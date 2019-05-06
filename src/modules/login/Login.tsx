@@ -1,17 +1,18 @@
 import { Link, navigate } from '@reach/router';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
+import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
 import { useForm } from '../../hooks/useForm';
 import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
 import { useSocialSignIn } from '../../hooks/useSocialSignIn';
+import { delay } from '../../utils/delay';
 import {
   Backdrop,
   BigButton,
-  Button,
   Field,
   Form,
   Input,
@@ -25,7 +26,9 @@ interface LoginProps {
 }
 
 export const Login: FunctionComponent<LoginProps> = () => {
-  const onSocialSignInSuccess = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSignInSuccess = () => {
     if (isNewUser) {
       navigate('/onboarding');
     } else {
@@ -34,16 +37,23 @@ export const Login: FunctionComponent<LoginProps> = () => {
   };
 
   const { hasError, isNewUser, signIn } = useSocialSignIn({
-    onSuccess: onSocialSignInSuccess,
+    onSuccess: onSignInSuccess,
   });
 
   const { login } = useEmailPassSignUp({
-    onSuccess: onSocialSignInSuccess,
+    onSuccess: onSignInSuccess,
   });
+
+  const onSubmit = async () => {
+    setIsSubmitting(true);
+    await delay(1500);
+    await login(values.email, values.password);
+    setIsSubmitting(false);
+  };
 
   const { handleInputChange, handleSubmit, values } = useForm({
     initialValues: { email: '', password: '' },
-    onSubmit: () => login(values.email, values.password),
+    onSubmit,
   });
 
   return (
@@ -88,7 +98,9 @@ export const Login: FunctionComponent<LoginProps> = () => {
           <Label>Password</Label>
         </Field>
         <Flex justifyContent="center" mb="24px">
-          <Button type="submit">Log in</Button>
+          <ButtonSpinner isSubmitting={isSubmitting} type="submit">
+            {!isSubmitting && 'Log in'}
+          </ButtonSpinner>
         </Flex>
         <Box>
           <P>

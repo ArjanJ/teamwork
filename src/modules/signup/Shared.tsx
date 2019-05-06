@@ -1,11 +1,10 @@
-import { darken } from 'polished';
+import { darken, lighten, rgba } from 'polished';
 import { Box } from 'rebass';
 import styled, { css, keyframes } from 'styled-components';
 
 import { Easing } from '../../styles/Easing';
 
 export const Backdrop = styled.div`
-  background-color: #0900c3;
   display: grid;
   min-height: 100vh;
 `;
@@ -86,46 +85,6 @@ export const Label = styled.label`
   position: absolute;
   top: 10px;
   transition: all 0.5s ${Easing.OUT};
-`;
-
-const loading = keyframes`
-  0% {
-    transform: translateX(0);
-  }
-
-  50% {
-    transform: translateX(-100%);
-  }
-  
-  100% {
-    transform: translateX(0);
-  }
-`;
-
-export const Button = styled.button<{ isSubmitting?: boolean }>`
-  background: #2d77ee;
-  border-radius: 99px;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0);
-  color: white;
-  font-size: 15px;
-  font-weight: 700;
-  height: 40px;
-  padding: 0 24px;
-  transition: all 0.5s ${Easing.OUT};
-
-  &:hover {
-    background: ${darken(0.05, '#2d77ee')};
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-  }
-
-  ${props =>
-    props.isSubmitting
-      ? css`
-          animation: 1s ${loading} ${Easing.IN_OUT} infinite;
-          padding: 0;
-          width: 40px;
-        `
-      : ''}
 `;
 
 export const Separator = styled(Box)`
