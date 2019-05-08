@@ -1,5 +1,5 @@
 import { navigate } from '@reach/router';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
@@ -27,27 +27,18 @@ export const Dashboard: FunctionComponent<IDashboardProps> = () => {
   useAuthorization('/login');
 
   const { authUser } = useAuthUser();
+  const { getUser } = useUser();
 
-  const { createUser, getUser, updateUser } = useUser();
-  const fakeUser = {
-    firstName: 'elon',
-    lastName: 'musk',
-    role: 'Software Engineer',
-  };
+  useEffect(() => {
+    if (authUser) {
+      getUser(authUser.uid);
+    }
+  }, [authUser]);
 
   return (
     <DashboardWrapper>
       <Sidebar />
-      <Box>
-        <button onClick={signOut}>Sign out</button>
-        <button onClick={() => createUser(fakeUser)}>create user</button>
-        <button onClick={() => getUser(authUser.uid)}>get user</button>
-        <button
-          onClick={() => updateUser(authUser.uid, { firstName: 'elongated' })}
-        >
-          update user
-        </button>
-      </Box>
+      <Box />
     </DashboardWrapper>
   );
 };
