@@ -5,14 +5,16 @@ import styled from 'styled-components';
 
 import { TeamworkLogo } from '../../components/logos/logos';
 import { SidebarNav } from './SidebarNav';
+import { SidebarTeams } from './SidebarTeams';
 import { SidebarUser } from './SidebarUser';
 
 export const Sidebar = () => (
   <SidebarWrapper>
-    <Box mb="36px">
+    <Box mb="24px">
       <TeamworkLogo />
     </Box>
     <SidebarUser />
+    <SidebarTeams />
     <SidebarNav />
   </SidebarWrapper>
 );
