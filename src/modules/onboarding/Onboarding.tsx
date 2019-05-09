@@ -10,6 +10,7 @@ import { useAuthorization } from '../../hooks/useAuthorization';
 import { useAuthUser } from '../../hooks/useAuthUser';
 import { useForm } from '../../hooks/useForm';
 import { useUser } from '../../hooks/useUser';
+import { Easing } from '../../styles/Easing';
 import { Backdrop, Field, Heading, Input, Label } from '../signup/Shared';
 import { delay } from '../../utils/delay';
 
@@ -25,7 +26,7 @@ type Step = 'NAME' | 'ROLE' | 'DONE';
 
 const NameForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
   const { authUser } = useAuthUser();
-  const { updateUser } = useUser();
+  const { updateUser, user } = useUser();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async () => {
@@ -35,7 +36,7 @@ const NameForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
     updateStep('ROLE');
   };
 
-  const initialValues = {
+  const initialValues = user || {
     firstName: '',
     lastName: '',
   };
@@ -88,7 +89,7 @@ const NameForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
 
 const RoleForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
   const { authUser } = useAuthUser();
-  const { updateUser } = useUser();
+  const { updateUser, user } = useUser();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async () => {
@@ -100,7 +101,7 @@ const RoleForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
     navigate('/');
   };
 
-  const initialValues = {
+  const initialValues = user || {
     role: '',
   };
 
@@ -132,9 +133,9 @@ const RoleForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
         </Field>
         <Flex justifyContent="space-between">
           <Box>
-            <button onClick={handleBackClick} type="button">
+            <BackButton onClick={handleBackClick} type="button">
               Back
-            </button>
+            </BackButton>
           </Box>
           <Box>
             <ButtonSpinner isSubmitting={isSubmitting} type="submit">
@@ -174,18 +175,20 @@ export const Onboarding: FunctionComponent<IOnboardingProps> = () => {
       <Header />
       <Wrapper>
         <Title>Welcome to Teamwork!</Title>
-        <PoseGroup>
-          {step === 'NAME' && (
-            <FormAnimation key="shade">
-              <NameForm updateStep={updateStep} />
-            </FormAnimation>
-          )}
-          {step === 'ROLE' && (
-            <FormAnimation key="shade2">
-              <RoleForm updateStep={updateStep} />
-            </FormAnimation>
-          )}
-        </PoseGroup>
+        {user !== null && (
+          <PoseGroup>
+            {step === 'NAME' && (
+              <FormAnimation key="shade">
+                <NameForm updateStep={updateStep} />
+              </FormAnimation>
+            )}
+            {step === 'ROLE' && (
+              <FormAnimation key="shade2">
+                <RoleForm updateStep={updateStep} />
+              </FormAnimation>
+            )}
+          </PoseGroup>
+        )}
       </Wrapper>
     </Backdrop>
   );
@@ -214,6 +217,18 @@ const Title = styled.h1`
   color: #f8cf83;
   font-size: 36px;
   margin-bottom: 64px;
+`;
+
+const BackButton = styled.button`
+  background: none;
+  color: white;
+  font-weight: 600;
+  opacity: 0.7;
+  transition: opacity 0.35s ${Easing.OUT};
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export default Onboarding;

@@ -22,10 +22,13 @@ export const SidebarUser: FunctionComponent = () => {
       {({ isOpen, setIsOpen }) => (
         <SidebarUserWrapper onClick={() => setIsOpen(!isOpen)}>
           <Flex alignItems="center" flex={1} justifyContent="space-between">
-            <span>
-              <SidebarUserName>{user && user.firstName}</SidebarUserName>{' '}
-              <SidebarUserName>{user && user.lastName}</SidebarUserName>
-            </span>
+            <Flex alignItems="center">
+              <SidebarUserPic />
+              <span>
+                <SidebarUserName>{user && user.firstName}</SidebarUserName>{' '}
+                <SidebarUserName>{user && user.lastName}</SidebarUserName>
+              </span>
+            </Flex>
             <StyledChevron
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -57,18 +60,17 @@ export const SidebarUser: FunctionComponent = () => {
 
 const SidebarUserWrapper = styled(Flex)`
   align-items: center;
-  background: ${rgba('white', 0.12)};
+  background: ${rgba('white', 0.15)};
   border-radius: 4px;
   cursor: pointer;
   height: 40px;
-  margin-bottom: 24px;
-  margin-left: -16px;
+  margin-bottom: 30px;
   padding: 10px 16px;
   position: relative;
   transition: all 0.5s ${Easing.OUT};
 
   &:hover {
-    background: ${rgba('white', 0.18)};
+    background: ${rgba('white', 0.2)};
   }
 `;
 
@@ -76,6 +78,14 @@ const SidebarUserName = styled.span`
   color: white;
   font-size: 15px;
   font-weight: 600;
+`;
+
+const SidebarUserPic = styled.div`
+  background: white;
+  border-radius: 50%;
+  margin-right: 10px;
+  height: 24px;
+  width: 24px;
 `;
 
 const SidebarUserDropdown = styled.div<{ isOpen: boolean }>`
@@ -90,6 +100,7 @@ const SidebarUserDropdown = styled.div<{ isOpen: boolean }>`
   transition: all 0.35s ${Easing.OUT};
   visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
   width: 100%;
+  z-index: 1;
 `;
 
 const StyledChevron = styled.svg<{ isOpen: boolean }>`
