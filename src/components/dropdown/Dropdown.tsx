@@ -22,7 +22,6 @@ export const Dropdown: FunctionComponent<IDropdownProps> = ({ children }) => {
     // Outside dropdown click.
     setIsOpen(false);
   };
-  console.log({ isOpen });
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClick);
@@ -30,7 +29,7 @@ export const Dropdown: FunctionComponent<IDropdownProps> = ({ children }) => {
     return () => {
       document.removeEventListener('mousedown', handleClick);
     };
-  }, []);
+  }, [isOpen]);
 
   return <div ref={node}>{children({ isOpen, setIsOpen })}</div>;
 };
