@@ -1,26 +1,22 @@
-import { navigate } from '@reach/router';
+import { Router } from '@reach/router';
 import React, { FunctionComponent, useEffect } from 'react';
+import Loadable from 'react-loadable';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
-import { auth } from '../../firebase';
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { useAuthUser } from '../../hooks/useAuthUser';
 import { useUser } from '../../hooks/useUser';
 import { Sidebar } from '../sidebar/Sidebar';
 
+const Teams = Loadable({
+  loader: () => import('../teams/Teams'),
+  loading: () => null,
+});
+
 interface IDashboardProps {
   path: string;
 }
-
-const signOut = async () => {
-  try {
-    await auth.doSignOut();
-    navigate('/login');
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 export const Dashboard: FunctionComponent<IDashboardProps> = () => {
   // Go to login page if not logged in.
@@ -38,7 +34,11 @@ export const Dashboard: FunctionComponent<IDashboardProps> = () => {
   return (
     <DashboardWrapper>
       <Sidebar />
-      <Box />
+      <Box flex={1}>
+        <Router>
+          <Teams path="/" />
+        </Router>
+      </Box>
     </DashboardWrapper>
   );
 };
