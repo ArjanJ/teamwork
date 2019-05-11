@@ -9,13 +9,13 @@ import { auth } from '../../firebase';
 import { useUser } from '../../hooks/useUser';
 import { Easing } from '../../styles/Easing';
 
+const signOut = async () => {
+  await auth.doSignOut();
+  navigate('/login');
+};
+
 export const SidebarUser: FunctionComponent = () => {
   const { user } = useUser();
-
-  const signOut = async () => {
-    await auth.doSignOut();
-    navigate('/login');
-  };
 
   return (
     <Dropdown>
