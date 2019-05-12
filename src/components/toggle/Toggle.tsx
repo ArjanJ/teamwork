@@ -1,25 +1,25 @@
 import React, { FunctionComponent, useEffect, useState, useRef } from 'react';
 
-interface IDropdownProps {
-  children(state: IDropdownState): React.ReactNode;
+interface IToggleProps {
+  children(state: IToggleState): React.ReactNode;
 }
 
-interface IDropdownState {
+interface IToggleState {
   isOpen: boolean;
   setIsOpen(val: boolean): void;
 }
 
-export const Dropdown: FunctionComponent<IDropdownProps> = ({ children }) => {
+export const Toggle: FunctionComponent<IToggleProps> = ({ children }) => {
   const node: React.RefObject<any> = useRef();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = (event: MouseEvent) => {
     if (node.current.contains(event.target)) {
-      // Inside dropdown click.
+      // Inside Toggle click.
       return null;
     }
 
-    // Outside dropdown click.
+    // Outside Toggle click.
     setIsOpen(false);
   };
 
