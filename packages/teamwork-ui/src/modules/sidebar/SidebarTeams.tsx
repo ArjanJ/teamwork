@@ -9,7 +9,7 @@ export const SidebarTeams = () => {
     <Box mb="30px">
       <SidebarTeamsTitle>Your teams</SidebarTeamsTitle>
       <SidebarTeamsAddButton>
-        Add a team
+        Create a team
         <Box ml="12px">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ const SidebarTeamsTitle = styled.h2`
   font-size: 12px;
   letter-spacing: 1px;
   margin-bottom: 10px;
-  opacity: 0.5;
+  opacity: 0.75;
   text-transform: uppercase;
 `;
 

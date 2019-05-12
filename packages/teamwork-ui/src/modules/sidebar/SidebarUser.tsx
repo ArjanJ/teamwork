@@ -4,7 +4,7 @@ import React, { FunctionComponent } from 'react';
 import { Flex } from 'rebass';
 import styled from 'styled-components';
 
-import { Dropdown } from '../../components/dropdown/Dropdown';
+import { Toggle } from '../../components/toggle/Toggle';
 import { auth } from '../../firebase';
 import { useUser } from '../../hooks/useUser';
 import { Easing } from '../../styles/Easing';
@@ -18,7 +18,7 @@ export const SidebarUser: FunctionComponent = () => {
   const { user } = useUser();
 
   return (
-    <Dropdown>
+    <Toggle>
       {({ isOpen, setIsOpen }) => (
         <SidebarUserWrapper onClick={() => setIsOpen(!isOpen)}>
           <Flex alignItems="center" flex={1} justifyContent="space-between">
@@ -54,7 +54,7 @@ export const SidebarUser: FunctionComponent = () => {
           </Flex>
         </SidebarUserWrapper>
       )}
-    </Dropdown>
+    </Toggle>
   );
 };
 
@@ -83,8 +83,9 @@ const SidebarUserName = styled.span`
 const SidebarUserPic = styled.div`
   background: white;
   border-radius: 50%;
-  margin-right: 10px;
   height: 24px;
+  margin-right: 10px;
+  opacity: 0.75;
   width: 24px;
 `;
 
