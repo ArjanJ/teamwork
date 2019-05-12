@@ -6,12 +6,12 @@ export const userRouter = Router();
 const usersCollection = db.collection('users');
 
 userRouter.post('/users', async (req: Request, res: Response) => {
-  const { decodedToken } = req;
+  const { body, decodedToken } = req;
 
   if (decodedToken) {
     try {
-      await usersCollection.doc(decodedToken.uid).set(req.body);
-      res.status(200).send({ data: req.body });
+      await usersCollection.doc(decodedToken.uid).set(body);
+      res.status(200).send({ data: body });
     } catch (error) {
       res.status(500).send({ error });
     }
