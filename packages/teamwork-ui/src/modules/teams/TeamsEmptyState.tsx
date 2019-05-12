@@ -31,7 +31,7 @@ export const TeamsEmptyState: FunctionComponent<ITeamsEmptyStateProps> = ({
 );
 
 const TeamsEmptyStateBox = styled.div`
-  background: linear-gradient(111.12deg, #fda57d 1.35%, #f9d749 100%);
+  background: linear-gradient(111.12deg, #fd7d7d 1.35%, #f9d749 100%);
   border-radius: 4px;
   box-shadow: 0 4px 18px ${rgba('black', 0.08)};
   display: flex;

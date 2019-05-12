@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import { verifyIdToken } from './middleware/verifyIdToken';
+import { teamsRouter } from './routes/teams';
 import { userRouter } from './routes/users';
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(verifyIdToken);
 app.use(userRouter);
+app.use(teamsRouter);
 
 /**
  * This is needed because Firebase hosting rewrite adds an extra /api
