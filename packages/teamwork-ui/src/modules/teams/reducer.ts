@@ -1,73 +1,67 @@
 import { AnyAction } from 'redux';
-import { createUserTypes, getUserTypes, IUser, updateUserTypes } from './types';
 
-type User = IUser | null;
+import { createTeamTypes, getTeamTypes, updateTeamTypes } from './types';
+import { ITeam } from './types';
 
-interface IUserState {
+interface ITeamState {
   isCreating: boolean;
   isFetching: boolean;
   isUpdating: boolean;
-  user: User;
+  teams: ITeam[];
 }
 
-const initialState: IUserState = {
+const initialState: ITeamState = {
   isCreating: false,
   isFetching: false,
   isUpdating: false,
-  user: null,
+  teams: [],
 };
 
 export default function(state = initialState, action: AnyAction) {
   switch (action.type) {
-    case createUserTypes.REQUEST:
+    case createTeamTypes.REQUEST:
       return {
         ...state,
         isCreating: true,
       };
-    case createUserTypes.SUCCESS:
+    case createTeamTypes.SUCCESS:
       return {
         ...state,
         isCreating: false,
-        user: action.data,
       };
-    case createUserTypes.FAILURE:
+    case createTeamTypes.FAILURE:
       return {
         ...state,
         error: action.error,
         isCreating: false,
       };
-    case getUserTypes.REQUEST:
+    case getTeamTypes.REQUEST:
       return {
         ...state,
         isFetching: true,
       };
-    case getUserTypes.SUCCESS:
+    case getTeamTypes.SUCCESS:
       return {
         ...state,
         isFetching: false,
-        user: action.data,
       };
-    case getUserTypes.FAILURE:
+    case getTeamTypes.FAILURE:
       return {
         ...state,
         error: action.error,
         isFetching: false,
       };
-    case updateUserTypes.REQUEST:
+    case updateTeamTypes.REQUEST:
       return {
         ...state,
         isUpdating: true,
       };
-    case updateUserTypes.SUCCESS:
+    case updateTeamTypes.SUCCESS:
       return {
         ...state,
         isUpdating: false,
-        user: {
-          ...state.user,
-          ...action.data,
-        },
       };
-    case updateUserTypes.FAILURE:
+    case updateTeamTypes.FAILURE:
       return {
         ...state,
         error: action.error,

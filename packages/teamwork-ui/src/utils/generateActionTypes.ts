@@ -1,5 +1,11 @@
-export const generateActionTypes = (prefix: string) => ({
-  [`${prefix}_FAILURE`]: `${prefix}_FAILURE`,
-  [`${prefix}_REQUEST`]: `${prefix}_REQUEST`,
-  [`${prefix}_SUCCESS`]: `${prefix}_SUCCESS`,
+interface ActionTypes {
+  FAILURE: string;
+  REQUEST: string;
+  SUCCESS: string;
+}
+
+export const generateActionTypes = (prefix: string): ActionTypes => ({
+  FAILURE: `${prefix}_FAILURE`,
+  REQUEST: `${prefix}_REQUEST`,
+  SUCCESS: `${prefix}_SUCCESS`,
 });
