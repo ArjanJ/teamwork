@@ -12,9 +12,9 @@ export function createUser(user: IUser) {
     payload: user,
     shouldCallAPI: (state: AppState) => !state.user.user,
     types: [
-      createUserTypes.CREATE_USER_REQUEST,
-      createUserTypes.CREATE_USER_SUCCESS,
-      createUserTypes.CREATE_USER_FAILURE,
+      createUserTypes.REQUEST,
+      createUserTypes.SUCCESS,
+      createUserTypes.FAILURE,
     ],
   };
 }
@@ -28,11 +28,7 @@ export function getUser(uid: string) {
       }),
     payload: uid,
     shouldCallAPI: (state: AppState) => !state.user.user,
-    types: [
-      getUserTypes.GET_USER_REQUEST,
-      getUserTypes.GET_USER_SUCCESS,
-      getUserTypes.GET_USER_FAILURE,
-    ],
+    types: [getUserTypes.REQUEST, getUserTypes.SUCCESS, getUserTypes.FAILURE],
   };
 }
 
@@ -46,9 +42,9 @@ export function updateUser(uid: string, body = {}) {
       }),
     payload: { ...body, uid },
     types: [
-      updateUserTypes.UPDATE_USER_REQUEST,
-      updateUserTypes.UPDATE_USER_SUCCESS,
-      updateUserTypes.UPDATE_USER_FAILURE,
+      updateUserTypes.REQUEST,
+      updateUserTypes.SUCCESS,
+      updateUserTypes.FAILURE,
     ],
   };
 }

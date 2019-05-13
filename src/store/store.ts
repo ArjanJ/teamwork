@@ -4,10 +4,12 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import { callAPIMiddleware } from '../middleware/callAPIMiddleware';
 
 import authReducer from '../modules/auth/reducer';
+import teamsReducer from '../modules/teams/reducer';
 import userReducer from '../modules/user/reducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  teams: teamsReducer,
   user: userReducer,
 });
 

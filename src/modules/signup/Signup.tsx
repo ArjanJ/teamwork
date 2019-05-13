@@ -30,12 +30,13 @@ export const Signup: FunctionComponent<SignupProps> = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { createUser } = useUser();
 
-  const onSocialSignInSuccess = (isNewUser: boolean) => {
+  const onSignInSuccess = (isNewUser: boolean) => {
     if (isNewUser) {
       createUser({
         firstName: '',
         lastName: '',
         role: '',
+        teams: [],
       });
       navigate('/onboarding');
     } else {
@@ -44,11 +45,11 @@ export const Signup: FunctionComponent<SignupProps> = () => {
   };
 
   const { hasError, signIn } = useSocialSignIn({
-    onSuccess: onSocialSignInSuccess,
+    onSuccess: onSignInSuccess,
   });
 
   const { signUp } = useEmailPassSignUp({
-    onSuccess: onSocialSignInSuccess,
+    onSuccess: onSignInSuccess,
   });
 
   const initialFormValues = {
