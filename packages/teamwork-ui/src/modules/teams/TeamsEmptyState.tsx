@@ -2,6 +2,7 @@ import { darken, rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
+import { useTeams } from '../../hooks/useTeams';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { IUser } from '../user/types';
@@ -13,22 +14,36 @@ interface ITeamsEmptyStateProps {
 
 export const TeamsEmptyState: FunctionComponent<ITeamsEmptyStateProps> = ({
   user,
-}) => (
-  <TeamsEmptyStateBox>
-    <TeamsEmptyStateHeading>
-      Hi {user.firstName}! Get started with Teamwork by creating your first
-      team.
-    </TeamsEmptyStateHeading>
-    <div>
-      <TeamsEmptyStateCreateButton type="button">
-        Create your team
-      </TeamsEmptyStateCreateButton>
-    </div>
-    <TeamsEmptyStateGraphicWrapper>
-      <TeamsGraphic />
-    </TeamsEmptyStateGraphicWrapper>
-  </TeamsEmptyStateBox>
-);
+}) => {
+  const { createTeam } = useTeams();
+
+  const handleCreateTeamClick = () => {
+    createTeam({
+      members: [],
+      name: '420 Blazers',
+    });
+  };
+
+  return (
+    <TeamsEmptyStateBox>
+      <TeamsEmptyStateHeading>
+        Hi {user.firstName}! Get started with Teamwork by creating your first
+        team.
+      </TeamsEmptyStateHeading>
+      <div>
+        <TeamsEmptyStateCreateButton
+          onClick={handleCreateTeamClick}
+          type="button"
+        >
+          Create your team
+        </TeamsEmptyStateCreateButton>
+      </div>
+      <TeamsEmptyStateGraphicWrapper>
+        <TeamsGraphic />
+      </TeamsEmptyStateGraphicWrapper>
+    </TeamsEmptyStateBox>
+  );
+};
 
 const TeamsEmptyStateBox = styled.div`
   background: linear-gradient(111.12deg, #fd7d7d 1.35%, #f9d749 100%);
@@ -47,7 +62,7 @@ const TeamsEmptyStateBox = styled.div`
 const TeamsEmptyStateHeading = styled.h1`
   color: ${Color.BLUE_RAGE};
   font-size: 24px;
-  max-width: 387px;
+  max-width: 420px;
 `;
 
 const TeamsEmptyStateGraphicWrapper = styled.div`
