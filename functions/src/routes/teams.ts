@@ -11,16 +11,19 @@ teamsRouter.post('/teams', async (req: Request, res: Response) => {
 
   if (decodedToken && decodedToken.uid) {
     try {
-      await teamsCollection.doc().set(body);
+      const teamDoc = await teamsCollection.add(body);
       res.status(200).send({ data: body });
 
       /**
-       * Add the name of the team to the user object. This is so
+       * Add the name and id of the team to the user object. This is so
        * we know all of the teams a user belongs to and can query
        * based on that.
        */
       usersCollection.doc(decodedToken.uid).update({
-        teams: admin.firestore.FieldValue.arrayUnion(body.name),
+        teams: admin.firestore.FieldValue.arrayUnion({
+          id: teamDoc.id,
+          name: body.name,
+        }),
       });
     } catch (error) {
       res.status(500).send({ error });

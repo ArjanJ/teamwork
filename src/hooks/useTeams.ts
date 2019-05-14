@@ -16,12 +16,12 @@ export const useTeams = () => {
     dispatch(updateTeam(teamId, body));
 
   return {
-    createUser: create,
-    getUser: get,
+    createTeam: create,
+    getTeam: get,
     isCreating: teamsState.isCreating,
     isFetching: teamsState.isFetching,
     isUpdating: teamsState.isUpdating,
-    updateUser: update,
-    user: teamsState.user,
+    updateTeam: update,
+    teams: teamsState.teams,
   };
 };
