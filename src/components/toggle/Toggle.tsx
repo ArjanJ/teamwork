@@ -6,14 +6,13 @@ interface IToggleProps {
 
 interface IToggleState {
   isOpen: boolean;
-  setIsOpen(val: boolean): void;
 }
 
 export const Toggle: FunctionComponent<IToggleProps> = ({ children }) => {
   const node: React.RefObject<any> = useRef();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = (event: MouseEvent) => {
+  const handleDocClick = (event: MouseEvent) => {
     if (node.current.contains(event.target)) {
       // Inside Toggle click.
       return null;
@@ -24,12 +23,18 @@ export const Toggle: FunctionComponent<IToggleProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClick);
+    document.addEventListener('mousedown', handleDocClick);
 
     return () => {
-      document.removeEventListener('mousedown', handleClick);
+      document.removeEventListener('mousedown', handleDocClick);
     };
   }, [isOpen]);
 
-  return <div ref={node}>{children({ isOpen, setIsOpen })}</div>;
+  const handleToggleClick = () => setIsOpen(!isOpen);
+
+  return (
+    <div onClick={handleToggleClick} ref={node}>
+      {children({ isOpen })}
+    </div>
+  );
 };

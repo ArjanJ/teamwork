@@ -19,8 +19,8 @@ export const SidebarUser: FunctionComponent = () => {
 
   return (
     <Toggle>
-      {({ isOpen, setIsOpen }) => (
-        <SidebarUserWrapper onClick={() => setIsOpen(!isOpen)}>
+      {({ isOpen }) => (
+        <SidebarUserWrapper>
           <Flex alignItems="center" flex={1} justifyContent="space-between">
             <Flex alignItems="center">
               <SidebarUserPic />
