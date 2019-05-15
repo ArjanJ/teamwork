@@ -19,6 +19,7 @@ export const TeamsEmptyState: FunctionComponent<ITeamsEmptyStateProps> = ({
 
   const handleCreateTeamClick = () => {
     createTeam({
+      id: '',
       members: [],
       name: '420 Blazers',
     });
@@ -46,7 +47,7 @@ export const TeamsEmptyState: FunctionComponent<ITeamsEmptyStateProps> = ({
 };
 
 const TeamsEmptyStateBox = styled.div`
-  background: linear-gradient(111.12deg, #fd7d7d 1.35%, #f9d749 100%);
+  background: linear-gradient(111.12deg, #ff6f6f 1.35%, #f9d749 100%);
   border-radius: 4px;
   box-shadow: 0 4px 24px ${rgba('black', 0.06)};
   display: flex;
