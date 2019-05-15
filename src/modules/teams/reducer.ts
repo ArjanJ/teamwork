@@ -28,6 +28,7 @@ export default function(state = initialState, action: AnyAction) {
       return {
         ...state,
         isCreating: false,
+        teams: [...state.teams, action.data],
       };
     case createTeamTypes.FAILURE:
       return {
@@ -39,6 +40,7 @@ export default function(state = initialState, action: AnyAction) {
       return {
         ...state,
         isFetching: true,
+        teams: [...state.teams, action.data],
       };
     case getTeamTypes.SUCCESS:
       return {
@@ -60,6 +62,12 @@ export default function(state = initialState, action: AnyAction) {
       return {
         ...state,
         isUpdating: false,
+        teams: state.teams.map((team: ITeam) => {
+          if (team.id === action.data.id) {
+            return action.data;
+          }
+          return team;
+        }),
       };
     case updateTeamTypes.FAILURE:
       return {

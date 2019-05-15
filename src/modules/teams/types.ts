@@ -11,6 +11,7 @@ interface IMember {
 }
 
 export interface ITeam {
+  id: string;
   members: IMember[];
   name: string;
 }
