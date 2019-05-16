@@ -1,11 +1,13 @@
 import { darken, rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
+import { useModal } from 'react-modal-hook';
 import styled from 'styled-components';
 
 import { useTeams } from '../../hooks/useTeams';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { IUser } from '../user/types';
+import { TeamsCreateModal } from './TeamsCreateModal';
 import { TeamsGraphic } from './TeamsGraphic';
 
 interface ITeamsEmptyStateProps {
@@ -15,15 +17,9 @@ interface ITeamsEmptyStateProps {
 export const TeamsEmptyState: FunctionComponent<ITeamsEmptyStateProps> = ({
   user,
 }) => {
-  const { createTeam } = useTeams();
-
-  const handleCreateTeamClick = () => {
-    createTeam({
-      id: '',
-      members: [],
-      name: '420 Blazers',
-    });
-  };
+  const [showModal, hideModal] = useModal(() => (
+    <TeamsCreateModal hideModal={hideModal} />
+  ));
 
   return (
     <TeamsEmptyStateBox>
@@ -32,10 +28,7 @@ export const TeamsEmptyState: FunctionComponent<ITeamsEmptyStateProps> = ({
         team.
       </TeamsEmptyStateHeading>
       <div>
-        <TeamsEmptyStateCreateButton
-          onClick={handleCreateTeamClick}
-          type="button"
-        >
+        <TeamsEmptyStateCreateButton onClick={showModal} type="button">
           Create your team
         </TeamsEmptyStateCreateButton>
       </div>
