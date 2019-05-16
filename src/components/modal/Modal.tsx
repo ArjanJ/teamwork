@@ -1,6 +1,9 @@
 import { rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+import { Color } from '../../styles/Color';
+import { Easing } from '../../styles/Easing';
 
 interface IModalProps {
   children: React.ReactNode;
@@ -40,18 +43,31 @@ export const Modal: FunctionComponent<IModalProps> = ({
   );
 };
 
+const fadeIn = keyframes`
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+`;
+
+const fadeInUp = keyframes`
+  0% { opacity: 0; transform: translateY(20%); }
+  100% { opacity: 1; transform: none; }
+`;
+
 export const ModalWrapper = styled.div<{ dark: boolean }>`
+  animation: 0.35s 0.2s ${fadeInUp} ${Easing.OUT} forwards;
   background: ${props => (props.dark ? '#03004B' : 'white')};
   border-radius: 4px;
-  box-shadow: 0 6px 20px ${rgba('black', 0.1)};
+  box-shadow: 0 6px 24px ${rgba('black', 0.2)};
   min-height: 400px;
+  opacity: 0;
   width: 600px;
 `;
 
 const Background = styled.div<{ dark: boolean }>`
   align-items: center;
+  animation: 0.35s ${fadeIn} ${Easing.OUT} forwards;
   background: ${props =>
-    props.dark ? rgba('white', 0.4) : rgba('black', 0.5)};
+    props.dark ? rgba(Color.BLUE_RAGE, 0.65) : rgba('black', 0.5)};
   display: flex;
   height: 100vh;
   justify-content: center;
