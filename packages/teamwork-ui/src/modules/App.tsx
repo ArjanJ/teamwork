@@ -1,4 +1,5 @@
 import React from 'react';
+import { ModalProvider } from 'react-modal-hook';
 import { StoreContext } from 'redux-react-hook';
 
 import { store } from '../store/store';
@@ -8,7 +9,9 @@ import { Routes } from './routes/Routes';
 const App = () => (
   <StoreContext.Provider value={store}>
     <GlobalStyles />
-    <Routes />
+    <ModalProvider>
+      <Routes />
+    </ModalProvider>
   </StoreContext.Provider>
 );
 
