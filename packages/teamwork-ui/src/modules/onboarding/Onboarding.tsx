@@ -163,7 +163,7 @@ export const Onboarding: FunctionComponent<IOnboardingProps> = () => {
 
       // If the user has filled out the info already go to dashboard.
       if (user && user.firstName && user.lastName && user.role) {
-        // navigate('/');
+        navigate('/');
       }
     }
   });
