@@ -1,14 +1,11 @@
+import { RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 import { useUser } from '../../hooks/useUser';
 import { TeamsEmptyState } from './TeamsEmptyState';
 
-interface ITeamsProps {
-  path: string;
-}
-
-export const Teams: FunctionComponent<ITeamsProps> = () => {
+export const Teams: FunctionComponent<RouteComponentProps> = () => {
   const { user } = useUser();
 
   if (user === null) {

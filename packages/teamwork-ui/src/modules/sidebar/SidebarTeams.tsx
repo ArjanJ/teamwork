@@ -66,7 +66,7 @@ const SidebarTeamsListName = styled(Link)`
   color: white;
   display: block;
   font-weight: ${props =>
-    window.location.pathname.includes(props.to || '') ? 700 : 500};
+    window.location.pathname.includes(props.to || '') ? 700 : 400};
   opacity: ${props =>
     window.location.pathname.includes(props.to || '') ? 1 : 0.75};
   padding: 4px 0;

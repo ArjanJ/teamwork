@@ -1,4 +1,4 @@
-import { Link, navigate } from '@reach/router';
+import { Link, navigate, RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent, useState } from 'react';
 import { Box, Flex } from 'rebass';
 
@@ -21,11 +21,7 @@ import {
   Title,
 } from '../signup/Shared';
 
-interface LoginProps {
-  path: string;
-}
-
-export const Login: FunctionComponent<LoginProps> = () => {
+export const Login: FunctionComponent<RouteComponentProps> = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSignInSuccess = () => {

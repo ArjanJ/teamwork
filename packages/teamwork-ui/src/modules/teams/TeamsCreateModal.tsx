@@ -88,15 +88,7 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
               <P>Add as many teammates as you'd like.</P>
               <FieldArray
                 name="members"
-                render={({
-                  insert,
-                  move,
-                  pop,
-                  push,
-                  remove,
-                  swap,
-                  unshift,
-                }: ArrayHelpers) => {
+                render={({ push, remove }: ArrayHelpers) => {
                   return (
                     <div>
                       {values.members && values.members.length > 0

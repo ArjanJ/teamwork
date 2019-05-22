@@ -1,3 +1,4 @@
+import { RouteComponentProps } from '@reach/router';
 import { Router } from '@reach/router';
 import React, { FunctionComponent, useEffect } from 'react';
 import Loadable from 'react-loadable';
@@ -14,11 +15,12 @@ const Teams = Loadable({
   loading: () => null,
 });
 
-interface IDashboardProps {
-  path: string;
-}
+const Team = Loadable({
+  loader: () => import('../teams/Team'),
+  loading: () => null,
+});
 
-export const Dashboard: FunctionComponent<IDashboardProps> = () => {
+export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
   // Go to login page if not logged in.
   useAuthorization('/login');
 
@@ -37,6 +39,7 @@ export const Dashboard: FunctionComponent<IDashboardProps> = () => {
       <Box flex={1}>
         <Router>
           <Teams path="/" />
+          <Team path="/:teamName" />
         </Router>
       </Box>
     </DashboardWrapper>
