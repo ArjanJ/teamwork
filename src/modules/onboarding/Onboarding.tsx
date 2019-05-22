@@ -1,4 +1,4 @@
-import { navigate } from '@reach/router';
+import { navigate, RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import posed, { PoseGroup } from 'react-pose';
 import { Box, Flex } from 'rebass';
@@ -13,10 +13,6 @@ import { useUser } from '../../hooks/useUser';
 import { Easing } from '../../styles/Easing';
 import { Backdrop, Field, Heading, Input, Label } from '../signup/Shared';
 import { delay } from '../../utils/delay';
-
-interface IOnboardingProps {
-  path: string;
-}
 
 interface IStepFormProps {
   updateStep(step: Step): void;
@@ -156,7 +152,7 @@ const RoleForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
   );
 };
 
-export const Onboarding: FunctionComponent<IOnboardingProps> = () => {
+export const Onboarding: FunctionComponent<RouteComponentProps> = () => {
   useAuthorization('/login');
 
   const { authUser } = useAuthUser();

@@ -1,4 +1,4 @@
-import { Link, navigate } from '@reach/router';
+import { Link, navigate, RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent, useState } from 'react';
 import { Box, Flex } from 'rebass';
 
@@ -22,11 +22,7 @@ import {
   Title,
 } from './Shared';
 
-interface SignupProps {
-  path: string;
-}
-
-export const Signup: FunctionComponent<SignupProps> = () => {
+export const Signup: FunctionComponent<RouteComponentProps> = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { createUser } = useUser();
 
