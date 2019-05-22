@@ -13,10 +13,12 @@ import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
+import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Modal } from '../../components/modal/Modal';
 import { useTeams } from '../../hooks/useTeams';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
+import { delay } from '../../utils/delay';
 
 interface ITeamsCreateModalProps {
   hideModal(): void;
@@ -52,13 +54,15 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
           values: ITeamFormValues,
           actions: FormikActions<ITeamFormValues>,
         ) => {
-          console.log({ values, actions });
           await createTeam({
             id: '',
             members: values.members,
             name: values.name,
           });
+          // So the transition of the loader isn't janky.
+          await delay(2000);
           actions.setSubmitting(false);
+          hideModal();
         }}
         render={({
           handleChange,
@@ -217,11 +221,21 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
             </FieldBox>
             <Flex justifyContent="flex-end">
               <Flex>
-                <CancelButton onClick={hideModal} type="button">
+                <CancelButton
+                  disabled={isSubmitting}
+                  onClick={hideModal}
+                  type="button"
+                >
                   Cancel
                 </CancelButton>
                 <Box ml="16px">
-                  <CreateTeamButton type="submit">Create Team</CreateTeamButton>
+                  <ButtonSpinner
+                    disabled={isSubmitting}
+                    isSubmitting={isSubmitting}
+                    type="submit"
+                  >
+                    {!isSubmitting && 'Create Team'}
+                  </ButtonSpinner>
                 </Box>
               </Flex>
             </Flex>
