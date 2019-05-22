@@ -4,6 +4,7 @@ import { Box } from 'rebass';
 import styled from 'styled-components';
 
 import { useUser } from '../../hooks/useUser';
+import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { IUser } from '../user/types';
 
@@ -64,6 +65,29 @@ const SidebarTeamsList = styled.ul`
 const SidebarTeamsListName = styled(Link)`
   color: white;
   display: block;
+  font-weight: ${props =>
+    window.location.pathname.includes(props.to || '') ? 700 : 500};
+  opacity: ${props =>
+    window.location.pathname.includes(props.to || '') ? 1 : 0.75};
   padding: 4px 0;
+  position: relative;
   text-decoration: none;
+  transition: opacity 0.35s ${Easing.OUT};
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &::before {
+    background: ${Color.MANGO};
+    content: '';
+    height: 20px;
+    left: -34px;
+    opacity: ${props =>
+      window.location.pathname.includes(props.to || '') ? 1 : 0};
+    position: absolute;
+    top: 6px;
+    transition: opacity 0.35s ${Easing.OUT};
+    width: 4px;
+  }
 `;

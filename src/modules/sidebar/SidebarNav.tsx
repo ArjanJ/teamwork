@@ -26,7 +26,8 @@ const NavLink = (props: LinkProps<any>) => (
     {...props}
     getProps={({ isCurrent }: LinkGetProps) => ({
       style: {
-        fontWeight: isCurrent ? 600 : '',
+        fontWeight: isCurrent ? 700 : '',
+        opacity: isCurrent ? 1 : 0.75,
       },
     })}
   />
@@ -36,7 +37,6 @@ const StyledLink = styled(Link)<any>`
   align-items: center;
   color: white;
   display: flex;
-  font-weight: 500;
   margin-bottom: 16px;
   text-decoration: none;
 
