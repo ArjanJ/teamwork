@@ -12,7 +12,12 @@ teamsRouter.post('/teams', async (req: Request, res: Response) => {
   if (decodedToken && decodedToken.uid) {
     try {
       const teamDoc = await teamsCollection.add(body);
-      res.status(200).send({ data: body });
+      const teamWithId = {
+        ...body,
+        id: teamDoc.id,
+      };
+
+      res.status(200).send({ data: teamWithId });
 
       /**
        * Add the name and id of the team to the user object. This is so

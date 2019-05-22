@@ -7,7 +7,7 @@ export const updateTeamTypes = generateActionTypes('UPDATE_TEAM');
 interface IMember {
   firstName: string;
   lastName: string;
-  role: string;
+  role?: string;
 }
 
 export interface ITeam {

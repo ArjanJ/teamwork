@@ -37,7 +37,7 @@ const StyledLink = styled(Link)<any>`
   color: white;
   display: flex;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   text-decoration: none;
 
   span {

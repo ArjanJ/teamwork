@@ -35,7 +35,7 @@ const SidebarTeamsListData: FunctionComponent<{ user: IUser }> = ({ user }) => {
   return (
     <SidebarTeamsList>
       {user.teams.map(team => (
-        <li>
+        <li key={team.id}>
           <SidebarTeamsListName to={`/${team.name}`}>
             {team.name}
           </SidebarTeamsListName>
@@ -49,7 +49,7 @@ const SidebarTeamsTitle = styled.h2`
   color: white;
   font-size: 12px;
   letter-spacing: 1px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   opacity: 0.75;
   text-transform: uppercase;
 `;
@@ -64,5 +64,7 @@ const SidebarTeamsList = styled.ul`
 
 const SidebarTeamsListName = styled(Link)`
   color: white;
+  display: block;
+  padding: 4px 0;
   text-decoration: none;
 `;
