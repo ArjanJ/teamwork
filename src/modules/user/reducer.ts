@@ -1,4 +1,6 @@
 import { AnyAction } from 'redux';
+
+import { createTeamTypes } from '../teams/types';
 import { createUserTypes, getUserTypes, IUser, updateUserTypes } from './types';
 
 type User = IUser | null;
@@ -72,6 +74,16 @@ export default function(state = initialState, action: AnyAction) {
         ...state,
         error: action.error,
         isUpdating: false,
+      };
+    case createTeamTypes.SUCCESS:
+      const teams = state.user ? state.user.teams : [];
+
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          teams: [...teams, { id: action.data.id, name: action.data.name }],
+        },
       };
     default:
       return state;

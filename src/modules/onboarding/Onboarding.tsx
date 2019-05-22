@@ -78,7 +78,11 @@ const NameForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
           <Label>Last name</Label>
         </Field>
         <Flex justifyContent="flex-end">
-          <ButtonSpinner isSubmitting={isSubmitting} type="submit">
+          <ButtonSpinner
+            disabled={isSubmitting}
+            isSubmitting={isSubmitting}
+            type="submit"
+          >
             {!isSubmitting && 'Next'}
           </ButtonSpinner>
         </Flex>
@@ -138,7 +142,11 @@ const RoleForm: FunctionComponent<IStepFormProps> = ({ updateStep }) => {
             </BackButton>
           </Box>
           <Box>
-            <ButtonSpinner isSubmitting={isSubmitting} type="submit">
+            <ButtonSpinner
+              disabled={isSubmitting}
+              isSubmitting={isSubmitting}
+              type="submit"
+            >
               {!isSubmitting && 'Finish'}
             </ButtonSpinner>
           </Box>

@@ -9,16 +9,20 @@ interface IModalProps {
   children: React.ReactNode;
   dark?: boolean;
   hideModal(): void;
+  title?: string;
 }
 
 export const Modal: FunctionComponent<IModalProps> = ({
   children,
   dark = true,
   hideModal,
+  title = '',
 }) => {
   return (
-    <Background dark={dark} onClick={hideModal}>
+    <Wrapper>
+      <Background dark={dark} onClick={hideModal} />
       <ModalWrapper dark={dark}>
+        {title && <Title>{title}</Title>}
         <CloseButton onClick={hideModal} type="button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,9 +41,9 @@ export const Modal: FunctionComponent<IModalProps> = ({
             </g>
           </svg>
         </CloseButton>
-        {children}
+        <ModalContent>{children}</ModalContent>
       </ModalWrapper>
-    </Background>
+    </Wrapper>
   );
 };
 
@@ -53,21 +57,8 @@ const fadeInUp = keyframes`
   100% { opacity: 1; transform: none; }
 `;
 
-export const ModalWrapper = styled.div<{ dark: boolean }>`
-  animation: 0.35s 0.2s ${fadeInUp} ${Easing.OUT} forwards;
-  background: ${props => (props.dark ? '#03004B' : 'white')};
-  border-radius: 4px;
-  box-shadow: 0 6px 24px ${rgba('black', 0.2)};
-  min-height: 400px;
-  opacity: 0;
-  width: 600px;
-`;
-
-const Background = styled.div<{ dark: boolean }>`
+const Wrapper = styled.div`
   align-items: center;
-  animation: 0.35s ${fadeIn} ${Easing.OUT} forwards;
-  background: ${props =>
-    props.dark ? rgba(Color.BLUE_RAGE, 0.65) : rgba('black', 0.5)};
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -78,9 +69,53 @@ const Background = styled.div<{ dark: boolean }>`
   z-index: 100;
 `;
 
+const ModalWrapper = styled.div<{ dark: boolean }>`
+  animation: 0.4s 0.15s ${fadeInUp} ${Easing.OUT} forwards;
+  background: ${props => (props.dark ? Color.NAVY : 'white')};
+  border-radius: 4px;
+  box-shadow: 0 6px 24px ${rgba('black', 0.2)};
+  min-height: 100px;
+  opacity: 0;
+  padding: 36px;
+  position: relative;
+  width: 640px;
+`;
+
+const Background = styled.div<{ dark: boolean }>`
+  animation: 0.35s ${fadeIn} ${Easing.OUT} forwards;
+  background: ${props =>
+    props.dark ? rgba(Color.BLUE_RAGE, 0.65) : rgba('black', 0.5)};
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+`;
+
 const CloseButton = styled.button`
   background: none;
   display: block;
-  margin-left: auto;
-  padding: 12px;
+  position: absolute;
+  padding: 8px;
+  right: 8px;
+  top: 8px;
+
+  svg {
+    transition: opacity 0.35s ${Easing.OUT};
+  }
+
+  &:hover {
+    svg {
+      opacity: 0.75;
+    }
+  }
 `;
+
+const Title = styled.h1`
+  color: white;
+  font-size: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+`;
+
+const ModalContent = styled.div``;
