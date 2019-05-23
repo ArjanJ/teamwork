@@ -1,4 +1,10 @@
-import { createTeamTypes, getTeamTypes, ITeam, updateTeamTypes } from './types';
+import {
+  createTeamTypes,
+  deleteTeamTypes,
+  getTeamTypes,
+  ITeam,
+  updateTeamTypes,
+} from './types';
 
 export function createTeam(team: ITeam) {
   return {
@@ -20,7 +26,7 @@ export function createTeam(team: ITeam) {
 export function getTeam(teamId: string) {
   return {
     callAPI: (headers = {}) =>
-      fetch(`/api/team/${teamId}`, {
+      fetch(`/api/teams/${teamId}`, {
         headers,
         method: 'GET',
       }),
@@ -42,6 +48,23 @@ export function updateTeam(teamId: string, body = {}) {
       updateTeamTypes.REQUEST,
       updateTeamTypes.SUCCESS,
       updateTeamTypes.FAILURE,
+    ],
+  };
+}
+
+export function deleteTeam(body: { id: string; name: string }) {
+  return {
+    callAPI: (headers = {}) =>
+      fetch(`/api/teams`, {
+        body: JSON.stringify(body),
+        headers,
+        method: 'DELETE',
+      }),
+    payload: body,
+    types: [
+      deleteTeamTypes.REQUEST,
+      deleteTeamTypes.SUCCESS,
+      deleteTeamTypes.FAILURE,
     ],
   };
 }

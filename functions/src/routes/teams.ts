@@ -11,9 +11,16 @@ teamsRouter.post('/teams', async (req: Request, res: Response) => {
 
   if (decodedToken && decodedToken.uid) {
     try {
-      const teamDoc = await teamsCollection.add(body);
-      const teamWithId = {
+      const teamDocWithOwner = {
         ...body,
+        owner: {
+          email: decodedToken.email,
+          uid: decodedToken.uid,
+        },
+      };
+      const teamDoc = await teamsCollection.add(teamDocWithOwner);
+      const teamWithId = {
+        ...teamDocWithOwner,
         id: teamDoc.id,
       };
 
@@ -27,7 +34,7 @@ teamsRouter.post('/teams', async (req: Request, res: Response) => {
       usersCollection.doc(decodedToken.uid).update({
         teams: admin.firestore.FieldValue.arrayUnion({
           id: teamDoc.id,
-          name: body.name,
+          name: teamDocWithOwner.name,
         }),
       });
     } catch (error) {
@@ -62,6 +69,30 @@ teamsRouter.put('/teams/:teamId', async (req: Request, res: Response) => {
     await doc.update(body);
     res.status(200).send({ data: body });
   } catch (error) {
+    res.status(500).send({ error });
+  }
+});
+
+teamsRouter.delete('/teams', async (req: Request, res: Response) => {
+  const { body, decodedToken } = req;
+  const { id, name } = body;
+
+  if (!decodedToken || !name) {
+    throw new Error('Expected decodedToken to exist.');
+  }
+
+  try {
+    await teamsCollection.doc(id).delete();
+    res.status(200).send({ data: {} });
+
+    await usersCollection.doc(decodedToken.uid).update({
+      teams: admin.firestore.FieldValue.arrayRemove({
+        id,
+        name,
+      }),
+    });
+  } catch (error) {
+    console.log(error);
     res.status(500).send({ error });
   }
 });
