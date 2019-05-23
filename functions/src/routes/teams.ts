@@ -77,11 +77,31 @@ teamsRouter.delete('/teams', async (req: Request, res: Response) => {
   const { body, decodedToken } = req;
   const { id, name } = body;
 
-  if (!decodedToken || !name) {
-    throw new Error('Expected decodedToken to exist.');
+  if (!id || !decodedToken) {
+    throw new Error('Expected team id in body.');
   }
 
   try {
+    const doc = await teamsCollection.doc(id).get();
+
+    if (!doc.exists) {
+      return res.status(200).send({
+        error: {
+          message: 'No team exists.',
+        },
+      });
+    } else {
+      const teamDocData = doc.data();
+
+      if (teamDocData && teamDocData.owner.uid !== decodedToken.uid) {
+        return res.status(200).send({
+          error: {
+            message: 'Must be owner to delete team.',
+          },
+        });
+      }
+    }
+
     await teamsCollection.doc(id).delete();
     res.status(200).send({ data: {} });
 
@@ -92,7 +112,6 @@ teamsRouter.delete('/teams', async (req: Request, res: Response) => {
       }),
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({ error });
   }
 });
