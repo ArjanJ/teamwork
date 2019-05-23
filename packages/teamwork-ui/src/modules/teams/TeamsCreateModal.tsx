@@ -41,6 +41,14 @@ const initialValues = {
   members: [emptyTeammate],
 };
 
+const validateTeamName = (value: string) => {
+  let error;
+  if (value.includes(' ')) {
+    error = 'Team name must not contain spaces.';
+  }
+  return error;
+};
+
 export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
   hideModal,
 }) => {
@@ -64,23 +72,23 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
           actions.setSubmitting(false);
           hideModal();
         }}
-        render={({
-          handleChange,
-          isSubmitting,
-          values,
-        }: FormikProps<ITeamFormValues>) => (
+        render={({ isSubmitting, values }: FormikProps<ITeamFormValues>) => (
           <Form>
             <FieldBox mb="30px">
               <Label>What's your team name?</Label>
               <P>Puns are encouraged.</P>
-              <Input
-                autoFocus
+              <Field
                 name="name"
-                onChange={handleChange}
-                placeholder="Your team name"
-                required
-                type="text"
-                value={values.name}
+                render={({ field }: FieldProps<ITeamFormValues>) => (
+                  <Input
+                    {...field}
+                    autoFocus
+                    placeholder="Your team name"
+                    required
+                    type="text"
+                  />
+                )}
+                validate={validateTeamName}
               />
             </FieldBox>
             <FieldBox mb="30px">
