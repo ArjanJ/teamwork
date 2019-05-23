@@ -82,7 +82,7 @@ const SidebarTeamsListName = styled(Link)`
     background: ${Color.MANGO};
     content: '';
     height: 20px;
-    left: -34px;
+    left: -36px;
     opacity: ${props =>
       window.location.pathname.includes(props.to || '') ? 1 : 0};
     position: absolute;
