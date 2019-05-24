@@ -38,7 +38,7 @@ const SidebarTeamsListData: FunctionComponent<{ user: IUser }> = ({ user }) => {
       {user.teams.map(team => (
         <li key={team.id}>
           <SidebarTeamsListName to={`/${team.name}`}>
-            {team.name}
+            {team.displayName}
           </SidebarTeamsListName>
         </li>
       ))}

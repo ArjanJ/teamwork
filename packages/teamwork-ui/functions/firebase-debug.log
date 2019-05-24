@@ -1,160 +1,32 @@
-[debug] [2019-04-27T21:43:30.663Z] ----------------------------------------------------------------------
-[debug] [2019-04-27T21:43:30.665Z] Command:       /usr/local/bin/node /Users/arjan/Repositories/teamwork/functions/node_modules/.bin/firebase serve --only functions
-[debug] [2019-04-27T21:43:30.665Z] CLI Version:   6.7.0
-[debug] [2019-04-27T21:43:30.665Z] Platform:      darwin
-[debug] [2019-04-27T21:43:30.665Z] Node Version:  v8.12.0
-[debug] [2019-04-27T21:43:30.665Z] Time:          Sat Apr 27 2019 14:43:30 GMT-0700 (PDT)
-[debug] [2019-04-27T21:43:30.665Z] ----------------------------------------------------------------------
+[debug] [2019-05-24T04:48:05.248Z] ----------------------------------------------------------------------
+[debug] [2019-05-24T04:48:05.249Z] Command:       /usr/local/bin/node /Users/arjan/Repositories/teamwork/functions/node_modules/.bin/firebase serve --only functions
+[debug] [2019-05-24T04:48:05.250Z] CLI Version:   6.7.0
+[debug] [2019-05-24T04:48:05.250Z] Platform:      darwin
+[debug] [2019-05-24T04:48:05.250Z] Node Version:  v8.12.0
+[debug] [2019-05-24T04:48:05.250Z] Time:          Thu May 23 2019 21:48:05 GMT-0700 (PDT)
+[debug] [2019-05-24T04:48:05.250Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-04-27T21:43:30.673Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-04-27T21:43:30.673Z] > authorizing via signed-in user
-[debug] [2019-04-27T21:43:30.673Z] [iam] checking project teamwork-dev-74882 for permissions ["firebase.projects.get"]
-[debug] [2019-04-27T21:43:30.674Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-04-27T21:43:30.674Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+[debug] [2019-05-24T04:48:05.261Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-05-24T04:48:05.261Z] > authorizing via signed-in user
+[debug] [2019-05-24T04:48:05.261Z] [iam] checking project teamwork-dev-74882 for permissions ["firebase.projects.get"]
+[debug] [2019-05-24T04:48:05.263Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-05-24T04:48:05.263Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
  <request body omitted>
-[debug] [2019-04-27T21:43:30.810Z] <<< HTTP RESPONSE 200
-[debug] [2019-04-27T21:43:30.821Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882:testIamPermissions  
+[debug] [2019-05-24T04:48:05.399Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-24T04:48:05.412Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882:testIamPermissions  
 
-[debug] [2019-04-27T21:43:30.967Z] <<< HTTP RESPONSE 200
-[debug] [2019-04-27T21:43:30.968Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882  
+[debug] [2019-05-24T04:48:05.813Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-24T04:48:05.813Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882  
  
-[debug] [2019-04-27T21:43:31.544Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-24T04:48:05.991Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Serving from '/Users/arjan/Repositories/teamwork'...
 [info] 
 [info] i  functions: Preparing to emulate functions.
-[debug] [2019-04-27T21:43:32.221Z] Fetching environment
-[debug] [2019-04-27T21:43:32.224Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/671854349708:getServerAppConfig  
+[debug] [2019-05-24T04:48:06.596Z] Fetching environment
+[debug] [2019-05-24T04:48:06.597Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/671854349708:getServerAppConfig  
  
-[debug] [2019-04-27T21:43:32.406Z] <<< HTTP RESPONSE 200
-[debug] [2019-04-27T21:43:32.407Z] Starting @google-cloud/functions-emulator
-[debug] [2019-04-27T21:43:33.956Z] Parsing function triggers
-[info] ✔  functions: api: http://localhost:5000/teamwork-dev-74882/us-central1/api
-[debug] [2019-05-04T02:21:52.663Z] ----------------------------------------------------------------------
-[debug] [2019-05-04T02:21:52.664Z] Command:       /usr/local/bin/node /Users/arjan/Repositories/teamwork/functions/node_modules/.bin/firebase serve --only functions
-[debug] [2019-05-04T02:21:52.664Z] CLI Version:   6.7.0
-[debug] [2019-05-04T02:21:52.664Z] Platform:      darwin
-[debug] [2019-05-04T02:21:52.665Z] Node Version:  v8.12.0
-[debug] [2019-05-04T02:21:52.665Z] Time:          Fri May 03 2019 19:21:52 GMT-0700 (PDT)
-[debug] [2019-05-04T02:21:52.665Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2019-05-04T02:21:52.677Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-05-04T02:21:52.677Z] > authorizing via signed-in user
-[debug] [2019-05-04T02:21:52.677Z] [iam] checking project teamwork-dev-74882 for permissions ["firebase.projects.get"]
-[debug] [2019-05-04T02:21:52.678Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-05-04T02:21:52.678Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2019-05-04T02:21:52.832Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-04T02:21:52.841Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882:testIamPermissions  
-
-[debug] [2019-05-04T02:21:53.038Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-04T02:21:53.039Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882  
- 
-[debug] [2019-05-04T02:21:53.250Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from '/Users/arjan/Repositories/teamwork'...
-[info] 
-[info] i  functions: Preparing to emulate functions.
-[debug] [2019-05-04T02:21:53.871Z] Fetching environment
-[debug] [2019-05-04T02:21:53.873Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/671854349708:getServerAppConfig  
- 
-[debug] [2019-05-04T02:21:54.141Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-04T02:21:54.142Z] Starting @google-cloud/functions-emulator
-[debug] [2019-05-04T02:21:55.185Z] Parsing function triggers
-[info] ✔  functions: api: http://localhost:5000/teamwork-dev-74882/us-central1/api
-[debug] [2019-05-09T04:12:13.153Z] ----------------------------------------------------------------------
-[debug] [2019-05-09T04:12:13.154Z] Command:       /usr/local/bin/node /Users/arjan/Repositories/teamwork/functions/node_modules/.bin/firebase serve --only functions
-[debug] [2019-05-09T04:12:13.155Z] CLI Version:   6.7.0
-[debug] [2019-05-09T04:12:13.155Z] Platform:      darwin
-[debug] [2019-05-09T04:12:13.155Z] Node Version:  v8.12.0
-[debug] [2019-05-09T04:12:13.155Z] Time:          Wed May 08 2019 21:12:13 GMT-0700 (PDT)
-[debug] [2019-05-09T04:12:13.155Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2019-05-09T04:12:13.167Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-05-09T04:12:13.167Z] > authorizing via signed-in user
-[debug] [2019-05-09T04:12:13.167Z] [iam] checking project teamwork-dev-74882 for permissions ["firebase.projects.get"]
-[debug] [2019-05-09T04:12:13.169Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-05-09T04:12:13.169Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2019-05-09T04:12:13.326Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-09T04:12:13.349Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882:testIamPermissions  
-
-[debug] [2019-05-09T04:12:13.514Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-09T04:12:13.515Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882  
- 
-[debug] [2019-05-09T04:12:13.689Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from '/Users/arjan/Repositories/teamwork'...
-[info] 
-[info] i  functions: Preparing to emulate functions.
-[debug] [2019-05-09T04:12:14.301Z] Fetching environment
-[debug] [2019-05-09T04:12:14.303Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/671854349708:getServerAppConfig  
- 
-[debug] [2019-05-09T04:12:14.466Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-09T04:12:14.466Z] Starting @google-cloud/functions-emulator
-[debug] [2019-05-09T04:12:15.505Z] Parsing function triggers
-[info] ✔  functions: api: http://localhost:5000/teamwork-dev-74882/us-central1/api
-[debug] [2019-05-19T22:05:35.028Z] ----------------------------------------------------------------------
-[debug] [2019-05-19T22:05:35.030Z] Command:       /usr/local/bin/node /Users/arjan/Repositories/teamwork/functions/node_modules/.bin/firebase serve --only functions
-[debug] [2019-05-19T22:05:35.030Z] CLI Version:   6.7.0
-[debug] [2019-05-19T22:05:35.030Z] Platform:      darwin
-[debug] [2019-05-19T22:05:35.030Z] Node Version:  v8.12.0
-[debug] [2019-05-19T22:05:35.031Z] Time:          Sun May 19 2019 15:05:35 GMT-0700 (PDT)
-[debug] [2019-05-19T22:05:35.031Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2019-05-19T22:05:35.041Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-05-19T22:05:35.041Z] > authorizing via signed-in user
-[debug] [2019-05-19T22:05:35.041Z] [iam] checking project teamwork-dev-74882 for permissions ["firebase.projects.get"]
-[debug] [2019-05-19T22:05:35.043Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-05-19T22:05:35.043Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2019-05-19T22:05:35.178Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-19T22:05:35.186Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882:testIamPermissions  
-
-[debug] [2019-05-19T22:05:35.348Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-19T22:05:35.349Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882  
- 
-[debug] [2019-05-19T22:05:35.535Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from '/Users/arjan/Repositories/teamwork'...
-[info] 
-[info] i  functions: Preparing to emulate functions.
-[debug] [2019-05-19T22:05:36.047Z] Fetching environment
-[debug] [2019-05-19T22:05:36.049Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/671854349708:getServerAppConfig  
- 
-[debug] [2019-05-19T22:05:36.246Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-19T22:05:36.247Z] Starting @google-cloud/functions-emulator
-[debug] [2019-05-19T22:05:37.288Z] Parsing function triggers
-[info] ✔  functions: api: http://localhost:5000/teamwork-dev-74882/us-central1/api
-[debug] [2019-05-22T15:53:50.011Z] ----------------------------------------------------------------------
-[debug] [2019-05-22T15:53:50.013Z] Command:       /usr/local/bin/node /Users/arjan/Repositories/teamwork/functions/node_modules/.bin/firebase serve --only functions
-[debug] [2019-05-22T15:53:50.013Z] CLI Version:   6.7.0
-[debug] [2019-05-22T15:53:50.013Z] Platform:      darwin
-[debug] [2019-05-22T15:53:50.013Z] Node Version:  v8.12.0
-[debug] [2019-05-22T15:53:50.013Z] Time:          Wed May 22 2019 08:53:50 GMT-0700 (PDT)
-[debug] [2019-05-22T15:53:50.013Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2019-05-22T15:53:50.025Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-05-22T15:53:50.025Z] > authorizing via signed-in user
-[debug] [2019-05-22T15:53:50.025Z] [iam] checking project teamwork-dev-74882 for permissions ["firebase.projects.get"]
-[debug] [2019-05-22T15:53:50.026Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-05-22T15:53:50.026Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2019-05-22T15:53:50.156Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-22T15:53:50.166Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882:testIamPermissions  
-
-[debug] [2019-05-22T15:53:50.334Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-22T15:53:50.335Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/teamwork-dev-74882  
- 
-[debug] [2019-05-22T15:53:50.664Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from '/Users/arjan/Repositories/teamwork'...
-[info] 
-[info] i  functions: Preparing to emulate functions.
-[debug] [2019-05-22T15:53:51.222Z] Fetching environment
-[debug] [2019-05-22T15:53:51.224Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/671854349708:getServerAppConfig  
- 
-[debug] [2019-05-22T15:53:51.410Z] <<< HTTP RESPONSE 200
-[debug] [2019-05-22T15:53:51.410Z] Starting @google-cloud/functions-emulator
-[debug] [2019-05-22T15:53:52.455Z] Parsing function triggers
+[debug] [2019-05-24T04:48:06.837Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-24T04:48:06.837Z] Starting @google-cloud/functions-emulator
+[debug] [2019-05-24T04:48:07.873Z] Parsing function triggers
 [info] ✔  functions: api: http://localhost:5000/teamwork-dev-74882/us-central1/api
