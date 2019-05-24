@@ -3,7 +3,6 @@ import React, { FunctionComponent } from 'react';
 import { useModal } from 'react-modal-hook';
 import styled from 'styled-components';
 
-import { useTeams } from '../../hooks/useTeams';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { IUser } from '../user/types';

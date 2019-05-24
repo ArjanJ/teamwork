@@ -19,6 +19,8 @@ import { useTeams } from '../../hooks/useTeams';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { delay } from '../../utils/delay';
+import { IMember } from './types';
+import * as TeamsUtils from './utils';
 
 interface ITeamsCreateModalProps {
   hideModal(): void;
@@ -26,27 +28,13 @@ interface ITeamsCreateModalProps {
 
 interface ITeamFormValues {
   name: string;
-  members: ITeammate[];
+  members: IMember[];
 }
 
-interface ITeammate {
-  email: string;
-  firstName: string;
-  lastName: string;
-}
-
-const emptyTeammate: ITeammate = { email: '', firstName: '', lastName: '' };
+const emptyTeammate: IMember = { email: '', firstName: '', lastName: '' };
 const initialValues = {
   name: '',
   members: [emptyTeammate],
-};
-
-const validateTeamName = (value: string) => {
-  let error;
-  if (value.includes(' ')) {
-    error = 'Team name must not contain spaces.';
-  }
-  return error;
 };
 
 export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
@@ -63,16 +51,21 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
           actions: FormikActions<ITeamFormValues>,
         ) => {
           await createTeam({
+            displayName: values.name,
             id: '',
             members: values.members,
-            name: values.name,
+            name: TeamsUtils.normalizeTeamName(values.name),
           });
           // So the transition of the loader isn't janky.
           await delay(2000);
           actions.setSubmitting(false);
           hideModal();
         }}
-        render={({ isSubmitting, values }: FormikProps<ITeamFormValues>) => (
+        render={({
+          errors,
+          isSubmitting,
+          values,
+        }: FormikProps<ITeamFormValues>) => (
           <Form>
             <FieldBox mb="30px">
               <Label>What's your team name?</Label>
@@ -88,7 +81,6 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
                     type="text"
                   />
                 )}
-                validate={validateTeamName}
               />
             </FieldBox>
             <FieldBox mb="30px">
@@ -153,38 +145,7 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
                                     onClick={() => remove(index)}
                                     type="button"
                                   >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                                      x="0px"
-                                      y="0px"
-                                      width="16px"
-                                      height="16px"
-                                      viewBox="0 0 16 16"
-                                    >
-                                      <g transform="translate(0, 0)">
-                                        <rect
-                                          data-color="color-2"
-                                          x="5"
-                                          y="7"
-                                          fill="#FFFFFF"
-                                          width="2"
-                                          height="6"
-                                        />{' '}
-                                        <rect
-                                          data-color="color-2"
-                                          x="9"
-                                          y="7"
-                                          fill="#FFFFFF"
-                                          width="2"
-                                          height="6"
-                                        />{' '}
-                                        <path
-                                          fill="#FFFFFF"
-                                          d="M12,1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h1v10c0,0.6,0.4,1,1,1h12c0.6,0,1-0.4,1-1V5h1V3h-4V1z M6,2h4 v1H6V2z M13,5v9H3V5H13z"
-                                        />
-                                      </g>
-                                    </svg>
+                                    <TrashIcon />
                                   </RemoveTeammateButton>
                                 </Box>
                               </Flex>
@@ -196,22 +157,7 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
                           onClick={() => push(emptyTeammate)}
                           type="button"
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                            x="0px"
-                            y="0px"
-                            width="12px"
-                            height="12px"
-                            viewBox="0 0 12 12"
-                          >
-                            <g transform="translate(0, 0)">
-                              <path
-                                d="M11,5H7V1A1,1,0,0,0,5,1V5H1A1,1,0,0,0,1,7H5v4a1,1,0,0,0,2,0V7h4a1,1,0,0,0,0-2Z"
-                                fill="#FFFFFF"
-                              />
-                            </g>
-                          </svg>
+                          <AddIcon />
                         </AddTeammateButton>
                       </Box>
                     </div>
@@ -245,6 +191,60 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
     </Modal>
   );
 };
+
+const AddIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    width="12px"
+    height="12px"
+    viewBox="0 0 12 12"
+  >
+    <g transform="translate(0, 0)">
+      <path
+        d="M11,5H7V1A1,1,0,0,0,5,1V5H1A1,1,0,0,0,1,7H5v4a1,1,0,0,0,2,0V7h4a1,1,0,0,0,0-2Z"
+        fill="#FFFFFF"
+      />
+    </g>
+  </svg>
+);
+
+const TrashIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    width="16px"
+    height="16px"
+    viewBox="0 0 16 16"
+  >
+    <g transform="translate(0, 0)">
+      <rect
+        data-color="color-2"
+        x="5"
+        y="7"
+        fill="#FFFFFF"
+        width="2"
+        height="6"
+      />{' '}
+      <rect
+        data-color="color-2"
+        x="9"
+        y="7"
+        fill="#FFFFFF"
+        width="2"
+        height="6"
+      />{' '}
+      <path
+        fill="#FFFFFF"
+        d="M12,1c0-0.6-0.4-1-1-1H5C4.4,0,4,0.4,4,1v2H0v2h1v10c0,0.6,0.4,1,1,1h12c0.6,0,1-0.4,1-1V5h1V3h-4V1z M6,2h4 v1H6V2z M13,5v9H3V5H13z"
+      />
+    </g>
+  </svg>
+);
 
 const Label = styled.label`
   color: white;
@@ -315,16 +315,8 @@ const CancelButton = styled.button`
   }
 `;
 
-const CreateTeamButton = styled.button`
-  background: ${Color.BLUE_SKY};
-  border-radius: 4px;
-  color: white;
-  font-weight: 700;
-  height: 40px;
-  padding: 0 16px;
-  transition: background 0.35s ${Easing.OUT};
-
-  &:hover {
-    background: ${darken(0.1, Color.BLUE_SKY)};
-  }
+const ErrorMessage = styled.p`
+  color: #ff7272;
+  font-weight: 500;
+  margin: 4px 12px;
 `;
