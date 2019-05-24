@@ -1,5 +1,5 @@
 import { RouteComponentProps } from '@reach/router';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { useTeams } from '../../hooks/useTeams';
@@ -13,23 +13,24 @@ interface ITeamProps {
 export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
   teamName,
 }) => {
+  const [userTeam, setUserTeam] = useState<IUserTeam | null>(null);
   const { deleteTeam } = useTeams();
   const { user } = useUser();
 
-  const getUserTeam = () => {
+  useEffect(() => {
     if (user && user.teams) {
-      return user.teams.find((team: IUserTeam) => team.name === teamName);
+      const userTeamResult = user.teams.find(
+        (team: IUserTeam) => team.name === teamName,
+      );
+      setUserTeam(userTeamResult);
     }
-    return null;
-  };
-
-  const userTeam = getUserTeam();
+  }, [user]);
 
   if (!userTeam || !teamName) {
     return null;
   }
 
-  const { displayName, id, name } = userTeam;
+  const { displayName } = userTeam;
 
   return (
     <Wrapper>
