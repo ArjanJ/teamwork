@@ -1,10 +1,17 @@
 import { rgba } from 'polished';
 import React from 'react';
+import { useModal } from 'react-modal-hook';
 import styled from 'styled-components';
 
+import { TeamsCreateModal } from '../teams/TeamsCreateModal';
+
 export const SidebarNewTeam = () => {
+  const [showModal, hideModal] = useModal(() => (
+    <TeamsCreateModal hideModal={hideModal} />
+  ));
+
   return (
-    <SidebarNewTeamWrapper>
+    <SidebarNewTeamWrapper onClick={showModal}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"

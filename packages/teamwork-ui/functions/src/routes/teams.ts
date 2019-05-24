@@ -33,6 +33,7 @@ teamsRouter.post('/teams', async (req: Request, res: Response) => {
        */
       usersCollection.doc(decodedToken.uid).update({
         teams: admin.firestore.FieldValue.arrayUnion({
+          displayName: teamDocWithOwner.displayName,
           id: teamDoc.id,
           name: teamDocWithOwner.name,
         }),
@@ -75,12 +76,16 @@ teamsRouter.put('/teams/:teamId', async (req: Request, res: Response) => {
 
 teamsRouter.delete('/teams', async (req: Request, res: Response) => {
   const { body, decodedToken } = req;
-  const { id, name } = body;
+  const { displayName, id, name } = body;
 
   if (!id || !decodedToken) {
     throw new Error('Expected team id in body.');
   }
 
+  /**
+   * First we get the Team doc to see if the user is the owner.
+   * Only owners can delete the Team.
+   */
   try {
     const doc = await teamsCollection.doc(id).get();
 
@@ -107,6 +112,7 @@ teamsRouter.delete('/teams', async (req: Request, res: Response) => {
 
     await usersCollection.doc(decodedToken.uid).update({
       teams: admin.firestore.FieldValue.arrayRemove({
+        displayName,
         id,
         name,
       }),
