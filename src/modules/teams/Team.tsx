@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { useTeams } from '../../hooks/useTeams';
 import { useUser } from '../../hooks/useUser';
+import { IUserTeam } from '../user/types';
 
 interface ITeamProps {
   teamName?: string;
@@ -15,30 +16,25 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
   const { deleteTeam } = useTeams();
   const { user } = useUser();
 
-  const getTeamId = () => {
+  const getUserTeam = () => {
     if (user && user.teams) {
-      return user.teams.find(
-        (team: { id: string; name: string }) => team.name === teamName,
-      );
+      return user.teams.find((team: IUserTeam) => team.name === teamName);
     }
-
     return null;
   };
 
-  const teamId = getTeamId();
+  const userTeam = getUserTeam();
 
-  if (!teamId || !teamName) {
+  if (!userTeam || !teamName) {
     return null;
   }
 
-  const { id } = teamId;
+  const { displayName, id, name } = userTeam;
 
   return (
     <Wrapper>
-      <h1>{teamName}</h1>
-      <button onClick={() => deleteTeam({ id, name: teamName })}>
-        Delete team
-      </button>
+      <h1>{displayName}</h1>
+      <button onClick={() => deleteTeam(userTeam)}>Delete team</button>
     </Wrapper>
   );
 };

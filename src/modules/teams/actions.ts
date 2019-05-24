@@ -6,6 +6,8 @@ import {
   updateTeamTypes,
 } from './types';
 
+import { IUserTeam } from '../user/types';
+
 export function createTeam(team: ITeam) {
   return {
     callAPI: (headers = {}) =>
@@ -52,7 +54,7 @@ export function updateTeam(teamId: string, body = {}) {
   };
 }
 
-export function deleteTeam(body: { id: string; name: string }) {
+export function deleteTeam(body: IUserTeam) {
   return {
     callAPI: (headers = {}) =>
       fetch(`/api/teams`, {

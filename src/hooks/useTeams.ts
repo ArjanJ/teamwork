@@ -8,6 +8,7 @@ import {
   updateTeam,
 } from '../modules/teams/actions';
 import { ITeam } from '../modules/teams/types';
+import { IUserTeam } from '../modules/user/types';
 
 export const useTeams = () => {
   const dispatch = useDispatch();
@@ -16,8 +17,7 @@ export const useTeams = () => {
   const teamsState = useMappedState(mapState);
 
   const create = (team: ITeam) => dispatch(createTeam(team));
-  const remove = (team: { id: string; name: string }) =>
-    dispatch(deleteTeam(team));
+  const remove = (team: IUserTeam) => dispatch(deleteTeam(team));
   const get = (teamId: string) => dispatch(getTeam(teamId));
   const update = (teamId: string, body = {}) =>
     dispatch(updateTeam(teamId, body));
