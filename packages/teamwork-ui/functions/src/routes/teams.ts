@@ -54,7 +54,7 @@ teamsRouter.get('/teams/:teamId', async (req: Request, res: Response) => {
     if (!doc.exists) {
       res.status(200).send({ data: {} });
     } else {
-      res.status(200).send({ data: doc.data() });
+      res.status(200).send({ data: { ...doc.data(), id: teamId } });
     }
   } catch (error) {
     res.status(500).send({ error });
