@@ -7,14 +7,16 @@ interface ITeamState {
   isCreating: boolean;
   isFetching: boolean;
   isUpdating: boolean;
-  teams: ITeam[];
+  teams: {
+    [id: string]: ITeam;
+  };
 }
 
 const initialState: ITeamState = {
   isCreating: false,
   isFetching: false,
   isUpdating: false,
-  teams: [],
+  teams: {},
 };
 
 export default function(state = initialState, action: AnyAction) {
@@ -28,7 +30,10 @@ export default function(state = initialState, action: AnyAction) {
       return {
         ...state,
         isCreating: false,
-        teams: [...state.teams, action.data],
+        teams: {
+          ...state.teams,
+          [action.data.id]: action.data,
+        },
       };
     case createTeamTypes.FAILURE:
       return {
@@ -40,12 +45,15 @@ export default function(state = initialState, action: AnyAction) {
       return {
         ...state,
         isFetching: true,
-        teams: [...state.teams, action.data],
       };
     case getTeamTypes.SUCCESS:
       return {
         ...state,
         isFetching: false,
+        teams: {
+          ...state.teams,
+          [action.data.id]: action.data,
+        },
       };
     case getTeamTypes.FAILURE:
       return {
@@ -62,12 +70,10 @@ export default function(state = initialState, action: AnyAction) {
       return {
         ...state,
         isUpdating: false,
-        teams: state.teams.map((team: ITeam) => {
-          if (team.id === action.data.id) {
-            return action.data;
-          }
-          return team;
-        }),
+        teams: {
+          ...state.teams,
+          [action.data.id]: action.data,
+        },
       };
     case updateTeamTypes.FAILURE:
       return {

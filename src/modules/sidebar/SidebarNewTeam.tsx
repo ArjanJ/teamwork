@@ -3,6 +3,7 @@ import React from 'react';
 import { useModal } from 'react-modal-hook';
 import styled from 'styled-components';
 
+import { Easing } from '../../styles/Easing';
 import { TeamsCreateModal } from '../teams/TeamsCreateModal';
 
 export const SidebarNewTeam = () => {
@@ -75,11 +76,17 @@ const SidebarNewTeamWrapper = styled.button`
   font-weight: 500;
   height: 64px;
   left: 0;
+  opacity: 0.75;
   padding-left: 36px;
   position: fixed;
+  transition: opacity 0.35s ${Easing.OUT};
   width: 280px;
 
   span {
     margin-left: 12px;
+  }
+
+  &:hover {
+    opacity: 1;
   }
 `;
