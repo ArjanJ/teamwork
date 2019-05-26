@@ -82,7 +82,14 @@ export default function(state = initialState, action: AnyAction) {
         ...state,
         user: {
           ...state.user,
-          teams: [...teams, { id: action.data.id, name: action.data.name }],
+          teams: [
+            ...teams,
+            {
+              displayName: action.data.displayName,
+              id: action.data.id,
+              name: action.data.name,
+            },
+          ],
         },
       };
     default:
