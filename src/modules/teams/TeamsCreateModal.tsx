@@ -15,7 +15,9 @@ import styled from 'styled-components';
 
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Modal } from '../../components/modal/Modal';
+import { useAuthUser } from '../../hooks/useAuthUser';
 import { useTeams } from '../../hooks/useTeams';
+import { useUser } from '../../hooks/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { delay } from '../../utils/delay';
@@ -41,6 +43,8 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
   hideModal,
 }) => {
   const { createTeam } = useTeams();
+  const { authUser } = useAuthUser();
+  const { user } = useUser();
 
   return (
     <Modal hideModal={hideModal} title="Create your team">
@@ -53,7 +57,14 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
           await createTeam({
             displayName: values.name,
             id: '',
-            members: values.members,
+            members: [
+              ...values.members,
+              {
+                email: authUser.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+              },
+            ],
             name: TeamsUtils.normalizeTeamName(values.name),
           });
           // So the transition of the loader isn't janky.
