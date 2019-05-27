@@ -72,23 +72,30 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
           {teams[id] &&
             teams[id].members.map((member: IMember) => (
               <StyledTeamMembersListItem key={member.email}>
-                <Flex>
-                  <TeamMembersInitials>
-                    {member.firstName[0]}
-                    {member.lastName[0]}
-                  </TeamMembersInitials>
-                  <Box ml="12px">
-                    <TeamMembersName>
-                      {member.firstName} {member.lastName}
-                    </TeamMembersName>
-                    <TeamMembersEmail>{member.email}</TeamMembersEmail>
+                <Flex justifyContent="space-between">
+                  <Flex>
+                    <TeamMembersInitials>
+                      {member.firstName[0]}
+                      {member.lastName[0]}
+                    </TeamMembersInitials>
+                    <Box ml="12px">
+                      <TeamMembersName>
+                        {member.firstName} {member.lastName}
+                      </TeamMembersName>
+                      <TeamMembersEmail>{member.email}</TeamMembersEmail>
+                    </Box>
+                  </Flex>
+                  <Box>
+                    <TeamMembersExpandButton type="button">
+                      <MenuIcon />
+                    </TeamMembersExpandButton>
                   </Box>
                 </Flex>
               </StyledTeamMembersListItem>
             ))}
         </StyledTeamMembersList>
       </Box>
-      <button onClick={() => deleteTeam(userTeam)}>Delete team</button>
+      {/* <button onClick={() => deleteTeam(userTeam)}>Delete team</button> */}
     </Wrapper>
   );
 };
@@ -107,6 +114,34 @@ const SettingsIcon = () => (
       <path
         fill="#FFFFFF"
         d="M13.3,5.2l1.1-2.1l-1.4-1.4l-2.1,1.1c-0.3-0.2-0.7-0.3-1.1-0.4L9,0H7L6.2,2.3C5.9,2.4,5.5,2.5,5.2,2.7 L3.1,1.6L1.6,3.1l1.1,2.1C2.5,5.5,2.4,5.9,2.3,6.2L0,7v2l2.3,0.8c0.1,0.4,0.3,0.7,0.4,1.1l-1.1,2.1l1.4,1.4l2.1-1.1 c0.3,0.2,0.7,0.3,1.1,0.4L7,16h2l0.8-2.3c0.4-0.1,0.7-0.3,1.1-0.4l2.1,1.1l1.4-1.4l-1.1-2.1c0.2-0.3,0.3-0.7,0.4-1.1L16,9V7 l-2.3-0.8C13.6,5.9,13.5,5.5,13.3,5.2z M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3S9.7,11,8,11z"
+      />
+    </g>
+  </svg>
+);
+
+const MenuIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    width="16px"
+    height="16px"
+    viewBox="0 0 16 16"
+  >
+    <g transform="translate(0, 0)">
+      <path
+        fill="#FFFFFF"
+        d="M8,14H1c-0.552,0-1-0.448-1-1v0c0-0.552,0.448-1,1-1h7c0.552,0,1,0.448,1,1v0C9,13.552,8.552,14,8,14z"
+      />{' '}
+      <path
+        fill="#FFFFFF"
+        d="M15,4H1C0.448,4,0,3.552,0,3v0c0-0.552,0.448-1,1-1h14c0.552,0,1,0.448,1,1v0C16,3.552,15.552,4,15,4z"
+      />{' '}
+      <path
+        data-color="color-2"
+        fill="#FFFFFF"
+        d="M15,9H1C0.448,9,0,8.552,0,8v0c0-0.552,0.448-1,1-1h14c0.552,0,1,0.448,1,1v0 C16,8.552,15.552,9,15,9z"
       />
     </g>
   </svg>
@@ -142,21 +177,16 @@ const TeamMembersItem = posed.li({
 });
 
 const StyledTeamMembersList = styled(TeamMembersList)`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: 1fr 1fr 1fr;
   list-style-type: none;
 `;
 
 const StyledTeamMembersListItem = styled(TeamMembersItem)`
   background: ${rgba('black', 0.15)};
   border-radius: 4px;
-  margin-right: 16px;
   padding: 16px;
-  width: calc(33.333% - 16px);
-
-  &:nth-child(3n) {
-    margin-right: 0;
-  }
 `;
 
 const TeamMembersName = styled.p`
@@ -177,7 +207,7 @@ const TeamMembersEmail = styled.p`
 
 const TeamMembersInitials = styled(Flex)`
   align-items: center;
-  background: ${Color.ORANGE};
+  background: ${rgba('white', 0.75)};
   border-radius: 50%;
   color: ${Color.BLUE_RAGE};
   font-size: 14px;
@@ -197,6 +227,10 @@ const SettingsButton = styled.button`
   &:hover {
     opacity: 1;
   }
+`;
+
+const TeamMembersExpandButton = styled.button`
+  background: none;
 `;
 
 export default Team;
