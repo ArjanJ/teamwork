@@ -1,5 +1,5 @@
 import { navigate } from '@reach/router';
-import { rgba } from 'polished';
+import { darken, rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
 import { Flex } from 'rebass';
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Toggle } from '../../components/toggle/Toggle';
 import { auth } from '../../firebase';
 import { useUser } from '../../hooks/useUser';
+import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 
 const signOut = async () => {
@@ -19,9 +20,14 @@ export const SidebarUser: FunctionComponent = () => {
 
   return (
     <Toggle>
-      {({ isOpen }) => (
+      {({ isOpen, toggle }) => (
         <SidebarUserWrapper>
-          <Flex alignItems="center" flex={1} justifyContent="space-between">
+          <Flex
+            alignItems="center"
+            flex={1}
+            justifyContent="space-between"
+            onClick={toggle}
+          >
             <Flex alignItems="center">
               <SidebarUserPic />
               <span>
@@ -46,12 +52,12 @@ export const SidebarUser: FunctionComponent = () => {
                 />
               </g>
             </StyledChevron>
-            <SidebarUserDropdown isOpen={isOpen}>
-              <button onClick={signOut} type="button">
-                Sign out
-              </button>
-            </SidebarUserDropdown>
           </Flex>
+          <SidebarUserDropdown isOpen={isOpen}>
+            <SidebarUserDropdownButton onClick={signOut} type="button">
+              Sign out
+            </SidebarUserDropdownButton>
+          </SidebarUserDropdown>
         </SidebarUserWrapper>
       )}
     </Toggle>
@@ -60,17 +66,17 @@ export const SidebarUser: FunctionComponent = () => {
 
 const SidebarUserWrapper = styled(Flex)`
   align-items: center;
-  background: ${rgba('white', 0.15)};
+  background: ${Color.BLUE_SKY};
   border-radius: 4px;
   cursor: pointer;
   height: 40px;
   margin-bottom: 30px;
   padding: 10px 16px;
   position: relative;
-  transition: all 0.5s ${Easing.OUT};
+  transition: all 0.35s ${Easing.OUT};
 
   &:hover {
-    background: ${rgba('white', 0.2)};
+    background: ${darken(0.1, Color.BLUE_SKY)};
   }
 `;
 
@@ -90,7 +96,7 @@ const SidebarUserPic = styled.div`
 `;
 
 const SidebarUserDropdown = styled.div<{ isOpen: boolean }>`
-  background: white;
+  background: ${Color.NAVY};
   border-radius: 4px;
   left: 0;
   opacity: ${props => (props.isOpen ? 1 : 0)};
@@ -102,6 +108,13 @@ const SidebarUserDropdown = styled.div<{ isOpen: boolean }>`
   visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
   width: 100%;
   z-index: 1;
+`;
+
+const SidebarUserDropdownButton = styled.button`
+  background: none;
+  color: white;
+  text-align: left;
+  width: 100%;
 `;
 
 const StyledChevron = styled.svg<{ isOpen: boolean }>`

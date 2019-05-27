@@ -4,6 +4,7 @@ import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
+import { Toggle } from '../../components/toggle/Toggle';
 import { Color } from '../../styles/Color';
 import { IMember, ITeam } from './types';
 
@@ -12,18 +13,18 @@ interface ITeamMembersProps {
 }
 
 export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
-  const [animateMembers, setAnimateMembers] = useState(false);
+  const [showMembers, setShowMembers] = useState(false);
 
   useEffect(() => {
-    if (animateMembers === false && team) {
-      setAnimateMembers(true);
+    if (showMembers === false && team) {
+      setShowMembers(true);
     }
-  }, [animateMembers, team]);
+  }, [showMembers, team]);
 
   return (
     <Box>
       <Subheading>Your team</Subheading>
-      <StyledTeamMembersList pose={animateMembers ? 'visible' : 'hidden'}>
+      <StyledTeamMembersList pose={showMembers ? 'visible' : 'hidden'}>
         {team &&
           team.members.map((member: IMember) => (
             <StyledTeamMembersListItem key={member.email}>
@@ -41,9 +42,18 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
                   </Box>
                 </Flex>
                 <Box>
-                  <TeamMembersExpandButton type="button">
-                    <MenuIcon />
-                  </TeamMembersExpandButton>
+                  <Toggle>
+                    {({ isOpen, toggle }) => (
+                      <React.Fragment>
+                        <TeamMembersExpandButton onClick={toggle} type="button">
+                          <MenuIcon />
+                        </TeamMembersExpandButton>
+                        <TeamMembersMenu isOpen={isOpen}>
+                          inside
+                        </TeamMembersMenu>
+                      </React.Fragment>
+                    )}
+                  </Toggle>
                 </Box>
               </Flex>
             </StyledTeamMembersListItem>
@@ -110,6 +120,7 @@ const StyledTeamMembersListItem = styled(TeamMembersItem)`
   background: ${rgba('black', 0.15)};
   border-radius: 4px;
   padding: 16px;
+  position: relative;
 `;
 
 const TeamMembersName = styled.p`
@@ -144,4 +155,14 @@ const TeamMembersInitials = styled(Flex)`
 
 const TeamMembersExpandButton = styled.button`
   background: none;
+`;
+
+const TeamMembersMenu = styled.div<{ isOpen: boolean }>`
+  position: absolute;
+  z-index: 1;
+  top: 30px;
+  right: 0;
+  background: white;
+  padding: 10px;
+  visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
 `;

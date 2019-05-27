@@ -6,6 +6,7 @@ interface IToggleProps {
 
 interface IToggleState {
   isOpen: boolean;
+  toggle(): void;
 }
 
 export const Toggle: FunctionComponent<IToggleProps> = ({ children }) => {
@@ -23,7 +24,9 @@ export const Toggle: FunctionComponent<IToggleProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleDocClick);
+    if (isOpen) {
+      document.addEventListener('mousedown', handleDocClick);
+    }
 
     return () => {
       document.removeEventListener('mousedown', handleDocClick);
@@ -33,8 +36,6 @@ export const Toggle: FunctionComponent<IToggleProps> = ({ children }) => {
   const handleToggleClick = () => setIsOpen(!isOpen);
 
   return (
-    <div onClick={handleToggleClick} ref={node}>
-      {children({ isOpen })}
-    </div>
+    <div ref={node}>{children({ isOpen, toggle: handleToggleClick })}</div>
   );
 };
