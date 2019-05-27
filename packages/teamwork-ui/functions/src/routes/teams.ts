@@ -6,6 +6,9 @@ export const teamsRouter = Router();
 const teamsCollection = db.collection('teams');
 const usersCollection = db.collection('users');
 
+/**
+ * CREATE TEAM
+ */
 teamsRouter.post('/teams', async (req: Request, res: Response) => {
   const { body, decodedToken } = req;
 
@@ -44,6 +47,9 @@ teamsRouter.post('/teams', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * GET TEAM
+ */
 teamsRouter.get('/teams/:teamId', async (req: Request, res: Response) => {
   const { params } = req;
   const { teamId } = params;
@@ -61,6 +67,9 @@ teamsRouter.get('/teams/:teamId', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * UPDATE TEAM
+ */
 teamsRouter.put('/teams/:teamId', async (req: Request, res: Response) => {
   const { body, params } = req;
   const { teamId } = params;
@@ -74,6 +83,9 @@ teamsRouter.put('/teams/:teamId', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * DELETE TEAM
+ */
 teamsRouter.delete('/teams', async (req: Request, res: Response) => {
   const { body, decodedToken } = req;
   const { displayName, id, name } = body;
