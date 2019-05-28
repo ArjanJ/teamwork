@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { Toggle } from '../../components/toggle/Toggle';
 import { Color } from '../../styles/Color';
+import { Easing } from '../../styles/Easing';
 import { IMember, ITeam } from './types';
 
 interface ITeamMembersProps {
@@ -49,7 +50,10 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
                           <MenuIcon />
                         </TeamMembersExpandButton>
                         <TeamMembersMenu isOpen={isOpen}>
-                          inside
+                          <TeamMembersMenuItem>Edit info</TeamMembersMenuItem>
+                          <TeamMembersMenuItem>
+                            Remove from team
+                          </TeamMembersMenuItem>
                         </TeamMembersMenu>
                       </React.Fragment>
                     )}
@@ -155,14 +159,33 @@ const TeamMembersInitials = styled(Flex)`
 
 const TeamMembersExpandButton = styled.button`
   background: none;
+  opacity: 0.75;
+  transition: opacity 0.35s ${Easing.OUT};
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const TeamMembersMenu = styled.div<{ isOpen: boolean }>`
+  background: ${Color.NAVY};
+  border-radius: 4px;
+  box-shadow: 0 4px 16px ${rgba('black', 0.15)};
+  opacity: ${props => (props.isOpen ? 1 : 0)};
+  padding: 6px 0;
   position: absolute;
-  z-index: 1;
-  top: 30px;
-  right: 0;
-  background: white;
-  padding: 10px;
+  right: 16px;
+  top: 42px;
+  transform: ${props => (props.isOpen ? 'none' : 'translateY(20%)')};
+  transition: all 0.25s ${Easing.OUT};
   visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
+  width: 200px;
+  z-index: 1;
+`;
+
+const TeamMembersMenuItem = styled.button`
+  background: none;
+  color: white;
+  font-size: 14px;
+  padding: 6px 12px;
 `;

@@ -21,44 +21,41 @@ export const SidebarUser: FunctionComponent = () => {
   return (
     <Toggle>
       {({ isOpen, toggle }) => (
-        <SidebarUserWrapper>
-          <Flex
-            alignItems="center"
-            flex={1}
-            justifyContent="space-between"
-            onClick={toggle}
-          >
-            <Flex alignItems="center">
-              <SidebarUserPic />
-              <span>
-                <SidebarUserName>{user && user.firstName}</SidebarUserName>{' '}
-                <SidebarUserName>{user && user.lastName}</SidebarUserName>
-              </span>
+        <div style={{ position: 'relative' }}>
+          <SidebarUserWrapper onClick={toggle}>
+            <Flex alignItems="center" flex={1} justifyContent="space-between">
+              <Flex alignItems="center">
+                <SidebarUserPic />
+                <span>
+                  <SidebarUserName>{user && user.firstName}</SidebarUserName>{' '}
+                  <SidebarUserName>{user && user.lastName}</SidebarUserName>
+                </span>
+              </Flex>
+              <StyledChevron
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                width="12px"
+                height="12px"
+                viewBox="0 0 12 12"
+                isOpen={isOpen}
+              >
+                <g transform="translate(0, 0)">
+                  <polygon
+                    points="6 5.882 2.148 2.03 0.074 4.104 6 10.03 11.926 4.104 9.852 2.03 6 5.882"
+                    fill="#FFFFFF"
+                  />
+                </g>
+              </StyledChevron>
             </Flex>
-            <StyledChevron
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              x="0px"
-              y="0px"
-              width="12px"
-              height="12px"
-              viewBox="0 0 12 12"
-              isOpen={isOpen}
-            >
-              <g transform="translate(0, 0)">
-                <polygon
-                  points="6 5.882 2.148 2.03 0.074 4.104 6 10.03 11.926 4.104 9.852 2.03 6 5.882"
-                  fill="#FFFFFF"
-                />
-              </g>
-            </StyledChevron>
-          </Flex>
+          </SidebarUserWrapper>
           <SidebarUserDropdown isOpen={isOpen}>
             <SidebarUserDropdownButton onClick={signOut} type="button">
               Sign out
             </SidebarUserDropdownButton>
           </SidebarUserDropdown>
-        </SidebarUserWrapper>
+        </div>
       )}
     </Toggle>
   );
@@ -76,7 +73,7 @@ const SidebarUserWrapper = styled(Flex)`
   transition: all 0.35s ${Easing.OUT};
 
   &:hover {
-    background: ${darken(0.1, Color.BLUE_SKY)};
+    background: ${darken(0.05, Color.BLUE_SKY)};
   }
 `;
 
@@ -91,7 +88,7 @@ const SidebarUserPic = styled.div`
   border-radius: 50%;
   height: 24px;
   margin-right: 10px;
-  opacity: 0.75;
+  opacity: 0.5;
   width: 24px;
 `;
 
