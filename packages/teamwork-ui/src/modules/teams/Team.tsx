@@ -36,7 +36,7 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
       setUserTeam(userTeamResult);
       getTeam(userTeamResult.id);
     }
-  }, [user]);
+  }, [user, teamName]);
 
   if (!userTeam || !teamName) {
     return null;
