@@ -1,14 +1,19 @@
 import { RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
+import { Toggle } from '../../components/toggle/Toggle';
 import { useTeams } from '../../hooks/useTeams';
 import { useUser } from '../../hooks/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { IUserTeam } from '../user/types';
-import { TeamMembers } from './TeamMembers';
+import {
+  TeamMembers,
+  TeamMembersMenu,
+  TeamMembersMenuItem,
+} from './TeamMembers';
 
 interface ITeamProps {
   teamName?: string;
@@ -33,8 +38,10 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
         (team: IUserTeam) => team.name === teamName,
       );
 
-      setUserTeam(userTeamResult);
-      getTeam(userTeamResult.id);
+      if (userTeamResult) {
+        setUserTeam(userTeamResult);
+        getTeam(userTeamResult.id);
+      }
     }
   }, [user, teamName]);
 
@@ -44,7 +51,7 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
 
   return (
     <Wrapper>
-      <Flex
+      <Header
         alignItems="center"
         as="header"
         justifyContent="space-between"
@@ -52,11 +59,31 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
       >
         <TeamName>{displayName}</TeamName>
         <Box>
-          <SettingsButton type="button">
-            <SettingsIcon />
-          </SettingsButton>
+          <Toggle>
+            {({ isOpen, toggle }) => (
+              <React.Fragment>
+                <SettingsButton onClick={toggle} type="button">
+                  <SettingsIcon />
+                </SettingsButton>
+                <TeamMembersMenu
+                  isOpen={isOpen}
+                  styles={css`
+                    right: 0;
+                    top: 36px;
+                  `}
+                >
+                  <TeamMembersMenuItem type="button">
+                    Rename team
+                  </TeamMembersMenuItem>
+                  <TeamMembersMenuItem type="button">
+                    Delete team
+                  </TeamMembersMenuItem>
+                </TeamMembersMenu>
+              </React.Fragment>
+            )}
+          </Toggle>
         </Box>
-      </Flex>
+      </Header>
       <TeamMembers team={teams[id]} />
       {/* <button onClick={() => deleteTeam(userTeam)}>Delete team</button> */}
     </Wrapper>
@@ -86,6 +113,10 @@ const Wrapper = styled.div`
   margin: auto;
   max-width: 1200px;
   padding: 24px 36px;
+`;
+
+const Header = styled(Flex)`
+  position: relative;
 `;
 
 const TeamName = styled.h1`

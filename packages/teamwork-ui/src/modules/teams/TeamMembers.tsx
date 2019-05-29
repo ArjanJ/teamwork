@@ -2,7 +2,7 @@ import { rgba } from 'polished';
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
-import styled from 'styled-components';
+import styled, { CSSProp } from 'styled-components';
 
 import { Toggle } from '../../components/toggle/Toggle';
 import { Color } from '../../styles/Color';
@@ -17,9 +17,13 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
   const [showMembers, setShowMembers] = useState(false);
 
   useEffect(() => {
-    if (showMembers === false && team) {
+    if (team) {
       setShowMembers(true);
     }
+
+    return () => {
+      setShowMembers(false);
+    };
   }, [showMembers, team]);
 
   return (
@@ -167,7 +171,10 @@ const TeamMembersExpandButton = styled.button`
   }
 `;
 
-const TeamMembersMenu = styled.div<{ isOpen: boolean }>`
+export const TeamMembersMenu = styled.div<{
+  isOpen: boolean;
+  styles?: CSSProp;
+}>`
   background: ${Color.NAVY};
   border-radius: 4px;
   box-shadow: 0 4px 16px ${rgba('black', 0.15)};
@@ -179,11 +186,13 @@ const TeamMembersMenu = styled.div<{ isOpen: boolean }>`
   transform: ${props => (props.isOpen ? 'none' : 'translateY(20%)')};
   transition: all 0.25s ${Easing.OUT};
   visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
-  width: 200px;
+  width: 174px;
   z-index: 1;
+
+  ${props => props.styles}
 `;
 
-const TeamMembersMenuItem = styled.button`
+export const TeamMembersMenuItem = styled.button`
   background: none;
   color: white;
   font-size: 14px;
