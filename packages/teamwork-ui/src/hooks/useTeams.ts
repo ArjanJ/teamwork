@@ -6,8 +6,9 @@ import {
   deleteTeam,
   getTeam,
   updateTeam,
+  updateTeamMembers,
 } from '../modules/teams/actions';
-import { ITeam } from '../modules/teams/types';
+import { IMember, ITeam } from '../modules/teams/types';
 import { IUserTeam } from '../modules/user/types';
 
 export const useTeams = () => {
@@ -21,6 +22,8 @@ export const useTeams = () => {
   const get = (teamId: string) => dispatch(getTeam(teamId));
   const update = (teamId: string, body = {}) =>
     dispatch(updateTeam(teamId, body));
+  const updateMembers = (teamId: string, body: IMember[]) =>
+    dispatch(updateTeamMembers(teamId, body));
 
   return {
     createTeam: create,
@@ -30,6 +33,7 @@ export const useTeams = () => {
     isFetching: teamsState.isFetching,
     isUpdating: teamsState.isUpdating,
     updateTeam: update,
+    updateTeamMembers: updateMembers,
     teams: teamsState.teams,
   };
 };

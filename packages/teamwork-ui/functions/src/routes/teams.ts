@@ -75,13 +75,34 @@ teamsRouter.put('/teams/:teamId', async (req: Request, res: Response) => {
   const { teamId } = params;
 
   try {
-    const doc = await teamsCollection.doc(teamId);
+    const doc = teamsCollection.doc(teamId);
     await doc.update(body);
     res.status(200).send({ data: body });
   } catch (error) {
     res.status(500).send({ error });
   }
 });
+
+/**
+ * UPDATE TEAM MEMBERS
+ */
+teamsRouter.put(
+  '/teams/:teamId/members',
+  async (req: Request, res: Response) => {
+    const { body, params } = req;
+    const { teamId } = params;
+
+    try {
+      const doc = teamsCollection.doc(teamId);
+      await doc.update({
+        members: body,
+      });
+      res.status(200).send({ data: { members: body, id: teamId } });
+    } catch (error) {
+      res.status(500).send({ error });
+    }
+  },
+);
 
 /**
  * DELETE TEAM

@@ -1,12 +1,15 @@
 import { rgba } from 'polished';
 import React, { FunctionComponent, useState, useEffect } from 'react';
+import { useModal } from 'react-modal-hook';
 import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
 import styled, { CSSProp } from 'styled-components';
 
 import { Toggle } from '../../components/toggle/Toggle';
+import { useTeams } from '../../hooks/useTeams';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
+import { TeamsAddMembersModal } from './TeamsAddMembersModal';
 import { IMember, ITeam } from './types';
 
 interface ITeamMembersProps {
@@ -15,6 +18,7 @@ interface ITeamMembersProps {
 
 export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
   const [showMembers, setShowMembers] = useState(false);
+  const { updateTeamMembers } = useTeams();
 
   useEffect(() => {
     if (team) {
@@ -25,6 +29,16 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
       setShowMembers(false);
     };
   }, [showMembers, team]);
+
+  const removeTeamMember = (email: string) =>
+    updateTeamMembers(
+      team.id,
+      team.members.filter((member: IMember) => member.email !== email),
+    );
+
+  const [showModal, hideModal] = useModal(() => (
+    <TeamsAddMembersModal hideModal={hideModal} team={team} />
+  ));
 
   return (
     <Box>
@@ -55,7 +69,9 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
                         </TeamMembersExpandButton>
                         <TeamMembersMenu isOpen={isOpen}>
                           <TeamMembersMenuItem>Edit info</TeamMembersMenuItem>
-                          <TeamMembersMenuItem>
+                          <TeamMembersMenuItem
+                            onClick={() => removeTeamMember(member.email)}
+                          >
                             Remove from team
                           </TeamMembersMenuItem>
                         </TeamMembersMenu>
@@ -67,6 +83,9 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
             </StyledTeamMembersListItem>
           ))}
       </StyledTeamMembersList>
+      <button onClick={showModal} type="button">
+        Add team member
+      </button>
     </Box>
   );
 };
@@ -197,4 +216,11 @@ export const TeamMembersMenuItem = styled.button`
   color: white;
   font-size: 14px;
   padding: 6px 12px;
+  text-align: left;
+  transition: all 0.35s ${Easing.OUT};
+  width: 100%;
+
+  &:hover {
+    background: ${rgba('white', 0.1)};
+  }
 `;

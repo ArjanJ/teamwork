@@ -27,6 +27,7 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
     id: '',
     name: '',
   });
+
   const { deleteTeam, getTeam, teams } = useTeams();
   const { user } = useUser();
 
@@ -45,7 +46,7 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
     }
   }, [user, teamName]);
 
-  if (!userTeam || !teamName) {
+  if (!teams[id] || !teamName) {
     return null;
   }
 
@@ -85,7 +86,6 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
         </Box>
       </Header>
       <TeamMembers team={teams[id]} />
-      {/* <button onClick={() => deleteTeam(userTeam)}>Delete team</button> */}
     </Wrapper>
   );
 };
