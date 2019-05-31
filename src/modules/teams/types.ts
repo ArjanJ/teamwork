@@ -4,6 +4,10 @@ export const createTeamTypes = generateActionTypes('CREATE_TEAM');
 export const deleteTeamTypes = generateActionTypes('DELETE_TEAM');
 export const getTeamTypes = generateActionTypes('GET_TEAM');
 export const updateTeamTypes = generateActionTypes('UPDATE_TEAM');
+export const updateTeamMembersTypes = generateActionTypes(
+  'UPDATE_TEAM_MEMBERS',
+);
+
 export interface IMember {
   email: string;
   firstName: string;

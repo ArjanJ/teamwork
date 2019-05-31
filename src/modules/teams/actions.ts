@@ -2,8 +2,10 @@ import {
   createTeamTypes,
   deleteTeamTypes,
   getTeamTypes,
+  IMember,
   ITeam,
   updateTeamTypes,
+  updateTeamMembersTypes,
 } from './types';
 
 import { IUserTeam } from '../user/types';
@@ -67,6 +69,23 @@ export function deleteTeam(body: IUserTeam) {
       deleteTeamTypes.REQUEST,
       deleteTeamTypes.SUCCESS,
       deleteTeamTypes.FAILURE,
+    ],
+  };
+}
+
+export function updateTeamMembers(teamId: string, body: IMember[]) {
+  return {
+    callAPI: (headers = {}) =>
+      fetch(`/api/teams/${teamId}/members`, {
+        body: JSON.stringify(body),
+        headers,
+        method: 'PUT',
+      }),
+    payload: body,
+    types: [
+      updateTeamMembersTypes.REQUEST,
+      updateTeamMembersTypes.SUCCESS,
+      updateTeamMembersTypes.FAILURE,
     ],
   };
 }

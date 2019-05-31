@@ -1,6 +1,11 @@
 import { AnyAction } from 'redux';
 
-import { createTeamTypes, getTeamTypes, updateTeamTypes } from './types';
+import {
+  createTeamTypes,
+  getTeamTypes,
+  updateTeamTypes,
+  updateTeamMembersTypes,
+} from './types';
 import { ITeam } from './types';
 
 interface ITeamState {
@@ -80,6 +85,29 @@ export default function(state = initialState, action: AnyAction) {
         ...state,
         error: action.error,
         isUpdating: false,
+      };
+    case updateTeamMembersTypes.REQUEST:
+      return {
+        ...state,
+        isUpdating: true,
+      };
+    case updateTeamMembersTypes.SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        teams: {
+          ...state.teams,
+          [action.data.id]: {
+            ...state.teams[action.data.id],
+            members: action.data.members,
+          },
+        },
+      };
+    case updateTeamMembersTypes.FAILURE:
+      return {
+        ...state,
+        isUpdating: false,
+        error: action.error,
       };
     default:
       return state;
