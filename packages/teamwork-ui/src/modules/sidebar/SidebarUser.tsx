@@ -25,7 +25,13 @@ export const SidebarUser: FunctionComponent = () => {
           <SidebarUserWrapper onClick={toggle}>
             <Flex alignItems="center" flex={1} justifyContent="space-between">
               <Flex alignItems="center">
-                <SidebarUserPic />
+                <SidebarUserPic>
+                  <img
+                    alt="user icon"
+                    src={`https://identicon-1132.appspot.com/${user &&
+                      user.firstName}?s=64`}
+                  />
+                </SidebarUserPic>
                 <span>
                   <SidebarUserName>{user && user.firstName}</SidebarUserName>{' '}
                   <SidebarUserName>{user && user.lastName}</SidebarUserName>
@@ -68,7 +74,7 @@ const SidebarUserWrapper = styled(Flex)`
   cursor: pointer;
   height: 40px;
   margin-bottom: 30px;
-  padding: 10px 16px;
+  padding: 10px 12px;
   position: relative;
   transition: all 0.35s ${Easing.OUT};
 
@@ -83,13 +89,18 @@ const SidebarUserName = styled.span`
   font-weight: 600;
 `;
 
-const SidebarUserPic = styled.div`
-  background: white;
+const SidebarUserPic = styled(Flex)`
+  align-items: center;
+  background: ${rgba('white', 0.75)};
   border-radius: 50%;
   height: 24px;
-  margin-right: 10px;
-  opacity: 0.5;
+  justify-content: center;
+  margin-right: 12px;
   width: 24px;
+
+  img {
+    width: 12px;
+  }
 `;
 
 const SidebarUserDropdown = styled.div<{ isOpen: boolean }>`

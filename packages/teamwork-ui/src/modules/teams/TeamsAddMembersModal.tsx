@@ -41,9 +41,6 @@ export const TeamsAddMembersModal: FunctionComponent<
   ITeamsAddMembersModalProps
 > = ({ hideModal, team }) => {
   const { updateTeamMembers } = useTeams();
-  const { authUser } = useAuthUser();
-  const { user } = useUser();
-  console.log(team);
 
   return (
     <Modal hideModal={hideModal} title="Add team members">
@@ -53,7 +50,9 @@ export const TeamsAddMembersModal: FunctionComponent<
           values: ITeamFormValues,
           actions: FormikActions<ITeamFormValues>,
         ) => {
+          // Add new memebrs to list of current members.
           const members = [...team.members, ...values.members];
+          // Save it.
           await updateTeamMembers(team.id, members);
           // So the transition of the loader isn't janky.
           await delay(2000);

@@ -49,10 +49,14 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
             <StyledTeamMembersListItem key={member.email}>
               <Flex justifyContent="space-between">
                 <Flex>
-                  <TeamMembersInitials>
-                    {member.firstName[0]}
-                    {member.lastName[0]}
-                  </TeamMembersInitials>
+                  <TeamMembersIcon>
+                    <img
+                      alt={member.firstName}
+                      src={`https://identicon-1132.appspot.com/${
+                        member.firstName
+                      }?s=64`}
+                    />
+                  </TeamMembersIcon>
                   <Box ml="12px">
                     <TeamMembersName>
                       {member.firstName} {member.lastName}
@@ -166,18 +170,17 @@ const TeamMembersEmail = styled.p`
   text-transform: uppercase;
 `;
 
-const TeamMembersInitials = styled(Flex)`
+const TeamMembersIcon = styled(Flex)`
   align-items: center;
   background: ${rgba('white', 0.75)};
   border-radius: 50%;
-  color: ${Color.BLUE_RAGE};
-  font-size: 14px;
-  font-weight: 700;
   height: 36px;
   justify-content: center;
-  text-align: center;
-  text-transform: uppercase;
   width: 36px;
+
+  img {
+    width: 16px;
+  }
 `;
 
 const TeamMembersExpandButton = styled.button`
