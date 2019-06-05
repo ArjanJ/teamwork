@@ -1,3 +1,4 @@
+import { navigate } from '@reach/router';
 import {
   ArrayHelpers,
   Formik,
@@ -54,6 +55,8 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
           values: ITeamFormValues,
           actions: FormikActions<ITeamFormValues>,
         ) => {
+          const normalizedTeamName = TeamsUtils.normalizeTeamName(values.name);
+
           await createTeam({
             displayName: values.name,
             id: '',
@@ -65,11 +68,14 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
                 lastName: user.lastName,
               },
             ],
-            name: TeamsUtils.normalizeTeamName(values.name),
+            name: normalizedTeamName,
           });
+
           // So the transition of the loader isn't janky.
           await delay(2000);
           actions.setSubmitting(false);
+
+          navigate(normalizedTeamName);
           hideModal();
         }}
         render={({

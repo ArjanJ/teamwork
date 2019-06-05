@@ -1,4 +1,4 @@
-import { rgba } from 'polished';
+import { darken, rgba } from 'polished';
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { useModal } from 'react-modal-hook';
 import posed from 'react-pose';
@@ -87,9 +87,12 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
             </StyledTeamMembersListItem>
           ))}
       </StyledTeamMembersList>
-      <button onClick={showModal} type="button">
-        Add team member
-      </button>
+      <Divider />
+      <Flex justifyContent="flex-end">
+        <AddTeammateButton onClick={showModal} type="button">
+          Add team member
+        </AddTeammateButton>
+      </Flex>
     </Box>
   );
 };
@@ -148,7 +151,7 @@ const StyledTeamMembersList = styled(TeamMembersList)`
 `;
 
 const StyledTeamMembersListItem = styled(TeamMembersItem)`
-  background: ${rgba('black', 0.15)};
+  background: ${rgba('black', 0.25)};
   border-radius: 4px;
   padding: 16px;
   position: relative;
@@ -225,5 +228,31 @@ export const TeamMembersMenuItem = styled.button`
 
   &:hover {
     background: ${rgba('white', 0.1)};
+  }
+`;
+
+const Divider = styled.div`
+  background: white;
+  height: 1px;
+  margin: 36px 0;
+  opacity: 0.25;
+`;
+
+const AddTeammateButton = styled.button`
+  background: ${Color.BLUE_SKY};
+  border-radius: 99px;
+  box-shadow: 0 0 0 3px ${rgba(Color.BLUE_SKY, 1)};
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  height: 36px;
+  margin: 3px;
+  min-width: 100px;
+  padding: 0 24px;
+  position: relative;
+  transition: background 0.5s ${Easing.IN_OUT};
+
+  &:hover {
+    background: ${darken(0.05, Color.BLUE_SKY)};
   }
 `;

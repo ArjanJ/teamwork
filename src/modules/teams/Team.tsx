@@ -76,7 +76,10 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
                   <TeamMembersMenuItem type="button">
                     Rename team
                   </TeamMembersMenuItem>
-                  <TeamMembersMenuItem type="button">
+                  <TeamMembersMenuItem
+                    onClick={() => deleteTeam(userTeam)}
+                    type="button"
+                  >
                     Delete team
                   </TeamMembersMenuItem>
                 </TeamMembersMenu>

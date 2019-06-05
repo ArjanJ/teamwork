@@ -1,4 +1,3 @@
-import { rgba } from 'polished';
 import React from 'react';
 import { Box } from 'rebass';
 import styled from 'styled-components';
@@ -22,7 +21,7 @@ export const Sidebar = () => (
 );
 
 const SidebarWrapper = styled.aside`
-  border-right: 1px solid ${rgba('white', 0.25)};
+  background: #04002f;
   padding: 36px;
   position: relative;
   width: 280px;
