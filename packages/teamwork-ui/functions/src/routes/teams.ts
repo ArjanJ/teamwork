@@ -6,6 +6,12 @@ export const teamsRouter = Router();
 const teamsCollection = db.collection('teams');
 const usersCollection = db.collection('users');
 
+interface IMember {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
 /**
  * CREATE TEAM
  */
@@ -14,6 +20,7 @@ teamsRouter.post('/teams', async (req: Request, res: Response) => {
 
   if (decodedToken && decodedToken.uid) {
     try {
+      // Add an owner property to the Team doc.
       const teamDocWithOwner = {
         ...body,
         owner: {
@@ -27,19 +34,36 @@ teamsRouter.post('/teams', async (req: Request, res: Response) => {
         id: teamDoc.id,
       };
 
+      // Return the newly created team doc with the unique id.
       res.status(200).send({ data: teamWithId });
+
+      const { members } = body;
+      const userTeam = {
+        displayName: teamDocWithOwner.displayName,
+        id: teamDoc.id,
+        name: teamDocWithOwner.name,
+      };
+
+      const batch = db.batch();
+
+      members.forEach((member: IMember) => {
+        const userDocRef = usersCollection.doc(member.email);
+        const memberWithTeam = {
+          ...member,
+          teams: [userTeam],
+        };
+        batch.set(userDocRef, memberWithTeam, { merge: true });
+      });
+
+      batch.commit();
 
       /**
        * Add the name and id of the team to the user object. This is so
        * we know all of the teams a user belongs to and can query
-       * based on that.
+       * teams based on that.
        */
       usersCollection.doc(decodedToken.uid).update({
-        teams: admin.firestore.FieldValue.arrayUnion({
-          displayName: teamDocWithOwner.displayName,
-          id: teamDoc.id,
-          name: teamDocWithOwner.name,
-        }),
+        teams: admin.firestore.FieldValue.arrayUnion(userTeam),
       });
     } catch (error) {
       res.status(500).send({ error });

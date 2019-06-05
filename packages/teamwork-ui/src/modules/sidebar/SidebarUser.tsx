@@ -1,5 +1,5 @@
 import { navigate } from '@reach/router';
-import { darken, rgba } from 'polished';
+import { rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
 import { Flex } from 'rebass';
 import styled from 'styled-components';
@@ -69,7 +69,7 @@ export const SidebarUser: FunctionComponent = () => {
 
 const SidebarUserWrapper = styled(Flex)`
   align-items: center;
-  background: ${Color.BLUE_SKY};
+  background: ${rgba('white', 0.25)};
   border-radius: 4px;
   cursor: pointer;
   height: 40px;
@@ -79,7 +79,7 @@ const SidebarUserWrapper = styled(Flex)`
   transition: all 0.35s ${Easing.OUT};
 
   &:hover {
-    background: ${darken(0.05, Color.BLUE_SKY)};
+    background: ${rgba('white', 0.35)};
   }
 `;
 
