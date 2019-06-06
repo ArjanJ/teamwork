@@ -12,6 +12,12 @@ interface IMember {
   lastName: string;
 }
 
+interface IUserTeam {
+  displayName: string;
+  id: string;
+  name: string;
+}
+
 /**
  * CREATE TEAM
  */
@@ -44,27 +50,32 @@ teamsRouter.post('/teams', async (req: Request, res: Response) => {
         name: teamDocWithOwner.name,
       };
 
-      const batch = db.batch();
+      // TODO: Invite system
 
-      members.forEach((member: IMember) => {
-        const userDocRef = usersCollection.doc(member.email);
-        const memberWithTeam = {
-          ...member,
-          teams: [userTeam],
-        };
-        batch.set(userDocRef, memberWithTeam, { merge: true });
-      });
+      // const batch = db.batch();
 
-      batch.commit();
+      // members.forEach((member: IMember) => {
+      //   const userDocRef = usersCollection.doc(member.email);
+      //   const memberWithTeam = {
+      //     ...member,
+      //     teams: [userTeam],
+      //   };
+      //   batch.set(userDocRef, memberWithTeam, { merge: true });
+      // });
+
+      // batch.commit().catch(err => console.log(err));
 
       /**
        * Add the name and id of the team to the user object. This is so
        * we know all of the teams a user belongs to and can query
        * teams based on that.
        */
-      usersCollection.doc(decodedToken.uid).update({
-        teams: admin.firestore.FieldValue.arrayUnion(userTeam),
-      });
+      usersCollection
+        .doc(decodedToken.uid)
+        .update({
+          teams: admin.firestore.FieldValue.arrayUnion(userTeam),
+        })
+        .catch(err => console.log(err));
     } catch (error) {
       res.status(500).send({ error });
     }
@@ -88,6 +99,35 @@ teamsRouter.get('/teams/:teamId', async (req: Request, res: Response) => {
     }
   } catch (error) {
     res.status(500).send({ error });
+  }
+});
+
+/**
+ * GET ALL TEAMS
+ */
+teamsRouter.get('/teams', async (req: Request, res: Response) => {
+  const { decodedToken } = req;
+
+  if (decodedToken) {
+    try {
+      const userDoc = await usersCollection.doc(decodedToken.uid).get();
+
+      if (!userDoc.exists) {
+        res.status(200).send({ data: [] });
+      } else {
+        const userData = userDoc.data();
+
+        if (userData) {
+          const { teams } = userData;
+          const teamDocRefs = teams.map((team: IUserTeam) => db.doc(team.id));
+          const teamDocs = await db.getAll(...teamDocRefs);
+          console.log(teamDocs);
+          res.status(200).send({ data: teamDocs });
+        }
+      }
+    } catch (error) {
+      res.status(500).send({ error });
+    }
   }
 });
 
