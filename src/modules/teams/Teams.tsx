@@ -1,12 +1,18 @@
 import { RouteComponentProps } from '@reach/router';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import styled from 'styled-components';
 
+import { useTeams } from '../../hooks/useTeams';
 import { useUser } from '../../hooks/useUser';
 import { TeamsEmptyState } from './TeamsEmptyState';
 
 export const Teams: FunctionComponent<RouteComponentProps> = () => {
+  const { getTeams, teams } = useTeams();
   const { user } = useUser();
+
+  useEffect(() => {
+    getTeams();
+  }, [user]);
 
   if (user === null) {
     return null;
@@ -14,7 +20,7 @@ export const Teams: FunctionComponent<RouteComponentProps> = () => {
 
   return (
     <Wrapper>
-      <TeamsEmptyState user={user} />
+      <TeamsEmptyState teams={teams} user={user} />
     </Wrapper>
   );
 };

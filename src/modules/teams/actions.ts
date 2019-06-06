@@ -2,6 +2,7 @@ import {
   createTeamTypes,
   deleteTeamTypes,
   getTeamTypes,
+  getTeamsTypes,
   IMember,
   ITeam,
   updateTeamTypes,
@@ -36,6 +37,21 @@ export function getTeam(teamId: string) {
       }),
     payload: teamId,
     types: [getTeamTypes.REQUEST, getTeamTypes.SUCCESS, getTeamTypes.FAILURE],
+  };
+}
+
+export function getTeams() {
+  return {
+    callAPI: (headers = {}) =>
+      fetch(`/api/teams`, {
+        headers,
+        method: 'GET',
+      }),
+    types: [
+      getTeamsTypes.REQUEST,
+      getTeamsTypes.SUCCESS,
+      getTeamsTypes.FAILURE,
+    ],
   };
 }
 

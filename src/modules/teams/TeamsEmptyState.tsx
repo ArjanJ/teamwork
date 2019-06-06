@@ -8,8 +8,10 @@ import { Easing } from '../../styles/Easing';
 import { IUser } from '../user/types';
 import { TeamsCreateModal } from './TeamsCreateModal';
 import { TeamsGraphic } from './TeamsGraphic';
+import { ITeam } from './types';
 
 interface ITeamsEmptyStateProps {
+  teams: ITeam[];
   user: IUser;
 }
 

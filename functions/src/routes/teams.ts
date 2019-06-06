@@ -118,14 +118,19 @@ teamsRouter.get('/teams', async (req: Request, res: Response) => {
         const userData = userDoc.data();
 
         if (userData) {
+          // Teams the user is on.
           const { teams } = userData;
-          const teamDocRefs = teams.map((team: IUserTeam) => db.doc(team.id));
+          const teamDocRefs = teams.map((team: IUserTeam) =>
+            db.doc(`teams/${team.id}`),
+          );
           const teamDocs = await db.getAll(...teamDocRefs);
-          console.log(teamDocs);
-          res.status(200).send({ data: teamDocs });
+          const teamDocsParsed = teamDocs.map(teamDoc => teamDoc.data());
+
+          res.status(200).send({ data: teamDocsParsed });
         }
       }
     } catch (error) {
+      console.log(error);
       res.status(500).send({ error });
     }
   }
