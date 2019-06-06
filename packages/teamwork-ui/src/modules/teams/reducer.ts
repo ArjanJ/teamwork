@@ -3,6 +3,7 @@ import { AnyAction } from 'redux';
 import {
   createTeamTypes,
   getTeamTypes,
+  getTeamsTypes,
   updateTeamTypes,
   updateTeamMembersTypes,
 } from './types';
@@ -24,6 +25,7 @@ const initialState: ITeamState = {
   teams: {},
 };
 
+// TODO: Handle delete team
 export default function(state = initialState, action: AnyAction) {
   switch (action.type) {
     case createTeamTypes.REQUEST:
@@ -47,6 +49,7 @@ export default function(state = initialState, action: AnyAction) {
         isCreating: false,
       };
     case getTeamTypes.REQUEST:
+    case getTeamsTypes.REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -60,7 +63,14 @@ export default function(state = initialState, action: AnyAction) {
           [action.data.id]: action.data,
         },
       };
+    case getTeamsTypes.SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        teams: action.data,
+      };
     case getTeamTypes.FAILURE:
+    case getTeamsTypes.FAILURE:
       return {
         ...state,
         error: action.error,

@@ -33,6 +33,7 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
 
   const { displayName, id } = userTeam;
 
+  // Fetch current team (the one in the URL)
   useEffect(() => {
     if (user && user.teams) {
       const userTeamResult = user.teams.find(

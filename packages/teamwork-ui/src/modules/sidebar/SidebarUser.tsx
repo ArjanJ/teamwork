@@ -104,7 +104,7 @@ const SidebarUserPic = styled(Flex)`
 `;
 
 const SidebarUserDropdown = styled.div<{ isOpen: boolean }>`
-  background: ${Color.NAVY};
+  background: ${Color.BLUE_SKY};
   border-radius: 4px;
   left: 0;
   opacity: ${props => (props.isOpen ? 1 : 0)};

@@ -5,6 +5,7 @@ import {
   createTeam,
   deleteTeam,
   getTeam,
+  getTeams,
   updateTeam,
   updateTeamMembers,
 } from '../modules/teams/actions';
@@ -17,9 +18,11 @@ export const useTeams = () => {
   const mapState = useCallback(state => state.teams, []);
   const teamsState = useMappedState(mapState);
 
+  // Binding action creators to dispatch.
   const create = (team: ITeam) => dispatch(createTeam(team));
   const remove = (team: IUserTeam) => dispatch(deleteTeam(team));
   const get = (teamId: string) => dispatch(getTeam(teamId));
+  const getAll = () => dispatch(getTeams());
   const update = (teamId: string, body = {}) =>
     dispatch(updateTeam(teamId, body));
   const updateMembers = (teamId: string, body: IMember[]) =>
@@ -29,6 +32,7 @@ export const useTeams = () => {
     createTeam: create,
     deleteTeam: remove,
     getTeam: get,
+    getTeams: getAll,
     isCreating: teamsState.isCreating,
     isFetching: teamsState.isFetching,
     isUpdating: teamsState.isUpdating,
