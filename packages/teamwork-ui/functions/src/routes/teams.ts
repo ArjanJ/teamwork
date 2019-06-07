@@ -6,12 +6,6 @@ export const teamsRouter = Router();
 const teamsCollection = db.collection('teams');
 const usersCollection = db.collection('users');
 
-interface IMember {
-  email: string;
-  firstName: string;
-  lastName: string;
-}
-
 interface IUserTeam {
   displayName: string;
   id: string;
@@ -51,19 +45,6 @@ teamsRouter.post('/teams', async (req: Request, res: Response) => {
       };
 
       // TODO: Invite system
-
-      // const batch = db.batch();
-
-      // members.forEach((member: IMember) => {
-      //   const userDocRef = usersCollection.doc(member.email);
-      //   const memberWithTeam = {
-      //     ...member,
-      //     teams: [userTeam],
-      //   };
-      //   batch.set(userDocRef, memberWithTeam, { merge: true });
-      // });
-
-      // batch.commit().catch(err => console.log(err));
 
       /**
        * Add the name and id of the team to the user object. This is so
