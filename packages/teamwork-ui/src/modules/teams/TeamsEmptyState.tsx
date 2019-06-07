@@ -26,22 +26,28 @@ export const TeamsEmptyState: FunctionComponent<ITeamsEmptyStateProps> = ({
   ));
 
   return (
-    <TeamsEmptyStateBox>
-      <TeamsEmptyStateHeading>
-        Hi {user.firstName}! Get started with Teamwork by creating your first
-        team.
-      </TeamsEmptyStateHeading>
-      <div>
-        <TeamsEmptyStateCreateButton onClick={showModal} type="button">
-          Create your team
-        </TeamsEmptyStateCreateButton>
-      </div>
-      <TeamsEmptyStateGraphicWrapper>
-        <TeamsGraphic />
-      </TeamsEmptyStateGraphicWrapper>
-    </TeamsEmptyStateBox>
+    <TeamsEmptyStateWrapper>
+      <TeamsEmptyStateBox>
+        <TeamsEmptyStateHeading>
+          Hi {user.firstName}! Get started with Teamwork by creating your first
+          team.
+        </TeamsEmptyStateHeading>
+        <div>
+          <TeamsEmptyStateCreateButton onClick={showModal} type="button">
+            Create your team
+          </TeamsEmptyStateCreateButton>
+        </div>
+        <TeamsEmptyStateGraphicWrapper>
+          <TeamsGraphic />
+        </TeamsEmptyStateGraphicWrapper>
+      </TeamsEmptyStateBox>
+    </TeamsEmptyStateWrapper>
   );
 };
+
+const TeamsEmptyStateWrapper = styled.div`
+  padding: 48px 36px;
+`;
 
 const TeamsEmptyStateBox = styled.div`
   background: linear-gradient(111.12deg, #ff6f6f 1.35%, #f9d749 100%);

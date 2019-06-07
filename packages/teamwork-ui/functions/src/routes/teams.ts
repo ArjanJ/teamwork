@@ -105,9 +105,16 @@ teamsRouter.get('/teams', async (req: Request, res: Response) => {
             db.doc(`teams/${team.id}`),
           );
           const teamDocs = await db.getAll(...teamDocRefs);
-          const teamDocsParsed = teamDocs.map(teamDoc => teamDoc.data());
 
-          res.status(200).send({ data: teamDocsParsed });
+          const teamsResponseObj: { [id: string]: any } = {};
+
+          // Return a keyed object of teams. (Each key is the team id).
+          const teamsResponse = teamDocs.reduce((acc, curr) => {
+            acc[curr.id] = curr.data();
+            return acc;
+          }, teamsResponseObj);
+
+          res.status(200).send({ data: teamsResponse });
         }
       }
     } catch (error) {
