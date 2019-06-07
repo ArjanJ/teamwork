@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useTeams } from '../../hooks/useTeams';
 import { useUser } from '../../hooks/useUser';
 import { TeamsEmptyState } from './TeamsEmptyState';
+import { TeamsOverview } from './TeamsOverview';
 
 export const Teams: FunctionComponent<RouteComponentProps> = () => {
   const { getTeams, teams } = useTeams();
@@ -20,7 +21,8 @@ export const Teams: FunctionComponent<RouteComponentProps> = () => {
 
   return (
     <Wrapper>
-      <TeamsEmptyState teams={teams} user={user} />
+      <TeamsOverview teams={teams} />
+      <TeamsEmptyState user={user} />
     </Wrapper>
   );
 };

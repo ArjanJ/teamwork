@@ -8,16 +8,19 @@ import { Easing } from '../../styles/Easing';
 import { IUser } from '../user/types';
 import { TeamsCreateModal } from './TeamsCreateModal';
 import { TeamsGraphic } from './TeamsGraphic';
-import { ITeam } from './types';
 
 interface ITeamsEmptyStateProps {
-  teams: ITeam[];
   user: IUser;
 }
 
 export const TeamsEmptyState: FunctionComponent<ITeamsEmptyStateProps> = ({
   user,
 }) => {
+  // If teams exist we don't want to show this component.
+  if (user.teams.length > 0) {
+    return null;
+  }
+
   const [showModal, hideModal] = useModal(() => (
     <TeamsCreateModal hideModal={hideModal} />
   ));
