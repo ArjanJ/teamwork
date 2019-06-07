@@ -1,6 +1,5 @@
 import { RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent, useEffect } from 'react';
-import styled from 'styled-components';
 
 import { useTeams } from '../../hooks/useTeams';
 import { useUser } from '../../hooks/useUser';
@@ -12,7 +11,9 @@ export const Teams: FunctionComponent<RouteComponentProps> = () => {
   const { user } = useUser();
 
   useEffect(() => {
-    getTeams();
+    if (Object.keys(teams).length === 0) {
+      getTeams();
+    }
   }, [user]);
 
   if (user === null) {
@@ -20,15 +21,11 @@ export const Teams: FunctionComponent<RouteComponentProps> = () => {
   }
 
   return (
-    <Wrapper>
+    <React.Fragment>
       <TeamsOverview teams={teams} />
       <TeamsEmptyState user={user} />
-    </Wrapper>
+    </React.Fragment>
   );
 };
-
-const Wrapper = styled.div`
-  padding: 48px 36px;
-`;
 
 export default Teams;
