@@ -85,6 +85,7 @@ export const TeamsAddMembersModal: FunctionComponent<
                                     }: FieldProps<ITeamFormValues>) => (
                                       <Input
                                         {...field}
+                                        autoFocus={true}
                                         placeholder="Email"
                                         required
                                         type="email"

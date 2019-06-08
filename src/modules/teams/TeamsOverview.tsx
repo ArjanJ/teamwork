@@ -1,11 +1,14 @@
 import { Link } from '@reach/router';
-import { rgba } from 'polished';
-import React, { FunctionComponent } from 'react';
-import { Box } from 'rebass';
+import { darken, rgba } from 'polished';
+import React, { FunctionComponent, useEffect, useState } from 'react';
+import { useModal } from 'react-modal-hook';
+import posed from 'react-pose';
+import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
+import { TeamsCreateModal } from './TeamsCreateModal';
 import { IMember, ITeam } from './types';
 
 interface TeamsOverviewProps {
@@ -17,7 +20,22 @@ interface TeamsOverviewProps {
 export const TeamsOverview: FunctionComponent<TeamsOverviewProps> = ({
   teams,
 }) => {
+  const [showTeams, setShowTeams] = useState(false);
   const teamKeys = Object.keys(teams);
+
+  useEffect(() => {
+    if (teamKeys.length > 0) {
+      setShowTeams(true);
+    }
+
+    return () => {
+      setShowTeams(false);
+    };
+  }, [showTeams, teamKeys]);
+
+  const [showModal, hideModal] = useModal(() => (
+    <TeamsCreateModal hideModal={hideModal} />
+  ));
 
   if (teamKeys.length === 0) {
     return null;
@@ -28,7 +46,7 @@ export const TeamsOverview: FunctionComponent<TeamsOverviewProps> = ({
       <Box as="header" mb="12px">
         <TeamsOverviewHeading>Your teams</TeamsOverviewHeading>
       </Box>
-      <TeamsOverviewList>
+      <StyledTeamsOverviewList pose={showTeams ? 'visible' : 'hidden'}>
         {teamKeys.map((key: string) => {
           const { displayName, name, members } = teams[key];
 
@@ -56,7 +74,13 @@ export const TeamsOverview: FunctionComponent<TeamsOverviewProps> = ({
             </TeamsOverviewListItem>
           );
         })}
-      </TeamsOverviewList>
+      </StyledTeamsOverviewList>
+      <Divider />
+      <Flex justifyContent="flex-end">
+        <AddTeamButton onClick={showModal} type="button">
+          New team
+        </AddTeamButton>
+      </Flex>
     </TeamsOverviewWrapper>
   );
 };
@@ -72,14 +96,24 @@ const TeamsOverviewHeading = styled.h1`
   font-size: 30px;
 `;
 
-const TeamsOverviewList = styled.ul`
+const TeamsOverviewList = posed.ul({
+  visible: {
+    delayChildren: 1000,
+    staggerChildren: 50,
+  },
+});
+
+const TeamsOverviewListItem = posed.li({
+  visible: { y: 0, opacity: 1 },
+  hidden: { y: 20, opacity: 0 },
+});
+
+const StyledTeamsOverviewList = styled(TeamsOverviewList)`
   display: grid;
   grid-gap: 16px;
   grid-template-columns: 1fr 1fr 1fr;
   list-style-type: none;
 `;
-
-const TeamsOverviewListItem = styled.li``;
 
 const TeamsOverviewListLink = styled(Link)`
   background: ${rgba('black', 0.25)};
@@ -124,5 +158,31 @@ const TeamsOverviewMemberItem = styled.li`
 
   &:last-child {
     margin-left: 0;
+  }
+`;
+
+const Divider = styled.div`
+  background: white;
+  height: 1px;
+  margin: 36px 0;
+  opacity: 0.25;
+`;
+
+const AddTeamButton = styled.button`
+  background: ${Color.BLUE_SKY};
+  border-radius: 99px;
+  box-shadow: 0 0 0 3px ${rgba(Color.BLUE_SKY, 1)};
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  height: 36px;
+  margin: 3px;
+  min-width: 100px;
+  padding: 0 24px;
+  position: relative;
+  transition: background 0.5s ${Easing.IN_OUT};
+
+  &:hover {
+    background: ${darken(0.05, Color.BLUE_SKY)};
   }
 `;
