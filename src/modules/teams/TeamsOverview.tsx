@@ -52,7 +52,7 @@ export const TeamsOverview: FunctionComponent<TeamsOverviewProps> = ({
 
           return (
             <TeamsOverviewListItem key={name}>
-              <TeamsOverviewListLink to={`/${name}`}>
+              <TeamsOverviewListLink to={`/teams/${name}`}>
                 <Box>
                   <TeamsOverviewTeamName>{displayName}</TeamsOverviewTeamName>
                 </Box>

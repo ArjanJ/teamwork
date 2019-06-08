@@ -221,6 +221,7 @@ export const TeamMembersMenuItem = styled.button`
   background: none;
   color: white;
   font-size: 14px;
+  font-weight: 500;
   padding: 6px 12px;
   text-align: left;
   transition: all 0.35s ${Easing.OUT};
