@@ -20,6 +20,11 @@ const Team = Loadable({
   loading: () => null,
 });
 
+const NotFound = Loadable({
+  loader: () => import('../not-found/NotFound'),
+  loading: () => null,
+});
+
 export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
   // Go to login page if not logged in.
   useAuthorization('/login');
@@ -38,8 +43,9 @@ export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
       <Sidebar />
       <Box flex={1}>
         <Router>
+          <Team path="/teams/:teamName" />
           <Teams path="/" />
-          <Team path="/:teamName" />
+          <NotFound path="*" />
         </Router>
       </Box>
     </DashboardWrapper>
