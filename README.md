@@ -1,7 +1,7 @@
 # Teamwork
 Teamwork is an app to help team leads stay on top of providing feedback, having 1-on-1's, and making sure their team members have what they need to do their best work.
 
-## Idea/pitch
+## Idea/motivation
 I started this passion project when I realized my time as team lead
 could've been easier if there was a way to manage a few small
 but important things more effectively.
