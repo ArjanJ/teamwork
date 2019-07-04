@@ -1,9 +1,14 @@
+import realFirebase from 'firebase/app';
 import { useState } from 'react';
 
 import { auth, firebase } from '../firebase';
 
+export interface IOnSocialSignInSuccess {
+  isNewUser: boolean;
+  user: realFirebase.User | null;
+}
 interface IUseSocialSignIn {
-  onSuccess(isNewUser: boolean): any;
+  onSuccess({  }: IOnSocialSignInSuccess): any;
 }
 
 export const useSocialSignIn = ({ onSuccess }: IUseSocialSignIn) => {
@@ -24,7 +29,7 @@ export const useSocialSignIn = ({ onSuccess }: IUseSocialSignIn) => {
         setIsNewUser(true);
       }
 
-      onSuccess(isNewUser);
+      onSuccess({ isNewUser, user });
     } catch (err) {
       setError(true);
     }

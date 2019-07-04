@@ -21,7 +21,7 @@ export const SidebarTeams = () => {
 };
 
 const SidebarTeamsEmpty: FunctionComponent<{ user: IUser }> = ({ user }) => {
-  if (user && user.teams.length > 0) {
+  if (user && user.teams && user.teams.length > 0) {
     return null;
   }
 

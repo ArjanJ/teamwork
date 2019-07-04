@@ -51,18 +51,19 @@ export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
 
       try {
         const response = await callAPI(headers);
-        const { data } = await response.json();
+        const { data, error } = await response.json();
 
         if (response) {
           return dispatch({
             data,
+            error,
             payload,
             type: successType,
           });
         }
-      } catch (error) {
+      } catch (caughtError) {
         return dispatch({
-          error,
+          error: caughtError,
           payload,
           type: failureType,
         });

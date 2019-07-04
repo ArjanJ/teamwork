@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
 import { auth } from '../firebase';
+import { IOnSocialSignInSuccess } from './useSocialSignIn';
 
 interface IUseEmailPassSignIn {
-  onSuccess(isNewUser: boolean): any;
+  onSuccess({  }: IOnSocialSignInSuccess): any;
 }
 
 export const useEmailPassSignUp = ({ onSuccess }: IUseEmailPassSignIn) => {
@@ -14,6 +15,7 @@ export const useEmailPassSignUp = ({ onSuccess }: IUseEmailPassSignIn) => {
     try {
       const {
         additionalUserInfo,
+        user,
       } = await auth.doCreateUserWithEmailAndPassword(email, password);
 
       const isNewUser = additionalUserInfo
@@ -24,7 +26,7 @@ export const useEmailPassSignUp = ({ onSuccess }: IUseEmailPassSignIn) => {
         setIsNewUser(true);
       }
 
-      onSuccess(isNewUser);
+      onSuccess({ isNewUser, user });
     } catch (err) {
       setError(true);
     }
@@ -32,10 +34,10 @@ export const useEmailPassSignUp = ({ onSuccess }: IUseEmailPassSignIn) => {
 
   async function signIn(email: string, password: string) {
     try {
-      const { additionalUserInfo } = await auth.doSignInWithEmailAndPassword(
-        email,
-        password,
-      );
+      const {
+        additionalUserInfo,
+        user,
+      } = await auth.doSignInWithEmailAndPassword(email, password);
 
       const isNewUser = additionalUserInfo
         ? additionalUserInfo.isNewUser
@@ -45,7 +47,7 @@ export const useEmailPassSignUp = ({ onSuccess }: IUseEmailPassSignIn) => {
         setIsNewUser(true);
       }
 
-      onSuccess(isNewUser);
+      onSuccess({ isNewUser, user });
     } catch (err) {
       setError(true);
     }

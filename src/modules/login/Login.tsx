@@ -1,5 +1,5 @@
 import { Link, navigate, RouteComponentProps } from '@reach/router';
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
@@ -7,8 +7,13 @@ import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
 import { useForm } from '../../hooks/useForm';
 import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
-import { useSocialSignIn } from '../../hooks/useSocialSignIn';
+import {
+  IOnSocialSignInSuccess,
+  useSocialSignIn,
+} from '../../hooks/useSocialSignIn';
+import { useUser } from '../../hooks/useUser';
 import { delay } from '../../utils/delay';
+import { isEmptyUser } from '../../utils/isEmptyUser';
 import {
   Backdrop,
   BigButton,
@@ -23,21 +28,34 @@ import {
 
 export const Login: FunctionComponent<RouteComponentProps> = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { createUser, getUser, user } = useUser();
 
-  const onSignInSuccess = () => {
+  const onLoginSuccess = async ({
+    isNewUser,
+    user,
+  }: IOnSocialSignInSuccess) => {
     if (isNewUser) {
-      navigate('/onboarding');
-    } else {
-      navigate('/');
+      await createUser({
+        firstName: '',
+        lastName: '',
+        role: '',
+        teams: [],
+      });
+
+      return navigate('/onboarding');
+    }
+
+    if (user && user.uid) {
+      getUser(user.uid);
     }
   };
 
-  const { hasError, isNewUser, signIn } = useSocialSignIn({
-    onSuccess: onSignInSuccess,
+  const { hasError, signIn } = useSocialSignIn({
+    onSuccess: onLoginSuccess,
   });
 
   const { login } = useEmailPassSignUp({
-    onSuccess: onSignInSuccess,
+    onSuccess: onLoginSuccess,
   });
 
   const onSubmit = async () => {
@@ -51,6 +69,14 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
     initialValues: { email: '', password: '' },
     onSubmit,
   });
+
+  useEffect(() => {
+    if (user && isEmptyUser(user)) {
+      navigate('/onboarding');
+    } else if (user) {
+      navigate('/');
+    }
+  }, [user]);
 
   return (
     <Backdrop>
