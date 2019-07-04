@@ -1,11 +1,11 @@
-import realFirebase from 'firebase/app';
+import firebaseApp from 'firebase/app';
 import { useState } from 'react';
 
 import { auth, firebase } from '../firebase';
 
 export interface IOnSocialSignInSuccess {
   isNewUser: boolean;
-  user: realFirebase.User | null;
+  user: firebaseApp.User | null;
 }
 interface IUseSocialSignIn {
   onSuccess({  }: IOnSocialSignInSuccess): any;

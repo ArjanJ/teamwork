@@ -4,7 +4,6 @@ import {
   applyMiddleware,
   combineReducers,
   createStore,
-  Store,
 } from 'redux';
 
 import { callAPIMiddleware } from '../middleware/callAPIMiddleware';
