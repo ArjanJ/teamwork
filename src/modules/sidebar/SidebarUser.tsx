@@ -1,7 +1,7 @@
 import { rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
 import { Flex } from 'rebass';
-import { useDispatch, useMappedState } from 'redux-react-hook';
+import { useDispatch } from 'redux-react-hook';
 import styled from 'styled-components';
 
 import { Toggle } from '../../components/toggle/Toggle';
