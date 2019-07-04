@@ -1,7 +1,7 @@
 # Teamwork
 Teamwork is an app to help team leads stay on top of providing feedback, having 1-on-1's, and making sure their team members have what they need to do their best work.
 
-## Idea/motivation
+## 💡Idea/motivation
 I started this passion project when I realized my time as team lead
 could've been easier if there was a way to manage a few small
 but important things more effectively.
@@ -21,3 +21,16 @@ things don't really fit into Jira, and typically aren't accounted
 for during sprints. It's easy to forget about these little things
 that help your team be the best that it can be, and that's where
 Teamwork comes in... well at least when I finish it.
+
+## 🗺️ Feature Roadmap
+### User Signup and Authentication
+### Create teams
+### Invite users
+### Feedback
+### Coffees
+### Todos
+
+## 👨‍💻 Technical Overview
+
+### Frontend
+### Backend
