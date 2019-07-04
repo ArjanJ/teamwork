@@ -1,5 +1,5 @@
 import { Link, navigate, RouteComponentProps } from '@reach/router';
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
@@ -7,9 +7,13 @@ import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
 import { useForm } from '../../hooks/useForm';
 import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
-import { useSocialSignIn } from '../../hooks/useSocialSignIn';
+import {
+  IOnSocialSignInSuccess,
+  useSocialSignIn,
+} from '../../hooks/useSocialSignIn';
 import { useUser } from '../../hooks/useUser';
 import { delay } from '../../utils/delay';
+import { isEmptyUser } from '../../utils/isEmptyUser';
 import {
   Backdrop,
   BigButton,
@@ -24,19 +28,25 @@ import {
 
 export const Signup: FunctionComponent<RouteComponentProps> = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { createUser } = useUser();
+  const { createUser, getUser, user } = useUser();
 
-  const onSignInSuccess = (isNewUser: boolean) => {
+  const onSignInSuccess = async ({
+    isNewUser,
+    user,
+  }: IOnSocialSignInSuccess) => {
     if (isNewUser) {
-      createUser({
+      await createUser({
         firstName: '',
         lastName: '',
         role: '',
         teams: [],
       });
-      navigate('/onboarding');
-    } else {
-      navigate('/');
+
+      return navigate('/onboarding');
+    }
+
+    if (user && user.uid) {
+      getUser(user.uid);
     }
   };
 
@@ -65,6 +75,14 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
     initialValues: initialFormValues,
     onSubmit,
   });
+
+  useEffect(() => {
+    if (user && isEmptyUser(user)) {
+      navigate('/onboarding');
+    } else if (user) {
+      navigate('/');
+    }
+  }, [user]);
 
   return (
     <Backdrop>

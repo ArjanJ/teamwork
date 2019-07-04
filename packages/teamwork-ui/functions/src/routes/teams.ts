@@ -101,6 +101,12 @@ teamsRouter.get('/teams', async (req: Request, res: Response) => {
         if (userData) {
           // Teams the user is on.
           const { teams } = userData;
+
+          // If there are no teams then we shouldn't pursue anything further.
+          if (teams.length === 0) {
+            return res.status(200).send({ data: teams });
+          }
+
           const teamDocRefs = teams.map((team: IUserTeam) =>
             db.doc(`teams/${team.id}`),
           );

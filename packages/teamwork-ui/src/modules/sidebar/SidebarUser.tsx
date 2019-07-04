@@ -1,7 +1,7 @@
-import { navigate } from '@reach/router';
 import { rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
 import { Flex } from 'rebass';
+import { useDispatch, useMappedState } from 'redux-react-hook';
 import styled from 'styled-components';
 
 import { Toggle } from '../../components/toggle/Toggle';
@@ -10,13 +10,16 @@ import { useUser } from '../../hooks/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 
-const signOut = async () => {
-  await auth.doSignOut();
-  navigate('/login');
-};
-
 export const SidebarUser: FunctionComponent = () => {
+  const dispatch = useDispatch();
   const { user } = useUser();
+
+  const resetApp = () => dispatch({ type: 'RESET_APP' });
+
+  const signOut = async () => {
+    resetApp();
+    await auth.doSignOut();
+  };
 
   return (
     <Toggle>
