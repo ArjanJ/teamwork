@@ -30,10 +30,17 @@ Users can signup, login, and signout.
 ✅ Done
 Users can create as many teams as they want.
 ### Invite users
-:checkbox
+⬜ WIP
+Invite teammates to join Teamwork.
 ### Feedback
+⬜ WIP
+Record and share feedback in an organized way.
 ### Coffees
+⬜ WIP
+Schedule 1-on-1's with your teammates and keep track of agendas and outcomes.
 ### Todos
+⬜ WIP
+Keep track of little things you owe people on your team.
 
 ## 👨‍💻 Technical Overview
 
