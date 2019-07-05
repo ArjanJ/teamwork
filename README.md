@@ -24,8 +24,13 @@ Teamwork comes in... well at least when I finish it.
 
 ## 🗺️ Feature Roadmap
 ### User Signup and Authentication
+✅ Done
+Users can signup, login, and signout.
 ### Create teams
+✅ Done
+Users can create as many teams as they want.
 ### Invite users
+:checkbox
 ### Feedback
 ### Coffees
 ### Todos
@@ -33,4 +38,15 @@ Teamwork comes in... well at least when I finish it.
 ## 👨‍💻 Technical Overview
 
 ### Frontend
+- React
+- TypeScript
+- Redux
+- Styled Components
+- Formik
+
 ### Backend
+- Node.js
+- TypeScript
+- Firebase Functions
+- Firebase Firestore
+- Firebase Authentication
