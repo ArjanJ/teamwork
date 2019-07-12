@@ -78,7 +78,7 @@ export const TeamsOverview: FunctionComponent<TeamsOverviewProps> = ({
       <Divider />
       <Flex justifyContent="flex-end">
         <AddTeamButton onClick={showModal} type="button">
-          New team
+          Add team
         </AddTeamButton>
       </Flex>
     </TeamsOverviewWrapper>
@@ -111,7 +111,7 @@ const TeamsOverviewListItem = posed.li({
 const StyledTeamsOverviewList = styled(TeamsOverviewList)`
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   list-style-type: none;
 `;
 
@@ -125,7 +125,7 @@ const TeamsOverviewListLink = styled(Link)`
   width: 100%;
 
   &:hover {
-    background: ${Color.BLUE_SKY};
+    background: ${rgba('black', 0.35)};
   }
 `;
 
