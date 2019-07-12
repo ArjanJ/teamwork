@@ -19,9 +19,11 @@ export const P = styled.p`
   font-weight: 500;
 `;
 
-export const Form = styled.form`
+export const Form = styled.form<{ disabled?: boolean }>`
   margin: 0 auto;
   max-width: 420px;
+  opacity: ${({ disabled }) => (disabled ? 0.35 : 1)};
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   text-align: center;
   width: 100%;
 `;
@@ -127,4 +129,12 @@ export const Error = styled.p`
   font-weight: 700;
   margin-bottom: 24px;
   padding: 12px;
+`;
+
+export const LoadingSpinnerWrapper = styled.div`
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 `;

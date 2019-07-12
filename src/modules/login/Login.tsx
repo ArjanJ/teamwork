@@ -5,6 +5,7 @@ import { Box, Flex } from 'rebass';
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
+import { Spinner } from '../../components/spinner/Spinner';
 import { useForm } from '../../hooks/useForm';
 import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
 import {
@@ -22,6 +23,7 @@ import {
   Form,
   Input,
   Label,
+  LoadingSpinnerWrapper,
   P,
   Separator,
   Title,
@@ -30,7 +32,7 @@ import {
 export const Login: FunctionComponent<RouteComponentProps> = () => {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { createUser, getUser, user } = useUser();
+  const { createUser, getUser, isFetching, user } = useUser();
 
   const onLoginSuccess = async ({
     isNewUser,
@@ -89,6 +91,9 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
   return (
     <Backdrop>
       <Header />
+      <LoadingSpinnerWrapper>
+        {isFetching && <Spinner color={Color.BLUE_RAGE} size={72} />}
+      </LoadingSpinnerWrapper>
       <Form onSubmit={handleSubmit}>
         <Box mb="24px">
           <Title>Log in</Title>
