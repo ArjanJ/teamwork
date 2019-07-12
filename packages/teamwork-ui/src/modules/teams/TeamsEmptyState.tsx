@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { IUser } from '../user/types';
-import { TeamsCreateModal } from './TeamsCreateModal';
+import { TeamsCreateModal } from './TeamsCreateTeamModal';
 import { TeamsGraphic } from './TeamsGraphic';
 
 interface ITeamsEmptyStateProps {
