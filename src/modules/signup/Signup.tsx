@@ -30,7 +30,7 @@ import {
 export const Signup: FunctionComponent<RouteComponentProps> = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const { createUser, getUser, user } = useUser();
+  const { createUser, getUser, isFetching, user } = useUser();
 
   const onSignInSuccess = async ({
     isNewUser,

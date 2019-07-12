@@ -17,6 +17,7 @@ import { isEmptyUser } from '../../utils/isEmptyUser';
 import {
   Backdrop,
   BigButton,
+  Error,
   Field,
   Form,
   Input,
@@ -27,6 +28,7 @@ import {
 } from '../signup/Shared';
 
 export const Login: FunctionComponent<RouteComponentProps> = () => {
+  const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { createUser, getUser, user } = useUser();
 
@@ -54,7 +56,7 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
     onSuccess: onLoginSuccess,
   });
 
-  const { login } = useEmailPassSignUp({
+  const { error: emailPassError, login } = useEmailPassSignUp({
     onSuccess: onLoginSuccess,
   });
 
@@ -78,6 +80,12 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    if (emailPassError) {
+      setError(emailPassError);
+    }
+  }, [emailPassError]);
+
   return (
     <Backdrop>
       <Header />
@@ -95,6 +103,7 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
         <Separator mb="36px">
           <P>Or, log in with your email</P>
         </Separator>
+        {error && <Error>{error}</Error>}
         <Field mb="24px">
           <Input
             id="email"
