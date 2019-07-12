@@ -1,25 +1,32 @@
 import { Link, LinkGetProps, LinkProps } from '@reach/router';
 import React from 'react';
+import { Box } from 'rebass';
 import styled from 'styled-components';
 
 import { Easing } from '../../styles/Easing';
 
 export const SidebarNav = () => {
   return (
-    <nav>
-      <NavLink to="/todos">
-        <TodoIcon />
-        <span>Todos</span>
-      </NavLink>
-      <NavLink to="/coffees">
-        <CoffeeIcon />
-        <span>Coffees</span>
-      </NavLink>
-      <NavLink to="/settings">
-        <SettingsIcon />
-        <span>Settings</span>
-      </NavLink>
-    </nav>
+    <Box mb="30px">
+      <nav>
+        <NavLink to="/">
+          <HomeIcon />
+          <span>Home</span>
+        </NavLink>
+        <NavLink to="/todos">
+          <TodoIcon />
+          <span>Todos</span>
+        </NavLink>
+        <NavLink to="/coffees">
+          <CoffeeIcon />
+          <span>Coffees</span>
+        </NavLink>
+        <NavLink to="/settings">
+          <SettingsIcon />
+          <span>Settings</span>
+        </NavLink>
+      </nav>
+    </Box>
   );
 };
 
@@ -28,7 +35,7 @@ const NavLink = (props: LinkProps<any>) => (
     {...props}
     getProps={({ isCurrent }: LinkGetProps) => ({
       style: {
-        opacity: isCurrent ? 1 : 0.75,
+        opacity: isCurrent ? 1 : 0.7,
       },
     })}
   />
@@ -44,14 +51,14 @@ const StyledLink = styled(Link)<any>`
   transition: opacity 0.35s ${Easing.OUT};
 
   svg {
-    opacity: 0.75;
+    opacity: 0.7;
   }
 
   &:hover {
     opacity: 1 !important; /* Because we need to override the inline style */
 
     svg {
-      opacity: 1;
+      opacity: 1 !important; /* Because we need to override the inline style */
     }
   }
 
@@ -59,6 +66,24 @@ const StyledLink = styled(Link)<any>`
     margin-left: 16px;
   }
 `;
+
+const HomeIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    x="0px"
+    y="0px"
+    width="16px"
+    height="16px"
+    viewBox="0 0 16 16"
+  >
+    <g transform="translate(0, 0)">
+      <path
+        fill="#FFFFFF"
+        d="M14,16c0.6,0,1-0.4,1-1V6c0-0.3-0.1-0.6-0.4-0.8l-6-5c-0.4-0.3-0.9-0.3-1.3,0l-6,5C1.1,5.4,1,5.7,1,6v9 c0,0.6,0.4,1,1,1h4v-5h4v5H14z"
+      />
+    </g>
+  </svg>
+);
 
 const TodoIcon = () => (
   <svg
