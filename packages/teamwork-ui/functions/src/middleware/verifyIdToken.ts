@@ -19,21 +19,22 @@ export const verifyIdToken = async (
 ) => {
   const token = extractBearerToken(req.headers);
 
-  if (token) {
-    try {
-      const decodedToken = await admin.auth().verifyIdToken(token);
-      req.decodedToken = decodedToken;
-      next();
-    } catch (error) {
-      res
-        .status(401)
-        .send(UNAUTHORIZED_ERROR(error.message))
-        .end();
-    }
-  } else {
+  if (!token) {
     res
       .status(401)
       .send(UNAUTHORIZED_ERROR())
+      .end();
+  }
+
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    req.decodedToken = decodedToken;
+
+    next();
+  } catch (error) {
+    res
+      .status(401)
+      .send(UNAUTHORIZED_ERROR(error.message))
       .end();
   }
 };

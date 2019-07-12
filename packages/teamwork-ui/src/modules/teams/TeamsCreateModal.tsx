@@ -75,7 +75,7 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
           await delay(2000);
           actions.setSubmitting(false);
 
-          navigate(normalizedTeamName);
+          navigate(`/teams/${normalizedTeamName}`);
           hideModal();
         }}
         render={({

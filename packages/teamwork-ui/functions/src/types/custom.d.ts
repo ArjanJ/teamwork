@@ -1,6 +1,6 @@
 declare namespace Express {
   export interface Request {
-    decodedToken?: {
+    decodedToken: {
       [key: string]: any;
     };
   }

@@ -1,4 +1,4 @@
-import { RouteComponentProps } from '@reach/router';
+import { navigate, RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
 import styled, { css } from 'styled-components';
@@ -51,6 +51,11 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
     return null;
   }
 
+  const handleDeleteTeam = async () => {
+    await deleteTeam(userTeam);
+    navigate('/');
+  };
+
   return (
     <Wrapper>
       <Header
@@ -77,10 +82,7 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
                   <TeamMembersMenuItem type="button">
                     Rename team
                   </TeamMembersMenuItem>
-                  <TeamMembersMenuItem
-                    onClick={() => deleteTeam(userTeam)}
-                    type="button"
-                  >
+                  <TeamMembersMenuItem onClick={handleDeleteTeam} type="button">
                     Delete team
                   </TeamMembersMenuItem>
                 </TeamMembersMenu>
