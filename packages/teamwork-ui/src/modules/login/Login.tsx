@@ -13,6 +13,7 @@ import {
   useSocialSignIn,
 } from '../../hooks/useSocialSignIn';
 import { useUser } from '../../hooks/useUser';
+import { Color } from '../../styles/Color';
 import { delay } from '../../utils/delay';
 import { isEmptyUser } from '../../utils/isEmptyUser';
 import {
