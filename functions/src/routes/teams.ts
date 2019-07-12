@@ -12,54 +12,81 @@ interface IUserTeam {
   name: string;
 }
 
+interface IMember {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
+async function doesCurrentUserBelongToATeamWithTheSameName(
+  team: string,
+  email: string,
+) {
+  const query = await teamsCollection.where('name', '==', team).get();
+  const docs = query.docs.map(d => d.data());
+  const docsWithUser = docs.filter(d =>
+    d.members.find((m: IMember) => m.email === email),
+  );
+
+  return docsWithUser.length > 0;
+}
+
 /**
  * CREATE TEAM
  */
 teamsRouter.post('/teams', async (req: Request, res: Response) => {
   const { body, decodedToken } = req;
+  const { email, uid } = decodedToken;
 
-  if (decodedToken && decodedToken.uid) {
-    try {
-      // Add an owner property to the Team doc.
-      const teamDocWithOwner = {
-        ...body,
-        owner: {
-          email: decodedToken.email,
-          uid: decodedToken.uid,
-        },
-      };
-      const teamDoc = await teamsCollection.add(teamDocWithOwner);
-      const teamWithId = {
-        ...teamDocWithOwner,
-        id: teamDoc.id,
-      };
+  try {
+    const teamExists = await doesCurrentUserBelongToATeamWithTheSameName(
+      body.name,
+      email,
+    );
 
-      // Return the newly created team doc with the unique id.
-      res.status(200).send({ data: teamWithId });
-
-      const { members } = body;
-      const userTeam = {
-        displayName: teamDocWithOwner.displayName,
-        id: teamDoc.id,
-        name: teamDocWithOwner.name,
-      };
-
-      // TODO: Invite system
-
-      /**
-       * Add the name and id of the team to the user object. This is so
-       * we know all of the teams a user belongs to and can query
-       * teams based on that.
-       */
-      usersCollection
-        .doc(decodedToken.uid)
-        .update({
-          teams: admin.firestore.FieldValue.arrayUnion(userTeam),
-        })
-        .catch(err => console.log(err));
-    } catch (error) {
-      res.status(500).send({ error });
+    if (teamExists) {
+      return res.status(400).send({ error: 'Team exists' });
     }
+
+    // Add an owner property to the Team doc.
+    const teamDocWithOwner = {
+      ...body,
+      owner: {
+        email: email,
+        uid: uid,
+      },
+    };
+    const teamDoc = await teamsCollection.add(teamDocWithOwner);
+    const teamWithId = {
+      ...teamDocWithOwner,
+      id: teamDoc.id,
+    };
+
+    // Return the newly created team doc with the unique id.
+    res.status(200).send({ data: teamWithId });
+
+    const { members } = body;
+    const userTeam = {
+      displayName: teamDocWithOwner.displayName,
+      id: teamDoc.id,
+      name: teamDocWithOwner.name,
+    };
+
+    // TODO: Invite system
+
+    /**
+     * Add the name and id of the team to the user object. This is so
+     * we know all of the teams a user belongs to and can query
+     * teams based on that.
+     */
+    usersCollection
+      .doc(uid)
+      .update({
+        teams: admin.firestore.FieldValue.arrayUnion(userTeam),
+      })
+      .catch(err => console.log(err));
+  } catch (error) {
+    res.status(500).send({ error });
   }
 });
 

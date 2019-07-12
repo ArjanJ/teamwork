@@ -35,7 +35,7 @@ export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
 
   if (currentUser) {
     // Fetch idToken first, otherwise API will return 401.
-    const token = await currentUser.getIdToken(false);
+    const token = await currentUser.getIdToken(true);
 
     if (token) {
       const headers = {
