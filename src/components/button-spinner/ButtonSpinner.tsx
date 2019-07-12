@@ -35,6 +35,7 @@ export const ButtonSpinner = styled.button<{ isSubmitting?: boolean }>`
           box-shadow: 0 0 0 3px ${rgba(Color.BLUE_SKY, 0)};
           min-width: 36px;
           padding: 0;
+          pointer-events: none;
         `
       : ''}
 
