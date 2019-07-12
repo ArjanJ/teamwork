@@ -50,6 +50,7 @@ const SidebarTeamsTitle = styled.h2`
   color: white;
   font-size: 12px;
   letter-spacing: 1px;
+  margin-bottom: 4px;
   opacity: 0.75;
   text-transform: uppercase;
 `;

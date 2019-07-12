@@ -14,8 +14,8 @@ export const Sidebar = () => (
       <TeamworkLogo />
     </Box>
     <SidebarUser />
-    <SidebarTeams />
     <SidebarNav />
+    <SidebarTeams />
     <SidebarNewTeam />
   </SidebarWrapper>
 );
