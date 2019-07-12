@@ -5,6 +5,7 @@ import { Box, Flex } from 'rebass';
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
+import { Spinner } from '../../components/spinner/Spinner';
 import { useForm } from '../../hooks/useForm';
 import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
 import {
@@ -12,6 +13,7 @@ import {
   useSocialSignIn,
 } from '../../hooks/useSocialSignIn';
 import { useUser } from '../../hooks/useUser';
+import { Color } from '../../styles/Color';
 import { delay } from '../../utils/delay';
 import { isEmptyUser } from '../../utils/isEmptyUser';
 import {
@@ -22,6 +24,7 @@ import {
   Form,
   Input,
   Label,
+  LoadingSpinnerWrapper,
   P,
   Separator,
   Title,
@@ -99,7 +102,10 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
   return (
     <Backdrop>
       <Header />
-      <Form onSubmit={handleSubmit}>
+      <LoadingSpinnerWrapper>
+        {isFetching && <Spinner color={Color.BLUE_RAGE} size={72} />}
+      </LoadingSpinnerWrapper>
+      <Form disabled={isFetching} onSubmit={handleSubmit}>
         <Box mb="24px">
           <Title>Create your account</Title>
           <P>Register with your work Google account</P>
