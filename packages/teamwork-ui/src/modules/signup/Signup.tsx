@@ -17,6 +17,7 @@ import { isEmptyUser } from '../../utils/isEmptyUser';
 import {
   Backdrop,
   BigButton,
+  Error,
   Field,
   Form,
   Input,
@@ -28,6 +29,7 @@ import {
 
 export const Signup: FunctionComponent<RouteComponentProps> = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const { createUser, getUser, user } = useUser();
 
   const onSignInSuccess = async ({
@@ -54,7 +56,7 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
     onSuccess: onSignInSuccess,
   });
 
-  const { signUp } = useEmailPassSignUp({
+  const { error: emailPassError, signUp } = useEmailPassSignUp({
     onSuccess: onSignInSuccess,
   });
 
@@ -65,6 +67,10 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
   };
 
   const onSubmit = async () => {
+    if (values.password !== values.confirmPassword) {
+      return setError('Passwords do not match.');
+    }
+
     setIsSubmitting(true);
     await delay(1500);
     await signUp(values.email, values.password);
@@ -84,6 +90,12 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
     }
   }, [user]);
 
+  useEffect(() => {
+    if (emailPassError) {
+      setError(emailPassError);
+    }
+  }, [emailPassError]);
+
   return (
     <Backdrop>
       <Header />
@@ -101,6 +113,7 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
         <Separator mb="36px">
           <P>Or, register with your email</P>
         </Separator>
+        {error && <Error>{error}</Error>}
         <Field mb="24px">
           <Input
             id="email"

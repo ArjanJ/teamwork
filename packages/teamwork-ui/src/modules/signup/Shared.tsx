@@ -120,3 +120,11 @@ export const Title = styled.h1`
   font-size: 30px;
   margin-bottom: 10px;
 `;
+
+export const Error = styled.p`
+  background: #ff4848;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 24px;
+  padding: 12px;
+`;

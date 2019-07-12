@@ -8,7 +8,7 @@ interface IUseEmailPassSignIn {
 }
 
 export const useEmailPassSignUp = ({ onSuccess }: IUseEmailPassSignIn) => {
-  const [hasError, setError] = useState(false);
+  const [error, setError] = useState('');
   const [isNewUser, setIsNewUser] = useState(false);
 
   async function signUp(email: string, password: string) {
@@ -28,7 +28,11 @@ export const useEmailPassSignUp = ({ onSuccess }: IUseEmailPassSignIn) => {
 
       onSuccess({ isNewUser, user });
     } catch (err) {
-      setError(true);
+      if (err.message) {
+        return setError(err.message);
+      }
+
+      setError('Something went wrong.');
     }
   }
 
@@ -49,9 +53,13 @@ export const useEmailPassSignUp = ({ onSuccess }: IUseEmailPassSignIn) => {
 
       onSuccess({ isNewUser, user });
     } catch (err) {
-      setError(true);
+      if (err.message) {
+        return setError(err.message);
+      }
+
+      setError('Something went wrong.');
     }
   }
 
-  return { hasError, isNewUser, login: signIn, signUp };
+  return { error, isNewUser, login: signIn, signUp };
 };
