@@ -25,4 +25,4 @@ yarn-error.log*
 keys/
 
 *.log
-.firebase
+.firebase/
