@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
-import { TeamsCreateModal } from './TeamsCreateModal';
+import { TeamsCreateModal } from './TeamsCreateTeamModal';
 import { IMember, ITeam } from './types';
 
 interface TeamsOverviewProps {
