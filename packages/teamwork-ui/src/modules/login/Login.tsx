@@ -1,4 +1,4 @@
-import { Link, navigate, RouteComponentProps } from '@reach/router';
+import { Link, RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
 
@@ -8,14 +8,11 @@ import { GoogleLogo } from '../../components/logos/logos';
 import { Spinner } from '../../components/spinner/Spinner';
 import { useForm } from '../../hooks/useForm';
 import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
-import {
-  IOnSocialSignInSuccess,
-  useSocialSignIn,
-} from '../../hooks/useSocialSignIn';
+import { useOnLoginOrSignup } from '../../hooks/useOnLoginOrSignup';
+import { useSocialSignIn } from '../../hooks/useSocialSignIn';
 import { useUser } from '../../hooks/useUser';
 import { Color } from '../../styles/Color';
 import { delay } from '../../utils/delay';
-import { isEmptyUser } from '../../utils/isEmptyUser';
 import {
   Backdrop,
   BigButton,
@@ -33,34 +30,15 @@ import {
 export const Login: FunctionComponent<RouteComponentProps> = () => {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { createUser, getUser, isFetching, user } = useUser();
-
-  const onLoginSuccess = async ({
-    isNewUser,
-    user,
-  }: IOnSocialSignInSuccess) => {
-    if (isNewUser) {
-      await createUser({
-        firstName: '',
-        lastName: '',
-        role: '',
-        teams: [],
-      });
-
-      return navigate('/onboarding');
-    }
-
-    if (user && user.uid) {
-      getUser(user.uid);
-    }
-  };
+  const { isFetching } = useUser();
+  const { onSuccess } = useOnLoginOrSignup();
 
   const { hasError, signIn } = useSocialSignIn({
-    onSuccess: onLoginSuccess,
+    onSuccess: onSuccess,
   });
 
   const { error: emailPassError, login } = useEmailPassSignUp({
-    onSuccess: onLoginSuccess,
+    onSuccess: onSuccess,
   });
 
   const onSubmit = async () => {
@@ -74,14 +52,6 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
     initialValues: { email: '', password: '' },
     onSubmit,
   });
-
-  useEffect(() => {
-    if (user && isEmptyUser(user)) {
-      navigate('/onboarding');
-    } else if (user) {
-      navigate('/');
-    }
-  }, [user]);
 
   useEffect(() => {
     if (emailPassError) {
