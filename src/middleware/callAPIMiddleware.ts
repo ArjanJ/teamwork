@@ -17,7 +17,6 @@ export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
     types.length !== 3 ||
     !types.every(type => typeof type === 'string')
   ) {
-    console.log(types);
     throw new Error('Expected an array of three string types.');
   }
 
@@ -52,6 +51,14 @@ export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
       try {
         const response = await callAPI(headers);
         const { data, error } = await response.json();
+
+        if (error) {
+          return dispatch({
+            error,
+            payload,
+            type: failureType,
+          });
+        }
 
         if (response) {
           return dispatch({
