@@ -118,7 +118,7 @@ const SidebarUserDropdown = styled.div<{ isOpen: boolean }>`
   transition: all 0.35s ${Easing.OUT};
   visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
   width: 100%;
-  z-index: 1;
+  z-index: 2;
 `;
 
 const SidebarUserDropdownButton = styled.button`
