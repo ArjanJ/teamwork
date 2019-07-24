@@ -97,7 +97,7 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
             id="password"
             name="password"
             onChange={handleInputChange}
-            placeholder="Create password"
+            placeholder="Password"
             required
             type="password"
             value={values.password}
