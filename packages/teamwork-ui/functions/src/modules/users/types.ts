@@ -1,12 +1,18 @@
-export interface IUser {
+export interface User {
+  company: UserCompany;
   firstName: string;
   lastName: string;
   role: string;
-  teams: IUserTeam[];
+  teams: UserTeam[];
+  uid: string;
 }
 
-export interface IUserTeam {
+export interface UserTeam {
   displayName: string;
   id: string;
+  name: string;
+}
+
+export interface UserCompany {
   name: string;
 }
