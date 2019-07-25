@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { useAuthUser } from '../../hooks/useAuthUser';
 import { useUser } from '../../hooks/useUser';
+import { VerifyEmail } from '../verify-email/VerifyEmail';
 import { Sidebar } from '../sidebar/Sidebar';
 
 const Teams = Loadable({
@@ -41,13 +42,15 @@ export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
   return (
     <DashboardWrapper>
       <Sidebar />
-      <Box flex={1}>
-        <Router>
-          <Team path="/teams/:teamName" />
-          <Teams path="/" />
-          <NotFound path="*" />
-        </Router>
-      </Box>
+      <VerifyEmail>
+        <Box flex={1}>
+          <Router>
+            <Team path="/teams/:teamName" />
+            <Teams path="/" />
+            <NotFound path="*" />
+          </Router>
+        </Box>
+      </VerifyEmail>
     </DashboardWrapper>
   );
 };

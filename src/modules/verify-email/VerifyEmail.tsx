@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 
 import { Spinner } from '../../components/spinner/Spinner';
 import { firebase } from '../../firebase';
+import { useAuthUser } from '../../hooks/useAuthUser';
 import { Color } from '../../styles/Color';
 
-export const VerifyEmail = ({ email }: { email: string }) => {
+interface VerifyEmailProps {
+  children: React.ReactNode;
+}
+
+export const VerifyEmail: FunctionComponent<VerifyEmailProps> = ({
+  children,
+}) => {
+  const { authUser } = useAuthUser();
   const { currentUser } = firebase.auth;
   const [isResendingEmail, setIsResendingEmail] = useState(false);
   const [resentEmail, setResentEmail] = useState(false);
   const [resentEmailError, setResentEmailError] = useState('');
 
-  if (!currentUser) {
+  if (!currentUser || !authUser) {
     return null;
   }
+
+  const hasVerifiedEmail = authUser.emailVerified;
 
   const onResendButtonClick = async () => {
     setResentEmail(false);
@@ -31,7 +41,9 @@ export const VerifyEmail = ({ email }: { email: string }) => {
     }
   };
 
-  return (
+  return hasVerifiedEmail ? (
+    <React.Fragment>{children}</React.Fragment>
+  ) : (
     <Wrapper>
       <Heading>Verify your email address</Heading>
       <Subheading>
@@ -43,11 +55,11 @@ export const VerifyEmail = ({ email }: { email: string }) => {
         <Button onClick={onResendButtonClick} type="button">
           click here{' '}
         </Button>{' '}
-        to send another link to {email}.
+        to send another link to {authUser.email}.
       </P>
       <ResentWrapper>
         {isResendingEmail && (
-          <Spinner color={Color.BLUE_RHINO} size={40} stroke={3} />
+          <Spinner color={Color.BLUE_PERSIAN} size={40} stroke={3} />
         )}
         {resentEmail && (
           <P>

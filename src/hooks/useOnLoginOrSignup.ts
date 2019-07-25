@@ -12,23 +12,12 @@ import { isEmptyUser } from '../utils/isEmptyUser';
  * we redirect them straight to the dashboard.
  */
 export const useOnLoginOrSignup = () => {
-  const { createUser, getUser, user } = useUser();
+  const { getUser, user } = useUser();
 
-  const onSuccess = async ({ isNewUser, user }: IOnSocialSignInSuccess) => {
+  const onSuccess = async ({ user }: IOnSocialSignInSuccess) => {
     if (user && user.emailVerified === false) {
       // Send a verification email to the user.
       user.sendEmailVerification();
-    }
-
-    if (isNewUser) {
-      await createUser({
-        firstName: '',
-        lastName: '',
-        role: '',
-        teams: [],
-      });
-
-      return navigate('/onboarding');
     }
 
     if (user && user.uid) {
