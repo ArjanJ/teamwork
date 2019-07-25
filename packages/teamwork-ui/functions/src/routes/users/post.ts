@@ -28,7 +28,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
     await createUser(user);
     res.status(200).send({ user });
 
-    if (!decodedToken.company) {
+    if (!decodedToken.company && company.name !== '') {
       admin.auth().setCustomUserClaims(decodedToken.uid, {
         company,
       });
