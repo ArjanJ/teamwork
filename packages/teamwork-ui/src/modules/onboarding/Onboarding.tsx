@@ -1,5 +1,6 @@
 import { RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent } from 'react';
+import { Box } from 'rebass';
 import styled from 'styled-components';
 
 import { Header } from '../../components/header/Header';
@@ -21,7 +22,13 @@ export const Onboarding: FunctionComponent<RouteComponentProps> = () => {
       <Header />
       <VerifyEmail>
         <Wrapper>
-          <Title>Welcome to Teamwork!</Title>
+          <Box mb="36px">
+            <Title>Welcome to Teamwork 👋</Title>
+            <P>
+              To get started we just need a few details about you and where you
+              work.
+            </P>
+          </Box>
           <OnboardingForm />
         </Wrapper>
       </VerifyEmail>
@@ -30,16 +37,20 @@ export const Onboarding: FunctionComponent<RouteComponentProps> = () => {
 };
 
 const Wrapper = styled.div`
-  justify-self: center;
-  margin-bottom: 148px;
+  margin: auto;
   min-height: 405px;
+  padding-top: 60px;
   width: 460px;
 `;
 
 const Title = styled.h1`
-  color: #f8cf83;
+  color: white;
   font-size: 36px;
-  margin-bottom: 64px;
+  margin-bottom: 12px;
+`;
+
+const P = styled.p`
+  color: white;
 `;
 
 export default Onboarding;

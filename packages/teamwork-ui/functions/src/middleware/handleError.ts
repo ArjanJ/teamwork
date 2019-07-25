@@ -16,8 +16,10 @@ export const handleError: ErrorRequestHandler = (
   const type = err.type || TYPE;
 
   res.status(status).send({
-    message,
-    status,
-    type,
+    error: {
+      message,
+      status,
+      type,
+    },
   });
 };

@@ -60,10 +60,9 @@ export const callAPIMiddleware = ({ dispatch, getState }: MiddlewareAPI) => (
           });
         }
 
-        if (response) {
+        if (data) {
           return dispatch({
             data,
-            error,
             payload,
             type: successType,
           });

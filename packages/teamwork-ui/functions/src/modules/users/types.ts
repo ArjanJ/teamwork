@@ -4,7 +4,6 @@ export interface User {
   lastName: string;
   role: string;
   teams: UserTeam[];
-  uid: string;
 }
 
 export interface UserTeam {

@@ -105,8 +105,13 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
           <Label>Password</Label>
         </Field>
         <Flex justifyContent="center" mb="24px">
-          <ButtonSpinner isSubmitting={isSubmitting} type="submit">
-            {!isSubmitting && 'Log in'}
+          <ButtonSpinner
+            isSubmitting={isSubmitting}
+            primary={Color.AQUA}
+            secondary={Color.BLUE_PERSIAN}
+            type="submit"
+          >
+            <span>Log in</span>
           </ButtonSpinner>
         </Flex>
         <Box>
