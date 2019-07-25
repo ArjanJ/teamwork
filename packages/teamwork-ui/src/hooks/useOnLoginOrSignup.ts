@@ -15,6 +15,11 @@ export const useOnLoginOrSignup = () => {
   const { createUser, getUser, user } = useUser();
 
   const onSuccess = async ({ isNewUser, user }: IOnSocialSignInSuccess) => {
+    if (user && user.emailVerified === false) {
+      // Send a verification email to the user.
+      user.sendEmailVerification();
+    }
+
     if (isNewUser) {
       await createUser({
         firstName: '',

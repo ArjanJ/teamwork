@@ -1,16 +1,15 @@
-import { navigate, RouteComponentProps } from '@reach/router';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import { RouteComponentProps } from '@reach/router';
+import React, { FunctionComponent } from 'react';
 import posed, { PoseGroup } from 'react-pose';
 import styled from 'styled-components';
 
 import { Header } from '../../components/header/Header';
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { useAuthUser } from '../../hooks/useAuthUser';
-import { useUser } from '../../hooks/useUser';
 import { Backdrop } from '../signup/Shared';
-import { OnboardingName } from './OnboardingName';
-import { OnboardingRole } from './OnboardingRole';
+import { OnboardingForm } from './OnboardingForm';
 import { Step } from './types';
+import { VerifyEmail } from '../verify-email/VerifyEmail';
 
 export interface IStepFormProps {
   updateStep(step: Step): void;
@@ -20,44 +19,27 @@ export const Onboarding: FunctionComponent<RouteComponentProps> = () => {
   useAuthorization('/login');
 
   const { authUser } = useAuthUser();
-  const { getUser, isFetching, user } = useUser();
 
-  useEffect(() => {
-    if (authUser) {
-      // Fetch user if we haven't already.
-      if (!user && !isFetching) {
-        getUser(authUser.uid);
-      }
+  const renderVerifyEmail = authUser && !authUser.emailVerified && (
+    <VerifyEmail email={authUser.email} />
+  );
 
-      // If the user has filled out the info already go to dashboard.
-      if (user && user.firstName && user.lastName && user.role) {
-        navigate('/');
-      }
-    }
-  });
-
-  const [step, updateStep] = useState<Step>('NAME');
+  const renderOnboarding = authUser && authUser.emailVerified && (
+    <Wrapper>
+      <Title>Welcome to Teamwork!</Title>
+      <PoseGroup>
+        <FormAnimation key="fadeInUp">
+          <OnboardingForm />
+        </FormAnimation>
+      </PoseGroup>
+    </Wrapper>
+  );
 
   return (
     <Backdrop>
       <Header />
-      <Wrapper>
-        <Title>Welcome to Teamwork!</Title>
-        {user !== null && (
-          <PoseGroup>
-            {step === 'NAME' && (
-              <FormAnimation key="shade">
-                <OnboardingName updateStep={updateStep} />
-              </FormAnimation>
-            )}
-            {step === 'ROLE' && (
-              <FormAnimation key="shade2">
-                <OnboardingRole updateStep={updateStep} />
-              </FormAnimation>
-            )}
-          </PoseGroup>
-        )}
-      </Wrapper>
+      {renderVerifyEmail}
+      {renderOnboarding}
     </Backdrop>
   );
 };

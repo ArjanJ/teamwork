@@ -22,9 +22,10 @@ export const useAuthorization = (path: string): { user: User | void } => {
 
     if (!authUser && !!user && !!user.email && !!user.uid) {
       setAuthUser({
-        displayName: user.displayName || '',
+        displayName: user.displayName || null,
         email: user.email,
-        photoURL: user.photoURL || '',
+        emailVerified: user.emailVerified,
+        photoURL: user.photoURL || null,
         uid: user.uid,
       });
     }

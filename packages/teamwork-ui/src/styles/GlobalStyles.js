@@ -61,7 +61,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background: ${Color.BLUE_RAGE};
+    background: ${Color.BLUE_RHINO};
     font-size: 1.6rem;
     line-height: 1.5;
     margin: 0;
