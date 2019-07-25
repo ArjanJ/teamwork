@@ -29,6 +29,8 @@ export const useSocialSignIn = ({ onSuccess }: IUseSocialSignIn) => {
         setIsNewUser(true);
       }
 
+      console.log({ additionalUserInfo, user });
+
       onSuccess({ isNewUser, user });
     } catch (err) {
       setError(true);

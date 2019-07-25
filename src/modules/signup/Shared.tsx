@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Easing } from '../../styles/Easing';
 
 export const Backdrop = styled.div`
-  display: grid;
   min-height: 100vh;
 `;
 
@@ -51,6 +50,7 @@ export const Field = styled(Box)`
 
 export const Input = styled.input`
   background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
   color: white;
   height: 64px;
   padding: 0 16px;

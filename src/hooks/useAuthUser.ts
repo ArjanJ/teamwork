@@ -4,7 +4,12 @@ import { useDispatch, useMappedState } from 'redux-react-hook';
 import { setAuthUser } from '../modules/auth/actions';
 import { IAuthUser } from '../modules/auth/types';
 
-export const useAuthUser = () => {
+interface UseAuthUser {
+  authUser: IAuthUser;
+  setAuthUser(authUser: IAuthUser): void;
+}
+
+export const useAuthUser = (): UseAuthUser => {
   const dispatch = useDispatch();
 
   const mapState = useCallback(state => state.auth, []);

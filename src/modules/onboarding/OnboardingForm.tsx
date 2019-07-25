@@ -9,34 +9,38 @@ import { delay } from '../../utils/delay';
 import { Field, Heading, Input, Label } from '../signup/Shared';
 import { IStepFormProps } from './Onboarding';
 
-export const OnboardingName: FunctionComponent<IStepFormProps> = ({
-  updateStep,
-}) => {
+interface OnboardingForm {
+  company: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+}
+
+const onboardingFormInitialValues: OnboardingForm = {
+  company: '',
+  firstName: '',
+  lastName: '',
+  role: '',
+};
+
+export const OnboardingForm = () => {
   const { authUser } = useAuthUser();
   const { updateUser, user } = useUser();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async () => {
     setIsSubmitting(true);
-    await updateUser(authUser.uid, values);
-    await delay(1600);
-    updateStep('ROLE');
-  };
-
-  const initialValues = user || {
-    firstName: '',
-    lastName: '',
   };
 
   const { handleInputChange, handleSubmit, values } = useForm({
-    initialValues,
+    initialValues: onboardingFormInitialValues,
     onSubmit,
   });
 
   return (
     <React.Fragment>
       <Box mb="24px">
-        <Heading>What's your name?</Heading>
+        <Heading>Let's get started</Heading>
       </Box>
       <form onSubmit={handleSubmit}>
         <Field mb="24px">
@@ -64,13 +68,37 @@ export const OnboardingName: FunctionComponent<IStepFormProps> = ({
           />
           <Label>Last name</Label>
         </Field>
+        <Field mb="36px">
+          <Input
+            id="company"
+            name="company"
+            onChange={handleInputChange}
+            placeholder="Your company"
+            required
+            type="company"
+            value={values.company}
+          />
+          <Label>Company</Label>
+        </Field>
+        <Field mb="36px">
+          <Input
+            id="role"
+            name="role"
+            onChange={handleInputChange}
+            placeholder="Your role"
+            required
+            type="role"
+            value={values.role}
+          />
+          <Label>Company</Label>
+        </Field>
         <Flex justifyContent="flex-end">
           <ButtonSpinner
             disabled={isSubmitting}
             isSubmitting={isSubmitting}
             type="submit"
           >
-            {!isSubmitting && 'Next'}
+            {!isSubmitting && 'Done'}
           </ButtonSpinner>
         </Flex>
       </form>
