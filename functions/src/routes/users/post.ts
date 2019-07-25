@@ -22,10 +22,10 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
       lastName,
       role,
       teams,
-      uid: decodedToken.uid,
     };
 
-    await createUser(user);
+    throw new Error('Testing out error handling');
+    // await createUser(decodedToken.uid, user);
     res.status(200).send({ user });
 
     if (!decodedToken.company && company.name !== '') {

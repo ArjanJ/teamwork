@@ -1,6 +1,8 @@
+import { darken } from 'polished';
 import { Box } from 'rebass';
 import styled from 'styled-components';
 
+import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 
 export const Backdrop = styled.div`
@@ -49,21 +51,18 @@ export const Field = styled(Box)`
 `;
 
 export const Input = styled.input`
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 2px;
-  color: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   height: 64px;
   padding: 0 16px;
   transition: all 0.2s ease-out;
   width: 100%;
 
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-  }
-
   &:focus,
   &:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: white;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12);
   }
 
   &:focus + label,
@@ -78,11 +77,12 @@ export const Input = styled.input`
 `;
 
 export const Label = styled.label`
-  color: white;
+  color: ${Color.NAVY};
   font-size: 12px;
   font-weight: 500;
   left: 16px;
   opacity: 0;
+  pointer-events: none;
   position: absolute;
   top: 10px;
   transition: all 0.5s ${Easing.OUT};

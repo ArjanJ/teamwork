@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 
+import { User } from '../../functions/src/modules/users/types';
 import { createUser, getUser, updateUser } from '../modules/user/actions';
-import { IUser } from '../modules/user/types';
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -10,9 +10,11 @@ export const useUser = () => {
   const mapState = useCallback(state => state.user, []);
   const userState = useMappedState(mapState);
 
-  const create = (user: IUser) => dispatch(createUser(user));
+  const create = (user: User) => dispatch(createUser(user));
   const get = (uid: string) => dispatch(getUser(uid));
   const update = (uid: string, body = {}) => dispatch(updateUser(uid, body));
+
+  const user: User = userState.user;
 
   return {
     createUser: create,
@@ -21,6 +23,6 @@ export const useUser = () => {
     isFetching: userState.isFetching,
     isUpdating: userState.isUpdating,
     updateUser: update,
-    user: userState.user,
+    user,
   };
 };

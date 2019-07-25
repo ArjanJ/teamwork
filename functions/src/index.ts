@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import express from 'express';
 import bodyParser from 'body-parser';
 
+import { handleError } from './middleware/handleError';
 import { routes } from './routes/';
 
 const app = express();
@@ -10,6 +11,7 @@ const main = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(routes);
+app.use(handleError);
 
 /**
  * This is needed because Firebase Hosting Rewrite adds an extra /api

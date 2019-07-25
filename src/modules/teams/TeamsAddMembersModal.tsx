@@ -159,9 +159,11 @@ export const TeamsAddMembersModal: FunctionComponent<
                   <ButtonSpinner
                     disabled={isSubmitting}
                     isSubmitting={isSubmitting}
+                    primary={Color.AQUA}
+                    secondary={Color.BLUE_PERSIAN}
                     type="submit"
                   >
-                    {!isSubmitting && 'Add team members'}
+                    <span>Add team members</span>
                   </ButtonSpinner>
                 </Box>
               </Flex>

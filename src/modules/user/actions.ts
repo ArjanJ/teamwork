@@ -1,7 +1,8 @@
+import { User } from '../../../functions/src/modules/users/types';
 import { AppState } from '../../store/store';
-import { createUserTypes, getUserTypes, IUser, updateUserTypes } from './types';
+import { createUserTypes, getUserTypes, updateUserTypes } from './types';
 
-export function createUser(user: IUser) {
+export function createUser(user: User) {
   return {
     callAPI: (headers = {}) =>
       fetch('/api/users', {

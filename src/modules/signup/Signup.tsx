@@ -127,8 +127,13 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
           <Label>Confirm Password</Label>
         </Field>
         <Flex justifyContent="center" mb="24px">
-          <ButtonSpinner isSubmitting={isSubmitting} type="submit">
-            {!isSubmitting && 'Create account'}
+          <ButtonSpinner
+            isSubmitting={isSubmitting}
+            primary={Color.AQUA}
+            secondary={Color.BLUE_PERSIAN}
+            type="submit"
+          >
+            <span>Create account</span>>
           </ButtonSpinner>
         </Flex>
         <Box>

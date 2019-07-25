@@ -1,18 +1,20 @@
 import { AnyAction } from 'redux';
 
+import { ApiError } from '../../../functions/src/types/ApiError';
+import { User } from '../../../functions/src/modules/users/types';
 import { createTeamTypes } from '../teams/types';
-import { createUserTypes, getUserTypes, IUser, updateUserTypes } from './types';
-
-type User = IUser | null;
+import { createUserTypes, getUserTypes, updateUserTypes } from './types';
 
 interface IUserState {
+  error: ApiError | null;
   isCreating: boolean;
   isFetching: boolean;
   isUpdating: boolean;
-  user: User;
+  user: User | null;
 }
 
 const initialState: IUserState = {
+  error: null,
   isCreating: false,
   isFetching: false,
   isUpdating: false,

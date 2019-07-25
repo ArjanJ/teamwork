@@ -1,7 +1,6 @@
 import { darken, lighten, rgba } from 'polished';
 import styled, { css, keyframes } from 'styled-components';
 
-import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 
 const rotate = keyframes`
@@ -9,53 +8,73 @@ const rotate = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
-export const ButtonSpinner = styled.button<{ isSubmitting?: boolean }>`
-  background: ${Color.BLUE_SKY};
-  border-radius: 99px;
-  box-shadow: 0 0 0 3px ${rgba(Color.BLUE_SKY, 1)};
+interface ButtonSpinnerProps {
+  isSubmitting?: boolean;
+  primary: string;
+  secondary: string;
+  width?: number;
+}
+
+export const ButtonSpinner = styled.button<ButtonSpinnerProps>`
+  background: none;
   color: white;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
-  height: 36px;
-  margin: 3px;
-  min-width: 100px;
-  padding: 0 24px;
+  height: 40px;
   position: relative;
-  transition: min-width 0.5s ${Easing.IN_OUT},
-    box-shadow 0.5s 0.25s ${Easing.IN_OUT};
+  transition: width 0.5s ${Easing.OUT};
+  width: ${({ width }) => width || 100}px;
 
-  &:hover {
-    background: ${darken(0.05, Color.BLUE_SKY)};
-  }
-
-  ${props =>
-    props.isSubmitting
+  ${({ isSubmitting, primary }) =>
+    isSubmitting
       ? css`
-          background: ${Color.BLUE_RAGE} !important;
-          box-shadow: 0 0 0 3px ${rgba(Color.BLUE_SKY, 0)};
-          min-width: 36px;
-          padding: 0;
+          width: 40px;
           pointer-events: none;
+
+          span {
+            opacity: 0;
+          }
         `
-      : ''}
+      : css`
+          &:hover {
+            &::after {
+              background: ${darken(0.07, primary)};
+            }
+          }
+        `}
 
   &::before {
     animation: 1s ${rotate} linear infinite;
-    background: linear-gradient(
-      ${Color.BLUE_SKY},
-      ${lighten(0.25, Color.BLUE_SKY)}
-    );
+    background: ${({ primary, secondary }) =>
+      `linear-gradient(${primary}, ${lighten(0.1, secondary)})`};
     border-radius: 50%;
-    box-sizing: content-box;
     content: '';
-    height: 100%;
-    left: -3px;
-    opacity: ${props => (props.isSubmitting ? 1 : 0)};
+    height: 40px;
+    left: 0;
     padding: 3px;
     position: absolute;
-    top: -3px;
-    transition: all 0.5s 0.25s ${Easing.IN_OUT};
+    top: 0;
+    transition: all 0.5s ${Easing.OUT};
+    width: 40px;
+    z-index: -2;
+  }
+
+  &::after {
+    background: ${({ isSubmitting, primary, secondary }) =>
+      isSubmitting ? secondary : primary};
+    border-radius: 99px;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: ${({ isSubmitting }) => (isSubmitting ? 'scale(0.85)' : 'none')};
+    transition: all 0.5s ${Easing.OUT};
     width: 100%;
     z-index: -1;
+  }
+
+  span {
+    transition: opacity 0.25s ${Easing.OUT};
   }
 `;

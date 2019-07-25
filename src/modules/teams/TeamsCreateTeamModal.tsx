@@ -195,9 +195,11 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
                   <ButtonSpinner
                     disabled={isSubmitting}
                     isSubmitting={isSubmitting}
+                    primary={Color.AQUA}
+                    secondary={Color.BLUE_PERSIAN}
                     type="submit"
                   >
-                    {!isSubmitting && 'Create Team'}
+                    <span>Create Team</span>
                   </ButtonSpinner>
                 </Box>
               </Flex>
