@@ -14,16 +14,11 @@ export const useUser = () => {
   const get = (uid: string) => dispatch(getUser(uid));
   const update = (uid: string, body = {}) => dispatch(updateUser(uid, body));
 
-  const user: User = userState.user;
-
   return {
+    ...userState,
     createUser: create,
     error: userState.error,
     getUser: get,
-    isCreating: userState.isCreating,
-    isFetching: userState.isFetching,
-    isUpdating: userState.isUpdating,
     updateUser: update,
-    user,
   };
 };
