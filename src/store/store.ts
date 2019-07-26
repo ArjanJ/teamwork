@@ -5,6 +5,7 @@ import {
   combineReducers,
   createStore,
 } from 'redux';
+import thunk from 'redux-thunk';
 
 import { callAPIMiddleware } from '../middleware/callAPIMiddleware';
 
@@ -36,7 +37,7 @@ declare global {
 }
 
 const middlewareEnhancer = composeWithDevTools(
-  applyMiddleware(callAPIMiddleware),
+  applyMiddleware(thunk, callAPIMiddleware),
 );
 
 export const store = createStore(rootReducer, middlewareEnhancer);

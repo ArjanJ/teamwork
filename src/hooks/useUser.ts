@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 
 import { User } from '../../functions/src/modules/users/types';
-import { createUser, getUser, updateUser } from '../modules/user/actions';
+import { createUser, getUser, updateUser } from '../modules/user/actions/index';
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ export const useUser = () => {
 
   return {
     createUser: create,
+    error: userState.error,
     getUser: get,
     isCreating: userState.isCreating,
     isFetching: userState.isFetching,
