@@ -1,11 +1,12 @@
-import { AnyAction } from 'redux';
-
 import { ApiError } from '../../../functions/src/types/ApiError';
 import { User } from '../../../functions/src/modules/users/types';
-import { createTeamTypes } from '../teams/types';
-import { createUserTypes, getUserTypes, updateUserTypes } from './types';
+import { UserActions } from './actions';
+import { CREATE_USER, GET_USER, UPDATE_USER } from './actions/index';
+import { createUserReducer } from './reducers/createUserReducer';
+import { getUserReducer } from './reducers/getUserReducer';
+import { updateUserReducer } from './reducers/updateUserReducer';
 
-interface IUserState {
+export interface UserState {
   error: ApiError | null;
   isCreating: boolean;
   isFetching: boolean;
@@ -13,7 +14,7 @@ interface IUserState {
   user: User | null;
 }
 
-const initialState: IUserState = {
+const initialState = {
   error: null,
   isCreating: false,
   isFetching: false,
@@ -21,80 +22,18 @@ const initialState: IUserState = {
   user: null,
 };
 
-export default function(state = initialState, action: AnyAction) {
-  switch (action.type) {
-    case createUserTypes.REQUEST:
-      return {
-        ...state,
-        isCreating: true,
-      };
-    case createUserTypes.SUCCESS:
-      return {
-        ...state,
-        isCreating: false,
-        user: action.data,
-      };
-    case createUserTypes.FAILURE:
-      return {
-        ...state,
-        error: action.error,
-        isCreating: false,
-      };
-    case getUserTypes.REQUEST:
-      return {
-        ...state,
-        isFetching: true,
-      };
-    case getUserTypes.SUCCESS:
-      return {
-        ...state,
-        isFetching: false,
-        user: action.data,
-      };
-    case getUserTypes.FAILURE:
-      return {
-        ...state,
-        error: action.error,
-        isFetching: false,
-      };
-    case updateUserTypes.REQUEST:
-      return {
-        ...state,
-        isUpdating: true,
-      };
-    case updateUserTypes.SUCCESS:
-      return {
-        ...state,
-        isUpdating: false,
-        user: {
-          ...state.user,
-          ...action.data,
-        },
-      };
-    case updateUserTypes.FAILURE:
-      return {
-        ...state,
-        error: action.error,
-        isUpdating: false,
-      };
-    case createTeamTypes.SUCCESS:
-      const teams = state.user ? state.user.teams : [];
-
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          teams: [
-            ...teams,
-            {
-              displayName: action.data.displayName,
-              id: action.data.id,
-              name: action.data.name,
-            },
-          ],
-        },
-      };
-    default:
-      return state;
+export default function(state: UserState = initialState, action: UserActions) {
+  if (action.type === CREATE_USER) {
+    return createUserReducer(state, action);
   }
+
+  if (action.type === GET_USER) {
+    return getUserReducer(state, action);
+  }
+
+  if (action.type === UPDATE_USER) {
+    return updateUserReducer(state, action);
+  }
+
+  return state;
 }

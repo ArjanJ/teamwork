@@ -1,0 +1,16 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-react"],
+  "linterOptions": {
+    "exclude": ["node_modules/**/*.ts"]
+  },
+  "rules": {
+    "interface-name": [true, "never-prefix"],
+    "jsx-curly-spacing": false,
+    "jsx-no-multiline-js": false,
+    "max-classes-per-file": false,
+    "member-ordering": [false],
+    "no-console": false,
+    "no-namespace": false
+  }
+}

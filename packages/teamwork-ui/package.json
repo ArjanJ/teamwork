@@ -15,6 +15,7 @@
     "rebass": "^3.1.0",
     "redux": "^4.0.1",
     "redux-react-hook": "^3.3.1",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^4.2.0",
     "typescript": "3.4.3"
   },
@@ -52,6 +53,9 @@
     "polished": "^3.2.0",
     "prettier": "^1.16.4",
     "react-modal-hook": "^1.1.1",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0"
   }
 }

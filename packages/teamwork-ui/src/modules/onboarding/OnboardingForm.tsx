@@ -1,4 +1,5 @@
-import React, { FunctionComponent, useState } from 'react';
+import { navigate } from '@reach/router';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
@@ -8,6 +9,7 @@ import { useUser } from '../../hooks/useUser';
 import { Color } from '../../styles/Color';
 import { delay } from '../../utils/delay';
 import { Field, Heading, Input, Label } from '../signup/Shared';
+import { isEmptyUser } from '../../utils/isEmptyUser';
 
 interface OnboardingForm {
   company: string;
@@ -25,7 +27,7 @@ const onboardingFormInitialValues: OnboardingForm = {
 
 export const OnboardingForm = () => {
   const { authUser } = useAuthUser();
-  const { createUser, user } = useUser();
+  const { createUser, error: userError, user } = useUser();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = async () => {
@@ -41,12 +43,18 @@ export const OnboardingForm = () => {
       teams: [],
     };
 
-    const res = await createUser(user);
+    await createUser(user);
   };
 
   const { handleInputChange, handleSubmit, values } = useForm({
     initialValues: onboardingFormInitialValues,
     onSubmit,
+  });
+
+  useEffect(() => {
+    if (!userError && !isEmptyUser(user)) {
+      navigate('/');
+    }
   });
 
   return (

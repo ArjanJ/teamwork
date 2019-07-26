@@ -1,6 +1,10 @@
-import { IUser } from '../modules/user/types';
+import { User } from '../../functions/src/modules/users/types';
 
-export const isEmptyUser = (user: IUser) => {
+export const isEmptyUser = (user: User) => {
+  if (!user) {
+    return true;
+  }
+
   if (Object.keys(user).length === 0) {
     return true;
   }
