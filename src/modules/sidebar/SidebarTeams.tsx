@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { Box } from 'rebass';
 import styled from 'styled-components';
 
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { IUser } from '../user/types';

@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 
-import { User } from '../../functions/src/modules/users/types';
-import { createUser, getUser, updateUser } from '../modules/user/actions/index';
+import { User } from '../../../functions/src/modules/users/types';
+import { createUser, getUser, updateUser } from './actions/index';
 
 export const useUser = () => {
   const dispatch = useDispatch();

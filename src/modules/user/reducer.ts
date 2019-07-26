@@ -2,9 +2,11 @@ import { ApiError } from '../../../functions/src/types/ApiError';
 import { User } from '../../../functions/src/modules/users/types';
 import { UserActions } from './actions';
 import { CREATE_USER, GET_USER, UPDATE_USER } from './actions/index';
-import { createUserReducer } from './reducers/createUserReducer';
-import { getUserReducer } from './reducers/getUserReducer';
-import { updateUserReducer } from './reducers/updateUserReducer';
+import {
+  createUserReducer,
+  getUserReducer,
+  updateUserReducer,
+} from './reducers/index';
 
 export interface UserState {
   error: ApiError | null;

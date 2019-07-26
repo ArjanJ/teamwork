@@ -2,7 +2,7 @@ import { RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent, useEffect } from 'react';
 
 import { useTeams } from '../../hooks/useTeams';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../user/useUser';
 import { TeamsEmptyState } from './TeamsEmptyState';
 import { TeamsOverview } from './TeamsOverview';
 

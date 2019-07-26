@@ -5,7 +5,7 @@ import { Box, Flex } from 'rebass';
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { useForm } from '../../hooks/useForm';
 import { useAuthUser } from '../../hooks/useAuthUser';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { delay } from '../../utils/delay';
 import { Field, Heading, Input, Label } from '../signup/Shared';

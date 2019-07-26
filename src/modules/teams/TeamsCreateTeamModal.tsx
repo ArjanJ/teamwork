@@ -18,7 +18,7 @@ import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Modal } from '../../components/modal/Modal';
 import { useAuthUser } from '../../hooks/useAuthUser';
 import { useTeams } from '../../hooks/useTeams';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { delay } from '../../utils/delay';
