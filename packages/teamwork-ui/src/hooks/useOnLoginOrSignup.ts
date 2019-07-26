@@ -2,7 +2,7 @@ import { navigate } from '@reach/router';
 import { useEffect } from 'react';
 
 import { IOnSocialSignInSuccess } from './useSocialSignIn';
-import { useUser } from './useUser';
+import { useUser } from '../modules/user/useUser';
 import { isEmptyUser } from '../utils/isEmptyUser';
 
 /**

@@ -10,7 +10,7 @@ import { useForm } from '../../hooks/useForm';
 import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
 import { useOnLoginOrSignup } from '../../hooks/useOnLoginOrSignup';
 import { useSocialSignIn } from '../../hooks/useSocialSignIn';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { delay } from '../../utils/delay';
 import {

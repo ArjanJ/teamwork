@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import { useAuthorization } from '../../hooks/useAuthorization';
 import { useAuthUser } from '../../hooks/useAuthUser';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../user/useUser';
 import { VerifyEmail } from '../verify-email/VerifyEmail';
 import { Sidebar } from '../sidebar/Sidebar';
 

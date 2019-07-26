@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 
 import { Toggle } from '../../components/toggle/Toggle';
 import { useTeams } from '../../hooks/useTeams';
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { IUserTeam } from '../user/types';
