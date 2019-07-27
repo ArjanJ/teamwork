@@ -50,6 +50,8 @@ export const Field = styled(Box)`
   position: relative;
 `;
 
+export const FieldWrapper = Field;
+
 export const Input = styled.input`
   background: rgba(255, 255, 255, 0.8);
   border-radius: 2px;

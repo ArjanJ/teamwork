@@ -1,36 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
-import BasisGrotesqueRegular from './fonts/regular.woff2';
-import BasisGrotesqueMedium from './fonts/medium.woff2';
-import BasisGrotesqueBold from './fonts/bold.woff2';
-
 import { Color } from './Color';
 
 export const GlobalStyles = createGlobalStyle`
-  @font-face {
-    font-family: 'Basis Grotesque';
-    src: local('Basis Grotesque Regular'), url('${BasisGrotesqueRegular}') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: fallback;
-  }
-
-  @font-face {
-    font-family: 'Basis Grotesque';
-    src: local('Basis Grotesque Medium'), url('${BasisGrotesqueMedium}') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: fallback;
-  }
-
-  @font-face {
-    font-family: 'Basis Grotesque';
-    src: local('Basis Grotesque Bold'), url('${BasisGrotesqueBold}') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: fallback;
-  }
-
   *,
   *:before,
   *:after {
@@ -43,18 +15,6 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     cursor: default;
-    font-family:
-      "Basis Grotesque",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Helvetica,
-      Arial,
-      sans-serif,
-      "Apple Color Emoji",
-      "Segoe UI Emoji",
-      "Segoe UI Symbol";
     font-size: 0.625rem;
     text-rendering: optimizeLegibility;
     text-size-adjust: 100%;

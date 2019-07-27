@@ -8,7 +8,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
   const { body, decodedToken } = req;
 
   const {
-    company = { name: '' },
+    companies = [{ id: '', name: '' }],
     firstName = '',
     lastName = '',
     role = '',
@@ -17,7 +17,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const user: User = {
-      company,
+      companies,
       firstName,
       lastName,
       role,
@@ -28,9 +28,9 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
     // await createUser(decodedToken.uid, user);
     res.status(200).send({ user });
 
-    if (!decodedToken.company && company.name !== '') {
+    if (!decodedToken.companies && companies[0].name !== '') {
       admin.auth().setCustomUserClaims(decodedToken.uid, {
-        company,
+        companies,
       });
     }
   } catch (error) {

@@ -3,10 +3,10 @@ import React, { FunctionComponent } from 'react';
 import { Box } from 'rebass';
 import styled from 'styled-components';
 
+import { User } from '../../../functions/src/modules/users/types';
 import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
-import { IUser } from '../user/types';
 
 export const SidebarTeams = () => {
   const { user } = useUser();
@@ -14,21 +14,21 @@ export const SidebarTeams = () => {
   return (
     <Box mb="30px">
       <SidebarTeamsTitle>Your teams</SidebarTeamsTitle>
-      <SidebarTeamsEmpty user={user} />
-      <SidebarTeamsListData user={user} />
+      {user && <SidebarTeamsEmpty user={user} />}
+      {user && <SidebarTeamsListData user={user} />}
     </Box>
   );
 };
 
-const SidebarTeamsEmpty: FunctionComponent<{ user: IUser }> = ({ user }) => {
-  if (user && user.teams && user.teams.length > 0) {
+const SidebarTeamsEmpty: FunctionComponent<{ user: User }> = ({ user }) => {
+  if (user.teams && user.teams.length > 0) {
     return null;
   }
 
   return <SidebarTeamsEmptyText>No teams</SidebarTeamsEmptyText>;
 };
 
-const SidebarTeamsListData: FunctionComponent<{ user: IUser }> = ({ user }) => {
+const SidebarTeamsListData: FunctionComponent<{ user: User }> = ({ user }) => {
   if (!user || !user.teams) {
     return null;
   }

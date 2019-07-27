@@ -47,6 +47,10 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
   const { authUser } = useAuthUser();
   const { user } = useUser();
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <Modal hideModal={hideModal} title="Create your team">
       <Formik
