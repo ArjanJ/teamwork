@@ -6,14 +6,14 @@ import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
+import { Team, TeamMember } from '../../../functions/src/modules/teams/types';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { TeamsCreateModal } from './TeamsCreateTeamModal';
-import { IMember, ITeam } from './types';
 
 interface TeamsOverviewProps {
   teams: {
-    [id: string]: ITeam;
+    [id: string]: Team;
   };
 }
 
@@ -58,7 +58,7 @@ export const TeamsOverview: FunctionComponent<TeamsOverviewProps> = ({
                 </Box>
                 <Box>
                   <TeamsOverviewMembersList>
-                    {members.map((member: IMember) => (
+                    {members.map((member: TeamMember) => (
                       <TeamsOverviewMemberItem key={member.email}>
                         <img
                           alt={member.firstName}

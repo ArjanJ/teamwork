@@ -13,24 +13,24 @@ import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
+import { Team, TeamMember } from '../../../functions/src/modules/teams/types';
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Modal } from '../../components/modal/Modal';
 import { useTeams } from '../../hooks/useTeams';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { delay } from '../../utils/delay';
-import { IMember, ITeam } from './types';
 
 interface ITeamsAddMembersModalProps {
   hideModal(): void;
-  team: ITeam;
+  team: Team;
 }
 
 interface ITeamFormValues {
-  members: IMember[];
+  members: TeamMember[];
 }
 
-const emptyTeammate: IMember = { email: '', firstName: '', lastName: '' };
+const emptyTeammate: TeamMember = { email: '', firstName: '', lastName: '' };
 const initialValues = {
   members: [emptyTeammate],
 };
