@@ -14,6 +14,7 @@ import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
+import { TeamMember } from '../../../functions/src/modules/teams/types';
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Modal } from '../../components/modal/Modal';
 import { useAuthUser } from '../../hooks/useAuthUser';
@@ -22,7 +23,6 @@ import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { delay } from '../../utils/delay';
-import { IMember } from './types';
 import * as TeamsUtils from './utils';
 
 interface ITeamsCreateModalProps {
@@ -31,10 +31,10 @@ interface ITeamsCreateModalProps {
 
 interface ITeamFormValues {
   name: string;
-  members: IMember[];
+  members: TeamMember[];
 }
 
-const emptyTeammate: IMember = { email: '', firstName: '', lastName: '' };
+const emptyTeammate: TeamMember = { email: '', firstName: '', lastName: '' };
 const initialValues = {
   name: '',
   members: [emptyTeammate],

@@ -5,15 +5,15 @@ import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
 import styled, { CSSProp } from 'styled-components';
 
+import { Team, TeamMember } from '../../../functions/src/modules/teams/types';
 import { Toggle } from '../../components/toggle/Toggle';
 import { useTeams } from '../../hooks/useTeams';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { TeamsAddMembersModal } from './TeamsAddMembersModal';
-import { IMember, ITeam } from './types';
 
 interface ITeamMembersProps {
-  team: ITeam;
+  team: Team;
 }
 
 export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
@@ -33,7 +33,7 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
   const removeTeamMember = (email: string) =>
     updateTeamMembers(
       team.id,
-      team.members.filter((member: IMember) => member.email !== email),
+      team.members.filter((member: TeamMember) => member.email !== email),
     );
 
   const [showModal, hideModal] = useModal(() => (
@@ -45,7 +45,7 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
       <Subheading>Your team</Subheading>
       <StyledTeamMembersList pose={showMembers ? 'visible' : 'hidden'}>
         {team &&
-          team.members.map((member: IMember) => (
+          team.members.map((member: TeamMember) => (
             <StyledTeamMembersListItem key={member.email}>
               <Flex justifyContent="space-between">
                 <Flex>

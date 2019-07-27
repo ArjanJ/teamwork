@@ -1,5 +1,6 @@
 import { AnyAction } from 'redux';
 
+import { Team } from '../../../functions/src/modules/teams/types';
 import {
   createTeamTypes,
   getTeamTypes,
@@ -7,14 +8,13 @@ import {
   updateTeamTypes,
   updateTeamMembersTypes,
 } from './types';
-import { ITeam } from './types';
 
 interface ITeamState {
   isCreating: boolean;
   isFetching: boolean;
   isUpdating: boolean;
   teams: {
-    [id: string]: ITeam;
+    [id: string]: Team;
   };
 }
 
