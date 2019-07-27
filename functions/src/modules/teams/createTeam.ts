@@ -1,5 +1,5 @@
 import { admin, db } from '../../config/firebase';
 import { TEAMS_COLLECTION } from './constants';
-import { ITeam } from './types';
+import { Team } from './types';
 
-export const createTeam = async (team: ITeam) => {};
+export const createTeam = async (team: Team) => {};

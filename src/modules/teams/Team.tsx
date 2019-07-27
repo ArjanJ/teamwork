@@ -3,12 +3,12 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
 import styled, { css } from 'styled-components';
 
+import { UserTeam } from '../../../functions/src/modules/users/types';
 import { Toggle } from '../../components/toggle/Toggle';
 import { useTeams } from '../../hooks/useTeams';
 import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
-import { IUserTeam } from '../user/types';
 import {
   TeamMembers,
   TeamMembersMenu,
@@ -22,7 +22,7 @@ interface ITeamProps {
 export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
   teamName,
 }) => {
-  const [userTeam, setUserTeam] = useState<IUserTeam>({
+  const [userTeam, setUserTeam] = useState<UserTeam>({
     displayName: '',
     id: '',
     name: '',
@@ -37,7 +37,7 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
   useEffect(() => {
     if (user && user.teams) {
       const userTeamResult = user.teams.find(
-        (team: IUserTeam) => team.name === teamName,
+        (team: UserTeam) => team.name === teamName,
       );
 
       if (userTeamResult) {

@@ -1,7 +1,7 @@
 import { ApiError } from '../../../functions/src/types/ApiError';
 import { User } from '../../../functions/src/modules/users/types';
-import { UserActions } from './actions';
 import { CREATE_USER, GET_USER, UPDATE_USER } from './actions/index';
+import { UserActions } from './actions';
 import {
   createUserReducer,
   getUserReducer,
