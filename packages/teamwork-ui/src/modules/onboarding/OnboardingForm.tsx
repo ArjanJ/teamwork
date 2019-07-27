@@ -7,15 +7,13 @@ import {
   Field,
   FieldProps,
 } from 'formik';
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { Box, Flex } from 'rebass';
+import React, { useEffect } from 'react';
+import { Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
-import { useAuthUser } from '../../hooks/useAuthUser';
 import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
-import { delay } from '../../utils/delay';
-import { FieldWrapper, Heading, Input, Label } from '../signup/Shared';
+import { FieldWrapper, Input, Label } from '../signup/Shared';
 import { isEmptyUser } from '../../utils/isEmptyUser';
 
 interface OnboardingFormValues {
@@ -33,7 +31,6 @@ const initialValues: OnboardingFormValues = {
 };
 
 export const OnboardingForm = () => {
-  const { authUser } = useAuthUser();
   const { createUser, error: userError, user } = useUser();
 
   useEffect(() => {
@@ -46,7 +43,6 @@ export const OnboardingForm = () => {
     values: OnboardingFormValues,
     actions: FormikActions<OnboardingFormValues>,
   ) => {
-    console.log({ values, actions });
     const user = {
       companies: [
         {

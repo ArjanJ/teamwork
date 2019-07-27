@@ -1,7 +1,7 @@
 import { ApiError } from '../../functions/src/types/ApiError';
 import { firebase } from '../firebase';
 
-interface ApiService {
+interface ApiClient {
   body?: {};
   method: 'GET' | 'PUT' | 'POST' | 'DELETE';
   url: string;
@@ -16,11 +16,11 @@ export interface ApiResponse {
   error?: ApiError;
 }
 
-export const apiService = async ({
+export const apiClient = async ({
   body,
   method,
   url,
-}: ApiService): Promise<{
+}: ApiClient): Promise<{
   data?: any;
   error?: ApiError;
 }> => {
