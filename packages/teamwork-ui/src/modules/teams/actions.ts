@@ -1,17 +1,15 @@
+import { Team, TeamMember } from '../../../functions/src/modules/teams/types';
+import { UserTeam } from '../../../functions/src/modules/users/types';
 import {
   createTeamTypes,
   deleteTeamTypes,
   getTeamTypes,
   getTeamsTypes,
-  IMember,
-  ITeam,
   updateTeamTypes,
   updateTeamMembersTypes,
 } from './types';
 
-import { IUserTeam } from '../user/types';
-
-export function createTeam(team: ITeam) {
+export function createTeam(team: Team) {
   return {
     callAPI: (headers = {}) =>
       fetch('/api/teams', {
@@ -72,7 +70,7 @@ export function updateTeam(teamId: string, body = {}) {
   };
 }
 
-export function deleteTeam(body: IUserTeam) {
+export function deleteTeam(body: UserTeam) {
   return {
     callAPI: (headers = {}) =>
       fetch(`/api/teams`, {
@@ -89,7 +87,7 @@ export function deleteTeam(body: IUserTeam) {
   };
 }
 
-export function updateTeamMembers(teamId: string, body: IMember[]) {
+export function updateTeamMembers(teamId: string, body: TeamMember[]) {
   return {
     callAPI: (headers = {}) =>
       fetch(`/api/teams/${teamId}/members`, {

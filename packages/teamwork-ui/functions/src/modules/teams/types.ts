@@ -1,12 +1,12 @@
-export interface IMember {
+export interface TeamMember {
   email: string;
   firstName: string;
   lastName: string;
 }
 
-export interface ITeam {
+export interface Team {
   displayName: string;
   id: string;
-  members: IMember[];
+  members: TeamMember[];
   name: string;
 }
