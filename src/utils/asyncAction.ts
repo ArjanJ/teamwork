@@ -1,6 +1,7 @@
-import { AnyAction, Dispatch } from 'redux';
+import { Dispatch } from 'redux';
 
 import { ApiError } from '../../functions/src/types/ApiError';
+import { ApiResponse } from './apiClient';
 
 export enum AsyncActionStatus {
   FAILED = 'FAILED',
@@ -57,7 +58,7 @@ function failedAsyncAction<T>(type: T, error: ApiError): FailedAsyncAction<T> {
   };
 }
 
-export function async<T, P>(
+export function async<T, P extends ApiResponse>(
   type: T,
   action: (...args: any[]) => Promise<P>,
   ...args: any[]
@@ -67,7 +68,12 @@ export function async<T, P>(
 
     try {
       const payload = await action(...args);
-      return dispatch(succeededAsyncAction(type, payload));
+
+      if (payload.error) {
+        return dispatch(failedAsyncAction(type, payload.error));
+      }
+
+      return dispatch(succeededAsyncAction(type, payload.data));
     } catch (error) {
       return dispatch(failedAsyncAction(type, error));
     }

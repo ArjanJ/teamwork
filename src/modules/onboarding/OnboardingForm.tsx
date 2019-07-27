@@ -1,24 +1,31 @@
 import { navigate } from '@reach/router';
+import {
+  Formik,
+  FormikActions,
+  FormikProps,
+  Form,
+  Field,
+  FieldProps,
+} from 'formik';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
-import { useForm } from '../../hooks/useForm';
 import { useAuthUser } from '../../hooks/useAuthUser';
 import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { delay } from '../../utils/delay';
-import { Field, Heading, Input, Label } from '../signup/Shared';
+import { FieldWrapper, Heading, Input, Label } from '../signup/Shared';
 import { isEmptyUser } from '../../utils/isEmptyUser';
 
-interface OnboardingForm {
+interface OnboardingFormValues {
   company: string;
   firstName: string;
   lastName: string;
   role: string;
 }
 
-const onboardingFormInitialValues: OnboardingForm = {
+const initialValues: OnboardingFormValues = {
   company: '',
   firstName: '',
   lastName: '',
@@ -28,97 +35,110 @@ const onboardingFormInitialValues: OnboardingForm = {
 export const OnboardingForm = () => {
   const { authUser } = useAuthUser();
   const { createUser, error: userError, user } = useUser();
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async () => {
-    setIsSubmitting(true);
+  useEffect(() => {
+    if (!userError && user && !isEmptyUser(user)) {
+      navigate('/');
+    }
+  });
 
+  const onSubmit = async (
+    values: OnboardingFormValues,
+    actions: FormikActions<OnboardingFormValues>,
+  ) => {
+    console.log({ values, actions });
     const user = {
-      company: {
-        name: values.company,
-      },
+      companies: [
+        {
+          id: '',
+          name: values.company,
+        },
+      ],
       firstName: values.firstName,
       lastName: values.lastName,
       role: values.role,
       teams: [],
     };
-
     await createUser(user);
+    actions.setSubmitting(false);
   };
 
-  const { handleInputChange, handleSubmit, values } = useForm({
-    initialValues: onboardingFormInitialValues,
-    onSubmit,
-  });
-
-  useEffect(() => {
-    if (!userError && !isEmptyUser(user)) {
-      navigate('/');
-    }
-  });
-
   return (
-    <form onSubmit={handleSubmit}>
-      <Field mb="36px">
-        <Input
-          autoFocus={true}
-          id="firstName"
-          name="firstName"
-          onChange={handleInputChange}
-          placeholder="Your first name"
-          required
-          type="firstName"
-          value={values.firstName}
-        />
-        <Label>First name</Label>
-      </Field>
-      <Field mb="36px">
-        <Input
-          id="lastName"
-          name="lastName"
-          onChange={handleInputChange}
-          placeholder="Your last name"
-          required
-          type="lastName"
-          value={values.lastName}
-        />
-        <Label>Last name</Label>
-      </Field>
-      <Field mb="36px">
-        <Input
-          id="company"
-          name="company"
-          onChange={handleInputChange}
-          placeholder="Your company"
-          required
-          type="company"
-          value={values.company}
-        />
-        <Label>Company</Label>
-      </Field>
-      <Field mb="36px">
-        <Input
-          id="role"
-          name="role"
-          onChange={handleInputChange}
-          placeholder="Your role"
-          required
-          type="role"
-          value={values.role}
-        />
-        <Label>Role</Label>
-      </Field>
-      <Flex justifyContent="flex-end">
-        <ButtonSpinner
-          disabled={isSubmitting}
-          isSubmitting={isSubmitting}
-          primary={Color.AQUA}
-          secondary={Color.BLUE_PERSIAN}
-          type="submit"
-        >
-          <span>Next</span>
-        </ButtonSpinner>
-      </Flex>
-    </form>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      render={(formikBag: FormikProps<OnboardingFormValues>) => (
+        <Form>
+          <Field
+            name="firstName"
+            render={({ field, form }: FieldProps<OnboardingFormValues>) => (
+              <FieldWrapper mb="36px">
+                <Input
+                  {...field}
+                  autoFocus={true}
+                  placeholder="Your First Name"
+                  required
+                  type="text"
+                />
+                <Label>First name</Label>
+              </FieldWrapper>
+            )}
+          />
+          <Field
+            name="lastName"
+            render={({ field, form }: FieldProps<OnboardingFormValues>) => (
+              <FieldWrapper mb="36px">
+                <Input
+                  {...field}
+                  placeholder="Your Last Name"
+                  required
+                  type="text"
+                />
+                <Label>Last name</Label>
+              </FieldWrapper>
+            )}
+          />
+          <Field
+            name="company"
+            render={({ field, form }: FieldProps<OnboardingFormValues>) => (
+              <FieldWrapper mb="36px">
+                <Input
+                  {...field}
+                  placeholder="Your Company"
+                  required
+                  type="text"
+                />
+                <Label>Company</Label>
+              </FieldWrapper>
+            )}
+          />
+          <Field
+            name="role"
+            render={({ field, form }: FieldProps<OnboardingFormValues>) => (
+              <FieldWrapper mb="36px">
+                <Input
+                  {...field}
+                  placeholder="Your Role"
+                  required
+                  type="text"
+                />
+                <Label>Role</Label>
+              </FieldWrapper>
+            )}
+          />
+          <Flex justifyContent="flex-end">
+            <ButtonSpinner
+              disabled={formikBag.isSubmitting}
+              isSubmitting={formikBag.isSubmitting}
+              primary={Color.AQUA}
+              secondary={Color.BLUE_PERSIAN}
+              type="submit"
+            >
+              <span>Next</span>
+            </ButtonSpinner>
+          </Flex>
+        </Form>
+      )}
+    />
   );
 };

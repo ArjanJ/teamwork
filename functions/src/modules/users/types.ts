@@ -1,5 +1,5 @@
 export interface User {
-  company: UserCompany;
+  companies: UserCompany[];
   firstName: string;
   lastName: string;
   role: string;
@@ -13,5 +13,6 @@ export interface UserTeam {
 }
 
 export interface UserCompany {
+  id: string;
   name: string;
 }
