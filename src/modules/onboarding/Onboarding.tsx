@@ -25,8 +25,8 @@ export const Onboarding: FunctionComponent<RouteComponentProps> = () => {
           <Box mb="36px">
             <Title>Welcome to Teamwork 👋</Title>
             <P>
-              To get started we just need a few details about you and where you
-              work.
+              It’s important to use cocoa butter. It’s the key to more success,
+              why not live smooth?
             </P>
           </Box>
           <OnboardingForm />

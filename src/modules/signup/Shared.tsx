@@ -53,8 +53,8 @@ export const Field = styled(Box)`
 export const FieldWrapper = Field;
 
 export const Input = styled.input`
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 2px;
+  background: white;
+  border-radius: 4px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   height: 64px;
   padding: 0 16px;
@@ -63,8 +63,8 @@ export const Input = styled.input`
 
   &:focus,
   &:hover {
-    background: white;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12);
+    background: ${darken(0.06, 'white')};
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   }
 
   &:focus + label,
@@ -74,19 +74,19 @@ export const Input = styled.input`
 
   &:focus,
   &:valid {
-    padding-top: 18px;
+    padding-top: 15px;
   }
 `;
 
 export const Label = styled.label`
   color: ${Color.NAVY};
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 700;
   left: 16px;
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  top: 10px;
+  top: 9px;
   transition: all 0.5s ${Easing.OUT};
 `;
 
