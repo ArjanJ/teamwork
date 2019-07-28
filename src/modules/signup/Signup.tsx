@@ -130,8 +130,9 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
             primary={Color.AQUA}
             secondary={Color.BLUE_PERSIAN}
             type="submit"
+            width={154}
           >
-            <span>Create account</span>>
+            <span>Create account</span>
           </ButtonSpinner>
         </Flex>
         <Box>
