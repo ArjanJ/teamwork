@@ -24,12 +24,13 @@ export const ButtonSpinner = styled.button<ButtonSpinnerProps>`
   position: relative;
   transition: width 0.5s ${Easing.OUT};
   width: ${({ width }) => width || 100}px;
+  white-space: nowrap;
 
   ${({ isSubmitting, primary }) =>
     isSubmitting
       ? css`
-          width: 40px;
           pointer-events: none;
+          width: 40px;
 
           span {
             opacity: 0;
@@ -38,7 +39,7 @@ export const ButtonSpinner = styled.button<ButtonSpinnerProps>`
       : css`
           &:hover {
             &::after {
-              background: ${darken(0.07, primary)};
+              background: ${darken(0.06, primary)};
             }
           }
         `}
@@ -46,7 +47,7 @@ export const ButtonSpinner = styled.button<ButtonSpinnerProps>`
   &::before {
     animation: 1s ${rotate} linear infinite;
     background: ${({ primary, secondary }) =>
-      `linear-gradient(${primary}, ${lighten(0.1, secondary)})`};
+      `linear-gradient(${primary}, ${lighten(0.12, secondary)})`};
     border-radius: 50%;
     content: '';
     height: 40px;
@@ -69,12 +70,13 @@ export const ButtonSpinner = styled.button<ButtonSpinnerProps>`
     position: absolute;
     top: 0;
     transform: ${({ isSubmitting }) => (isSubmitting ? 'scale(0.85)' : 'none')};
-    transition: all 0.5s ${Easing.OUT};
+    transition: background 0.35s ${Easing.OUT}, transform 0.5s ${Easing.OUT};
     width: 100%;
     z-index: -1;
   }
 
   span {
+    display: inline-block;
     transition: opacity 0.25s ${Easing.OUT};
   }
 `;
