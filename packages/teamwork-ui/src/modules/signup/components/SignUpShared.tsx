@@ -2,8 +2,8 @@ import { darken } from 'polished';
 import { Box } from 'rebass';
 import styled from 'styled-components';
 
-import { Color } from '../../styles/Color';
-import { Easing } from '../../styles/Easing';
+import { Color } from '../../../styles/Color';
+import { Easing } from '../../../styles/Easing';
 
 export const Backdrop = styled.div`
   min-height: 100vh;

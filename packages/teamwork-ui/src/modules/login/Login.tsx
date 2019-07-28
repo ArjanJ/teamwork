@@ -31,7 +31,7 @@ import {
   Separator,
   Title,
   Wrapper,
-} from '../signup/Shared';
+} from '../signup/components/SignUpShared';
 
 interface LoginFormValues {
   email: string;

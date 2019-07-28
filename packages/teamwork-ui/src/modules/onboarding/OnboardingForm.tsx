@@ -13,7 +13,7 @@ import { Flex } from 'rebass';
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
-import { FieldWrapper, Input, Label } from '../signup/Shared';
+import { FieldWrapper, Input, Label } from '../signup/components/SignUpShared';
 import { isEmptyUser } from '../user/utils';
 
 interface OnboardingFormValues {
