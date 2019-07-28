@@ -7,12 +7,12 @@ interface AuthState {
   user: null | IAuthUser;
 }
 
-const initialState: AuthState = {
+const initialState = {
   token: null,
   user: null,
 };
 
-export default function(state = initialState, action: AnyAction) {
+export default function(state: AuthState = initialState, action: AnyAction) {
   switch (action.type) {
     case SET_AUTH_TOKEN:
       return {
