@@ -1,9 +1,9 @@
 import { navigate } from '@reach/router';
 import { useEffect } from 'react';
 
-import { IOnSocialSignInSuccess } from './useSocialSignIn';
 import { useUser } from '../modules/user/useUser';
 import { isEmptyUser } from '../utils/isEmptyUser';
+import { OnSuccess } from './useSocialSignIn';
 
 /**
  * Handles what happens after someone signs up or logs in.
@@ -14,7 +14,7 @@ import { isEmptyUser } from '../utils/isEmptyUser';
 export const useOnLoginOrSignup = () => {
   const { getUser, user } = useUser();
 
-  const onSuccess = async ({ user }: IOnSocialSignInSuccess) => {
+  const onSuccess = async ({ user }: OnSuccess) => {
     if (user && user.emailVerified === false) {
       // Send a verification email to the user.
       user.sendEmailVerification();

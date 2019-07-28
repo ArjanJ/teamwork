@@ -3,10 +3,14 @@ import { User } from 'firebase';
 import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { firebase } from '../firebase';
+import { firebase } from '../../firebase';
 import { useAuthUser } from './useAuthUser';
 
-export const useAuthorization = (path: string): { user: User | void } => {
+interface UseAuthorization {
+  user: User | void;
+}
+
+export const useAuthorization = (path: string) => {
   const { initialising, user } = useAuthState(firebase.auth);
   const { authUser, setAuthUser } = useAuthUser();
 
@@ -20,6 +24,7 @@ export const useAuthorization = (path: string): { user: User | void } => {
       navigate(path);
     }
 
+    // If auth user hasn't been set, set it with the values from firebase.auth.
     if (!authUser && !!user && !!user.email && !!user.uid) {
       setAuthUser({
         displayName: user.displayName || null,
@@ -31,5 +36,9 @@ export const useAuthorization = (path: string): { user: User | void } => {
     }
   });
 
-  return { user };
+  const api: UseAuthorization = {
+    user,
+  };
+
+  return api;
 };

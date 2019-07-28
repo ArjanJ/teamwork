@@ -1,15 +1,15 @@
-import { IAuthUser, SET_AUTH_TOKEN, SET_AUTH_USER } from './types';
+import { AuthUser, SET_AUTH_USER } from './types';
 
-export function setAuthToken(token: string) {
-  return {
-    type: SET_AUTH_TOKEN,
-    payload: token,
-  };
+interface SetAuthUser {
+  type: typeof SET_AUTH_USER;
+  payload: AuthUser;
 }
 
-export function setAuthUser(authUser: IAuthUser) {
+export function setAuthUser(authUser: AuthUser) {
   return {
     type: SET_AUTH_USER,
     payload: authUser,
   };
 }
+
+export type AuthActions = SetAuthUser;

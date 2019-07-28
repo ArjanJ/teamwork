@@ -1,15 +1,35 @@
+import firebaseApp from 'firebase/app';
 import { useState } from 'react';
 
 import { auth } from '../firebase';
-import { IOnSocialSignInSuccess } from './useSocialSignIn';
+import { OnSuccess } from './useSocialSignIn';
 
-interface IUseEmailPassSignIn {
-  onSuccess({  }: IOnSocialSignInSuccess): any;
+interface UseEmailPassSignIn {
+  error: string;
+  isNewUser: boolean;
+  login(email: string, password: string): void;
+  signUp(email: string, password: string): void;
+}
+interface UseEmailPassSignInConfig {
+  onSuccess({  }: OnSuccess): void;
 }
 
-export const useEmailPassSignUp = ({ onSuccess }: IUseEmailPassSignIn) => {
+export const useEmailPassSignUp = ({ onSuccess }: UseEmailPassSignInConfig) => {
   const [error, setError] = useState('');
   const [isNewUser, setIsNewUser] = useState(false);
+
+  function afterAuth(
+    additionalUserInfo: firebaseApp.auth.AdditionalUserInfo,
+    user: firebaseApp.User,
+  ) {
+    const isNewUser = additionalUserInfo ? additionalUserInfo.isNewUser : false;
+
+    if (isNewUser) {
+      setIsNewUser(true);
+    }
+
+    onSuccess({ isNewUser, user });
+  }
 
   async function signUp(email: string, password: string) {
     try {
@@ -18,48 +38,43 @@ export const useEmailPassSignUp = ({ onSuccess }: IUseEmailPassSignIn) => {
         user,
       } = await auth.doCreateUserWithEmailAndPassword(email, password);
 
-      const isNewUser = additionalUserInfo
-        ? additionalUserInfo.isNewUser
-        : false;
-
-      if (isNewUser) {
-        setIsNewUser(true);
+      if (additionalUserInfo && user) {
+        afterAuth(additionalUserInfo, user);
       }
-
-      onSuccess({ isNewUser, user });
     } catch (err) {
       if (err.message) {
         return setError(err.message);
       }
 
-      setError('Something went wrong.');
+      setError('Error using email and password signup.');
     }
   }
 
-  async function signIn(email: string, password: string) {
+  async function login(email: string, password: string) {
     try {
       const {
         additionalUserInfo,
         user,
       } = await auth.doSignInWithEmailAndPassword(email, password);
 
-      const isNewUser = additionalUserInfo
-        ? additionalUserInfo.isNewUser
-        : false;
-
-      if (isNewUser) {
-        setIsNewUser(true);
+      if (additionalUserInfo && user) {
+        afterAuth(additionalUserInfo, user);
       }
-
-      onSuccess({ isNewUser, user });
     } catch (err) {
       if (err.message) {
         return setError(err.message);
       }
 
-      setError('Something went wrong.');
+      setError('Error using email and password signup.');
     }
   }
 
-  return { error, isNewUser, login: signIn, signUp };
+  const api: UseEmailPassSignIn = {
+    error,
+    isNewUser,
+    login,
+    signUp,
+  };
+
+  return api;
 };
