@@ -2,7 +2,7 @@ import { navigate } from '@reach/router';
 import { useEffect } from 'react';
 
 import { useUser } from '../modules/user/useUser';
-import { isEmptyUser } from '../utils/isEmptyUser';
+import { isEmptyUser } from '../modules/user/utils';
 import { OnSuccess } from './useSignUpOrLogin';
 
 /**

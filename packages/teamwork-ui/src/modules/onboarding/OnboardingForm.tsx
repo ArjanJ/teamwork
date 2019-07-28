@@ -14,7 +14,7 @@ import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { FieldWrapper, Input, Label } from '../signup/Shared';
-import { isEmptyUser } from '../../utils/isEmptyUser';
+import { isEmptyUser } from '../user/utils';
 
 interface OnboardingFormValues {
   company: string;
