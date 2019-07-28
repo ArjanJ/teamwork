@@ -31,15 +31,21 @@ export const Form = styled.form<{ disabled?: boolean }>`
 
 export const BigButton = styled.button`
   align-items: center;
-  background: #f3f3f3;
-  border-radius: 2px;
-  color: #2d77ee;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  color: ${Color.BLUE_SKY};
   display: flex;
-  font-size: 15px;
   font-weight: 600;
-  height: 48px;
-  padding: 0 12px;
+  height: 64px;
+  padding: 0 16px;
+  transition: all 0.35s ${Easing.OUT};
   width: 100%;
+
+  &:hover {
+    background: ${darken(0.06, 'white')};
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  }
 
   span {
     flex: 1;
@@ -58,7 +64,7 @@ export const Input = styled.input`
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   height: 64px;
   padding: 0 16px;
-  transition: all 0.2s ease-out;
+  transition: all 0.35s ${Easing.OUT};
   width: 100%;
 
   &:focus,
@@ -120,9 +126,9 @@ export const Separator = styled(Box)`
 `;
 
 export const Title = styled.h1`
-  color: #f8cf83;
-  font-size: 30px;
-  margin-bottom: 10px;
+  color: ${Color.MANGO};
+  font-size: 36px;
+  margin-bottom: 24px;
 `;
 
 export const Error = styled.p`
@@ -139,4 +145,11 @@ export const LoadingSpinnerWrapper = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
+`;
+
+export const Wrapper = styled.div<{ width?: number }>`
+  margin: auto;
+  min-height: 405px;
+  padding-top: 60px;
+  width: ${({ width }) => width || 460}px;
 `;
