@@ -5,24 +5,24 @@ import Loadable from 'react-loadable';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
-import { useAuthorization } from '../auth/useAuthorization';
-import { useAuthUser } from '../auth/useAuthUser';
-import { useUser } from '../user/useUser';
-import { VerifyEmail } from '../verify-email/VerifyEmail';
-import { Sidebar } from '../sidebar/Sidebar';
+import { useAuthorization } from '../../auth/useAuthorization';
+import { useAuthUser } from '../../auth/useAuthUser';
+import { useUser } from '../../user/useUser';
+import { VerifyEmail } from '../../verify-email/components/VerifyEmail';
+import { Sidebar } from '../../sidebar/components/Sidebar';
 
 const Teams = Loadable({
-  loader: () => import('../teams/components/Teams'),
+  loader: () => import('../../teams/components/Teams'),
   loading: () => null,
 });
 
 const Team = Loadable({
-  loader: () => import('../teams/components/Team'),
+  loader: () => import('../../teams/components/Team'),
   loading: () => null,
 });
 
 const NotFound = Loadable({
-  loader: () => import('../not-found/NotFound'),
+  loader: () => import('../../not-found/components/NotFound'),
   loading: () => null,
 });
 

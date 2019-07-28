@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 
-import { Spinner } from '../../components/spinner/Spinner';
-import { firebase } from '../../firebase';
-import { useAuthUser } from '../auth/useAuthUser';
-import { Color } from '../../styles/Color';
+import { Spinner } from '../../../components/spinner/Spinner';
+import { firebase } from '../../../firebase';
+import { useAuthUser } from '../../auth/useAuthUser';
+import { Color } from '../../../styles/Color';
 
 interface VerifyEmailProps {
   children: React.ReactNode;

@@ -2,7 +2,7 @@ import { RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
-import { Color } from '../../styles/Color';
+import { Color } from '../../../styles/Color';
 
 export const NotFound: FunctionComponent<RouteComponentProps> = () => (
   <NotFoundWrapper>

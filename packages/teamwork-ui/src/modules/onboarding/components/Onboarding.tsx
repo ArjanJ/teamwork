@@ -3,11 +3,11 @@ import React, { FunctionComponent } from 'react';
 import { Box } from 'rebass';
 import styled from 'styled-components';
 
-import { Header } from '../../components/header/Header';
-import { useAuthorization } from '../auth/useAuthorization';
-import { Backdrop, Wrapper } from '../signup/components/SignUpShared';
+import { Header } from '../../../components/header/Header';
+import { useAuthorization } from '../../auth/useAuthorization';
+import { Backdrop, Wrapper } from '../../signup/components/SignUpShared';
 import { OnboardingForm } from './OnboardingForm';
-import { VerifyEmail } from '../verify-email/VerifyEmail';
+import { VerifyEmail } from '../../verify-email/components/VerifyEmail';
 
 export const Onboarding: FunctionComponent<RouteComponentProps> = () => {
   useAuthorization('/login');

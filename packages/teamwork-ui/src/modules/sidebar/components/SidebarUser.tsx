@@ -4,11 +4,11 @@ import { Flex } from 'rebass';
 import { useDispatch } from 'redux-react-hook';
 import styled from 'styled-components';
 
-import { Toggle } from '../../components/toggle/Toggle';
-import { auth } from '../../firebase';
-import { useUser } from '../user/useUser';
-import { Color } from '../../styles/Color';
-import { Easing } from '../../styles/Easing';
+import { Toggle } from '../../../components/toggle/Toggle';
+import { auth } from '../../../firebase';
+import { useUser } from '../../user/useUser';
+import { Color } from '../../../styles/Color';
+import { Easing } from '../../../styles/Easing';
 
 export const SidebarUser: FunctionComponent = () => {
   const dispatch = useDispatch();

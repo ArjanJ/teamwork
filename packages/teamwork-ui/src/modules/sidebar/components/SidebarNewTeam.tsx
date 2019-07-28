@@ -3,8 +3,8 @@ import React from 'react';
 import { useModal } from 'react-modal-hook';
 import styled from 'styled-components';
 
-import { Easing } from '../../styles/Easing';
-import { TeamsCreateModal } from '../teams/components/TeamsCreateTeamModal';
+import { Easing } from '../../../styles/Easing';
+import { TeamsCreateModal } from '../../teams/components/TeamsCreateTeamModal';
 
 export const SidebarNewTeam = () => {
   const [showModal, hideModal] = useModal(() => (

@@ -13,12 +13,12 @@ const SignUp = Loadable({
 });
 
 const Dashboard = Loadable({
-  loader: () => import('../modules/dashboard/Dashboard'),
+  loader: () => import('../modules/dashboard/components/Dashboard'),
   loading: () => null,
 });
 
 const Onboarding = Loadable({
-  loader: () => import('../modules/onboarding/Onboarding'),
+  loader: () => import('../modules/onboarding/components/Onboarding'),
   loading: () => null,
 });
 
