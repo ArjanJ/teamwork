@@ -1,7 +1,7 @@
 # Teamwork
 Teamwork is an app to help team leads stay on top of providing feedback, having 1-on-1's, and making sure their team members have what they need to do their best work.
 
-## Disclaimer: This app isn't closed to finished.
+## Disclaimer: This app isn't close to finished.
 
 ![Teamwork dashboard](/public/teamwork-dashboard.jpg)
 
