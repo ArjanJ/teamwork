@@ -3,10 +3,10 @@ import React, { FunctionComponent } from 'react';
 import { Box } from 'rebass';
 import styled from 'styled-components';
 
-import { User } from '../../../functions/src/modules/users/types';
-import { useUser } from '../user/useUser';
-import { Color } from '../../styles/Color';
-import { Easing } from '../../styles/Easing';
+import { User } from '../../../../functions/src/modules/users/types';
+import { useUser } from '../../user/useUser';
+import { Color } from '../../../styles/Color';
+import { Easing } from '../../../styles/Easing';
 
 export const SidebarTeams = () => {
   const { user } = useUser();

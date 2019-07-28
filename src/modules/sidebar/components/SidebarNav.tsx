@@ -3,7 +3,7 @@ import React from 'react';
 import { Box } from 'rebass';
 import styled from 'styled-components';
 
-import { Easing } from '../../styles/Easing';
+import { Easing } from '../../../styles/Easing';
 
 export const SidebarNav = () => {
   return (

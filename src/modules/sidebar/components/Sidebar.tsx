@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from 'rebass';
 import styled from 'styled-components';
 
-import { TeamworkLogo } from '../../components/logos/logos';
+import { TeamworkLogo } from '../../../components/logos/logos';
 import { SidebarNav } from './SidebarNav';
 import { SidebarNewTeam } from './SidebarNewTeam';
 import { SidebarTeams } from './SidebarTeams';
