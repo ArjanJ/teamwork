@@ -12,7 +12,7 @@ interface UseUser extends UserState {
   updateUser(uid: string, body: Partial<User>): Promise<ApiResponse>;
 }
 
-export const useUser = (): UseUser => {
+export const useUser = () => {
   const dispatch = useDispatch();
 
   const mapState = useCallback(state => state.user, []);

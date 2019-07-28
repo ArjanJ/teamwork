@@ -24,7 +24,10 @@ const initialState = {
   user: null,
 };
 
-export default function(state: UserState = initialState, action: UserActions) {
+export default function(
+  state: UserState = initialState,
+  action: UserActions,
+): UserState {
   if (action.type === CREATE_USER) {
     return createUserReducer(state, action);
   }

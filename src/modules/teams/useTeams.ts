@@ -12,9 +12,9 @@ import {
   updateTeam,
   updateTeamMembers,
 } from './actions/index';
-import { TeamState } from './reducer';
+import { TeamsState } from './reducer';
 
-interface UseTeam extends TeamState {
+interface UseTeam extends TeamsState {
   createTeam(team: Team): Promise<ApiResponse>;
   deleteTeam(userTeam: UserTeam): Promise<ApiResponse>;
   getTeam(id: string): Promise<ApiResponse>;
@@ -23,7 +23,7 @@ interface UseTeam extends TeamState {
   updateTeamMembers(id: string, body: TeamMember[]): Promise<ApiResponse>;
 }
 
-export const useTeams = (): UseTeam => {
+export const useTeams = () => {
   const dispatch = useDispatch();
 
   const mapState = useCallback(state => state.teams, []);

@@ -8,7 +8,7 @@ const getAllTeamsRequest = () => apiClient({ url: 'teams', method: 'GET' });
 
 export type GetAllTeamsAction = AsyncAction<
   typeof GET_ALL_TEAMS,
-  ApiResponseSuccess<Team>
+  ApiResponseSuccess<{ [id: string]: Team }>
 >;
 
 export function getAllTeams() {

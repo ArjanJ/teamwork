@@ -1,31 +1,13 @@
 import { composeWithDevTools } from 'redux-devtools-extension';
-import {
-  AnyAction,
-  applyMiddleware,
-  combineReducers,
-  createStore,
-} from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
-import { callAPIMiddleware } from '../middleware/callAPIMiddleware';
+import { rootReducer } from '../reducer/rootReducer';
 
-import authReducer from '../modules/auth/reducer';
-import teamsReducer from '../modules/teams/reducer';
-import userReducer from '../modules/user/reducer';
+const middlewareEnhancer = composeWithDevTools(applyMiddleware(thunk));
 
-const appReducer = combineReducers({
-  auth: authReducer,
-  teams: teamsReducer,
-  user: userReducer,
-});
-
-const rootReducer = (state: any, action: AnyAction) => {
-  if (action.type === 'RESET_APP') {
-    state = undefined;
-  }
-
-  return appReducer(state, action);
-};
+export const store = createStore(rootReducer, middlewareEnhancer);
+export type AppState = ReturnType<typeof rootReducer>;
 
 /**
  * Required for redux devtools chrome extension.
@@ -35,11 +17,3 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION__(): object;
   }
 }
-
-const middlewareEnhancer = composeWithDevTools(
-  applyMiddleware(thunk, callAPIMiddleware),
-);
-
-export const store = createStore(rootReducer, middlewareEnhancer);
-
-export type AppState = ReturnType<typeof rootReducer>;
