@@ -20,10 +20,7 @@ export const apiClient = async ({
   body,
   method,
   url,
-}: ApiClient): Promise<{
-  data?: any;
-  error?: ApiError;
-}> => {
+}: ApiClient): Promise<ApiResponse> => {
   const { currentUser } = firebase.auth;
 
   if (!currentUser) {

@@ -7,10 +7,10 @@ import styled, { CSSProp } from 'styled-components';
 
 import { Team, TeamMember } from '../../../functions/src/modules/teams/types';
 import { Toggle } from '../../components/toggle/Toggle';
-import { useTeams } from '../../hooks/useTeams';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { TeamsAddMembersModal } from './TeamsAddMembersModal';
+import { useTeams } from './useTeams';
 
 interface ITeamMembersProps {
   team: Team;

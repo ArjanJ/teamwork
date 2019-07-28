@@ -9,7 +9,7 @@ import { UserState } from './reducer';
 interface UseUser extends UserState {
   createUser(user: User): Promise<ApiResponse>;
   getUser(uid: string): Promise<ApiResponse>;
-  updateUser(uid: string, body: {}): Promise<ApiResponse>;
+  updateUser(uid: string, body: Partial<User>): Promise<ApiResponse>;
 }
 
 export const useUser = (): UseUser => {
@@ -18,10 +18,12 @@ export const useUser = (): UseUser => {
   const mapState = useCallback(state => state.user, []);
   const userState = useMappedState(mapState);
 
-  return {
+  const api: UseUser = {
     ...userState,
-    createUser: (user: User) => dispatch(createUser(user)),
-    getUser: (uid: string) => dispatch(getUser(uid)),
-    updateUser: (uid: string, body = {}) => dispatch(updateUser(uid, body)),
+    createUser: user => dispatch(createUser(user)),
+    getUser: uid => dispatch(getUser(uid)),
+    updateUser: (uid, body) => dispatch(updateUser(uid, body)),
   };
+
+  return api;
 };

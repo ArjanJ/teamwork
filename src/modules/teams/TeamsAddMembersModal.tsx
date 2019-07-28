@@ -16,10 +16,10 @@ import styled from 'styled-components';
 import { Team, TeamMember } from '../../../functions/src/modules/teams/types';
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Modal } from '../../components/modal/Modal';
-import { useTeams } from '../../hooks/useTeams';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { delay } from '../../utils/delay';
+import { useTeams } from './useTeams';
 
 interface ITeamsAddMembersModalProps {
   hideModal(): void;
