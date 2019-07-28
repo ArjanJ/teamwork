@@ -24,6 +24,7 @@ import {
   P,
   Separator,
   Title,
+  Wrapper,
 } from './Shared';
 
 export const Signup: FunctionComponent<RouteComponentProps> = () => {
@@ -73,77 +74,79 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
       <LoadingSpinnerWrapper>
         {isFetching && <Spinner color={Color.BLUE_RAGE} size={72} />}
       </LoadingSpinnerWrapper>
-      <Form disabled={isFetching} onSubmit={handleSubmit}>
-        <Box mb="24px">
-          <Title>Create your account</Title>
-          <P>Register with your work Google account</P>
-        </Box>
-        <Box mb="24px">
-          <BigButton onClick={doSocial} type="button">
-            <GoogleLogo />
-            <span>Register with Google</span>
-          </BigButton>
-        </Box>
-        <Separator mb="36px">
-          <P>Or, register with your email</P>
-        </Separator>
-        {error && <Error>{error}</Error>}
-        <Field mb="24px">
-          <Input
-            id="email"
-            name="email"
-            onChange={handleInputChange}
-            placeholder="Your email"
-            required
-            type="email"
-            value={values.email}
-          />
-          <Label>Email</Label>
-        </Field>
-        <Field mb="24px">
-          <Input
-            id="password"
-            name="password"
-            onChange={handleInputChange}
-            placeholder="Create password"
-            required
-            type="password"
-            value={values.password}
-          />
-          <Label>Password</Label>
-        </Field>
-        <Field mb="36px">
-          <Input
-            id="confirmPassword"
-            name="confirmPassword"
-            onChange={handleInputChange}
-            placeholder="Confirm password"
-            required
-            type="password"
-            value={values.confirmPassword}
-          />
-          <Label>Confirm Password</Label>
-        </Field>
-        <Flex justifyContent="center" mb="24px">
-          <ButtonSpinner
-            isSubmitting={isSubmitting}
-            primary={Color.AQUA}
-            secondary={Color.BLUE_PERSIAN}
-            type="submit"
-            width={154}
-          >
-            <span>Create account</span>
-          </ButtonSpinner>
-        </Flex>
-        <Box>
-          <P>
-            Already have an account?{' '}
-            <Link to="/login">
-              <strong>Login</strong>
-            </Link>
-          </P>
-        </Box>
-      </Form>
+      <Wrapper>
+        <Form disabled={isFetching} onSubmit={handleSubmit}>
+          <Box mb="24px">
+            <Title>Create your account</Title>
+            <P>Register with your work Google account</P>
+          </Box>
+          <Box mb="24px">
+            <BigButton onClick={doSocial} type="button">
+              <GoogleLogo />
+              <span>Register with Google</span>
+            </BigButton>
+          </Box>
+          <Separator mb="36px">
+            <P>Or, register with your email</P>
+          </Separator>
+          {error && <Error>{error}</Error>}
+          <Field mb="24px">
+            <Input
+              id="email"
+              name="email"
+              onChange={handleInputChange}
+              placeholder="Your email"
+              required
+              type="email"
+              value={values.email}
+            />
+            <Label>Email</Label>
+          </Field>
+          <Field mb="24px">
+            <Input
+              id="password"
+              name="password"
+              onChange={handleInputChange}
+              placeholder="Create password"
+              required
+              type="password"
+              value={values.password}
+            />
+            <Label>Password</Label>
+          </Field>
+          <Field mb="36px">
+            <Input
+              id="confirmPassword"
+              name="confirmPassword"
+              onChange={handleInputChange}
+              placeholder="Confirm password"
+              required
+              type="password"
+              value={values.confirmPassword}
+            />
+            <Label>Confirm Password</Label>
+          </Field>
+          <Flex justifyContent="center" mb="24px">
+            <ButtonSpinner
+              isSubmitting={isSubmitting}
+              primary={Color.AQUA}
+              secondary={Color.BLUE_PERSIAN}
+              type="submit"
+              width={154}
+            >
+              <span>Create account</span>
+            </ButtonSpinner>
+          </Flex>
+          <Box>
+            <P>
+              Already have an account?{' '}
+              <Link to="/login">
+                <strong>Login</strong>
+              </Link>
+            </P>
+          </Box>
+        </Form>
+      </Wrapper>
     </Backdrop>
   );
 };

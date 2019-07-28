@@ -24,6 +24,7 @@ import {
   P,
   Separator,
   Title,
+  Wrapper,
 } from '../signup/Shared';
 
 export const Login: FunctionComponent<RouteComponentProps> = () => {
@@ -65,64 +66,66 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
       <LoadingSpinnerWrapper>
         {isFetching && <Spinner color={Color.BLUE_RAGE} size={72} />}
       </LoadingSpinnerWrapper>
-      <Form onSubmit={handleSubmit}>
-        <Box mb="24px">
-          <Title>Log in</Title>
-          <P>Log in with your work Google account</P>
-        </Box>
-        <Box mb="24px">
-          <BigButton onClick={doSocial} type="button">
-            <GoogleLogo />
-            <span>Log in with Google</span>
-          </BigButton>
-        </Box>
-        <Separator mb="36px">
-          <P>Or, log in with your email</P>
-        </Separator>
-        {error && <Error>{error}</Error>}
-        <Field mb="24px">
-          <Input
-            id="email"
-            name="email"
-            onChange={handleInputChange}
-            placeholder="Your email"
-            required
-            type="email"
-            value={values.email}
-          />
-          <Label>Email</Label>
-        </Field>
-        <Field mb="24px">
-          <Input
-            id="password"
-            name="password"
-            onChange={handleInputChange}
-            placeholder="Password"
-            required
-            type="password"
-            value={values.password}
-          />
-          <Label>Password</Label>
-        </Field>
-        <Flex justifyContent="center" mb="24px">
-          <ButtonSpinner
-            isSubmitting={isSubmitting}
-            primary={Color.AQUA}
-            secondary={Color.BLUE_PERSIAN}
-            type="submit"
-          >
-            <span>Log in</span>
-          </ButtonSpinner>
-        </Flex>
-        <Box>
-          <P>
-            Dont' have an account?{' '}
-            <Link to="/signup">
-              <strong>Signup</strong>
-            </Link>
-          </P>
-        </Box>
-      </Form>
+      <Wrapper>
+        <Form onSubmit={handleSubmit}>
+          <Box mb="24px">
+            <Title>Log in</Title>
+            <P>Log in with your work Google account</P>
+          </Box>
+          <Box mb="24px">
+            <BigButton onClick={doSocial} type="button">
+              <GoogleLogo />
+              <span>Log in with Google</span>
+            </BigButton>
+          </Box>
+          <Separator mb="36px">
+            <P>Or, log in with your email</P>
+          </Separator>
+          {error && <Error>{error}</Error>}
+          <Field mb="24px">
+            <Input
+              id="email"
+              name="email"
+              onChange={handleInputChange}
+              placeholder="Your email"
+              required
+              type="email"
+              value={values.email}
+            />
+            <Label>Email</Label>
+          </Field>
+          <Field mb="24px">
+            <Input
+              id="password"
+              name="password"
+              onChange={handleInputChange}
+              placeholder="Password"
+              required
+              type="password"
+              value={values.password}
+            />
+            <Label>Password</Label>
+          </Field>
+          <Flex justifyContent="center" mb="24px">
+            <ButtonSpinner
+              isSubmitting={isSubmitting}
+              primary={Color.AQUA}
+              secondary={Color.BLUE_PERSIAN}
+              type="submit"
+            >
+              <span>Log in</span>
+            </ButtonSpinner>
+          </Flex>
+          <Box>
+            <P>
+              Dont' have an account?{' '}
+              <Link to="/signup">
+                <strong>Signup</strong>
+              </Link>
+            </P>
+          </Box>
+        </Form>
+      </Wrapper>
     </Backdrop>
   );
 };

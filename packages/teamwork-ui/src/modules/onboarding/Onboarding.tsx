@@ -5,14 +5,9 @@ import styled from 'styled-components';
 
 import { Header } from '../../components/header/Header';
 import { useAuthorization } from '../auth/useAuthorization';
-import { Backdrop } from '../signup/Shared';
+import { Backdrop, Wrapper } from '../signup/Shared';
 import { OnboardingForm } from './OnboardingForm';
-import { Step } from './types';
 import { VerifyEmail } from '../verify-email/VerifyEmail';
-
-export interface IStepFormProps {
-  updateStep(step: Step): void;
-}
 
 export const Onboarding: FunctionComponent<RouteComponentProps> = () => {
   useAuthorization('/login');
@@ -35,13 +30,6 @@ export const Onboarding: FunctionComponent<RouteComponentProps> = () => {
     </Backdrop>
   );
 };
-
-const Wrapper = styled.div`
-  margin: auto;
-  min-height: 405px;
-  padding-top: 60px;
-  width: 460px;
-`;
 
 const Title = styled.h1`
   color: white;

@@ -1,5 +1,5 @@
 export enum Color {
-  AQUA = '#18c4d0',
+  AQUA = '#19c0cb',
   BLUE_RAGE = '#0900c3',
   BLUE_RHINO = '#2A355F',
   BLUE_PERSIAN = '#2147D8',
