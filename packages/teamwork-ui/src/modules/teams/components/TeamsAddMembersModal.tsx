@@ -13,13 +13,16 @@ import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
-import { Team, TeamMember } from '../../../functions/src/modules/teams/types';
-import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
-import { Modal } from '../../components/modal/Modal';
-import { Color } from '../../styles/Color';
-import { Easing } from '../../styles/Easing';
-import { delay } from '../../utils/delay';
-import { useTeams } from './useTeams';
+import {
+  Team,
+  TeamMember,
+} from '../../../../functions/src/modules/teams/types';
+import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
+import { Modal } from '../../../components/modal/Modal';
+import { Color } from '../../../styles/Color';
+import { Easing } from '../../../styles/Easing';
+import { delay } from '../../../utils/delay';
+import { useTeams } from '../useTeams';
 
 interface ITeamsAddMembersModalProps {
   hideModal(): void;

@@ -6,9 +6,12 @@ import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
-import { Team, TeamMember } from '../../../functions/src/modules/teams/types';
-import { Color } from '../../styles/Color';
-import { Easing } from '../../styles/Easing';
+import {
+  Team,
+  TeamMember,
+} from '../../../../functions/src/modules/teams/types';
+import { Color } from '../../../styles/Color';
+import { Easing } from '../../../styles/Easing';
 import { TeamsCreateModal } from './TeamsCreateTeamModal';
 
 interface TeamsOverviewProps {
