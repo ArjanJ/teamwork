@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components';
 
 import { UserTeam } from '../../../functions/src/modules/users/types';
 import { Toggle } from '../../components/toggle/Toggle';
-import { useTeams } from '../../hooks/useTeams';
 import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
@@ -14,6 +13,7 @@ import {
   TeamMembersMenu,
   TeamMembersMenuItem,
 } from './TeamMembers';
+import { useTeams } from './useTeams';
 
 interface ITeamProps {
   teamName?: string;

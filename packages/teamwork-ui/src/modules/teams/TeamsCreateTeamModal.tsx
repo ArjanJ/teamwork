@@ -18,11 +18,11 @@ import { TeamMember } from '../../../functions/src/modules/teams/types';
 import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Modal } from '../../components/modal/Modal';
 import { useAuthUser } from '../../hooks/useAuthUser';
-import { useTeams } from '../../hooks/useTeams';
 import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 import { delay } from '../../utils/delay';
+import { useTeams } from './useTeams';
 import * as TeamsUtils from './utils';
 
 interface ITeamsCreateModalProps {

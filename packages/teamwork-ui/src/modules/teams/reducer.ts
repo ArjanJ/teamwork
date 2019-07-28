@@ -9,7 +9,7 @@ import {
   updateTeamMembersTypes,
 } from './types';
 
-interface ITeamState {
+export interface TeamState {
   isCreating: boolean;
   isFetching: boolean;
   isUpdating: boolean;
@@ -18,7 +18,7 @@ interface ITeamState {
   };
 }
 
-const initialState: ITeamState = {
+const initialState = {
   isCreating: false,
   isFetching: false,
   isUpdating: false,
@@ -26,7 +26,7 @@ const initialState: ITeamState = {
 };
 
 // TODO: Handle delete team
-export default function(state = initialState, action: AnyAction) {
+export default function(state: TeamState = initialState, action: AnyAction) {
   switch (action.type) {
     case createTeamTypes.REQUEST:
       return {
