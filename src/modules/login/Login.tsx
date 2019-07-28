@@ -7,9 +7,8 @@ import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
 import { Spinner } from '../../components/spinner/Spinner';
 import { useForm } from '../../hooks/useForm';
-import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
-import { useOnLoginOrSignup } from '../../hooks/useOnLoginOrSignup';
-import { useSocialSignIn } from '../../hooks/useSocialSignIn';
+import { AuthMethod, useSignUpOrLogin } from '../../hooks/useSignUpOrLogin';
+import { useSignUpOrLoginOnSuccess } from '../../hooks/useSignUpOrLoginOnSuccess';
 import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { delay } from '../../utils/delay';
@@ -31,20 +30,21 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { isFetching } = useUser();
-  const { onSuccess } = useOnLoginOrSignup();
+  const { onSuccess } = useSignUpOrLoginOnSuccess();
 
-  const { error: socialError, signIn } = useSocialSignIn({
-    onSuccess: onSuccess,
-  });
-
-  const { error: emailPassError, login } = useEmailPassSignUp({
-    onSuccess: onSuccess,
+  const {
+    error: emailPassError,
+    doEmailAndPassword,
+    doSocial,
+  } = useSignUpOrLogin({
+    method: AuthMethod.LOGIN,
+    onSuccess,
   });
 
   const onSubmit = async () => {
     setIsSubmitting(true);
     await delay(1500);
-    await login(values.email, values.password);
+    await doEmailAndPassword(values.email, values.password);
     setIsSubmitting(false);
   };
 
@@ -71,7 +71,7 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
           <P>Log in with your work Google account</P>
         </Box>
         <Box mb="24px">
-          <BigButton onClick={signIn} type="button">
+          <BigButton onClick={doSocial} type="button">
             <GoogleLogo />
             <span>Log in with Google</span>
           </BigButton>

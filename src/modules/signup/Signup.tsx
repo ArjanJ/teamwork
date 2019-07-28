@@ -7,9 +7,8 @@ import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
 import { Spinner } from '../../components/spinner/Spinner';
 import { useForm } from '../../hooks/useForm';
-import { useEmailPassSignUp } from '../../hooks/useEmailPassSignUp';
-import { useOnLoginOrSignup } from '../../hooks/useOnLoginOrSignup';
-import { useSocialSignIn } from '../../hooks/useSocialSignIn';
+import { AuthMethod, useSignUpOrLogin } from '../../hooks/useSignUpOrLogin';
+import { useSignUpOrLoginOnSuccess } from '../../hooks/useSignUpOrLoginOnSuccess';
 import { useUser } from '../user/useUser';
 import { Color } from '../../styles/Color';
 import { delay } from '../../utils/delay';
@@ -31,15 +30,14 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const { isFetching } = useUser();
-  const { onSuccess } = useOnLoginOrSignup();
+  const { onSuccess } = useSignUpOrLoginOnSuccess();
 
-  const { error: socialError, signIn } = useSocialSignIn({
-    onSuccess: onSuccess,
-  });
-
-  const { error: emailPassError, signUp } = useEmailPassSignUp({
-    onSuccess: onSuccess,
-  });
+  const { error: signUpError, doEmailAndPassword, doSocial } = useSignUpOrLogin(
+    {
+      method: AuthMethod.SIGN_UP,
+      onSuccess,
+    },
+  );
 
   const initialFormValues = {
     email: '',
@@ -54,7 +52,7 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
 
     setIsSubmitting(true);
     await delay(1500);
-    await signUp(values.email, values.password);
+    await doEmailAndPassword(values.email, values.password);
     setIsSubmitting(false);
   };
 
@@ -64,10 +62,10 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
   });
 
   useEffect(() => {
-    if (emailPassError) {
-      setError(emailPassError);
+    if (signUpError) {
+      setError(signUpError);
     }
-  }, [emailPassError]);
+  }, [signUpError]);
 
   return (
     <Backdrop>
@@ -81,7 +79,7 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
           <P>Register with your work Google account</P>
         </Box>
         <Box mb="24px">
-          <BigButton onClick={signIn} type="button">
+          <BigButton onClick={doSocial} type="button">
             <GoogleLogo />
             <span>Register with Google</span>
           </BigButton>
