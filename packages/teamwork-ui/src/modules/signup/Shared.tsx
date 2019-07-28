@@ -107,7 +107,7 @@ export const Separator = styled(Box)`
   }
 
   &::after {
-    background: #0900c3;
+    background: ${Color.BLUE_PERSIAN};
     content: '';
     height: 100%;
     left: 50%;
