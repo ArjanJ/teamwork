@@ -1,24 +1,16 @@
-import { AnyAction } from 'redux';
-
-import { IAuthUser, SET_AUTH_TOKEN, SET_AUTH_USER } from './types';
+import { AuthActions } from './actions';
+import { AuthUser, SET_AUTH_USER } from './types';
 
 interface AuthState {
-  token: null | string;
-  user: null | IAuthUser;
+  user: null | AuthUser;
 }
 
 const initialState = {
-  token: null,
   user: null,
 };
 
-export default function(state: AuthState = initialState, action: AnyAction) {
+export default function(state: AuthState = initialState, action: AuthActions) {
   switch (action.type) {
-    case SET_AUTH_TOKEN:
-      return {
-        ...state,
-        token: action.payload,
-      };
     case SET_AUTH_USER:
       return {
         ...state,

@@ -3,16 +3,22 @@ import { useState } from 'react';
 
 import { auth, firebase } from '../firebase';
 
-export interface IOnSocialSignInSuccess {
+export interface OnSuccess {
   isNewUser: boolean;
   user: firebaseApp.User | null;
 }
-interface IUseSocialSignIn {
-  onSuccess({  }: IOnSocialSignInSuccess): any;
+interface UseSocialSignIn {
+  error: string;
+  isNewUser: boolean;
+  signIn(): void;
 }
 
-export const useSocialSignIn = ({ onSuccess }: IUseSocialSignIn) => {
-  const [hasError, setError] = useState(false);
+interface UseSocialSignInConfig {
+  onSuccess({  }: OnSuccess): void;
+}
+
+export const useSocialSignIn = ({ onSuccess }: UseSocialSignInConfig) => {
+  const [error, setError] = useState('');
   const [isNewUser, setIsNewUser] = useState(false);
 
   async function signIn() {
@@ -29,13 +35,21 @@ export const useSocialSignIn = ({ onSuccess }: IUseSocialSignIn) => {
         setIsNewUser(true);
       }
 
-      console.log({ additionalUserInfo, user });
-
       onSuccess({ isNewUser, user });
     } catch (err) {
-      setError(true);
+      if (err.message) {
+        return setError(err.message);
+      }
+
+      setError('Something went wrong.');
     }
   }
 
-  return { hasError, isNewUser, signIn };
+  const api: UseSocialSignIn = {
+    error,
+    isNewUser,
+    signIn,
+  };
+
+  return api;
 };

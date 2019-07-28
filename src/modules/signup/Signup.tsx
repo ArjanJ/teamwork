@@ -33,7 +33,7 @@ export const Signup: FunctionComponent<RouteComponentProps> = () => {
   const { isFetching } = useUser();
   const { onSuccess } = useOnLoginOrSignup();
 
-  const { hasError, signIn } = useSocialSignIn({
+  const { error: socialError, signIn } = useSocialSignIn({
     onSuccess: onSuccess,
   });
 

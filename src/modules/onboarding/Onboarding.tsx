@@ -4,7 +4,7 @@ import { Box } from 'rebass';
 import styled from 'styled-components';
 
 import { Header } from '../../components/header/Header';
-import { useAuthorization } from '../../hooks/useAuthorization';
+import { useAuthorization } from '../auth/useAuthorization';
 import { Backdrop } from '../signup/Shared';
 import { OnboardingForm } from './OnboardingForm';
 import { Step } from './types';
