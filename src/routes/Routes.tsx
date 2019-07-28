@@ -3,22 +3,22 @@ import React from 'react';
 import Loadable from 'react-loadable';
 
 const Login = Loadable({
-  loader: () => import('../login/Login'),
+  loader: () => import('../modules/login/components/Login'),
   loading: () => null,
 });
 
 const SignUp = Loadable({
-  loader: () => import('../signup/components/SignUp'),
+  loader: () => import('../modules/signup/components/SignUp'),
   loading: () => null,
 });
 
 const Dashboard = Loadable({
-  loader: () => import('../dashboard/Dashboard'),
+  loader: () => import('../modules/dashboard/Dashboard'),
   loading: () => null,
 });
 
 const Onboarding = Loadable({
-  loader: () => import('../onboarding/Onboarding'),
+  loader: () => import('../modules/onboarding/Onboarding'),
   loading: () => null,
 });
 

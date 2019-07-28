@@ -6,47 +6,47 @@ import { GoogleLogo } from '../../../components/logos/logos';
 import { Spinner } from '../../../components/spinner/Spinner';
 import { AuthMethod, useSignUpOrLogin } from '../../../hooks/useSignUpOrLogin';
 import { useSignUpOrLoginOnSuccess } from '../../../hooks/useSignUpOrLoginOnSuccess';
-import { Color } from '../../../styles/Color';
 import { useUser } from '../../user/useUser';
-import { SignUpForm } from './SignUpForm';
+import { Color } from '../../../styles/Color';
 import {
   BigButton,
   LoadingSpinnerWrapper,
   P,
   Separator,
   Title,
-} from './SignUpShared';
-import { SignUpWrapper } from './SignUpWrapper';
+} from '../../signup/components/SignUpShared';
+import { SignUpWrapper } from '../../signup/components/SignUpWrapper';
+import { LoginForm } from './LoginForm';
 
-export const SignUp: FunctionComponent<RouteComponentProps> = () => {
+export const Login: FunctionComponent<RouteComponentProps> = () => {
   const { isFetching } = useUser();
   const { onSuccess } = useSignUpOrLoginOnSuccess();
 
   const { doSocial } = useSignUpOrLogin({
-    method: AuthMethod.SIGN_UP,
+    method: AuthMethod.LOGIN,
     onSuccess,
   });
 
   return (
     <SignUpWrapper>
       <Box mb="24px">
-        <Title>Create your account</Title>
-        <P>Register with your work Google account</P>
+        <Title>Log in</Title>
+        <P>Log in with your work Google account</P>
       </Box>
       <Box mb="24px">
         <BigButton onClick={doSocial} type="button">
           <GoogleLogo />
-          <span>Register with Google</span>
+          <span>Log in with Google</span>
         </BigButton>
       </Box>
       <Separator mb="36px">
-        <P>Or, register with your email</P>
+        <P>Or, log in with your email</P>
       </Separator>
-      <SignUpForm />
+      <LoginForm />
       <P>
-        Already have an account?{' '}
-        <Link to="/login">
-          <strong>Login</strong>
+        Don't have an account?{' '}
+        <Link to="/signup">
+          <strong>Signup</strong>
         </Link>
       </P>
       <LoadingSpinnerWrapper>
@@ -56,4 +56,4 @@ export const SignUp: FunctionComponent<RouteComponentProps> = () => {
   );
 };
 
-export default SignUp;
+export default Login;
