@@ -17,16 +17,6 @@ export const Heading = styled.h2`
 
 export const P = styled.p`
   color: white;
-  font-weight: 500;
-`;
-
-export const Form = styled.form<{ disabled?: boolean }>`
-  margin: 0 auto;
-  max-width: 420px;
-  opacity: ${({ disabled }) => (disabled ? 0.35 : 1)};
-  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
-  text-align: center;
-  width: 100%;
 `;
 
 export const BigButton = styled.button`
@@ -52,11 +42,9 @@ export const BigButton = styled.button`
   }
 `;
 
-export const Field = styled(Box)`
+export const FieldWrapper = styled(Box)`
   position: relative;
 `;
-
-export const FieldWrapper = Field;
 
 export const Input = styled.input`
   background: white;
@@ -120,7 +108,7 @@ export const Separator = styled(Box)`
     position: absolute;
     top: 0;
     transform: translateX(-50%);
-    width: 64%;
+    width: 60%;
     z-index: -1;
   }
 `;
@@ -147,9 +135,14 @@ export const LoadingSpinnerWrapper = styled.div`
   z-index: 1;
 `;
 
-export const Wrapper = styled.div<{ width?: number }>`
+export const Wrapper = styled.div<{
+  textAlign?: 'left' | 'center' | 'right';
+  width?: number;
+}>`
   margin: auto;
   min-height: 405px;
   padding-top: 60px;
   width: ${({ width }) => width || 460}px;
+
+  ${({ textAlign }) => `text-align: ${textAlign}`};
 `;

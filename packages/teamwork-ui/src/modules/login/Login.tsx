@@ -1,4 +1,12 @@
 import { Link, RouteComponentProps } from '@reach/router';
+import {
+  Formik,
+  FormikActions,
+  FormikProps,
+  Form,
+  Field,
+  FieldProps,
+} from 'formik';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
 
@@ -6,7 +14,6 @@ import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
 import { Header } from '../../components/header/Header';
 import { GoogleLogo } from '../../components/logos/logos';
 import { Spinner } from '../../components/spinner/Spinner';
-import { useForm } from '../../hooks/useForm';
 import { AuthMethod, useSignUpOrLogin } from '../../hooks/useSignUpOrLogin';
 import { useSignUpOrLoginOnSuccess } from '../../hooks/useSignUpOrLoginOnSuccess';
 import { useUser } from '../user/useUser';
@@ -16,8 +23,7 @@ import {
   Backdrop,
   BigButton,
   Error,
-  Field,
-  Form,
+  FieldWrapper,
   Input,
   Label,
   LoadingSpinnerWrapper,
@@ -27,9 +33,18 @@ import {
   Wrapper,
 } from '../signup/Shared';
 
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
+const initialValues = {
+  email: '',
+  password: '',
+};
+
 export const Login: FunctionComponent<RouteComponentProps> = () => {
   const [error, setError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { isFetching } = useUser();
   const { onSuccess } = useSignUpOrLoginOnSuccess();
 
@@ -42,17 +57,14 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
     onSuccess,
   });
 
-  const onSubmit = async () => {
-    setIsSubmitting(true);
+  const onSubmit = async (
+    values: LoginFormValues,
+    actions: FormikActions<LoginFormValues>,
+  ) => {
     await delay(1500);
     await doEmailAndPassword(values.email, values.password);
-    setIsSubmitting(false);
+    actions.setSubmitting(false);
   };
-
-  const { handleInputChange, handleSubmit, values } = useForm({
-    initialValues: { email: '', password: '' },
-    onSubmit,
-  });
 
   useEffect(() => {
     if (emailPassError) {
@@ -63,69 +75,78 @@ export const Login: FunctionComponent<RouteComponentProps> = () => {
   return (
     <Backdrop>
       <Header />
-      <LoadingSpinnerWrapper>
-        {isFetching && <Spinner color={Color.BLUE_RAGE} size={72} />}
-      </LoadingSpinnerWrapper>
-      <Wrapper>
-        <Form onSubmit={handleSubmit}>
-          <Box mb="24px">
-            <Title>Log in</Title>
-            <P>Log in with your work Google account</P>
-          </Box>
-          <Box mb="24px">
-            <BigButton onClick={doSocial} type="button">
-              <GoogleLogo />
-              <span>Log in with Google</span>
-            </BigButton>
-          </Box>
-          <Separator mb="36px">
-            <P>Or, log in with your email</P>
-          </Separator>
-          {error && <Error>{error}</Error>}
-          <Field mb="24px">
-            <Input
-              id="email"
-              name="email"
-              onChange={handleInputChange}
-              placeholder="Your email"
-              required
-              type="email"
-              value={values.email}
-            />
-            <Label>Email</Label>
-          </Field>
-          <Field mb="24px">
-            <Input
-              id="password"
-              name="password"
-              onChange={handleInputChange}
-              placeholder="Password"
-              required
-              type="password"
-              value={values.password}
-            />
-            <Label>Password</Label>
-          </Field>
-          <Flex justifyContent="center" mb="24px">
-            <ButtonSpinner
-              isSubmitting={isSubmitting}
-              primary={Color.AQUA}
-              secondary={Color.BLUE_PERSIAN}
-              type="submit"
-            >
-              <span>Log in</span>
-            </ButtonSpinner>
-          </Flex>
-          <Box>
-            <P>
-              Dont' have an account?{' '}
-              <Link to="/signup">
-                <strong>Signup</strong>
-              </Link>
-            </P>
-          </Box>
-        </Form>
+      <Wrapper textAlign="center">
+        <Box mb="24px">
+          <Title>Log in</Title>
+          <P>Log in with your work Google account</P>
+        </Box>
+        <Box mb="24px">
+          <BigButton onClick={doSocial} type="button">
+            <GoogleLogo />
+            <span>Log in with Google</span>
+          </BigButton>
+        </Box>
+        <Separator mb="36px">
+          <P>Or, log in with your email</P>
+        </Separator>
+        {error && <Error>{error}</Error>}
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          render={(formikBag: FormikProps<LoginFormValues>) => (
+            <Form>
+              <Field
+                name="email"
+                render={({ field }: FieldProps<LoginFormValues>) => (
+                  <FieldWrapper mb="36px">
+                    <Input
+                      {...field}
+                      autoFocus={true}
+                      placeholder="Your Email"
+                      required
+                      type="email"
+                    />
+                    <Label>Email</Label>
+                  </FieldWrapper>
+                )}
+              />
+              <Field
+                name="password"
+                render={({ field }: FieldProps<LoginFormValues>) => (
+                  <FieldWrapper mb="36px">
+                    <Input
+                      {...field}
+                      placeholder="Your Password"
+                      required
+                      type="password"
+                    />
+                    <Label>Password</Label>
+                  </FieldWrapper>
+                )}
+              />
+              <Flex justifyContent="center" mb="36px">
+                <ButtonSpinner
+                  isSubmitting={formikBag.isSubmitting}
+                  primary={Color.AQUA}
+                  secondary={Color.BLUE_PERSIAN}
+                  type="submit"
+                >
+                  <span>Log in</span>
+                </ButtonSpinner>
+              </Flex>
+              <P>
+                Don't have an account?{' '}
+                <Link to="/signup">
+                  <strong>Signup</strong>
+                </Link>
+              </P>
+            </Form>
+          )}
+        />
       </Wrapper>
+      <LoadingSpinnerWrapper>
+        {isFetching && <Spinner color={Color.BLUE_PERSIAN} size={72} />}
+      </LoadingSpinnerWrapper>
     </Backdrop>
   );
 };
