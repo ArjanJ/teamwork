@@ -3,17 +3,17 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
 import styled, { css } from 'styled-components';
 
-import { UserTeam } from '../../../functions/src/modules/users/types';
-import { Toggle } from '../../components/toggle/Toggle';
-import { useUser } from '../user/useUser';
-import { Color } from '../../styles/Color';
-import { Easing } from '../../styles/Easing';
+import { UserTeam } from '../../../../functions/src/modules/users/types';
+import { Toggle } from '../../../components/toggle/Toggle';
+import { useUser } from '../../user/useUser';
+import { Color } from '../../../styles/Color';
+import { Easing } from '../../../styles/Easing';
 import {
   TeamMembers,
   TeamMembersMenu,
   TeamMembersMenuItem,
 } from './TeamMembers';
-import { useTeams } from './useTeams';
+import { useTeams } from '../useTeams';
 
 interface ITeamProps {
   teamName?: string;

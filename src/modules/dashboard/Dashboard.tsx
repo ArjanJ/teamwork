@@ -12,12 +12,12 @@ import { VerifyEmail } from '../verify-email/VerifyEmail';
 import { Sidebar } from '../sidebar/Sidebar';
 
 const Teams = Loadable({
-  loader: () => import('../teams/Teams'),
+  loader: () => import('../teams/components/Teams'),
   loading: () => null,
 });
 
 const Team = Loadable({
-  loader: () => import('../teams/Team'),
+  loader: () => import('../teams/components/Team'),
   loading: () => null,
 });
 

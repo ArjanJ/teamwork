@@ -3,9 +3,9 @@ import React, { FunctionComponent } from 'react';
 import { useModal } from 'react-modal-hook';
 import styled from 'styled-components';
 
-import { User } from '../../../functions/src/modules/users/types';
-import { Color } from '../../styles/Color';
-import { Easing } from '../../styles/Easing';
+import { User } from '../../../../functions/src/modules/users/types';
+import { Color } from '../../../styles/Color';
+import { Easing } from '../../../styles/Easing';
 import { TeamsCreateModal } from './TeamsCreateTeamModal';
 import { TeamsGraphic } from './TeamsGraphic';
 

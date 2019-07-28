@@ -5,12 +5,15 @@ import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
 import styled, { CSSProp } from 'styled-components';
 
-import { Team, TeamMember } from '../../../functions/src/modules/teams/types';
-import { Toggle } from '../../components/toggle/Toggle';
-import { Color } from '../../styles/Color';
-import { Easing } from '../../styles/Easing';
+import {
+  Team,
+  TeamMember,
+} from '../../../../functions/src/modules/teams/types';
+import { Toggle } from '../../../components/toggle/Toggle';
+import { Color } from '../../../styles/Color';
+import { Easing } from '../../../styles/Easing';
 import { TeamsAddMembersModal } from './TeamsAddMembersModal';
-import { useTeams } from './useTeams';
+import { useTeams } from '../useTeams';
 
 interface ITeamMembersProps {
   team: Team;

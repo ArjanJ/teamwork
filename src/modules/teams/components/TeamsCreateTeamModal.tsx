@@ -14,16 +14,16 @@ import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
-import { TeamMember } from '../../../functions/src/modules/teams/types';
-import { ButtonSpinner } from '../../components/button-spinner/ButtonSpinner';
-import { Modal } from '../../components/modal/Modal';
-import { useAuthUser } from '../../hooks/useAuthUser';
-import { useUser } from '../user/useUser';
-import { Color } from '../../styles/Color';
-import { Easing } from '../../styles/Easing';
-import { delay } from '../../utils/delay';
-import { useTeams } from './useTeams';
-import * as TeamsUtils from './utils';
+import { TeamMember } from '../../../../functions/src/modules/teams/types';
+import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
+import { Modal } from '../../../components/modal/Modal';
+import { useAuthUser } from '../../../hooks/useAuthUser';
+import { useUser } from '../../user/useUser';
+import { Color } from '../../../styles/Color';
+import { Easing } from '../../../styles/Easing';
+import { delay } from '../../../utils/delay';
+import { useTeams } from '../useTeams';
+import * as TeamsUtils from '../utils';
 
 interface ITeamsCreateModalProps {
   hideModal(): void;
