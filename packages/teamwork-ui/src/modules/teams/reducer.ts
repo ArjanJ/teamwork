@@ -1,4 +1,4 @@
-import { Team } from '../../../functions/src/modules/teams/types';
+import { Teams } from '../../../functions/src/modules/teams/types';
 import {
   CREATE_TEAM,
   DELETE_TEAM,
@@ -22,9 +22,7 @@ export interface TeamsState {
   isDeleting: boolean;
   isFetching: boolean;
   isUpdating: boolean;
-  teams: {
-    [id: string]: Team;
-  };
+  teams: Teams;
 }
 
 const initialState = {

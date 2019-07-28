@@ -10,3 +10,7 @@ export interface Team {
   members: TeamMember[];
   name: string;
 }
+
+export interface Teams {
+  [id: string]: Team;
+}
