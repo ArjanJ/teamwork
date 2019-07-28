@@ -7,8 +7,8 @@ const Login = Loadable({
   loading: () => null,
 });
 
-const Signup = Loadable({
-  loader: () => import('../signup/Signup'),
+const SignUp = Loadable({
+  loader: () => import('../signup/components/SignUp'),
   loading: () => null,
 });
 
@@ -25,7 +25,7 @@ const Onboarding = Loadable({
 export const Routes = () => (
   <Router>
     <Login path="/login" />
-    <Signup path="/signup" />
+    <SignUp path="/signup" />
     <Onboarding path="onboarding" />
     <Dashboard path="/*" />
   </Router>
