@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { useUser } from '../modules/user/useUser';
 import { isEmptyUser } from '../utils/isEmptyUser';
-import { OnSuccess } from './useSocialSignIn';
+import { OnSuccess } from './useSignUpOrLogin';
 
 /**
  * Handles what happens after someone signs up or logs in.
@@ -11,7 +11,7 @@ import { OnSuccess } from './useSocialSignIn';
  * them do that before they can see the dashboard. Otherwise
  * we redirect them straight to the dashboard.
  */
-export const useOnLoginOrSignup = () => {
+export const useSignUpOrLoginOnSuccess = () => {
   const { getUser, user } = useUser();
 
   const onSuccess = async ({ user }: OnSuccess) => {
