@@ -13,6 +13,7 @@ export function createUserReducer(state: UserState, action: CreateUserAction) {
   if (action.status === AsyncActionStatus.SUCCEEDED) {
     return {
       ...state,
+      error: null,
       isCreating: false,
       user: action.payload,
     };

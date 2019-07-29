@@ -13,6 +13,7 @@ export function updateUserReducer(state: UserState, action: UpdateUserAction) {
   if (action.status === AsyncActionStatus.SUCCEEDED) {
     return {
       ...state,
+      error: null,
       isUpdating: false,
       user: {
         ...state.user,

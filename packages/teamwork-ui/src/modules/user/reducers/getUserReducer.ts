@@ -13,6 +13,7 @@ export function getUserReducer(state: UserState, action: GetUserAction) {
   if (action.status === AsyncActionStatus.SUCCEEDED) {
     return {
       ...state,
+      error: null,
       isFetching: false,
       user: action.payload,
     };
