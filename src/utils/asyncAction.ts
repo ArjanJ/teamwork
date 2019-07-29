@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { ApiError } from '../../functions/src/types/ApiError';
+import { ApiError } from '../../functions/src/types/types';
 import { ApiResponse } from './apiClient';
 
 export enum AsyncActionStatus {
