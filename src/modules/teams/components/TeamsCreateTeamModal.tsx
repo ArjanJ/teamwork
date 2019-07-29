@@ -21,6 +21,7 @@ import { useAuthUser } from '../../auth/hooks/useAuthUser';
 import { useUser } from '../../user/useUser';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
+import { AsyncActionStatus } from '../../../utils/asyncAction';
 import { delay } from '../../../utils/delay';
 import { useTeams } from '../useTeams';
 import * as TeamsUtils from '../utils';
@@ -66,7 +67,7 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
             lastName: user.lastName,
           };
 
-          await createTeam({
+          const { status } = await createTeam({
             company: { id: '', name: '', owner: self },
             displayName: values.name,
             id: '',
@@ -74,12 +75,16 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
             name: normalizedTeamName,
           });
 
-          // So the transition of the loader isn't janky.
-          // await delay(2000);
-          // actions.setSubmitting(false);
+          if (status !== AsyncActionStatus.SUCCEEDED) {
+            return null;
+          }
 
-          // navigate(`/teams/${normalizedTeamName}`);
-          // hideModal();
+          // So the transition of the loader isn't janky.
+          await delay(2000);
+          actions.setSubmitting(false);
+
+          navigate(`/teams/${normalizedTeamName}`);
+          hideModal();
         }}
         render={({
           errors,

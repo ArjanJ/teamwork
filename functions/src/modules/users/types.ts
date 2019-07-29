@@ -6,9 +6,10 @@ export interface User {
   id: string;
   lastName: string;
   role: string;
-  teams: firebaseAdmin.firestore.FieldValue | UserTeam[];
+  teams: UserTeam[];
 }
 
+//firebaseAdmin.firestore.FieldValue
 export interface UserTeam {
   displayName: string;
   id: string;
