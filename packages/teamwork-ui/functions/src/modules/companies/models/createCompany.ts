@@ -4,5 +4,9 @@ import { Company } from '../types';
 
 export const CREATE_COMPANY = 'CREATE_COMPANY';
 
-export const createCompany = async (company: Company) =>
-  await db.collection(COMPANIES_COLLECTION).add(company);
+export const createCompany = async (company: Company) => {
+  const doc = db.collection(COMPANIES_COLLECTION).doc();
+  company.id = doc.id;
+  await doc.set(company);
+  return doc;
+};

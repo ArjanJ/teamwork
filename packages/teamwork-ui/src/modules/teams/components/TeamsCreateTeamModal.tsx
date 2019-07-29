@@ -61,19 +61,19 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
         ) => {
           const normalizedTeamName = TeamsUtils.normalizeTeamName(values.name);
 
-          await createTeam({
-            displayName: values.name,
-            id: '',
-            members: [
-              ...values.members,
-              {
-                email: authUser.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
-              },
-            ],
-            name: normalizedTeamName,
-          });
+          // await createTeam({
+          //   displayName: values.name,
+          //   id: '',
+          //   members: [
+          //     ...values.members,
+          //     {
+          //       email: authUser.email,
+          //       firstName: user.firstName,
+          //       lastName: user.lastName,
+          //     },
+          //   ],
+          //   name: normalizedTeamName,
+          // });
 
           // So the transition of the loader isn't janky.
           await delay(2000);

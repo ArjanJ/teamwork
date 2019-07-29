@@ -1,6 +1,7 @@
 export interface User {
   companies: UserCompany[];
   firstName: string;
+  id: string;
   lastName: string;
   role: string;
   teams: UserTeam[];
