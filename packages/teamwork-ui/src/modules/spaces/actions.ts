@@ -1,24 +1,23 @@
-import { UserCompany } from '../../../functions/src/modules/users/types';
-import { SET_ACTIVE_SPACE, SET_SPACES } from './types';
+import { ActiveSpace, SET_ACTIVE_SPACE, SET_SPACES, Spaces } from './types';
 
 interface SetActiveSpace {
   type: typeof SET_ACTIVE_SPACE;
-  payload: UserCompany['id'];
+  payload: ActiveSpace;
 }
 
 interface SetSpaces {
   type: typeof SET_SPACES;
-  payload: UserCompany[];
+  payload: Spaces;
 }
 
-export function SetActiveSpace(activeSpace: UserCompany['id']) {
+export function setActiveSpace(activeSpace: ActiveSpace): SetActiveSpace {
   return {
     type: SET_ACTIVE_SPACE,
     payload: activeSpace,
   };
 }
 
-export function SetSpaces(spaces: UserCompany[]) {
+export function setSpaces(spaces: Spaces): SetSpaces {
   return {
     type: SET_SPACES,
     payload: spaces,

@@ -5,7 +5,7 @@ interface SetAuthUser {
   payload: AuthUser;
 }
 
-export function setAuthUser(authUser: AuthUser) {
+export function setAuthUser(authUser: AuthUser): SetAuthUser {
   return {
     type: SET_AUTH_USER,
     payload: authUser,
