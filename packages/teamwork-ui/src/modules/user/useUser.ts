@@ -2,14 +2,14 @@ import { useCallback } from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 
 import { User } from '../../../functions/src/modules/users/types';
-import { ApiResponse } from '../../utils/apiClient';
+import { AsyncAction } from '../../utils/asyncAction';
 import { createUser, getUser, updateUser } from './actions/index';
 import { UserState } from './reducer';
 
 interface UseUser extends UserState {
-  createUser(user: User): Promise<ApiResponse>;
-  getUser(uid: string): Promise<ApiResponse>;
-  updateUser(uid: string, body: Partial<User>): Promise<ApiResponse>;
+  createUser(user: User): Promise<AsyncAction<string>>;
+  getUser(uid: string): Promise<AsyncAction<string>>;
+  updateUser(uid: string, body: Partial<User>): Promise<AsyncAction<string>>;
 }
 
 export const useUser = () => {

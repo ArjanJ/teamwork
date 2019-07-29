@@ -15,13 +15,13 @@ interface StartedAsyncAction<T> {
   type: T;
 }
 
-interface SucceededAsyncAction<T, P = any> {
+export interface SucceededAsyncAction<T, P = any> {
   payload: P;
   status: AsyncActionStatus.SUCCEEDED;
   type: T;
 }
 
-interface FailedAsyncAction<T> {
+export interface FailedAsyncAction<T> {
   payload: ApiError;
   status: AsyncActionStatus.FAILED;
   type: T;

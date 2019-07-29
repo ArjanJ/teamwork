@@ -1,8 +1,9 @@
 import { navigate } from '@reach/router';
 import { useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
+import { firebase } from '../firebase';
 import { useUser } from '../modules/user/useUser';
-import { isEmptyUser } from '../modules/user/utils';
 import { OnSuccess } from './useSignUpOrLogin';
 
 /**
@@ -12,6 +13,7 @@ import { OnSuccess } from './useSignUpOrLogin';
  * we redirect them straight to the dashboard.
  */
 export const useSignUpOrLoginOnSuccess = () => {
+  const [authUser] = useAuthState(firebase.auth);
   const { error, getUser, user } = useUser();
 
   const onSuccess = async ({ user }: OnSuccess) => {
@@ -30,9 +32,17 @@ export const useSignUpOrLoginOnSuccess = () => {
   };
 
   useEffect(() => {
-    if ((user && isEmptyUser(user)) || (error && error.status === 404)) {
+    const userNotFound = error && error.status === 404;
+
+    if (userNotFound) {
+      // If the user wasn't found, we need to create it (onboard them).
       navigate('/onboarding');
-    } else if (user) {
+    } else if (authUser && user) {
+      /**
+       * If we don't check for authUser then it will cause an infinite
+       * loop between '/' and '/login' because user still exists in
+       * redux store.
+       */
       navigate('/');
     }
   }, [error, user]);

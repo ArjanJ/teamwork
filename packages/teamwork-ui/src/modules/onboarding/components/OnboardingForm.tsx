@@ -11,8 +11,10 @@ import React, { useEffect } from 'react';
 import { Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
-import { useUser } from '../../user/useUser';
 import { Color } from '../../../styles/Color';
+import { AsyncActionStatus } from '../../../utils/asyncAction';
+import { useAuthUser } from '../../auth/useAuthUser';
+import { useUser } from '../../user/useUser';
 import {
   FieldWrapper,
   Input,
@@ -35,13 +37,18 @@ const initialValues: OnboardingFormValues = {
 };
 
 export const OnboardingForm = () => {
-  const { createUser, error: userError, user } = useUser();
+  const { authUser } = useAuthUser();
+  const { createUser, error, getUser, isFetching, user } = useUser();
 
   useEffect(() => {
-    if (!userError && user && !isEmptyUser(user)) {
+    if (!error && !user && !isFetching && authUser.uid) {
+      getUser(authUser.uid);
+    }
+
+    if (!error && user && !isEmptyUser(user)) {
       navigate('/');
     }
-  });
+  }, [authUser, error, user]);
 
   const onSubmit = async (
     values: OnboardingFormValues,
@@ -59,8 +66,15 @@ export const OnboardingForm = () => {
       role: values.role,
       teams: [],
     };
-    await createUser(user);
-    actions.setSubmitting(false);
+
+    const { status } = await createUser(user);
+    if (status === AsyncActionStatus.FAILED) {
+      // Do not go further if there was an error creating the user.
+      return actions.setSubmitting(false);
+    }
+
+    // If user is successfully created go to dashboard :)
+    navigate('/');
   };
 
   return (
