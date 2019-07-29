@@ -1,5 +1,5 @@
-import { db } from '../../config/firebase';
-import { TEAMS_COLLECTION } from './constants';
+import { db } from '../../../config/firebase';
+import { TEAMS_COLLECTION } from '../constants';
 
 export const DELETE_TEAM = 'DELETE_TEAM';
 

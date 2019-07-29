@@ -42,7 +42,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
           message: `${
             company.name
           } already exists. You must be added by an administrator.`,
-          status: 401,
+          status: 400,
           type: CREATE_USER,
         });
       } else {

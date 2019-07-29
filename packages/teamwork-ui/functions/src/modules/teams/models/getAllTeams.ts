@@ -1,6 +1,6 @@
-import { db } from '../../config/firebase';
-import { Company } from '../companies/types';
-import { TEAMS_COLLECTION } from './constants';
+import { db } from '../../../config/firebase';
+import { Company } from '../../companies/types';
+import { TEAMS_COLLECTION } from '../constants';
 
 export const GET_ALL_TEAMS = 'GET_ALL_TEAMS';
 

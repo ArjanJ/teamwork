@@ -1,10 +1,12 @@
+import * as firebaseAdmin from 'firebase-admin';
+
 export interface User {
   companies: UserCompany[];
   firstName: string;
   id: string;
   lastName: string;
   role: string;
-  teams: UserTeam[];
+  teams: firebaseAdmin.firestore.FieldValue | UserTeam[];
 }
 
 export interface UserTeam {

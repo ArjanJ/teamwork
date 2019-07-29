@@ -1,6 +1,6 @@
-import { db } from '../../config/firebase';
-import { TEAMS_COLLECTION } from './constants';
-import { Team } from './types';
+import { db } from '../../../config/firebase';
+import { TEAMS_COLLECTION } from '../constants';
+import { Team } from '../types';
 
 export const UPDATE_TEAM = 'UPDATE_TEAM';
 
