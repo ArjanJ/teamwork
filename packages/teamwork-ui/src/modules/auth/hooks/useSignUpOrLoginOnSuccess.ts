@@ -2,8 +2,8 @@ import { navigate } from '@reach/router';
 import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { firebase } from '../firebase';
-import { useUser } from '../modules/user/useUser';
+import { firebase } from '../../../firebase';
+import { useUser } from '../../user/useUser';
 import { OnSuccess } from './useSignUpOrLogin';
 
 /**

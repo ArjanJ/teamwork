@@ -4,8 +4,11 @@ import { Box } from 'rebass';
 
 import { GoogleLogo } from '../../../components/logos/logos';
 import { Spinner } from '../../../components/spinner/Spinner';
-import { AuthMethod, useSignUpOrLogin } from '../../../hooks/useSignUpOrLogin';
-import { useSignUpOrLoginOnSuccess } from '../../../hooks/useSignUpOrLoginOnSuccess';
+import {
+  AuthMethod,
+  useSignUpOrLogin,
+} from '../../auth/hooks/useSignUpOrLogin';
+import { useSignUpOrLoginOnSuccess } from '../../auth/hooks/useSignUpOrLoginOnSuccess';
 import { Color } from '../../../styles/Color';
 import { useUser } from '../../user/useUser';
 import { SignUpForm } from './SignUpForm';

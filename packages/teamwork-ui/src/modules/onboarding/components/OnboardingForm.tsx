@@ -13,7 +13,7 @@ import { Flex } from 'rebass';
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
 import { Color } from '../../../styles/Color';
 import { AsyncActionStatus } from '../../../utils/asyncAction';
-import { useAuthUser } from '../../auth/useAuthUser';
+import { useAuthUser } from '../../auth/hooks/useAuthUser';
 import { useUser } from '../../user/useUser';
 import {
   FieldWrapper,

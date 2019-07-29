@@ -17,7 +17,7 @@ import styled from 'styled-components';
 import { TeamMember } from '../../../../functions/src/modules/teams/types';
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
 import { Modal } from '../../../components/modal/Modal';
-import { useAuthUser } from '../../auth/useAuthUser';
+import { useAuthUser } from '../../auth/hooks/useAuthUser';
 import { useUser } from '../../user/useUser';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';

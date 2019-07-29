@@ -1,7 +1,7 @@
 import firebaseApp from 'firebase/app';
 import { useState } from 'react';
 
-import { auth, firebase } from '../firebase';
+import { auth, firebase } from '../../../firebase';
 
 export enum AuthMethod {
   LOGIN = 'LOGIN',

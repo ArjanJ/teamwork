@@ -5,8 +5,8 @@ import Loadable from 'react-loadable';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
-import { useAuthorization } from '../../auth/useAuthorization';
-import { useAuthUser } from '../../auth/useAuthUser';
+import { useAuthorization } from '../../auth/hooks/useAuthorization';
+import { useAuthUser } from '../../auth/hooks/useAuthUser';
 import { useUser } from '../../user/useUser';
 import { VerifyEmail } from '../../verify-email/components/VerifyEmail';
 import { Sidebar } from '../../sidebar/components/Sidebar';
