@@ -1,5 +1,3 @@
-import * as firebaseAdmin from 'firebase-admin';
-
 export interface User {
   companies: UserCompany[];
   firstName: string;

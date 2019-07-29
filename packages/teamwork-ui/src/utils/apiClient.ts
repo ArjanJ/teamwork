@@ -32,6 +32,7 @@ export const apiClient = async ({
   const token = await currentUser.getIdToken(true);
   headers.set('Authorization', `Bearer ${token}`);
 
+  // Add company id to headers.
   if (spaces.activeSpace) {
     headers.set('X-Company', spaces.activeSpace);
   }
