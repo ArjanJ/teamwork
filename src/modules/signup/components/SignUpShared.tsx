@@ -12,7 +12,7 @@ export const Backdrop = styled.div`
 export const Heading = styled.h2`
   color: white;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 400;
 `;
 
 export const P = styled.p`
