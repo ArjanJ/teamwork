@@ -16,7 +16,7 @@ export function updateUserReducer(state: UserState, action: UpdateUserAction) {
       isUpdating: false,
       user: {
         ...state.user,
-        ...action.payload.data,
+        ...action.payload,
       },
     };
   }

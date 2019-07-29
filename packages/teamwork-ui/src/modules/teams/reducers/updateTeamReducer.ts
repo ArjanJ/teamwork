@@ -16,7 +16,7 @@ export function updateTeamReducer(state: TeamsState, action: UpdateTeamAction) {
       isUpdating: false,
       teams: {
         ...state.teams,
-        [action.payload.data.id]: action.payload.data,
+        [action.payload.id]: action.payload,
       },
     };
   }

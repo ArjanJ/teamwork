@@ -11,7 +11,7 @@ export function deleteTeamReducer(state: TeamsState, action: DeleteTeamAction) {
   }
 
   if (action.status === AsyncActionStatus.SUCCEEDED) {
-    const { [action.payload.data.id]: deletedTeam, ...teams } = state.teams;
+    const { [action.payload.id]: deletedTeam, ...teams } = state.teams;
 
     return {
       ...state,

@@ -16,7 +16,7 @@ export function createTeamReducer(state: TeamsState, action: CreateTeamAction) {
       isCreating: false,
       teams: {
         ...state.teams,
-        [action.payload.data.id]: action.payload.data,
+        [action.payload.id]: action.payload,
       },
     };
   }
