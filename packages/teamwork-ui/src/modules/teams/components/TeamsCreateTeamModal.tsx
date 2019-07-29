@@ -60,27 +60,26 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
           actions: FormikActions<ITeamFormValues>,
         ) => {
           const normalizedTeamName = TeamsUtils.normalizeTeamName(values.name);
+          const self = {
+            email: authUser.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+          };
 
-          // await createTeam({
-          //   displayName: values.name,
-          //   id: '',
-          //   members: [
-          //     ...values.members,
-          //     {
-          //       email: authUser.email,
-          //       firstName: user.firstName,
-          //       lastName: user.lastName,
-          //     },
-          //   ],
-          //   name: normalizedTeamName,
-          // });
+          await createTeam({
+            company: { id: '', name: '', owner: self },
+            displayName: values.name,
+            id: '',
+            members: [...values.members, self],
+            name: normalizedTeamName,
+          });
 
           // So the transition of the loader isn't janky.
-          await delay(2000);
-          actions.setSubmitting(false);
+          // await delay(2000);
+          // actions.setSubmitting(false);
 
-          navigate(`/teams/${normalizedTeamName}`);
-          hideModal();
+          // navigate(`/teams/${normalizedTeamName}`);
+          // hideModal();
         }}
         render={({
           errors,
