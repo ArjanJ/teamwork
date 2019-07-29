@@ -3,3 +3,7 @@ export interface ApiError {
   status: number;
   type: string;
 }
+
+export interface ApiSuccess<T> {
+  data: T;
+}

@@ -1,4 +1,4 @@
-import { ApiError } from '../../functions/src/types/ApiError';
+import { ApiError } from '../../functions/src/types/types';
 import { firebase } from '../firebase';
 
 interface ApiClient {

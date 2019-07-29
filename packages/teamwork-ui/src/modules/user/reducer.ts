@@ -1,4 +1,4 @@
-import { ApiError } from '../../../functions/src/types/ApiError';
+import { ApiError } from '../../../functions/src/types/types';
 import { User } from '../../../functions/src/modules/users/types';
 import { CREATE_USER, GET_USER, UPDATE_USER } from './actions/index';
 import { UserActions } from './actions';

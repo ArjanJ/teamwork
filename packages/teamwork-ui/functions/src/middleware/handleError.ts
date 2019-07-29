@@ -1,5 +1,5 @@
 import { ErrorRequestHandler } from 'express';
-import { ApiError } from '../types/ApiError';
+import { ApiError } from '../types/types';
 
 const STATUS = 500;
 const MESSAGE = 'Something went wrong.';
@@ -15,11 +15,13 @@ export const handleError: ErrorRequestHandler = (
   const message = err.message || MESSAGE;
   const type = err.type || TYPE;
 
+  const error: ApiError = {
+    message,
+    status,
+    type,
+  };
+
   res.status(status).send({
-    error: {
-      message,
-      status,
-      type,
-    },
+    error,
   });
 };

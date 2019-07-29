@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 
+import { CREATE_USER } from '../../../../src/modules/user/actions/index';
 import { admin } from '../../config/firebase';
-import { createUser } from '../../modules/users';
+import { createUser } from '../../modules/users/models';
 import { User } from '../../modules/users/types';
 
 export const post = async (req: Request, res: Response, next: NextFunction) => {
@@ -24,16 +25,16 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
       teams,
     };
 
-    throw new Error('Testing out error handling');
-    // await createUser(decodedToken.uid, user);
+    await createUser(decodedToken.uid, user);
     res.status(200).send({ user });
 
     if (!decodedToken.companies && companies[0].name !== '') {
+      // TODO: Make API call to create company.
       admin.auth().setCustomUserClaims(decodedToken.uid, {
         companies,
       });
     }
   } catch (error) {
-    next({ message: error.message, type: 'CREATE_USER_ERROR' });
+    next({ message: error.message, type: CREATE_USER });
   }
 };
