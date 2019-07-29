@@ -13,11 +13,11 @@ interface UseSpaces extends SpacesState {
 export const useSpaces = () => {
   const dispatch = useDispatch();
 
-  const mapState = useCallback(state => state.auth, []);
-  const { spaces } = useMappedState(mapState);
+  const mapState = useCallback(state => state.spaces, []);
+  const spacesState = useMappedState(mapState);
 
   const api: UseSpaces = {
-    ...spaces,
+    ...spacesState,
     setActiveSpace: activeSpace => dispatch(setActiveSpace(activeSpace)),
     setSpaces: spaces => dispatch(setSpaces(spaces)),
   };

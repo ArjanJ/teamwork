@@ -17,7 +17,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
   const companyId = req.get('X-Company');
 
   if (!companyId) {
-    return next({ message: 'X-Company header missing value.' });
+    return next({ message: 'X-Company header is required.' });
   }
 
   try {
