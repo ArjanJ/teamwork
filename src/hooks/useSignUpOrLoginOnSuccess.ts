@@ -12,7 +12,7 @@ import { OnSuccess } from './useSignUpOrLogin';
  * we redirect them straight to the dashboard.
  */
 export const useSignUpOrLoginOnSuccess = () => {
-  const { getUser, user } = useUser();
+  const { error, getUser, user } = useUser();
 
   const onSuccess = async ({ user }: OnSuccess) => {
     if (user && user.emailVerified === false) {
@@ -30,12 +30,12 @@ export const useSignUpOrLoginOnSuccess = () => {
   };
 
   useEffect(() => {
-    if (user && isEmptyUser(user)) {
+    if ((user && isEmptyUser(user)) || (error && error.status === 404)) {
       navigate('/onboarding');
     } else if (user) {
       navigate('/');
     }
-  }, [user]);
+  }, [error, user]);
 
   return { onSuccess };
 };
