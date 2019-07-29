@@ -43,8 +43,8 @@ export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
 
   useEffect(() => {
     if (!activeSpace && user && user.companies) {
-      setSpaces(user.companies);
       setActiveSpace(user.companies[0].id);
+      setSpaces(user.companies);
     }
   }, [user]);
 
@@ -53,11 +53,13 @@ export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
       <Sidebar />
       <VerifyEmail>
         <Box flex={1}>
-          <Router>
-            <Team path="/teams/:teamName" />
-            <Teams path="/" />
-            <NotFound path="*" />
-          </Router>
+          {activeSpace && (
+            <Router>
+              <Team path="/teams/:teamName" />
+              <Teams path="/" />
+              <NotFound path="*" />
+            </Router>
+          )}
         </Box>
       </VerifyEmail>
     </DashboardWrapper>
