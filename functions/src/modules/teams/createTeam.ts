@@ -4,5 +4,9 @@ import { Team } from './types';
 
 export const CREATE_TEAM = 'CREATE_TEAM';
 
-export const createTeam = async (team: Team) =>
-  await db.collection(TEAMS_COLLECTION).add(team);
+export const createTeam = async (team: Team) => {
+  const doc = db.collection(TEAMS_COLLECTION).doc();
+  team.id = doc.id;
+  await doc.set(team);
+  return doc;
+};

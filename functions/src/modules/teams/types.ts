@@ -7,6 +7,7 @@ export interface Teams {
 export interface Team {
   company: Company;
   displayName: string;
+  id: string;
   members: TeamMember[];
   name: string;
 }

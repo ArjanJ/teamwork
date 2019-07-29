@@ -62,6 +62,7 @@ export const OnboardingForm = () => {
         },
       ],
       firstName: values.firstName,
+      id: '',
       lastName: values.lastName,
       role: values.role,
       teams: [],

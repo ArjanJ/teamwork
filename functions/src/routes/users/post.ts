@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { admin } from '../../config/firebase';
 import {
   createCompany,
   getCompanyByName,
@@ -11,6 +10,7 @@ import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const post = async (req: Request, res: Response, next: NextFunction) => {
   const { body, decodedToken } = req;
+  const { email, uid } = decodedToken;
 
   const {
     companies = [],
@@ -24,6 +24,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
     const user: User = {
       companies,
       firstName,
+      id: uid,
       lastName,
       role,
       teams,
@@ -46,37 +47,24 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
         });
       } else {
         // If the company doesn't exist then create it.
-        const companyDocRef = await createCompany({
+        const companyDoc = await createCompany({
           ...company,
           owner: {
-            email: decodedToken.email,
+            email,
             firstName,
             lastName,
           },
         });
 
-        // Add companyDoc id to user.companies object.
-        company.id = companyDocRef.id;
+        company.id = companyDoc.id;
       }
     }
 
     // Create user in db.
-    await createUser(decodedToken.uid, user);
+    await createUser(uid, user);
 
     // Return newly created user to client.
     res.status(200).send(wrapJsonResponse(user));
-
-    /**
-     * Here we're adding a custom claim to the JWT
-     * that firebase creates. By adding the companies
-     * to the token we will know what companies this user
-     * belongs to in each authenticated request.
-     */
-    if (!decodedToken.companies && companies[0].name !== '') {
-      admin.auth().setCustomUserClaims(decodedToken.uid, {
-        companies,
-      });
-    }
   } catch (error) {
     next({ message: error.message, type: CREATE_USER });
   }
