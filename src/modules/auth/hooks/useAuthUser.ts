@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 
-import { setAuthUser } from './actions';
-import { AuthUser } from './types';
+import { setAuthUser } from '../actions';
+import { AuthUser } from '../types';
 
 interface UseAuthUser {
   authUser: AuthUser;

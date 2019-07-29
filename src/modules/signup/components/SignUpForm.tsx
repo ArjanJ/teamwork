@@ -10,8 +10,11 @@ import React, { FunctionComponent } from 'react';
 import { Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
-import { AuthMethod, useSignUpOrLogin } from '../../../hooks/useSignUpOrLogin';
-import { useSignUpOrLoginOnSuccess } from '../../../hooks/useSignUpOrLoginOnSuccess';
+import {
+  AuthMethod,
+  useSignUpOrLogin,
+} from '../../auth/hooks/useSignUpOrLogin';
+import { useSignUpOrLoginOnSuccess } from '../../auth/hooks/useSignUpOrLoginOnSuccess';
 import { Color } from '../../../styles/Color';
 import { delay } from '../../../utils/delay';
 import { FieldWrapper, Input, Label } from './SignUpShared';

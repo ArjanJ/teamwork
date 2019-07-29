@@ -3,7 +3,7 @@ import { User } from 'firebase';
 import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { firebase } from '../../firebase';
+import { firebase } from '../../../firebase';
 import { useAuthUser } from './useAuthUser';
 
 interface UseAuthorization {
