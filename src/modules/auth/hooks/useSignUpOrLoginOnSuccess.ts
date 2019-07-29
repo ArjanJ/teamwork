@@ -24,7 +24,7 @@ export const useSignUpOrLoginOnSuccess = () => {
 
     if (user && user.uid) {
       /**
-       * Have to fetch the user to see if they filled out the
+       * Fetch the user to see if they filled out the
        * onboarding info (firstname, lastname, role).
        */
       getUser(user.uid);

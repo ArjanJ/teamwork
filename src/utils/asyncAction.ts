@@ -10,7 +10,8 @@ export enum AsyncActionStatus {
   UNSTARTED = 'UNSTARTED',
 }
 
-interface StartedAsyncAction<T> {
+interface StartedAsyncAction<T, P = any> {
+  payload: P;
   status: AsyncActionStatus.STARTED;
   type: T;
 }
@@ -28,12 +29,13 @@ export interface FailedAsyncAction<T> {
 }
 
 export type AsyncAction<T, P = any> =
-  | StartedAsyncAction<T>
+  | StartedAsyncAction<T, P>
   | SucceededAsyncAction<T, P>
   | FailedAsyncAction<T>;
 
-function startedAsyncAction<T>(type: T): StartedAsyncAction<T> {
+function startedAsyncAction<T, P>(type: T, payload: P): StartedAsyncAction<T> {
   return {
+    payload,
     status: AsyncActionStatus.STARTED,
     type,
   };
@@ -64,7 +66,7 @@ export function async<T, P extends ApiResponse>(
   ...args: any[]
 ) {
   return async (dispatch: Dispatch) => {
-    dispatch(startedAsyncAction(type));
+    dispatch(startedAsyncAction(type, {}));
 
     try {
       const payload = await action(...args);

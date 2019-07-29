@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import { useAuthorization } from '../../auth/hooks/useAuthorization';
 import { useAuthUser } from '../../auth/hooks/useAuthUser';
+import { useSpaces } from '../../spaces/useSpaces';
 import { useUser } from '../../user/useUser';
 import { VerifyEmail } from '../../verify-email/components/VerifyEmail';
 import { Sidebar } from '../../sidebar/components/Sidebar';
@@ -31,13 +32,21 @@ export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
   useAuthorization('/login');
 
   const { authUser } = useAuthUser();
-  const { getUser } = useUser();
+  const { getUser, user } = useUser();
+  const { activeSpace, setActiveSpace, setSpaces } = useSpaces();
 
   useEffect(() => {
-    if (authUser) {
+    if (authUser && !user) {
       getUser(authUser.uid);
     }
   }, [authUser]);
+
+  useEffect(() => {
+    if (!activeSpace && user && user.companies) {
+      setSpaces(user.companies);
+      setActiveSpace(user.companies[0].id);
+    }
+  }, [user]);
 
   return (
     <DashboardWrapper>
