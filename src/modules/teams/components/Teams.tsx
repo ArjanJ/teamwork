@@ -11,7 +11,10 @@ export const Teams: FunctionComponent<RouteComponentProps> = () => {
   const { user } = useUser();
 
   useEffect(() => {
-    if (Object.keys(teams).length === 0) {
+    const shouldFetchAllTeams =
+      user && Object.keys(teams).length === 0 && user.teams.length > 0;
+
+    if (shouldFetchAllTeams) {
       getAllTeams();
     }
   }, [user]);

@@ -17,7 +17,7 @@ export function getAllTeamsReducer(
     return {
       ...state,
       isFetching: false,
-      teams: action.payload.data,
+      teams: action.payload,
     };
   }
 

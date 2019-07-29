@@ -7,10 +7,6 @@ interface ApiClient {
   url: string;
 }
 
-export interface ApiResponseSuccess<D = any> {
-  data: D;
-}
-
 export interface ApiResponse {
   data?: any;
   error?: ApiError;

@@ -16,7 +16,7 @@ export function getTeamReducer(state: TeamsState, action: GetTeamAction) {
       isFetching: false,
       teams: {
         ...state.teams,
-        [action.payload.data.id]: action.payload.data,
+        [action.payload.id]: action.payload,
       },
     };
   }

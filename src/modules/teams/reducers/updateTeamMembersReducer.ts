@@ -19,7 +19,7 @@ export function updateTeamMembersReducer(
       isUpdating: false,
       teams: {
         ...state.teams,
-        [action.payload.data.id]: action.payload.data,
+        [action.payload.id]: action.payload,
       },
     };
   }

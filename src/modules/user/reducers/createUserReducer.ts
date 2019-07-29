@@ -14,7 +14,7 @@ export function createUserReducer(state: UserState, action: CreateUserAction) {
     return {
       ...state,
       isCreating: false,
-      user: action.payload.data,
+      user: action.payload,
     };
   }
 

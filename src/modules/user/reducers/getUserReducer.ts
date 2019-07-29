@@ -14,7 +14,7 @@ export function getUserReducer(state: UserState, action: GetUserAction) {
     return {
       ...state,
       isFetching: false,
-      user: action.payload.data,
+      user: action.payload,
     };
   }
 
