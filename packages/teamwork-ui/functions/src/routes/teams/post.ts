@@ -21,16 +21,24 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    // Check if team exists already within this company.
-    const existingTeam = await getTeamWhere('company.id', companyId);
-    if (existingTeam.docs.length > 0) {
-      return next({
-        message: `Team ${
-          body.displayName
-        } already exists within your organization.`,
-        status: 400,
-        type: CREATE_TEAM,
-      });
+    // Get all teams within company.
+    const teamsDocs = await getTeamWhere('company.id', companyId);
+
+    if (teamsDocs.docs.length > 0) {
+      // Check if team exists already within this company.
+      const teamsWithSameName = teamsDocs.docs
+        .map(teamDoc => teamDoc.data())
+        .filter(teamDoc => teamDoc.name === body.name);
+
+      if (teamsWithSameName.length > 0) {
+        return next({
+          message: `Team ${
+            body.displayName
+          } already exists within your organization.`,
+          status: 400,
+          type: CREATE_TEAM,
+        });
+      }
     }
 
     // Fetch full details of company because we need to store it on the Team doc.
