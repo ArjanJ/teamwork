@@ -11,16 +11,16 @@ interface UseAuthorization {
 }
 
 export const useAuthorization = (path: string) => {
-  const { initialising, user } = useAuthState(firebase.auth);
+  const [user, loading] = useAuthState(firebase.auth);
   const { authUser, setAuthUser } = useAuthUser();
 
   if (!path) {
     throw new Error('Expected a path to redirect to if not authorized.');
   }
 
-  // If no user and not loading then redirect to some path.
   useEffect(() => {
-    if (!initialising && !user) {
+    // If no user and not loading then redirect to some path.
+    if (!loading && !user) {
       navigate(path);
     }
 

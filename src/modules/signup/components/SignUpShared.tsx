@@ -146,3 +146,8 @@ export const Wrapper = styled.div<{
 
   ${({ textAlign }) => `text-align: ${textAlign}`};
 `;
+
+export const FadeWhen = styled.div<{ fade: boolean }>`
+  opacity: ${({ fade }) => (fade ? 0.4 : 1)};
+  transition: opacity 0.35s ${Easing.IN_OUT};
+`;

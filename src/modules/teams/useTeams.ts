@@ -3,7 +3,7 @@ import { useDispatch, useMappedState } from 'redux-react-hook';
 
 import { TeamMember, Team } from '../../../functions/src/modules/teams/types';
 import { UserTeam } from '../../../functions/src/modules/users/types';
-import { ApiResponse } from '../../utils/apiClient';
+import { AsyncAction } from '../../utils/asyncAction';
 import {
   createTeam,
   deleteTeam,
@@ -15,12 +15,15 @@ import {
 import { TeamsState } from './reducer';
 
 interface UseTeam extends TeamsState {
-  createTeam(team: Team): Promise<ApiResponse>;
-  deleteTeam(userTeam: UserTeam): Promise<ApiResponse>;
-  getTeam(id: string): Promise<ApiResponse>;
-  getAllTeams(): Promise<ApiResponse>;
-  updateTeam(id: string, body: Partial<Team>): Promise<ApiResponse>;
-  updateTeamMembers(id: string, body: TeamMember[]): Promise<ApiResponse>;
+  createTeam(team: Team): Promise<AsyncAction<string>>;
+  deleteTeam(userTeam: UserTeam): Promise<AsyncAction<string>>;
+  getTeam(id: string): Promise<AsyncAction<string>>;
+  getAllTeams(): Promise<AsyncAction<string>>;
+  updateTeam(id: string, body: Partial<Team>): Promise<AsyncAction<string>>;
+  updateTeamMembers(
+    id: string,
+    body: TeamMember[],
+  ): Promise<AsyncAction<string>>;
 }
 
 export const useTeams = () => {
