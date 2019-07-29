@@ -236,7 +236,7 @@ const Label = styled.label`
   color: white;
   display: block;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 4px;
 `;
 
@@ -303,6 +303,5 @@ const CancelButton = styled.button`
 
 const ErrorMessage = styled.p`
   color: #ff7272;
-  font-weight: 500;
   margin: 4px 12px;
 `;

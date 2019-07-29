@@ -73,7 +73,6 @@ const SidebarNewTeamWrapper = styled.button`
   bottom: 0;
   color: white;
   display: flex;
-  font-weight: 500;
   height: 64px;
   left: 0;
   opacity: 0.75;
