@@ -7,9 +7,9 @@ export const get = async (req: Request, res: Response, next: NextFunction) => {
   const { params } = req;
 
   try {
-    const doc = await getUser(params.uid);
+    const userDoc = await getUser(params.uid);
 
-    if (!doc.exists) {
+    if (!userDoc.exists) {
       return next({
         message: `User with uid: ${params.uid} not found.`,
         status: 404,
@@ -17,7 +17,7 @@ export const get = async (req: Request, res: Response, next: NextFunction) => {
       });
     }
 
-    res.status(200).send(wrapJsonResponse(doc.data()));
+    res.status(200).send(wrapJsonResponse(userDoc.data()));
   } catch (error) {
     next({ message: error.message, type: GET_USER });
   }

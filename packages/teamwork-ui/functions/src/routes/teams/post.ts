@@ -69,7 +69,6 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
     const teamDoc = await createTeam(team);
     // Add the new id to the in memory team obj.
     team.id = teamDoc.id;
-
     // Send newly created team back to client.
     res.status(200).send(wrapJsonResponse(team));
 
