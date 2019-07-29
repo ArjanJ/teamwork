@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import express from 'express';
 import bodyParser from 'body-parser';
+import morgan from 'morgan';
 
 import { handleError } from './middleware/handleError';
 import { routes } from './routes/';
@@ -8,6 +9,7 @@ import { routes } from './routes/';
 const app = express();
 const main = express();
 
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(routes);
