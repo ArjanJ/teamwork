@@ -1,10 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { GET_USER } from '../../../../src/modules/user/actions/index';
-import { getUser } from '../../modules/users/models';
+import { GET_USER, getUser } from '../../modules/users/models';
 
 export const get = async (req: Request, res: Response, next: NextFunction) => {
-  console.log('get func');
   const { params } = req;
 
   try {

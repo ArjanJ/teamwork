@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { CREATE_USER } from '../../../../src/modules/user/actions/index';
 import { admin } from '../../config/firebase';
-import { createUser } from '../../modules/users/models';
+import { CREATE_USER, createUser } from '../../modules/users/models';
 import { User } from '../../modules/users/types';
 
 export const post = async (req: Request, res: Response, next: NextFunction) => {
