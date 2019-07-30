@@ -1,11 +1,17 @@
 import { ApiError } from '../../../functions/src/types/types';
 import { User } from '../../../functions/src/modules/users/types';
-import { CREATE_TEAM, CreateTeamAction } from '../teams/actions/index';
+import {
+  CREATE_TEAM,
+  CreateTeamAction,
+  DELETE_TEAM,
+  DeleteTeamAction,
+} from '../teams/actions/index';
 import { CREATE_USER, GET_USER, UPDATE_USER } from './actions/index';
 import { UserActions } from './actions';
 import {
   createUserReducer,
   createTeamUserReducer,
+  deleteTeamUserReducer,
   getUserReducer,
   updateUserReducer,
 } from './reducers/index';
@@ -28,7 +34,7 @@ const initialState = {
 
 export default function(
   state: UserState = initialState,
-  action: UserActions | CreateTeamAction,
+  action: UserActions | CreateTeamAction | DeleteTeamAction,
 ): UserState {
   if (action.type === CREATE_USER) {
     return createUserReducer(state, action);
@@ -44,6 +50,10 @@ export default function(
 
   if (action.type === CREATE_TEAM) {
     return createTeamUserReducer(state, action);
+  }
+
+  if (action.type === DELETE_TEAM) {
+    return deleteTeamUserReducer(state, action);
   }
 
   return state;

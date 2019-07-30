@@ -4,7 +4,9 @@ import { Team } from '../types';
 
 export const UPDATE_TEAM = 'UPDATE_TEAM';
 
-export const updateTeam = async (id: string, changes: Partial<Team>) =>
+interface UpdateTeam extends Omit<Team, 'id'> {}
+
+export const updateTeam = async (id: string, changes: Partial<UpdateTeam>) =>
   await db
     .collection(TEAMS_COLLECTION)
     .doc(id)

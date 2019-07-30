@@ -3,7 +3,6 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Box, Flex } from 'rebass';
 import styled, { css } from 'styled-components';
 
-import { UserTeam } from '../../../../functions/src/modules/users/types';
 import { Toggle } from '../../../components/toggle/Toggle';
 import { useUser } from '../../user/useUser';
 import { Color } from '../../../styles/Color';
@@ -15,45 +14,35 @@ import {
 } from './TeamMembers';
 import { useTeams } from '../useTeams';
 
-interface ITeamProps {
+interface TeamProps {
   teamName?: string;
 }
 
-export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
+export const Team: FunctionComponent<RouteComponentProps & TeamProps> = ({
   teamName,
 }) => {
-  const [userTeam, setUserTeam] = useState<UserTeam>({
-    displayName: '',
-    id: '',
-    name: '',
-  });
-
   const { deleteTeam, getTeam, teams } = useTeams();
-  const { user } = useUser();
+  const { selectTeamFromName } = useUser();
 
-  const { displayName, id } = userTeam;
+  // UserTeam exists on state.user.teams
+  const userTeam = selectTeamFromName(teamName || '');
 
-  // Fetch current team (the one in the URL)
   useEffect(() => {
-    if (user && user.teams) {
-      const userTeamResult = user.teams.find(
-        (team: UserTeam) => team.name === teamName,
-      );
-
-      if (userTeamResult) {
-        setUserTeam(userTeamResult);
-        getTeam(userTeamResult.id);
-      }
+    // If state.teams[id] hasn't been loaded yet, load it.
+    if (userTeam && !teams[userTeam.id]) {
+      getTeam(userTeam.id);
     }
-  }, [user, teamName]);
+  }, [userTeam]);
 
-  if (!teams[id] || !teamName) {
+  if (!teamName) {
     return null;
   }
 
-  const handleDeleteTeam = async () => {
-    await deleteTeam(userTeam);
-    navigate('/');
+  const onDeleteClick = async () => {
+    if (userTeam) {
+      await deleteTeam({ id: userTeam.id });
+      navigate('/');
+    }
   };
 
   return (
@@ -64,7 +53,7 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
         justifyContent="space-between"
         mb="24px"
       >
-        <TeamName>{displayName}</TeamName>
+        {userTeam && <TeamName>{userTeam.displayName}</TeamName>}
         <Box>
           <Toggle>
             {({ isOpen, toggle }) => (
@@ -82,7 +71,7 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
                   <TeamMembersMenuItem type="button">
                     Rename team
                   </TeamMembersMenuItem>
-                  <TeamMembersMenuItem onClick={handleDeleteTeam} type="button">
+                  <TeamMembersMenuItem onClick={onDeleteClick} type="button">
                     Delete team
                   </TeamMembersMenuItem>
                 </TeamMembersMenu>
@@ -91,7 +80,7 @@ export const Team: FunctionComponent<RouteComponentProps & ITeamProps> = ({
           </Toggle>
         </Box>
       </Header>
-      <TeamMembers team={teams[id]} />
+      {userTeam && <TeamMembers team={teams[userTeam.id]} />}
     </Wrapper>
   );
 };
