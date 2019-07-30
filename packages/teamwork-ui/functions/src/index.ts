@@ -1,6 +1,6 @@
-import * as functions from 'firebase-functions';
-import express from 'express';
 import bodyParser from 'body-parser';
+import express from 'express';
+import * as functions from 'firebase-functions';
 import morgan from 'morgan';
 
 import { handleError } from './middleware/handleError';

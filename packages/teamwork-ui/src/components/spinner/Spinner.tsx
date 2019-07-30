@@ -1,12 +1,12 @@
-import styled, { keyframes } from 'styled-components';
 import React, { FunctionComponent } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 const rotate = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 `;
 
-interface ISpinnerProps {
+interface SpinnerProps {
   color: string;
   size: number;
   stroke?: number;
@@ -16,7 +16,7 @@ const Spinning = styled.svg`
   animation: 1s ${rotate} linear infinite;
 `;
 
-export const Spinner: FunctionComponent<ISpinnerProps> = ({
+export const Spinner: FunctionComponent<SpinnerProps> = ({
   color,
   size,
   stroke,

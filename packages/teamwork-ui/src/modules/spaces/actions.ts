@@ -12,15 +12,15 @@ interface SetSpaces {
 
 export function setActiveSpace(activeSpace: ActiveSpace): SetActiveSpace {
   return {
-    type: SET_ACTIVE_SPACE,
     payload: activeSpace,
+    type: SET_ACTIVE_SPACE,
   };
 }
 
 export function setSpaces(spaces: Spaces): SetSpaces {
   return {
-    type: SET_SPACES,
     payload: spaces,
+    type: SET_SPACES,
   };
 }
 

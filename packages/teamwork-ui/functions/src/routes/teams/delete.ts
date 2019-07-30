@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { admin } from '../../config/firebase';
-import { getTeam, DELETE_TEAM, deleteTeam } from '../../modules/teams/models';
+import { DELETE_TEAM, deleteTeam, getTeam } from '../../modules/teams/models';
 import { updateUser } from '../../modules/users/models';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
@@ -26,7 +26,7 @@ export const delete_ = async (
     // If clause is here because TS thinks it could be undefined 🤔
     if (team) {
       // Update the user object teams.
-      updateUser(uid, {
+      await updateUser(uid, {
         teams: admin.firestore.FieldValue.arrayRemove({
           displayName: team.displayName,
           id,

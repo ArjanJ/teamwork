@@ -1,4 +1,5 @@
 import { Teams } from '../../../functions/src/modules/teams/types';
+import { TeamsActions } from './actions';
 import {
   CREATE_TEAM,
   DELETE_TEAM,
@@ -6,7 +7,6 @@ import {
   GET_TEAM,
   UPDATE_TEAM,
 } from './actions/index';
-import { TeamsActions } from './actions';
 import {
   createTeamReducer,
   deleteTeamReducer,

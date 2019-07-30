@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { GET_TEAM, getTeamWhere } from '../../modules/teams/models';
-import { Teams, Team } from '../../modules/teams/types';
+import { Team, Teams } from '../../modules/teams/types';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const getAll = async (

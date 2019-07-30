@@ -1,15 +1,15 @@
-import React, { FunctionComponent, useEffect, useState, useRef } from 'react';
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
 
-interface IToggleProps {
-  children(state: IToggleState): React.ReactNode;
+interface ToggleProps {
+  children(state: ToggleState): React.ReactNode;
 }
 
-interface IToggleState {
+interface ToggleState {
   isOpen: boolean;
   toggle(): void;
 }
 
-export const Toggle: FunctionComponent<IToggleProps> = ({ children }) => {
+export const Toggle: FunctionComponent<ToggleProps> = ({ children }) => {
   const node: React.RefObject<any> = useRef();
   const [isOpen, setIsOpen] = useState(false);
 

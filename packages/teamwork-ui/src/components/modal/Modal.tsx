@@ -5,14 +5,14 @@ import styled, { keyframes } from 'styled-components';
 import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 
-interface IModalProps {
+interface ModalProps {
   children: React.ReactNode;
   dark?: boolean;
   hideModal(): void;
   title?: string;
 }
 
-export const Modal: FunctionComponent<IModalProps> = ({
+export const Modal: FunctionComponent<ModalProps> = ({
   children,
   dark = true,
   hideModal,
