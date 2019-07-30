@@ -1,7 +1,5 @@
 import { RouteComponentProps } from '@reach/router';
-import { Router } from '@reach/router';
 import React, { FunctionComponent, useEffect } from 'react';
-import Loadable from 'react-loadable';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
@@ -11,21 +9,7 @@ import { useSpaces } from '../../spaces/useSpaces';
 import { useUser } from '../../user/useUser';
 import { VerifyEmail } from '../../verify-email/components/VerifyEmail';
 import { Sidebar } from '../../sidebar/components/Sidebar';
-
-const Teams = Loadable({
-  loader: () => import('../../teams/components/Teams'),
-  loading: () => null,
-});
-
-const Team = Loadable({
-  loader: () => import('../../teams/components/Team'),
-  loading: () => null,
-});
-
-const NotFound = Loadable({
-  loader: () => import('../../not-found/components/NotFound'),
-  loading: () => null,
-});
+import { DashboardRoutes } from './DashboardRoutes';
 
 export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
   // Go to login page if not logged in.
@@ -52,15 +36,7 @@ export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
     <DashboardWrapper>
       <Sidebar />
       <VerifyEmail>
-        <Box flex={1}>
-          {activeSpace && (
-            <Router>
-              <Team path="/teams/:teamName" />
-              <Teams path="/" />
-              <NotFound path="*" />
-            </Router>
-          )}
-        </Box>
+        <Box flex={1}>{activeSpace && <DashboardRoutes />}</Box>
       </VerifyEmail>
     </DashboardWrapper>
   );
