@@ -46,7 +46,7 @@ export const TeamsOverview: FunctionComponent<TeamsOverviewProps> = ({
 
   return (
     <TeamsOverviewWrapper>
-      <Box as="header" mb="12px">
+      <Box as="header" mb="24px">
         <TeamsOverviewHeading>Your teams</TeamsOverviewHeading>
       </Box>
       <StyledTeamsOverviewList pose={showTeams ? 'visible' : 'hidden'}>
@@ -116,6 +116,7 @@ const StyledTeamsOverviewList = styled(TeamsOverviewList)`
   grid-gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   list-style-type: none;
+  min-height: 94px;
 `;
 
 const TeamsOverviewListLink = styled(Link)`
