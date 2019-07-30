@@ -49,15 +49,17 @@ Keep track of little things you owe people on your team.
 ## 👨‍💻 Technical Overview
 
 ### Frontend
-- React
 - TypeScript
+- React
 - Redux
+- React Hooks
 - Styled Components
 - Formik
 
 ### Backend
-- Node.js
 - TypeScript
+- Node.js
+- Express
 - Firebase Functions
 - Firebase Firestore
 - Firebase Authentication
