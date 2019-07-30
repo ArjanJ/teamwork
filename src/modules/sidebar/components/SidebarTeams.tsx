@@ -8,6 +8,10 @@ import { useUser } from '../../user/useUser';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
 
+interface SidebarTeamsChildProps {
+  user: User;
+}
+
 export const SidebarTeams = () => {
   const { user } = useUser();
 
@@ -20,7 +24,9 @@ export const SidebarTeams = () => {
   );
 };
 
-const SidebarTeamsEmpty: FunctionComponent<{ user: User }> = ({ user }) => {
+const SidebarTeamsEmpty: FunctionComponent<SidebarTeamsChildProps> = ({
+  user,
+}) => {
   if (user.teams && user.teams.length > 0) {
     return null;
   }
@@ -28,8 +34,10 @@ const SidebarTeamsEmpty: FunctionComponent<{ user: User }> = ({ user }) => {
   return <SidebarTeamsEmptyText>No teams</SidebarTeamsEmptyText>;
 };
 
-const SidebarTeamsListData: FunctionComponent<{ user: User }> = ({ user }) => {
-  if (!user || !user.teams) {
+const SidebarTeamsListData = React.memo(function SidebarTeamsListData({
+  user,
+}: SidebarTeamsChildProps) {
+  if (!user.teams) {
     return null;
   }
 
@@ -44,7 +52,7 @@ const SidebarTeamsListData: FunctionComponent<{ user: User }> = ({ user }) => {
       ))}
     </SidebarTeamsList>
   );
-};
+});
 
 const SidebarTeamsTitle = styled.h2`
   color: white;
