@@ -1,5 +1,5 @@
 import { navigate, RouteComponentProps } from '@reach/router';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { Box, Flex } from 'rebass';
 import styled, { css } from 'styled-components';
 

@@ -149,8 +149,9 @@ const TeamMembersItem = posed.li({
 const StyledTeamMembersList = styled(TeamMembersList)`
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   list-style-type: none;
+  min-height: 71px;
 `;
 
 const StyledTeamMembersListItem = styled(TeamMembersItem)`
