@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { GET_TEAM, getTeamWhere } from '../../modules/teams/models';
+import { Teams, Team } from '../../modules/teams/types';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const getAll = async (
@@ -17,7 +18,17 @@ export const getAll = async (
 
     // Get all teams within company.
     const teamsDocs = await getTeamWhere('company.id', companyId);
-    const teams = teamsDocs.docs.map(teamDoc => teamDoc.data());
+
+    const teamsResponse: Teams = {};
+
+    // Return docs list into Teams structure.
+    const teams: Teams = teamsDocs.docs.reduce((acc, curr) => {
+      const team: Team = <Team>curr.data();
+      acc[team.id] = team;
+      return acc;
+    }, teamsResponse);
+
+    // Return Teams to client.
     res.status(200).send(wrapJsonResponse(teams));
   } catch (error) {
     next({ message: error.message, status: error.status, type: GET_TEAM });

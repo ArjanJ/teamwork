@@ -79,8 +79,6 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
             return null;
           }
 
-          // So the transition of the loader isn't janky.
-          await delay(2000);
           actions.setSubmitting(false);
 
           navigate(`/teams/${normalizedTeamName}`);
