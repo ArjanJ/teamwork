@@ -1,4 +1,4 @@
-import { darken, lighten, rgba } from 'polished';
+import { darken, lighten } from 'polished';
 import styled, { css, keyframes } from 'styled-components';
 
 import { Easing } from '../../styles/Easing';

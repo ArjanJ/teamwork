@@ -26,11 +26,11 @@ import { delay } from '../../../utils/delay';
 import { useTeams } from '../useTeams';
 import * as TeamsUtils from '../utils';
 
-interface ITeamsCreateModalProps {
+interface TeamsCreateModalProps {
   hideModal(): void;
 }
 
-interface ITeamFormValues {
+interface TeamFormValues {
   name: string;
   members: TeamMember[];
 }
@@ -41,7 +41,7 @@ const initialValues = {
   members: [emptyTeammate],
 };
 
-export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
+export const TeamsCreateModal: FunctionComponent<TeamsCreateModalProps> = ({
   hideModal,
 }) => {
   const { createTeam } = useTeams();
@@ -57,8 +57,8 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
       <Formik
         initialValues={initialValues}
         onSubmit={async (
-          values: ITeamFormValues,
-          actions: FormikActions<ITeamFormValues>,
+          values: TeamFormValues,
+          actions: FormikActions<TeamFormValues>,
         ) => {
           const normalizedTeamName = TeamsUtils.normalizeTeamName(values.name);
           const self = {
@@ -79,23 +79,23 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
             return null;
           }
 
+          await delay(1200);
           actions.setSubmitting(false);
-
-          navigate(`/teams/${normalizedTeamName}`);
           hideModal();
+          navigate(`/teams/${normalizedTeamName}`);
         }}
         render={({
           errors,
           isSubmitting,
           values,
-        }: FormikProps<ITeamFormValues>) => (
+        }: FormikProps<TeamFormValues>) => (
           <Form>
             <FieldBox mb="30px">
               <Label>What's your team name?</Label>
               <P>Puns are encouraged.</P>
               <Field
                 name="name"
-                render={({ field }: FieldProps<ITeamFormValues>) => (
+                render={({ field }: FieldProps<TeamFormValues>) => (
                   <Input
                     {...field}
                     autoFocus
@@ -123,7 +123,7 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
                                     name={`members[${index}].email`}
                                     render={({
                                       field,
-                                    }: FieldProps<ITeamFormValues>) => (
+                                    }: FieldProps<TeamFormValues>) => (
                                       <Input
                                         {...field}
                                         placeholder="Email"
@@ -138,7 +138,7 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
                                     name={`members[${index}].firstName`}
                                     render={({
                                       field,
-                                    }: FieldProps<ITeamFormValues>) => (
+                                    }: FieldProps<TeamFormValues>) => (
                                       <Input
                                         {...field}
                                         placeholder="First Name"
@@ -153,7 +153,7 @@ export const TeamsCreateModal: FunctionComponent<ITeamsCreateModalProps> = ({
                                     name={`members[${index}].lastName`}
                                     render={({
                                       field,
-                                    }: FieldProps<ITeamFormValues>) => (
+                                    }: FieldProps<TeamFormValues>) => (
                                       <Input
                                         {...field}
                                         placeholder="Last Name"

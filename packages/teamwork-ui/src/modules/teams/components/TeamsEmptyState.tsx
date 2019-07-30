@@ -1,5 +1,5 @@
 import { darken, rgba } from 'polished';
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useModal } from 'react-modal-hook';
 import styled from 'styled-components';
 
@@ -9,21 +9,21 @@ import { Easing } from '../../../styles/Easing';
 import { TeamsCreateModal } from './TeamsCreateTeamModal';
 import { TeamsGraphic } from './TeamsGraphic';
 
-interface ITeamsEmptyStateProps {
+interface TeamsEmptyStateProps {
   user: User;
 }
 
-export const TeamsEmptyState: FunctionComponent<ITeamsEmptyStateProps> = ({
+export const TeamsEmptyState = React.memo(function TeamsEmptyState({
   user,
-}) => {
+}: TeamsEmptyStateProps) {
+  const [showModal, hideModal] = useModal(() => (
+    <TeamsCreateModal hideModal={hideModal} />
+  ));
+
   // If teams exist we don't want to show this component.
   if (user.teams.length > 0) {
     return null;
   }
-
-  const [showModal, hideModal] = useModal(() => (
-    <TeamsCreateModal hideModal={hideModal} />
-  ));
 
   return (
     <TeamsEmptyStateWrapper>
@@ -43,7 +43,7 @@ export const TeamsEmptyState: FunctionComponent<ITeamsEmptyStateProps> = ({
       </TeamsEmptyStateBox>
     </TeamsEmptyStateWrapper>
   );
-};
+});
 
 const TeamsEmptyStateWrapper = styled.div`
   padding: 48px 36px;
