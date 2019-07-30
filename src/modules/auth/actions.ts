@@ -1,14 +1,14 @@
 import { AuthUser, SET_AUTH_USER } from './types';
 
 interface SetAuthUser {
-  type: typeof SET_AUTH_USER;
   payload: AuthUser;
+  type: typeof SET_AUTH_USER;
 }
 
 export function setAuthUser(authUser: AuthUser): SetAuthUser {
   return {
-    type: SET_AUTH_USER,
     payload: authUser,
+    type: SET_AUTH_USER,
   };
 }
 

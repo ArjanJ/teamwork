@@ -1,16 +1,16 @@
-import { ApiError } from '../../../functions/src/types/types';
 import { User } from '../../../functions/src/modules/users/types';
+import { ApiError } from '../../../functions/src/types/types';
 import {
   CREATE_TEAM,
   CreateTeamAction,
   DELETE_TEAM,
   DeleteTeamAction,
 } from '../teams/actions/index';
-import { CREATE_USER, GET_USER, UPDATE_USER } from './actions/index';
 import { UserActions } from './actions';
+import { CREATE_USER, GET_USER, UPDATE_USER } from './actions/index';
 import {
-  createUserReducer,
   createTeamUserReducer,
+  createUserReducer,
   deleteTeamUserReducer,
   getUserReducer,
   updateUserReducer,

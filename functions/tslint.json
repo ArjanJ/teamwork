@@ -69,7 +69,7 @@
     "no-use-before-declare": true,
 
     // Expressions must always return a value. Avoids common errors like const myValue = functionReturningVoid();
-    "no-void-expression": [true, "ignore-arrow-function-shorthand"],
+    "no-void-expression": [false, "ignore-arrow-function-shorthand"],
 
     // Disallow duplicate imports in the same file.
     "no-duplicate-imports": true,

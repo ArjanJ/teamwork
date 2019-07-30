@@ -25,6 +25,8 @@
     "deploy": "npm run build && firebase deploy --project dev --only hosting",
     "deploy:api": "cd functions && firebase deploy --project dev --only functions",
     "eject": "react-scripts eject",
+    "lint": "tslint -c tslint.json src/**/**/*.ts*",
+    "lint:fix": "tslint -c tslint.json src/**/**/*.ts* --fix",
     "start": "react-scripts start",
     "start:api": "cd functions && concurrently \"npm run watch\" \"npm run serve\"",
     "test": "react-scripts test"

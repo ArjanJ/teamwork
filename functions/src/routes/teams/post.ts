@@ -3,13 +3,13 @@ import { NextFunction, Request, Response } from 'express';
 import { admin } from '../../config/firebase';
 import { getCompany } from '../../modules/companies/models';
 import {
-  createTeam,
   CREATE_TEAM,
+  createTeam,
   getTeamWhere,
 } from '../../modules/teams/models';
+import { Team } from '../../modules/teams/types';
 import { updateUser } from '../../modules/users/models';
 import { UserTeam } from '../../modules/users/types';
-import { Team } from '../../modules/teams/types';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const post = async (req: Request, res: Response, next: NextFunction) => {
@@ -27,8 +27,8 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
     if (teamsDocs.docs.length > 0) {
       // Check if team exists already within this company.
       const teamsWithSameName = teamsDocs.docs
-        .map(teamDoc => teamDoc.data())
-        .filter(teamDoc => teamDoc.name === body.name);
+        .map(t => t.data())
+        .filter(t => t.name === body.name);
 
       if (teamsWithSameName.length > 0) {
         return next({
@@ -80,7 +80,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
     };
 
     // Update user doc with new team.
-    updateUser(decodedToken.uid, {
+    await updateUser(decodedToken.uid, {
       teams: admin.firestore.FieldValue.arrayUnion(userTeam),
     });
   } catch (error) {

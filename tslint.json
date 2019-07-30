@@ -2,7 +2,7 @@
   "defaultSeverity": "error",
   "extends": ["tslint:recommended", "tslint-config-prettier", "tslint-react"],
   "linterOptions": {
-    "exclude": ["node_modules/**/*.ts"]
+    "exclude": ["node_modules/**/*.ts", "./functions"]
   },
   "rules": {
     "interface-name": [true, "never-prefix"],
@@ -11,6 +11,7 @@
     "max-classes-per-file": false,
     "member-ordering": [false],
     "no-console": false,
-    "no-namespace": false
+    "no-namespace": false,
+    "ordered-imports": true
   }
 }
