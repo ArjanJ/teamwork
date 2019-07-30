@@ -15,13 +15,13 @@ import { Easing } from '../../../styles/Easing';
 import { TeamsAddMembersModal } from './TeamsAddMembersModal';
 import { useTeams } from '../useTeams';
 
-interface ITeamMembersProps {
+interface TeamMembersProps {
   team: Team;
 }
 
-export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
+export const TeamMembers: FunctionComponent<TeamMembersProps> = ({ team }) => {
   const [showMembers, setShowMembers] = useState(false);
-  const { updateTeamMembers } = useTeams();
+  const { updateTeam } = useTeams();
 
   useEffect(() => {
     if (team) {
@@ -34,10 +34,11 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = ({ team }) => {
   }, [showMembers, team]);
 
   const removeTeamMember = (email: string) =>
-    updateTeamMembers(
-      team.id,
-      team.members.filter((member: TeamMember) => member.email !== email),
-    );
+    updateTeam(team.id, {
+      members: team.members.filter(
+        (member: TeamMember) => member.email !== email,
+      ),
+    });
 
   const [showModal, hideModal] = useModal(() => (
     <TeamsAddMembersModal hideModal={hideModal} team={team} />

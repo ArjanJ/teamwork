@@ -21,4 +21,4 @@ teamsRouter.get('/', getAll);
 teamsRouter.post('/', post);
 
 // Update single team
-teamsRouter.put('/', put);
+teamsRouter.put('/:id', put);

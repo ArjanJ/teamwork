@@ -80,7 +80,9 @@ export const Team: FunctionComponent<RouteComponentProps & TeamProps> = ({
           </Toggle>
         </Box>
       </Header>
-      {userTeam && <TeamMembers team={teams[userTeam.id]} />}
+      {userTeam && teams[userTeam.id] && (
+        <TeamMembers team={teams[userTeam.id]} />
+      )}
     </Wrapper>
   );
 };

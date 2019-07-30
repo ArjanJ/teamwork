@@ -4,7 +4,6 @@ import {
   DELETE_TEAM,
   GET_ALL_TEAMS,
   GET_TEAM,
-  UPDATE_TEAM_MEMBERS,
   UPDATE_TEAM,
 } from './actions/index';
 import { TeamsActions } from './actions';
@@ -14,7 +13,6 @@ import {
   getAllTeamsReducer,
   getTeamReducer,
   updateTeamReducer,
-  updateTeamMembersReducer,
 } from './reducers/index';
 
 export interface TeamsState {
@@ -55,10 +53,6 @@ export default function(
 
   if (action.type === UPDATE_TEAM) {
     return updateTeamReducer(state, action);
-  }
-
-  if (action.type === UPDATE_TEAM_MEMBERS) {
-    return updateTeamMembersReducer(state, action);
   }
 
   return state;

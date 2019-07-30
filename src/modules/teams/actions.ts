@@ -4,7 +4,6 @@ import {
   GetAllTeamsAction,
   GetTeamAction,
   UpdateTeamAction,
-  UpdateTeamMembersAction,
 } from './actions/index';
 
 export type TeamsActions =
@@ -12,5 +11,4 @@ export type TeamsActions =
   | DeleteTeamAction
   | GetAllTeamsAction
   | GetTeamAction
-  | UpdateTeamAction
-  | UpdateTeamMembersAction;
+  | UpdateTeamAction;

@@ -24,12 +24,12 @@ import { Easing } from '../../../styles/Easing';
 import { delay } from '../../../utils/delay';
 import { useTeams } from '../useTeams';
 
-interface ITeamsAddMembersModalProps {
+interface TeamsAddMembersModalProps {
   hideModal(): void;
   team: Team;
 }
 
-interface ITeamFormValues {
+interface TeamFormValues {
   members: TeamMember[];
 }
 
@@ -39,22 +39,23 @@ const initialValues = {
 };
 
 export const TeamsAddMembersModal: FunctionComponent<
-  ITeamsAddMembersModalProps
+  TeamsAddMembersModalProps
 > = ({ hideModal, team }) => {
-  const { updateTeamMembers } = useTeams();
+  console.log('inmodal', team);
+  const { updateTeam } = useTeams();
 
   return (
     <Modal hideModal={hideModal} title="Add team members">
       <Formik
         initialValues={initialValues}
         onSubmit={async (
-          values: ITeamFormValues,
-          actions: FormikActions<ITeamFormValues>,
+          values: TeamFormValues,
+          actions: FormikActions<TeamFormValues>,
         ) => {
           // Add new memebrs to list of current members.
           const members = [...team.members, ...values.members];
           // Save it.
-          await updateTeamMembers(team.id, members);
+          await updateTeam(team.id, { members });
           // So the transition of the loader isn't janky.
           await delay(2000);
           actions.setSubmitting(false);
@@ -64,7 +65,7 @@ export const TeamsAddMembersModal: FunctionComponent<
           errors,
           isSubmitting,
           values,
-        }: FormikProps<ITeamFormValues>) => (
+        }: FormikProps<TeamFormValues>) => (
           <Form>
             <FieldBox mb="30px">
               <Label>Who's on your team?</Label>
@@ -83,7 +84,7 @@ export const TeamsAddMembersModal: FunctionComponent<
                                     name={`members[${index}].email`}
                                     render={({
                                       field,
-                                    }: FieldProps<ITeamFormValues>) => (
+                                    }: FieldProps<TeamFormValues>) => (
                                       <Input
                                         {...field}
                                         autoFocus={true}
@@ -99,7 +100,7 @@ export const TeamsAddMembersModal: FunctionComponent<
                                     name={`members[${index}].firstName`}
                                     render={({
                                       field,
-                                    }: FieldProps<ITeamFormValues>) => (
+                                    }: FieldProps<TeamFormValues>) => (
                                       <Input
                                         {...field}
                                         placeholder="First Name"
@@ -114,7 +115,7 @@ export const TeamsAddMembersModal: FunctionComponent<
                                     name={`members[${index}].lastName`}
                                     render={({
                                       field,
-                                    }: FieldProps<ITeamFormValues>) => (
+                                    }: FieldProps<TeamFormValues>) => (
                                       <Input
                                         {...field}
                                         placeholder="Last Name"
@@ -163,8 +164,9 @@ export const TeamsAddMembersModal: FunctionComponent<
                     disabled={isSubmitting}
                     isSubmitting={isSubmitting}
                     primary={Color.AQUA}
-                    secondary={Color.BLUE_PERSIAN}
+                    secondary={Color.NAVY}
                     type="submit"
+                    width={180}
                   >
                     <span>Add team members</span>
                   </ButtonSpinner>
