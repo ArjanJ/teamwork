@@ -2,13 +2,12 @@ import { useCallback } from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 
 import { TeamMember, Team } from '../../../functions/src/modules/teams/types';
-import { UserTeam } from '../../../functions/src/modules/users/types';
 import { AsyncAction } from '../../utils/asyncAction';
 import {
   createTeam,
   deleteTeam,
-  getTeam,
   getAllTeams,
+  getTeam,
   updateTeam,
   updateTeamMembers,
 } from './actions/index';
@@ -16,9 +15,9 @@ import { TeamsState } from './reducer';
 
 interface UseTeam extends TeamsState {
   createTeam(team: Team): Promise<AsyncAction<string>>;
-  deleteTeam(userTeam: UserTeam): Promise<AsyncAction<string>>;
-  getTeam(id: string): Promise<AsyncAction<string>>;
+  deleteTeam(body: { id: Team['id'] }): Promise<AsyncAction<string>>;
   getAllTeams(): Promise<AsyncAction<string>>;
+  getTeam(id: string): Promise<AsyncAction<string>>;
   updateTeam(id: string, body: Partial<Team>): Promise<AsyncAction<string>>;
   updateTeamMembers(
     id: string,
@@ -35,9 +34,9 @@ export const useTeams = () => {
   const api: UseTeam = {
     ...teamsState,
     createTeam: team => dispatch(createTeam(team)),
-    deleteTeam: team => dispatch(deleteTeam(team)),
-    getTeam: id => dispatch(getTeam(id)),
+    deleteTeam: body => dispatch(deleteTeam(body)),
     getAllTeams: () => dispatch(getAllTeams()),
+    getTeam: id => dispatch(getTeam(id)),
     updateTeam: (id, body) => dispatch(updateTeam(id, body)),
     updateTeamMembers: (id, body) => dispatch(updateTeamMembers(id, body)),
   };
