@@ -20,7 +20,6 @@ export const FormField: FunctionComponent<FormFieldProps> = ({
 );
 
 const FormFieldWrapper = styled.div`
-  margin-bottom: 36px;
   position: relative;
 `;
 

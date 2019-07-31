@@ -1,5 +1,5 @@
 import { rgba } from 'polished';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import { Color } from '../../styles/Color';
@@ -10,6 +10,7 @@ interface ModalProps {
   dark?: boolean;
   hideModal(): void;
   title?: string;
+  width?: number;
 }
 
 export const Modal: FunctionComponent<ModalProps> = ({
@@ -17,11 +18,27 @@ export const Modal: FunctionComponent<ModalProps> = ({
   dark = true,
   hideModal,
   title = '',
+  width,
 }) => {
+  const handleKeyDown = ({ keyCode }: KeyboardEvent) => {
+    // Close modal when esc key is pressed.
+    if (keyCode === 27) {
+      hideModal();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown, false);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, false);
+    };
+  });
+
   return (
     <Wrapper>
       <Background dark={dark} onClick={hideModal} />
-      <ModalWrapper dark={dark}>
+      <ModalWrapper dark={dark} width={width}>
         {title && <Title>{title}</Title>}
         <CloseButton onClick={hideModal} type="button">
           <svg
@@ -69,7 +86,7 @@ const Wrapper = styled.div`
   z-index: 100;
 `;
 
-const ModalWrapper = styled.div<{ dark: boolean }>`
+const ModalWrapper = styled.div<{ dark: boolean; width?: number }>`
   animation: 0.4s 0.15s ${fadeInUp} ${Easing.OUT} forwards;
   background: ${props => (props.dark ? Color.NAVY : 'white')};
   border-radius: 4px;
@@ -78,7 +95,7 @@ const ModalWrapper = styled.div<{ dark: boolean }>`
   opacity: 0;
   padding: 36px;
   position: relative;
-  width: 640px;
+  width: ${({ width }) => width || 640}px;
 `;
 
 const Background = styled.div<{ dark: boolean }>`
