@@ -178,10 +178,10 @@ const TeamMembersName = styled.p`
 `;
 
 const TeamMembersEmail = styled.p`
-  color: ${darken(0.4, 'white')};
+  color: ${darken(0.45, 'white')};
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
 `;
 
