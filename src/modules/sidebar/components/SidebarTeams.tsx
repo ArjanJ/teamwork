@@ -26,22 +26,15 @@ export const SidebarTeams = () => {
 
 const SidebarTeamsEmpty: FunctionComponent<SidebarTeamsChildProps> = ({
   user,
-}) => {
-  if (user.teams && user.teams.length > 0) {
-    return null;
-  }
+}) =>
+  user.teams.length === 0 ? (
+    <SidebarTeamsEmptyText>No teams</SidebarTeamsEmptyText>
+  ) : null;
 
-  return <SidebarTeamsEmptyText>No teams</SidebarTeamsEmptyText>;
-};
-
-const SidebarTeamsListData = React.memo(function SidebarTeamsListData({
+const SidebarTeamsListData: FunctionComponent<SidebarTeamsChildProps> = ({
   user,
-}: SidebarTeamsChildProps) {
-  if (!user.teams) {
-    return null;
-  }
-
-  return (
+}) =>
+  user.teams ? (
     <SidebarTeamsList>
       {user.teams.map(team => (
         <li key={team.id}>
@@ -51,8 +44,7 @@ const SidebarTeamsListData = React.memo(function SidebarTeamsListData({
         </li>
       ))}
     </SidebarTeamsList>
-  );
-});
+  ) : null;
 
 const SidebarTeamsTitle = styled.h2`
   color: white;

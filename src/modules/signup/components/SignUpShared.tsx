@@ -114,7 +114,7 @@ export const Separator = styled(Box)`
 `;
 
 export const Title = styled.h1`
-  color: ${Color.MANGO};
+  color: ${Color.MINT};
   font-size: 36px;
   margin-bottom: 24px;
 `;

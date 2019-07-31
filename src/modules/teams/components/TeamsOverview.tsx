@@ -95,7 +95,7 @@ const TeamsOverviewWrapper = styled.div`
 `;
 
 const TeamsOverviewHeading = styled.h1`
-  color: ${Color.ORANGE};
+  color: ${Color.MINT};
   font-size: 30px;
 `;
 
@@ -113,30 +113,32 @@ const TeamsOverviewListItem = posed.li({
 
 const StyledTeamsOverviewList = styled(TeamsOverviewList)`
   display: grid;
-  grid-gap: 16px;
+  grid-gap: 24px;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   list-style-type: none;
   min-height: 94px;
 `;
 
 const TeamsOverviewListLink = styled(Link)`
-  background: ${rgba('black', 0.25)};
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   border-radius: 4px;
   display: block;
-  padding: 16px;
+  padding: 24px;
   text-decoration: none;
-  transition: background 0.35s ${Easing.OUT};
+  transition: all 0.35s ${Easing.OUT};
   width: 100%;
 
   &:hover {
-    background: ${rgba('black', 0.35)};
+    background: ${darken(0.08, 'white')};
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.16);
   }
 `;
 
 const TeamsOverviewTeamName = styled.h2`
-  color: white;
-  font-size: 20px;
-  margin-bottom: 8px;
+  color: ${Color.NAVY};
+  font-size: 24px;
+  margin-bottom: 18px;
 `;
 
 const TeamsOverviewMembersList = styled.ul`
@@ -147,14 +149,14 @@ const TeamsOverviewMembersList = styled.ul`
 
 const TeamsOverviewMemberItem = styled.li`
   align-items: center;
-  background: ${rgba('white', 0.75)};
+  background: ${rgba(Color.BLUE_PERSIAN, 0.2)};
   border-radius: 50%;
   box-shadow: 0 1px 1px ${rgba('black', 0.1)};
   display: flex;
-  height: 24px;
+  height: 36px;
   justify-content: center;
-  margin-left: -8px;
-  width: 24px;
+  margin-left: -12px;
+  width: 36px;
 
   img {
     width: 16px;
@@ -168,7 +170,7 @@ const TeamsOverviewMemberItem = styled.li`
 const Divider = styled.div`
   background: white;
   height: 1px;
-  margin: 36px 0;
+  margin: 48px 0;
   opacity: 0.25;
 `;
 
