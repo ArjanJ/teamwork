@@ -149,9 +149,9 @@ const TeamsOverviewMembersList = styled.ul`
 
 const TeamsOverviewMemberItem = styled.li`
   align-items: center;
-  background: ${rgba(Color.BLUE_PERSIAN, 0.2)};
+  background: #dbd1f1;
+  border: 2px solid white;
   border-radius: 50%;
-  box-shadow: 0 1px 1px ${rgba('black', 0.1)};
   display: flex;
   height: 36px;
   justify-content: center;
@@ -175,20 +175,17 @@ const Divider = styled.div`
 `;
 
 const AddTeamButton = styled.button`
-  background: ${Color.BLUE_SKY};
+  background: ${Color.AQUA};
   border-radius: 99px;
-  box-shadow: 0 0 0 3px ${rgba(Color.BLUE_SKY, 1)};
   color: white;
-  font-size: 15px;
   font-weight: 700;
-  height: 36px;
-  margin: 3px;
+  height: 40px;
   min-width: 100px;
   padding: 0 24px;
   position: relative;
-  transition: background 0.5s ${Easing.IN_OUT};
+  transition: background 0.35s ${Easing.OUT};
 
   &:hover {
-    background: ${darken(0.05, Color.BLUE_SKY)};
+    background: ${darken(0.06, Color.AQUA)};
   }
 `;

@@ -35,25 +35,18 @@ export default function(
   state: TeamsState = initialState,
   action: TeamsActions,
 ): TeamsState {
-  if (action.type === CREATE_TEAM) {
-    return createTeamReducer(state, action);
+  switch (action.type) {
+    case CREATE_TEAM:
+      return createTeamReducer(state, action);
+    case DELETE_TEAM:
+      return deleteTeamReducer(state, action);
+    case GET_ALL_TEAMS:
+      return getAllTeamsReducer(state, action);
+    case GET_TEAM:
+      return getTeamReducer(state, action);
+    case UPDATE_TEAM:
+      return updateTeamReducer(state, action);
+    default:
+      return state;
   }
-
-  if (action.type === DELETE_TEAM) {
-    return deleteTeamReducer(state, action);
-  }
-
-  if (action.type === GET_ALL_TEAMS) {
-    return getAllTeamsReducer(state, action);
-  }
-
-  if (action.type === GET_TEAM) {
-    return getTeamReducer(state, action);
-  }
-
-  if (action.type === UPDATE_TEAM) {
-    return updateTeamReducer(state, action);
-  }
-
-  return state;
 }
