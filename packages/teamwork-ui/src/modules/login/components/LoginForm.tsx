@@ -10,6 +10,8 @@ import React, { FunctionComponent } from 'react';
 import { Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
+import { FormField } from '../../../components/form-field/FormField';
+import { Input } from '../../../components/input/Input';
 import { Color } from '../../../styles/Color';
 import { delay } from '../../../utils/delay';
 import {
@@ -17,11 +19,6 @@ import {
   useSignUpOrLogin,
 } from '../../auth/hooks/useSignUpOrLogin';
 import { useSignUpOrLoginOnSuccess } from '../../auth/hooks/useSignUpOrLoginOnSuccess';
-import {
-  FieldWrapper,
-  Input,
-  Label,
-} from '../../signup/components/SignUpShared';
 
 interface LoginFormValues {
   email: string;
@@ -32,18 +29,6 @@ const initialValues = {
   email: '',
   password: '',
 };
-
-interface FormFieldProps {
-  children: React.ReactChild | React.ReactNodeArray;
-  label: string;
-}
-
-const FormField: FunctionComponent<FormFieldProps> = ({ children, label }) => (
-  <FieldWrapper mb="36px">
-    {children}
-    <Label>{label}</Label>
-  </FieldWrapper>
-);
 
 const EmailField = ({ field }: FieldProps<LoginFormValues>) => (
   <FormField label="Email">
