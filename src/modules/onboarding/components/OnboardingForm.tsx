@@ -11,14 +11,11 @@ import React, { useEffect } from 'react';
 import { Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
+import { FormField } from '../../../components/form-field/FormField';
+import { Input } from '../../../components/input/Input';
 import { Color } from '../../../styles/Color';
 import { AsyncActionStatus } from '../../../utils/asyncAction';
 import { useAuthUser } from '../../auth/hooks/useAuthUser';
-import {
-  FieldWrapper,
-  Input,
-  Label,
-} from '../../signup/components/SignUpShared';
 import { useUser } from '../../user/useUser';
 import { isEmptyUser } from '../../user/utils';
 
@@ -29,12 +26,82 @@ interface OnboardingFormValues {
   role: string;
 }
 
-const initialValues: OnboardingFormValues = {
+const initialValues = {
   company: '',
   firstName: '',
   lastName: '',
   role: '',
 };
+
+const FirstNameField = ({ field }: FieldProps<OnboardingFormValues>) => (
+  <FormField label="First Name">
+    <Input
+      {...field}
+      autoFocus={true}
+      placeholder="Your First Name"
+      required={true}
+      type="text"
+    />
+  </FormField>
+);
+
+const LastNameField = ({ field }: FieldProps<OnboardingFormValues>) => (
+  <FormField label="Last Name">
+    <Input
+      {...field}
+      autoFocus={true}
+      placeholder="Your Last Name"
+      required={true}
+      type="text"
+    />
+  </FormField>
+);
+
+const CompanyField = ({ field }: FieldProps<OnboardingFormValues>) => (
+  <FormField label="Company">
+    <Input
+      {...field}
+      autoFocus={true}
+      placeholder="Your Company"
+      required={true}
+      type="text"
+    />
+  </FormField>
+);
+
+const RoleField = ({ field }: FieldProps<OnboardingFormValues>) => (
+  <FormField label="Role">
+    <Input
+      {...field}
+      autoFocus={true}
+      placeholder="Your Role"
+      required={true}
+      type="text"
+    />
+  </FormField>
+);
+
+const OnboardingFormComponent = (
+  formikBag: FormikProps<OnboardingFormValues>,
+) => (
+  <Form>
+    <Field name="firstName" render={FirstNameField} />
+    <Field name="lastName" render={LastNameField} />
+    <Field name="company" render={CompanyField} />
+    <Field name="role" render={RoleField} />
+    <Flex justifyContent="flex-end">
+      <ButtonSpinner
+        disabled={formikBag.isSubmitting}
+        isSubmitting={formikBag.isSubmitting}
+        primary={Color.AQUA}
+        secondary={Color.BLUE_PERSIAN}
+        type="submit"
+      >
+        <span>Next</span>
+      </ButtonSpinner>
+    </Flex>
+  </Form>
+);
 
 export const OnboardingForm = () => {
   const { authUser } = useAuthUser();
@@ -54,7 +121,7 @@ export const OnboardingForm = () => {
     values: OnboardingFormValues,
     actions: FormikActions<OnboardingFormValues>,
   ) => {
-    const user = {
+    const newUser = {
       companies: [
         {
           id: '',
@@ -68,7 +135,7 @@ export const OnboardingForm = () => {
       teams: [],
     };
 
-    const { status } = await createUser(user);
+    const { status } = await createUser(newUser);
     if (status === AsyncActionStatus.FAILED) {
       // Do not go further if there was an error creating the user.
       return actions.setSubmitting(false);
@@ -82,78 +149,7 @@ export const OnboardingForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
-      render={(formikBag: FormikProps<OnboardingFormValues>) => (
-        <Form>
-          <Field
-            name="firstName"
-            render={({ field, form }: FieldProps<OnboardingFormValues>) => (
-              <FieldWrapper mb="36px">
-                <Input
-                  {...field}
-                  autoFocus={true}
-                  placeholder="Your First Name"
-                  required={true}
-                  type="text"
-                />
-                <Label>First name</Label>
-              </FieldWrapper>
-            )}
-          />
-          <Field
-            name="lastName"
-            render={({ field, form }: FieldProps<OnboardingFormValues>) => (
-              <FieldWrapper mb="36px">
-                <Input
-                  {...field}
-                  placeholder="Your Last Name"
-                  required={true}
-                  type="text"
-                />
-                <Label>Last name</Label>
-              </FieldWrapper>
-            )}
-          />
-          <Field
-            name="company"
-            render={({ field, form }: FieldProps<OnboardingFormValues>) => (
-              <FieldWrapper mb="36px">
-                <Input
-                  {...field}
-                  placeholder="Your Company"
-                  required={true}
-                  type="text"
-                />
-                <Label>Company</Label>
-              </FieldWrapper>
-            )}
-          />
-          <Field
-            name="role"
-            render={({ field, form }: FieldProps<OnboardingFormValues>) => (
-              <FieldWrapper mb="36px">
-                <Input
-                  {...field}
-                  placeholder="Your Role"
-                  required={true}
-                  type="text"
-                />
-                <Label>Role</Label>
-              </FieldWrapper>
-            )}
-          />
-          <Flex justifyContent="flex-end">
-            <ButtonSpinner
-              disabled={formikBag.isSubmitting}
-              isSubmitting={formikBag.isSubmitting}
-              primary={Color.AQUA}
-              secondary={Color.BLUE_PERSIAN}
-              type="submit"
-            >
-              <span>Next</span>
-            </ButtonSpinner>
-          </Flex>
-        </Form>
-      )}
+      render={OnboardingFormComponent}
     />
   );
 };
