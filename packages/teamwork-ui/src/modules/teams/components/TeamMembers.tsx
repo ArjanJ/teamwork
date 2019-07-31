@@ -136,7 +136,7 @@ const Subheading = styled.h2`
 
 const TeamMembersList = posed.ul({
   visible: {
-    delayChildren: 1000,
+    delayChildren: 600,
     staggerChildren: 50,
   },
 });
