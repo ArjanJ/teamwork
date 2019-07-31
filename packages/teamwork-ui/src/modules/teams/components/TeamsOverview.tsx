@@ -1,5 +1,5 @@
 import { Link } from '@reach/router';
-import { darken, rgba } from 'polished';
+import { darken } from 'polished';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useModal } from 'react-modal-hook';
 import posed from 'react-pose';
@@ -10,6 +10,7 @@ import {
   Team,
   TeamMember,
 } from '../../../../functions/src/modules/teams/types';
+import { Button, ButtonKind } from '../../../components/button/Button';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
 import { TeamsCreateModal } from './TeamsCreateTeamModal';
@@ -80,9 +81,9 @@ export const TeamsOverview: FunctionComponent<TeamsOverviewProps> = ({
       </StyledTeamsOverviewList>
       <Divider />
       <Flex justifyContent="flex-end">
-        <AddTeamButton onClick={showModal} type="button">
+        <Button kind={ButtonKind.PRIMARY} onClick={showModal} type="button">
           Add team
-        </AddTeamButton>
+        </Button>
       </Flex>
     </TeamsOverviewWrapper>
   );
@@ -172,20 +173,4 @@ const Divider = styled.div`
   height: 1px;
   margin: 48px 0;
   opacity: 0.25;
-`;
-
-const AddTeamButton = styled.button`
-  background: ${Color.AQUA};
-  border-radius: 99px;
-  color: white;
-  font-weight: 700;
-  height: 40px;
-  min-width: 100px;
-  padding: 0 24px;
-  position: relative;
-  transition: background 0.35s ${Easing.OUT};
-
-  &:hover {
-    background: ${darken(0.06, Color.AQUA)};
-  }
 `;

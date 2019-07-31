@@ -18,7 +18,6 @@ interface ButtonSpinnerProps {
 export const ButtonSpinner = styled.button<ButtonSpinnerProps>`
   background: none;
   color: white;
-  font-size: 16px;
   font-weight: 700;
   height: 40px;
   position: relative;
