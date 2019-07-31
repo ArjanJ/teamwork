@@ -18,74 +18,74 @@ interface TeamProps {
   teamName?: string;
 }
 
-export const Team = React.memo<RouteComponentProps & TeamProps>(function Team({
-  teamName = '',
-}) {
-  const { deleteTeam, getTeam, teams } = useTeams();
-  const { selectTeamFromName } = useUser();
+export const Team = React.memo<RouteComponentProps & TeamProps>(
+  function TeamComponent({ teamName = '' }) {
+    const { deleteTeam, getTeam, teams } = useTeams();
+    const { selectTeamFromName } = useUser();
 
-  // UserTeam exists on state.user.teams
-  const userTeam = selectTeamFromName(teamName);
+    // UserTeam exists on state.user.teams
+    const userTeam = selectTeamFromName(teamName);
 
-  useEffect(() => {
-    // If state.teams[id] hasn't been loaded yet, load it.
-    if (userTeam && !teams[userTeam.id]) {
-      getTeam(userTeam.id);
+    useEffect(() => {
+      // If state.teams[id] hasn't been loaded yet, load it.
+      if (userTeam && !teams[userTeam.id]) {
+        getTeam(userTeam.id);
+      }
+    }, [userTeam]);
+
+    if (!teamName) {
+      return null;
     }
-  }, [userTeam]);
 
-  if (!teamName) {
-    return null;
-  }
+    const onDeleteClick = async () => {
+      if (userTeam) {
+        await deleteTeam({ id: userTeam.id });
+        navigate('/');
+      }
+    };
 
-  const onDeleteClick = async () => {
-    if (userTeam) {
-      await deleteTeam({ id: userTeam.id });
-      navigate('/');
-    }
-  };
-
-  return (
-    <Wrapper>
-      <Header
-        alignItems="center"
-        as="header"
-        justifyContent="space-between"
-        mb="24px"
-      >
-        {userTeam && <TeamName>{userTeam.displayName}</TeamName>}
-        <Box>
-          <Toggle>
-            {({ isOpen, toggle }) => (
-              <React.Fragment>
-                <SettingsButton onClick={toggle} type="button">
-                  <SettingsIcon />
-                </SettingsButton>
-                <TeamMembersMenu
-                  isOpen={isOpen}
-                  styles={css`
-                    right: 0;
-                    top: 36px;
-                  `}
-                >
-                  <TeamMembersMenuItem type="button">
-                    Rename team
-                  </TeamMembersMenuItem>
-                  <TeamMembersMenuItem onClick={onDeleteClick} type="button">
-                    Delete team
-                  </TeamMembersMenuItem>
-                </TeamMembersMenu>
-              </React.Fragment>
-            )}
-          </Toggle>
-        </Box>
-      </Header>
-      {userTeam && teams[userTeam.id] && (
-        <TeamMembers team={teams[userTeam.id]} />
-      )}
-    </Wrapper>
-  );
-});
+    return (
+      <Wrapper>
+        <Header
+          alignItems="center"
+          as="header"
+          justifyContent="space-between"
+          mb="24px"
+        >
+          {userTeam && <TeamName>{userTeam.displayName}</TeamName>}
+          <Box>
+            <Toggle>
+              {({ isOpen, toggle }) => (
+                <React.Fragment>
+                  <SettingsButton onClick={toggle} type="button">
+                    <SettingsIcon />
+                  </SettingsButton>
+                  <TeamMembersMenu
+                    isOpen={isOpen}
+                    styles={css`
+                      right: 0;
+                      top: 36px;
+                    `}
+                  >
+                    <TeamMembersMenuItem type="button">
+                      Rename team
+                    </TeamMembersMenuItem>
+                    <TeamMembersMenuItem onClick={onDeleteClick} type="button">
+                      Delete team
+                    </TeamMembersMenuItem>
+                  </TeamMembersMenu>
+                </React.Fragment>
+              )}
+            </Toggle>
+          </Box>
+        </Header>
+        {userTeam && teams[userTeam.id] && (
+          <TeamMembers team={teams[userTeam.id]} />
+        )}
+      </Wrapper>
+    );
+  },
+);
 
 const SettingsIcon = () => (
   <svg

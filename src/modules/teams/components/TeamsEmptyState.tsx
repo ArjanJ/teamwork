@@ -13,7 +13,7 @@ interface TeamsEmptyStateProps {
   user: User;
 }
 
-export const TeamsEmptyState = React.memo(function TeamsEmptyState({
+export const TeamsEmptyState = React.memo(function TeamsEmptyStateComponent({
   user,
 }: TeamsEmptyStateProps) {
   const [showModal, hideModal] = useModal(() => (
