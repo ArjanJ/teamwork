@@ -7,7 +7,7 @@ import {
   FormikProps,
 } from 'formik';
 import React, { FunctionComponent } from 'react';
-import { Flex } from 'rebass';
+import { Box, Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
 import { FormField } from '../../../components/form-field/FormField';
@@ -70,9 +70,15 @@ const SignUpFormComponent = ({
   isSubmitting,
 }: FormikProps<SignUpFormValues>) => (
   <Form>
-    <Field name="email" render={EmailField} />
-    <Field name="password" render={PasswordField} />
-    <Field name="confirmPassword" render={ConfirmPasswordField} />
+    <Box mb="24px">
+      <Field name="email" render={EmailField} />
+    </Box>
+    <Box mb="24px">
+      <Field name="password" render={PasswordField} />
+    </Box>
+    <Box mb="36px">
+      <Field name="confirmPassword" render={ConfirmPasswordField} />
+    </Box>
     <Flex justifyContent="center" mb="36px">
       <ButtonSpinner
         isSubmitting={isSubmitting}
