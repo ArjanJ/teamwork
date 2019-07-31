@@ -42,48 +42,6 @@ export const BigButton = styled.button`
   }
 `;
 
-export const FieldWrapper = styled(Box)`
-  position: relative;
-`;
-
-export const Input = styled.input`
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  height: 64px;
-  padding: 0 16px;
-  transition: all 0.35s ${Easing.OUT};
-  width: 100%;
-
-  &:focus,
-  &:hover {
-    background: ${darken(0.06, 'white')};
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-  }
-
-  &:focus + label,
-  &:valid + label {
-    opacity: 1;
-  }
-
-  &:focus,
-  &:valid {
-    padding-top: 15px;
-  }
-`;
-
-export const Label = styled.label`
-  color: ${Color.NAVY};
-  font-size: 13px;
-  font-weight: 700;
-  left: 16px;
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  top: 9px;
-  transition: all 0.5s ${Easing.OUT};
-`;
-
 export const Separator = styled(Box)`
   position: relative;
   z-index: 1;
