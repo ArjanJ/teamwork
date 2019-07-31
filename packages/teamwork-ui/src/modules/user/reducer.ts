@@ -36,25 +36,18 @@ export default function(
   state: UserState = initialState,
   action: UserActions | CreateTeamAction | DeleteTeamAction,
 ): UserState {
-  if (action.type === CREATE_USER) {
-    return createUserReducer(state, action);
+  switch (action.type) {
+    case CREATE_USER:
+      return createUserReducer(state, action);
+    case GET_USER:
+      return getUserReducer(state, action);
+    case UPDATE_USER:
+      return updateUserReducer(state, action);
+    case CREATE_TEAM:
+      return createTeamUserReducer(state, action);
+    case DELETE_TEAM:
+      return deleteTeamUserReducer(state, action);
+    default:
+      return state;
   }
-
-  if (action.type === GET_USER) {
-    return getUserReducer(state, action);
-  }
-
-  if (action.type === UPDATE_USER) {
-    return updateUserReducer(state, action);
-  }
-
-  if (action.type === CREATE_TEAM) {
-    return createTeamUserReducer(state, action);
-  }
-
-  if (action.type === DELETE_TEAM) {
-    return deleteTeamUserReducer(state, action);
-  }
-
-  return state;
 }

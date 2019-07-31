@@ -104,11 +104,11 @@ const SidebarUserPic = styled(Flex)`
 `;
 
 const SidebarUserDropdown = styled.div<{ isOpen: boolean }>`
-  background: ${Color.BLUE_SKY};
+  background: ${Color.BLUE_PERSIAN};
   border-radius: 4px;
   left: 0;
   opacity: ${props => (props.isOpen ? 1 : 0)};
-  padding: 10px;
+  padding: 10px 0;
   position: absolute;
   top: 48px;
   transform: translateY(${props => (props.isOpen ? '0' : '20%')});
@@ -119,10 +119,16 @@ const SidebarUserDropdown = styled.div<{ isOpen: boolean }>`
 `;
 
 const SidebarUserDropdownButton = styled.button`
-  background: none;
+  background: ${rgba('white', 0)};
   color: white;
+  padding: 6px 12px;
   text-align: left;
+  transition: all 0.35s ${Easing.OUT};
   width: 100%;
+
+  &:hover {
+    background: ${rgba('white', 0.1)};
+  }
 `;
 
 const StyledChevron = styled.svg<{ isOpen: boolean }>`
