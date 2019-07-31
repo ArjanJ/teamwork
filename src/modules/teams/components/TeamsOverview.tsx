@@ -101,7 +101,7 @@ const TeamsOverviewHeading = styled.h1`
 
 const TeamsOverviewList = posed.ul({
   visible: {
-    delayChildren: 1000,
+    delayChildren: 600,
     staggerChildren: 50,
   },
 });
