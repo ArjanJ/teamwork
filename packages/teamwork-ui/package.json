@@ -25,8 +25,8 @@
     "deploy": "npm run build && firebase deploy --project dev --only hosting",
     "deploy:api": "cd functions && firebase deploy --project dev --only functions",
     "eject": "react-scripts eject",
-    "lint": "tslint -c tslint.json src/**/**/*.ts*",
-    "lint:fix": "tslint -c tslint.json src/**/**/*.ts* --fix",
+    "lint": "tslint -c tslint.json src/**/**/**/*.ts*",
+    "lint:fix": "tslint -c tslint.json src/**/**/**/*.ts* --fix",
     "start": "react-scripts start",
     "start:api": "cd functions && concurrently \"npm run watch\" \"npm run serve\"",
     "test": "react-scripts test"
@@ -58,6 +58,7 @@
     "redux-devtools-extension": "^2.13.8",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-react": "^4.0.0"
+    "tslint-react": "^4.0.0",
+    "tslint-react-hooks": "^2.2.1"
   }
 }

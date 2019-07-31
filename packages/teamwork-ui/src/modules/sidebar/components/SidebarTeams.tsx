@@ -4,9 +4,9 @@ import { Box } from 'rebass';
 import styled from 'styled-components';
 
 import { User } from '../../../../functions/src/modules/users/types';
-import { useUser } from '../../user/useUser';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
+import { useUser } from '../../user/useUser';
 
 interface SidebarTeamsChildProps {
   user: User;

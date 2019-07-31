@@ -2,9 +2,9 @@ import { RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent, useEffect } from 'react';
 
 import { useUser } from '../../user/useUser';
+import { useTeams } from '../useTeams';
 import { TeamsEmptyState } from './TeamsEmptyState';
 import { TeamsOverview } from './TeamsOverview';
-import { useTeams } from '../useTeams';
 
 export const Teams: FunctionComponent<RouteComponentProps> = () => {
   const { getAllTeams, teams } = useTeams();

@@ -4,15 +4,15 @@ import { Box, Flex } from 'rebass';
 import styled, { css } from 'styled-components';
 
 import { Toggle } from '../../../components/toggle/Toggle';
-import { useUser } from '../../user/useUser';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
+import { useUser } from '../../user/useUser';
+import { useTeams } from '../useTeams';
 import {
   TeamMembers,
   TeamMembersMenu,
   TeamMembersMenuItem,
 } from './TeamMembers';
-import { useTeams } from '../useTeams';
 
 interface TeamProps {
   teamName?: string;

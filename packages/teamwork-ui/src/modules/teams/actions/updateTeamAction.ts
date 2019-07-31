@@ -1,6 +1,6 @@
 import { Team } from '../../../../functions/src/modules/teams/types';
-import { async, AsyncAction } from '../../../utils/asyncAction';
 import { apiClient } from '../../../utils/apiClient';
+import { async, AsyncAction } from '../../../utils/asyncAction';
 
 export const UPDATE_TEAM = 'UPDATE_TEAM';
 

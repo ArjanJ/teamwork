@@ -1,6 +1,6 @@
 import { Teams } from '../../../../functions/src/modules/teams/types';
-import { async, AsyncAction } from '../../../utils/asyncAction';
 import { apiClient } from '../../../utils/apiClient';
+import { async, AsyncAction } from '../../../utils/asyncAction';
 
 export const GET_ALL_TEAMS = 'GET_ALL_TEAMS';
 

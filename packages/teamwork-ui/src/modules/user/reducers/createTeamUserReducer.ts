@@ -8,7 +8,7 @@ export function createTeamUserReducer(
 ) {
   if (action.status === AsyncActionStatus.SUCCEEDED) {
     const user = state.user;
-    if (!user) return state;
+    if (!user) { return state; }
 
     const { displayName, id, name } = action.payload;
 
