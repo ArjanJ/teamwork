@@ -1,5 +1,5 @@
 import { navigate, RouteComponentProps } from '@reach/router';
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Box, Flex } from 'rebass';
 import styled, { css } from 'styled-components';
 
@@ -18,14 +18,14 @@ interface TeamProps {
   teamName?: string;
 }
 
-export const Team: FunctionComponent<RouteComponentProps & TeamProps> = ({
-  teamName,
-}) => {
+export const Team = React.memo<RouteComponentProps & TeamProps>(function Team({
+  teamName = '',
+}) {
   const { deleteTeam, getTeam, teams } = useTeams();
   const { selectTeamFromName } = useUser();
 
   // UserTeam exists on state.user.teams
-  const userTeam = selectTeamFromName(teamName || '');
+  const userTeam = selectTeamFromName(teamName);
 
   useEffect(() => {
     // If state.teams[id] hasn't been loaded yet, load it.
@@ -85,7 +85,7 @@ export const Team: FunctionComponent<RouteComponentProps & TeamProps> = ({
       )}
     </Wrapper>
   );
-};
+});
 
 const SettingsIcon = () => (
   <svg
@@ -117,7 +117,7 @@ const Header = styled(Flex)`
 `;
 
 const TeamName = styled.h1`
-  color: ${Color.ORANGE};
+  color: ${Color.MINT};
   font-size: 30px;
 `;
 

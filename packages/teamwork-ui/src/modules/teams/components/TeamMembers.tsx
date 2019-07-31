@@ -112,16 +112,16 @@ const MenuIcon = () => (
   >
     <g transform="translate(0, 0)">
       <path
-        fill="#FFFFFF"
+        fill={Color.NAVY}
         d="M8,14H1c-0.552,0-1-0.448-1-1v0c0-0.552,0.448-1,1-1h7c0.552,0,1,0.448,1,1v0C9,13.552,8.552,14,8,14z"
       />{' '}
       <path
-        fill="#FFFFFF"
+        fill={Color.NAVY}
         d="M15,4H1C0.448,4,0,3.552,0,3v0c0-0.552,0.448-1,1-1h14c0.552,0,1,0.448,1,1v0C16,3.552,15.552,4,15,4z"
       />{' '}
       <path
         data-color="color-2"
-        fill="#FFFFFF"
+        fill={Color.NAVY}
         d="M15,9H1C0.448,9,0,8.552,0,8v0c0-0.552,0.448-1,1-1h14c0.552,0,1,0.448,1,1v0 C16,8.552,15.552,9,15,9z"
       />
     </g>
@@ -148,42 +148,50 @@ const TeamMembersItem = posed.li({
 
 const StyledTeamMembersList = styled(TeamMembersList)`
   display: grid;
-  grid-gap: 16px;
+  grid-gap: 24px;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   list-style-type: none;
   min-height: 71px;
 `;
 
 const StyledTeamMembersListItem = styled(TeamMembersItem)`
-  background: ${rgba('black', 0.25)};
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   border-radius: 4px;
-  padding: 16px;
+  display: block;
+  padding: 24px;
   position: relative;
+  text-decoration: none;
+  transition: all 0.35s ${Easing.OUT};
+  width: 100%;
+
+  &:hover {
+    background: ${darken(0.08, 'white')};
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.16);
+  }
 `;
 
 const TeamMembersName = styled.p`
-  color: white;
-  font-size: 14px;
+  color: ${Color.NAVY};
   font-weight: 700;
   margin-bottom: 0;
 `;
 
 const TeamMembersEmail = styled.p`
-  color: white;
+  color: ${darken(0.4, 'white')};
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
-  opacity: 0.75;
   text-transform: uppercase;
 `;
 
 const TeamMembersIcon = styled(Flex)`
   align-items: center;
-  background: ${rgba('white', 0.75)};
+  background: ${rgba(Color.BLUE_PERSIAN, 0.2)};
   border-radius: 50%;
-  height: 36px;
+  height: 42px;
   justify-content: center;
-  width: 36px;
+  width: 42px;
 
   img {
     width: 16px;
@@ -224,7 +232,6 @@ export const TeamMembersMenu = styled.div<{
 export const TeamMembersMenuItem = styled.button`
   background: none;
   color: white;
-  font-size: 14px;
   padding: 6px 12px;
   text-align: left;
   transition: all 0.35s ${Easing.OUT};
@@ -243,20 +250,17 @@ const Divider = styled.div`
 `;
 
 const AddTeammateButton = styled.button`
-  background: ${Color.BLUE_SKY};
+  background: ${Color.AQUA};
   border-radius: 99px;
-  box-shadow: 0 0 0 3px ${rgba(Color.BLUE_SKY, 1)};
   color: white;
-  font-size: 15px;
   font-weight: 700;
-  height: 36px;
-  margin: 3px;
+  height: 40px;
   min-width: 100px;
   padding: 0 24px;
   position: relative;
-  transition: background 0.5s ${Easing.IN_OUT};
+  transition: background 0.35s ${Easing.OUT};
 
   &:hover {
-    background: ${darken(0.05, Color.BLUE_SKY)};
+    background: ${darken(0.06, Color.AQUA)};
   }
 `;
