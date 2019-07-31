@@ -5,6 +5,7 @@ import { Flex } from 'rebass';
 import styled from 'styled-components';
 
 import { Dropdown, DropdownItem } from '../../../components/dropdown/Dropdown';
+import { ChevronDownIcon } from '../../../components/icons/ChevronDownIcon';
 import { Toggle } from '../../../components/toggle/Toggle';
 import { auth } from '../../../firebase';
 import { Color } from '../../../styles/Color';
@@ -38,23 +39,9 @@ export const SidebarUser: FunctionComponent = () => {
                   <SidebarUserName>{user && user.lastName}</SidebarUserName>
                 </span>
               </Flex>
-              <StyledChevron
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                width="12px"
-                height="12px"
-                viewBox="0 0 12 12"
-                isOpen={isOpen}
-              >
-                <g transform="translate(0, 0)">
-                  <polygon
-                    points="6 5.882 2.148 2.03 0.074 4.104 6 10.03 11.926 4.104 9.852 2.03 6 5.882"
-                    fill="#FFFFFF"
-                  />
-                </g>
-              </StyledChevron>
+              <SidebarChevronWrapper isOpen={isOpen}>
+                <ChevronDownIcon />
+              </SidebarChevronWrapper>
             </Flex>
           </SidebarUserWrapper>
           <Dropdown
@@ -112,7 +99,7 @@ const SidebarUserPic = styled(Flex)`
   }
 `;
 
-const StyledChevron = styled.svg<{ isOpen: boolean }>`
-  transform: rotate(${props => (props.isOpen ? '180deg' : '0deg')});
+const SidebarChevronWrapper = styled.span<{ isOpen: boolean }>`
+  transform: rotate(${({ isOpen }) => (isOpen ? '180deg' : '0deg')});
   transition: all 0.35s ${Easing.OUT};
 `;
