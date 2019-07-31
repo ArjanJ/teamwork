@@ -5,10 +5,10 @@ import styled from 'styled-components';
 
 import { useAuthorization } from '../../auth/hooks/useAuthorization';
 import { useAuthUser } from '../../auth/hooks/useAuthUser';
+import { Sidebar } from '../../sidebar/components/Sidebar';
 import { useSpaces } from '../../spaces/useSpaces';
 import { useUser } from '../../user/useUser';
 import { VerifyEmail } from '../../verify-email/components/VerifyEmail';
-import { Sidebar } from '../../sidebar/components/Sidebar';
 import { DashboardRoutes } from './DashboardRoutes';
 
 export const Dashboard: FunctionComponent<RouteComponentProps> = () => {

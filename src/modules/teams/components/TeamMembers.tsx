@@ -1,5 +1,5 @@
 import { darken, rgba } from 'polished';
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useModal } from 'react-modal-hook';
 import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
@@ -12,8 +12,8 @@ import {
 import { Toggle } from '../../../components/toggle/Toggle';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
-import { TeamsAddMembersModal } from './TeamsAddMembersModal';
 import { useTeams } from '../useTeams';
+import { TeamsAddMembersModal } from './TeamsAddMembersModal';
 
 interface TeamMembersProps {
   team: Team;
@@ -48,47 +48,49 @@ export const TeamMembers: FunctionComponent<TeamMembersProps> = ({ team }) => {
     <Box>
       <Subheading>Your team</Subheading>
       <StyledTeamMembersList pose={showMembers ? 'visible' : 'hidden'}>
-        {team.members.map((member: TeamMember) => (
-          <StyledTeamMembersListItem key={member.email}>
-            <Flex justifyContent="space-between">
-              <Flex>
-                <TeamMembersIcon>
-                  <img
-                    alt={member.firstName}
-                    src={`https://identicon-1132.appspot.com/${
-                      member.firstName
-                    }?s=64`}
-                  />
-                </TeamMembersIcon>
-                <Box ml="12px">
-                  <TeamMembersName>
-                    {member.firstName} {member.lastName}
-                  </TeamMembersName>
-                  <TeamMembersEmail>{member.email}</TeamMembersEmail>
+        {team.members.map((member: TeamMember) => {
+          const onRemoveClick = () => removeTeamMember(member.email);
+
+          return (
+            <StyledTeamMembersListItem key={member.email}>
+              <Flex justifyContent="space-between">
+                <Flex>
+                  <TeamMembersIcon>
+                    <img
+                      alt={member.firstName}
+                      src={`https://identicon-1132.appspot.com/${
+                        member.firstName
+                      }?s=64`}
+                    />
+                  </TeamMembersIcon>
+                  <Box ml="12px">
+                    <TeamMembersName>
+                      {member.firstName} {member.lastName}
+                    </TeamMembersName>
+                    <TeamMembersEmail>{member.email}</TeamMembersEmail>
+                  </Box>
+                </Flex>
+                <Box>
+                  <Toggle>
+                    {({ isOpen, toggle }) => (
+                      <React.Fragment>
+                        <TeamMembersExpandButton onClick={toggle} type="button">
+                          <MenuIcon />
+                        </TeamMembersExpandButton>
+                        <TeamMembersMenu isOpen={isOpen}>
+                          <TeamMembersMenuItem>Edit info</TeamMembersMenuItem>
+                          <TeamMembersMenuItem onClick={onRemoveClick}>
+                            Remove from team
+                          </TeamMembersMenuItem>
+                        </TeamMembersMenu>
+                      </React.Fragment>
+                    )}
+                  </Toggle>
                 </Box>
               </Flex>
-              <Box>
-                <Toggle>
-                  {({ isOpen, toggle }) => (
-                    <React.Fragment>
-                      <TeamMembersExpandButton onClick={toggle} type="button">
-                        <MenuIcon />
-                      </TeamMembersExpandButton>
-                      <TeamMembersMenu isOpen={isOpen}>
-                        <TeamMembersMenuItem>Edit info</TeamMembersMenuItem>
-                        <TeamMembersMenuItem
-                          onClick={() => removeTeamMember(member.email)}
-                        >
-                          Remove from team
-                        </TeamMembersMenuItem>
-                      </TeamMembersMenu>
-                    </React.Fragment>
-                  )}
-                </Toggle>
-              </Box>
-            </Flex>
-          </StyledTeamMembersListItem>
-        ))}
+            </StyledTeamMembersListItem>
+          );
+        })}
       </StyledTeamMembersList>
       <Divider />
       <Flex justifyContent="flex-end">
@@ -142,8 +144,8 @@ const TeamMembersList = posed.ul({
 });
 
 const TeamMembersItem = posed.li({
-  visible: { y: 0, opacity: 1 },
   hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
 });
 
 const StyledTeamMembersList = styled(TeamMembersList)`

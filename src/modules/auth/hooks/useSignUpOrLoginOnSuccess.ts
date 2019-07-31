@@ -16,18 +16,18 @@ export const useSignUpOrLoginOnSuccess = () => {
   const [authUser] = useAuthState(firebase.auth);
   const { error, getUser, user } = useUser();
 
-  const onSuccess = async ({ user }: OnSuccess) => {
-    if (user && user.emailVerified === false) {
+  const onSuccess = async ({ user: userFromCallback }: OnSuccess) => {
+    if (userFromCallback && userFromCallback.emailVerified === false) {
       // Send a verification email to the user.
-      user.sendEmailVerification();
+      userFromCallback.sendEmailVerification();
     }
 
-    if (user && user.uid) {
+    if (userFromCallback && userFromCallback.uid) {
       /**
        * Fetch the user to see if they filled out the
        * onboarding info (firstname, lastname, role).
        */
-      getUser(user.uid);
+      getUser(userFromCallback.uid);
     }
   };
 

@@ -48,13 +48,13 @@ export const useSignUpOrLogin = ({
     additionalUserInfo: firebaseApp.auth.AdditionalUserInfo,
     user: firebaseApp.User,
   ) {
-    const isNewUser = additionalUserInfo ? additionalUserInfo.isNewUser : false;
+    const newUser = additionalUserInfo ? additionalUserInfo.isNewUser : false;
 
-    if (isNewUser) {
+    if (newUser) {
       setIsNewUser(true);
     }
 
-    onSuccess({ isNewUser, user });
+    onSuccess({ isNewUser: newUser, user });
   }
 
   async function doEmailAndPassword(email: string, password: string) {

@@ -1,11 +1,11 @@
 import { navigate } from '@reach/router';
 import {
+  Field,
+  FieldProps,
+  Form,
   Formik,
   FormikActions,
   FormikProps,
-  Form,
-  Field,
-  FieldProps,
 } from 'formik';
 import React, { useEffect } from 'react';
 import { Flex } from 'rebass';
@@ -14,12 +14,12 @@ import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner'
 import { Color } from '../../../styles/Color';
 import { AsyncActionStatus } from '../../../utils/asyncAction';
 import { useAuthUser } from '../../auth/hooks/useAuthUser';
-import { useUser } from '../../user/useUser';
 import {
   FieldWrapper,
   Input,
   Label,
 } from '../../signup/components/SignUpShared';
+import { useUser } from '../../user/useUser';
 import { isEmptyUser } from '../../user/utils';
 
 interface OnboardingFormValues {
@@ -92,7 +92,7 @@ export const OnboardingForm = () => {
                   {...field}
                   autoFocus={true}
                   placeholder="Your First Name"
-                  required
+                  required={true}
                   type="text"
                 />
                 <Label>First name</Label>
@@ -106,7 +106,7 @@ export const OnboardingForm = () => {
                 <Input
                   {...field}
                   placeholder="Your Last Name"
-                  required
+                  required={true}
                   type="text"
                 />
                 <Label>Last name</Label>
@@ -120,7 +120,7 @@ export const OnboardingForm = () => {
                 <Input
                   {...field}
                   placeholder="Your Company"
-                  required
+                  required={true}
                   type="text"
                 />
                 <Label>Company</Label>
@@ -134,7 +134,7 @@ export const OnboardingForm = () => {
                 <Input
                   {...field}
                   placeholder="Your Role"
-                  required
+                  required={true}
                   type="text"
                 />
                 <Label>Role</Label>

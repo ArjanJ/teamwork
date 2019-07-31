@@ -4,13 +4,12 @@ import { Box } from 'rebass';
 
 import { GoogleLogo } from '../../../components/logos/logos';
 import { Spinner } from '../../../components/spinner/Spinner';
+import { Color } from '../../../styles/Color';
 import {
   AuthMethod,
   useSignUpOrLogin,
 } from '../../auth/hooks/useSignUpOrLogin';
 import { useSignUpOrLoginOnSuccess } from '../../auth/hooks/useSignUpOrLoginOnSuccess';
-import { useUser } from '../../user/useUser';
-import { Color } from '../../../styles/Color';
 import {
   BigButton,
   FadeWhen,
@@ -20,6 +19,7 @@ import {
   Title,
 } from '../../signup/components/SignUpShared';
 import { SignUpWrapper } from '../../signup/components/SignUpWrapper';
+import { useUser } from '../../user/useUser';
 import { LoginForm } from './LoginForm';
 
 export const Login: FunctionComponent<RouteComponentProps> = () => {

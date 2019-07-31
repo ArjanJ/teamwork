@@ -107,8 +107,8 @@ const TeamsOverviewList = posed.ul({
 });
 
 const TeamsOverviewListItem = posed.li({
-  visible: { y: 0, opacity: 1 },
   hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
 });
 
 const StyledTeamsOverviewList = styled(TeamsOverviewList)`

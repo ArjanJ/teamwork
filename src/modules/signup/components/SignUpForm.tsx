@@ -1,22 +1,22 @@
 import {
+  Field,
+  FieldProps,
+  Form,
   Formik,
   FormikActions,
   FormikProps,
-  Form,
-  Field,
-  FieldProps,
 } from 'formik';
 import React, { FunctionComponent } from 'react';
 import { Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
+import { Color } from '../../../styles/Color';
+import { delay } from '../../../utils/delay';
 import {
   AuthMethod,
   useSignUpOrLogin,
 } from '../../auth/hooks/useSignUpOrLogin';
 import { useSignUpOrLoginOnSuccess } from '../../auth/hooks/useSignUpOrLoginOnSuccess';
-import { Color } from '../../../styles/Color';
-import { delay } from '../../../utils/delay';
 import { FieldWrapper, Input, Label } from './SignUpShared';
 
 interface SignUpFormValues {
@@ -62,7 +62,7 @@ export const SignUpForm: FunctionComponent = () => {
                   {...field}
                   autoFocus={true}
                   placeholder="Your Email"
-                  required
+                  required={true}
                   type="email"
                 />
                 <Label>Email</Label>
@@ -76,7 +76,7 @@ export const SignUpForm: FunctionComponent = () => {
                 <Input
                   {...field}
                   placeholder="Create Password"
-                  required
+                  required={true}
                   type="password"
                 />
                 <Label>Password</Label>
@@ -90,7 +90,7 @@ export const SignUpForm: FunctionComponent = () => {
                 <Input
                   {...field}
                   placeholder="Confirm Password"
-                  required
+                  required={true}
                   type="password"
                 />
                 <Label>Confirm Password</Label>

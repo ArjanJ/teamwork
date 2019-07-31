@@ -1,6 +1,6 @@
 import { User } from '../../../../functions/src/modules/users/types';
-import { async, AsyncAction } from '../../../utils/asyncAction';
 import { apiClient } from '../../../utils/apiClient';
+import { async, AsyncAction } from '../../../utils/asyncAction';
 
 export const UPDATE_USER = 'UPDATE_USER';
 

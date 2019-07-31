@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import { Header } from '../../../components/header/Header';
 import { useAuthorization } from '../../auth/hooks/useAuthorization';
 import { Backdrop, Wrapper } from '../../signup/components/SignUpShared';
-import { OnboardingForm } from './OnboardingForm';
 import { VerifyEmail } from '../../verify-email/components/VerifyEmail';
+import { OnboardingForm } from './OnboardingForm';
 
 export const Onboarding: FunctionComponent<RouteComponentProps> = () => {
   useAuthorization('/login');

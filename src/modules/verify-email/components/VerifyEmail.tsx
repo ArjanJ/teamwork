@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import { Spinner } from '../../../components/spinner/Spinner';
 import { firebase } from '../../../firebase';
-import { useAuthUser } from '../../auth/hooks/useAuthUser';
 import { Color } from '../../../styles/Color';
+import { useAuthUser } from '../../auth/hooks/useAuthUser';
 
 interface VerifyEmailProps {
   children: React.ReactNode;

@@ -6,9 +6,9 @@ import styled from 'styled-components';
 
 import { Toggle } from '../../../components/toggle/Toggle';
 import { auth } from '../../../firebase';
-import { useUser } from '../../user/useUser';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
+import { useUser } from '../../user/useUser';
 
 const signOut = async () => {
   await auth.doSignOut();

@@ -1,13 +1,13 @@
 import { navigate } from '@reach/router';
 import {
   ArrayHelpers,
-  Formik,
-  FormikActions,
-  FormikProps,
-  Form,
   Field,
   FieldArray,
   FieldProps,
+  Form,
+  Formik,
+  FormikActions,
+  FormikProps,
 } from 'formik';
 import { darken, rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
@@ -17,12 +17,12 @@ import styled from 'styled-components';
 import { TeamMember } from '../../../../functions/src/modules/teams/types';
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
 import { Modal } from '../../../components/modal/Modal';
-import { useAuthUser } from '../../auth/hooks/useAuthUser';
-import { useUser } from '../../user/useUser';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
 import { AsyncActionStatus } from '../../../utils/asyncAction';
 import { delay } from '../../../utils/delay';
+import { useAuthUser } from '../../auth/hooks/useAuthUser';
+import { useUser } from '../../user/useUser';
 import { useTeams } from '../useTeams';
 import * as TeamsUtils from '../utils';
 
@@ -98,9 +98,9 @@ export const TeamsCreateModal: FunctionComponent<TeamsCreateModalProps> = ({
                 render={({ field }: FieldProps<TeamFormValues>) => (
                   <Input
                     {...field}
-                    autoFocus
+                    autoFocus={true}
                     placeholder="Your team name"
-                    required
+                    required={true}
                     type="text"
                   />
                 )}
@@ -127,7 +127,7 @@ export const TeamsCreateModal: FunctionComponent<TeamsCreateModalProps> = ({
                                       <Input
                                         {...field}
                                         placeholder="Email"
-                                        required
+                                        required={true}
                                         type="email"
                                       />
                                     )}
@@ -142,7 +142,7 @@ export const TeamsCreateModal: FunctionComponent<TeamsCreateModalProps> = ({
                                       <Input
                                         {...field}
                                         placeholder="First Name"
-                                        required
+                                        required={true}
                                         type="text"
                                       />
                                     )}
@@ -157,7 +157,7 @@ export const TeamsCreateModal: FunctionComponent<TeamsCreateModalProps> = ({
                                       <Input
                                         {...field}
                                         placeholder="Last Name"
-                                        required
+                                        required={true}
                                         type="text"
                                       />
                                     )}

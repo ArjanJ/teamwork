@@ -1,6 +1,6 @@
 import { User } from '../../../../functions/src/modules/users/types';
-import { async, AsyncAction } from '../../../utils/asyncAction';
 import { apiClient } from '../../../utils/apiClient';
+import { async, AsyncAction } from '../../../utils/asyncAction';
 
 export const CREATE_USER = 'CREATE_USER';
 

@@ -1,12 +1,12 @@
 import {
   ArrayHelpers,
-  Formik,
-  FormikActions,
-  FormikProps,
-  Form,
   Field,
   FieldArray,
   FieldProps,
+  Form,
+  Formik,
+  FormikActions,
+  FormikProps,
 } from 'formik';
 import { darken, rgba } from 'polished';
 import React, { FunctionComponent } from 'react';
@@ -89,7 +89,7 @@ export const TeamsAddMembersModal: FunctionComponent<
                                         {...field}
                                         autoFocus={true}
                                         placeholder="Email"
-                                        required
+                                        required={true}
                                         type="email"
                                       />
                                     )}
@@ -104,7 +104,7 @@ export const TeamsAddMembersModal: FunctionComponent<
                                       <Input
                                         {...field}
                                         placeholder="First Name"
-                                        required
+                                        required={true}
                                         type="text"
                                       />
                                     )}
@@ -119,7 +119,7 @@ export const TeamsAddMembersModal: FunctionComponent<
                                       <Input
                                         {...field}
                                         placeholder="Last Name"
-                                        required
+                                        required={true}
                                         type="text"
                                       />
                                     )}
