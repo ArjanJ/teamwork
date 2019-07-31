@@ -3,13 +3,14 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useModal } from 'react-modal-hook';
 import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
-import styled, { CSSProp } from 'styled-components';
+import styled from 'styled-components';
 
 import {
   Team,
   TeamMember,
 } from '../../../../functions/src/modules/teams/types';
 import { Button, ButtonKind } from '../../../components/button/Button';
+import { Dropdown, DropdownItem } from '../../../components/dropdown/Dropdown';
 import { MenuIcon } from '../../../components/icons/MenuIcon';
 import { Toggle } from '../../../components/toggle/Toggle';
 import { Color } from '../../../styles/Color';
@@ -79,12 +80,12 @@ export const TeamMembers: FunctionComponent<TeamMembersProps> = ({ team }) => {
                         <TeamMembersExpandButton onClick={toggle} type="button">
                           <MenuIcon />
                         </TeamMembersExpandButton>
-                        <TeamMembersMenu isOpen={isOpen}>
-                          <TeamMembersMenuItem>Edit info</TeamMembersMenuItem>
-                          <TeamMembersMenuItem onClick={onRemoveClick}>
+                        <Dropdown isOpen={isOpen}>
+                          <DropdownItem>Edit info</DropdownItem>
+                          <DropdownItem onClick={onRemoveClick}>
                             Remove from team
-                          </TeamMembersMenuItem>
-                        </TeamMembersMenu>
+                          </DropdownItem>
+                        </Dropdown>
                       </React.Fragment>
                     )}
                   </Toggle>
@@ -181,40 +182,6 @@ const TeamMembersExpandButton = styled.button`
 
   &:hover {
     opacity: 1;
-  }
-`;
-
-export const TeamMembersMenu = styled.div<{
-  isOpen: boolean;
-  styles?: CSSProp;
-}>`
-  background: ${Color.NAVY};
-  border-radius: 4px;
-  box-shadow: 0 4px 16px ${rgba('black', 0.15)};
-  opacity: ${props => (props.isOpen ? 1 : 0)};
-  padding: 6px 0;
-  position: absolute;
-  right: 16px;
-  top: 42px;
-  transform: ${props => (props.isOpen ? 'none' : 'translateY(20%)')};
-  transition: all 0.25s ${Easing.OUT};
-  visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
-  width: 174px;
-  z-index: 1;
-
-  ${props => props.styles}
-`;
-
-export const TeamMembersMenuItem = styled.button`
-  background: none;
-  color: white;
-  padding: 6px 12px;
-  text-align: left;
-  transition: all 0.35s ${Easing.OUT};
-  width: 100%;
-
-  &:hover {
-    background: ${rgba('white', 0.1)};
   }
 `;
 

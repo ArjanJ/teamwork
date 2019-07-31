@@ -3,17 +3,14 @@ import React, { useEffect } from 'react';
 import { Box, Flex } from 'rebass';
 import styled, { css } from 'styled-components';
 
+import { Dropdown, DropdownItem } from '../../../components/dropdown/Dropdown';
 import { SettingsIcon } from '../../../components/icons/SettingsIcon';
 import { Toggle } from '../../../components/toggle/Toggle';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
 import { useUser } from '../../user/useUser';
 import { useTeams } from '../useTeams';
-import {
-  TeamMembers,
-  TeamMembersMenu,
-  TeamMembersMenuItem,
-} from './TeamMembers';
+import { TeamMembers } from './TeamMembers';
 
 interface TeamProps {
   teamName?: string;
@@ -61,20 +58,18 @@ export const Team = React.memo<RouteComponentProps & TeamProps>(
                   <SettingsButton onClick={toggle} type="button">
                     <SettingsIcon />
                   </SettingsButton>
-                  <TeamMembersMenu
+                  <Dropdown
                     isOpen={isOpen}
                     styles={css`
                       right: 0;
                       top: 36px;
                     `}
                   >
-                    <TeamMembersMenuItem type="button">
-                      Rename team
-                    </TeamMembersMenuItem>
-                    <TeamMembersMenuItem onClick={onDeleteClick} type="button">
+                    <DropdownItem type="button">Rename team</DropdownItem>
+                    <DropdownItem onClick={onDeleteClick} type="button">
                       Delete team
-                    </TeamMembersMenuItem>
-                  </TeamMembersMenu>
+                    </DropdownItem>
+                  </Dropdown>
                 </React.Fragment>
               )}
             </Toggle>
