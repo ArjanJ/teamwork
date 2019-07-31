@@ -4,6 +4,7 @@ import React, { FunctionComponent } from 'react';
 import { Flex } from 'rebass';
 import styled from 'styled-components';
 
+import { Dropdown, DropdownItem } from '../../../components/dropdown/Dropdown';
 import { Toggle } from '../../../components/toggle/Toggle';
 import { auth } from '../../../firebase';
 import { Color } from '../../../styles/Color';
@@ -56,11 +57,19 @@ export const SidebarUser: FunctionComponent = () => {
               </StyledChevron>
             </Flex>
           </SidebarUserWrapper>
-          <SidebarUserDropdown isOpen={isOpen}>
-            <SidebarUserDropdownButton onClick={signOut} type="button">
+          <Dropdown
+            isOpen={isOpen}
+            style={{
+              background: Color.BLUE_PERSIAN,
+              left: 0,
+              top: '48px',
+              width: '100%',
+            }}
+          >
+            <DropdownItem onClick={signOut} type="button">
               Sign out
-            </SidebarUserDropdownButton>
-          </SidebarUserDropdown>
+            </DropdownItem>
+          </Dropdown>
         </div>
       )}
     </Toggle>
@@ -100,34 +109,6 @@ const SidebarUserPic = styled(Flex)`
 
   img {
     width: 12px;
-  }
-`;
-
-const SidebarUserDropdown = styled.div<{ isOpen: boolean }>`
-  background: ${Color.BLUE_PERSIAN};
-  border-radius: 4px;
-  left: 0;
-  opacity: ${props => (props.isOpen ? 1 : 0)};
-  padding: 10px 0;
-  position: absolute;
-  top: 48px;
-  transform: translateY(${props => (props.isOpen ? '0' : '20%')});
-  transition: all 0.35s ${Easing.OUT};
-  visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
-  width: 100%;
-  z-index: 2;
-`;
-
-const SidebarUserDropdownButton = styled.button`
-  background: ${rgba('white', 0)};
-  color: white;
-  padding: 6px 12px;
-  text-align: left;
-  transition: all 0.35s ${Easing.OUT};
-  width: 100%;
-
-  &:hover {
-    background: ${rgba('white', 0.1)};
   }
 `;
 
