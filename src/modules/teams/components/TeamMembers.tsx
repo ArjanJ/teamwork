@@ -1,7 +1,6 @@
 import { darken, rgba } from 'polished';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useModal } from 'react-modal-hook';
-import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
@@ -12,11 +11,13 @@ import {
 import { Button, ButtonKind } from '../../../components/button/Button';
 import { Dropdown, DropdownItem } from '../../../components/dropdown/Dropdown';
 import { MenuIcon } from '../../../components/icons/MenuIcon';
+import { PoseListStaggerListItem } from '../../../components/pose/PoseListStagger';
 import { Toggle } from '../../../components/toggle/Toggle';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
 import { useTeams } from '../useTeams';
 import { TeamsAddMembersModal } from './TeamsAddMembersModal';
+import { TeamsCard, TeamsDivider, TeamsGrid } from './TeamsShared';
 
 interface TeamMembersProps {
   team: Team;
@@ -50,52 +51,57 @@ export const TeamMembers: FunctionComponent<TeamMembersProps> = ({ team }) => {
   return (
     <Box>
       <Subheading>Your team</Subheading>
-      <StyledTeamMembersList pose={showMembers ? 'visible' : 'hidden'}>
+      <TeamsGrid pose={showMembers ? 'visible' : 'hidden'}>
         {team.members.map((member: TeamMember) => {
           const onRemoveClick = () => removeTeamMember(member.email);
 
           return (
-            <StyledTeamMembersListItem key={member.email}>
-              <Flex justifyContent="space-between">
-                <Flex>
-                  <TeamMembersIcon>
-                    <img
-                      alt={member.firstName}
-                      src={`https://identicon-1132.appspot.com/${
-                        member.firstName
-                      }?s=64`}
-                    />
-                  </TeamMembersIcon>
-                  <Box ml="12px">
-                    <TeamMembersName>
-                      {member.firstName} {member.lastName}
-                    </TeamMembersName>
-                    <TeamMembersEmail>{member.email}</TeamMembersEmail>
+            <PoseListStaggerListItem key={member.email}>
+              <TeamsCard as="li">
+                <Flex justifyContent="space-between">
+                  <Flex>
+                    <TeamMembersIcon>
+                      <img
+                        alt={member.firstName}
+                        src={`https://identicon-1132.appspot.com/${
+                          member.firstName
+                        }?s=64`}
+                      />
+                    </TeamMembersIcon>
+                    <Box ml="12px">
+                      <TeamMembersName>
+                        {member.firstName} {member.lastName}
+                      </TeamMembersName>
+                      <TeamMembersEmail>{member.email}</TeamMembersEmail>
+                    </Box>
+                  </Flex>
+                  <Box>
+                    <Toggle>
+                      {({ isOpen, toggle }) => (
+                        <React.Fragment>
+                          <TeamMembersExpandButton
+                            onClick={toggle}
+                            type="button"
+                          >
+                            <MenuIcon />
+                          </TeamMembersExpandButton>
+                          <Dropdown isOpen={isOpen}>
+                            <DropdownItem>Edit info</DropdownItem>
+                            <DropdownItem onClick={onRemoveClick}>
+                              Remove from team
+                            </DropdownItem>
+                          </Dropdown>
+                        </React.Fragment>
+                      )}
+                    </Toggle>
                   </Box>
                 </Flex>
-                <Box>
-                  <Toggle>
-                    {({ isOpen, toggle }) => (
-                      <React.Fragment>
-                        <TeamMembersExpandButton onClick={toggle} type="button">
-                          <MenuIcon />
-                        </TeamMembersExpandButton>
-                        <Dropdown isOpen={isOpen}>
-                          <DropdownItem>Edit info</DropdownItem>
-                          <DropdownItem onClick={onRemoveClick}>
-                            Remove from team
-                          </DropdownItem>
-                        </Dropdown>
-                      </React.Fragment>
-                    )}
-                  </Toggle>
-                </Box>
-              </Flex>
-            </StyledTeamMembersListItem>
+              </TeamsCard>
+            </PoseListStaggerListItem>
           );
         })}
-      </StyledTeamMembersList>
-      <Divider />
+      </TeamsGrid>
+      <TeamsDivider />
       <Flex justifyContent="flex-end">
         <Button kind={ButtonKind.PRIMARY} onClick={showModal} type="button">
           Add team member
@@ -109,43 +115,6 @@ const Subheading = styled.h2`
   color: white;
   font-size: 16px;
   margin-bottom: 12px;
-`;
-
-const TeamMembersList = posed.ul({
-  visible: {
-    delayChildren: 600,
-    staggerChildren: 50,
-  },
-});
-
-const TeamMembersItem = posed.li({
-  hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1 },
-});
-
-const StyledTeamMembersList = styled(TeamMembersList)`
-  display: grid;
-  grid-gap: 24px;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  list-style-type: none;
-  min-height: 71px;
-`;
-
-const StyledTeamMembersListItem = styled(TeamMembersItem)`
-  background: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  border-radius: 4px;
-  display: block;
-  padding: 24px;
-  position: relative;
-  text-decoration: none;
-  transition: all 0.35s ${Easing.OUT};
-  width: 100%;
-
-  &:hover {
-    background: ${darken(0.08, 'white')};
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.16);
-  }
 `;
 
 const TeamMembersName = styled.p`
