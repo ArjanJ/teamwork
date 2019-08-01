@@ -3,13 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { admin } from '../config/firebase';
 import { extractBearerToken } from '../utils/extractBearerToken';
 
-const UNAUTHORIZED_ERROR = (message = 'Login required') => ({
-  error: {
-    code: 401,
-    message,
-    type: 'UNAUTHORIZED',
-  },
-});
+const UNAUTHORIZED = 'UNAUTHORIZED';
 
 // idToken comes from the client app, passed in as Authorization header.
 export const verifyIdToken = async (
@@ -17,23 +11,18 @@ export const verifyIdToken = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const token = extractBearerToken(req.headers);
-
-  if (!token) {
-    res
-      .status(401)
-      .send(UNAUTHORIZED_ERROR())
-      .end();
-  }
-
   try {
+    const token = extractBearerToken(req.headers);
+
+    if (!token) {
+      throw new Error('You must be authorized to access this data.');
+    }
+
     const decodedToken = await admin.auth().verifyIdToken(token);
     req.decodedToken = decodedToken;
+
     next();
   } catch (error) {
-    res
-      .status(401)
-      .send(UNAUTHORIZED_ERROR(error.message))
-      .end();
+    next({ message: error.message, status: 401, type: UNAUTHORIZED });
   }
 };
