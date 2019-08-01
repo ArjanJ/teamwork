@@ -130,10 +130,3 @@ const TeamsOverviewMemberItem = styled.li`
     margin-left: 0;
   }
 `;
-
-const Divider = styled.div`
-  background: white;
-  height: 1px;
-  margin: 48px 0;
-  opacity: 0.25;
-`;

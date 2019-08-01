@@ -153,10 +153,3 @@ const TeamMembersExpandButton = styled.button`
     opacity: 1;
   }
 `;
-
-const Divider = styled.div`
-  background: white;
-  height: 1px;
-  margin: 36px 0;
-  opacity: 0.25;
-`;
