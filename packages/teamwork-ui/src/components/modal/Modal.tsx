@@ -37,10 +37,10 @@ export const Modal: FunctionComponent<ModalProps> = ({
 
   return (
     <Wrapper>
-      <Background dark={dark} onClick={hideModal} />
+      <ModalBackground dark={dark} onClick={hideModal} />
       <ModalWrapper dark={dark} width={width}>
-        {title && <Title>{title}</Title>}
-        <CloseButton onClick={hideModal} type="button">
+        {title && <ModalTitle>{title}</ModalTitle>}
+        <ModalCloseButton onClick={hideModal} type="button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -57,7 +57,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
               />
             </g>
           </svg>
-        </CloseButton>
+        </ModalCloseButton>
         <ModalContent>{children}</ModalContent>
       </ModalWrapper>
     </Wrapper>
@@ -98,7 +98,7 @@ const ModalWrapper = styled.div<{ dark: boolean; width?: number }>`
   width: ${({ width }) => width || 640}px;
 `;
 
-const Background = styled.div<{ dark: boolean }>`
+const ModalBackground = styled.div<{ dark: boolean }>`
   animation: 0.35s ${fadeIn} ${Easing.OUT} forwards;
   background: ${props =>
     props.dark ? rgba(Color.BLUE_RAGE, 0.65) : rgba('black', 0.5)};
@@ -109,7 +109,7 @@ const Background = styled.div<{ dark: boolean }>`
   width: 100%;
 `;
 
-const CloseButton = styled.button`
+const ModalCloseButton = styled.button`
   background: none;
   display: block;
   position: absolute;
@@ -128,11 +128,38 @@ const CloseButton = styled.button`
   }
 `;
 
-const Title = styled.h1`
+const ModalTitle = styled.h1`
   color: white;
   font-size: 24px;
   margin-bottom: 30px;
   text-align: center;
+`;
+
+export const ModalSubheading = styled.p`
+  color: white;
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+`;
+
+export const ModalText = styled.p`
+  color: white;
+  margin-bottom: 16px;
+  opacity: 0.75;
+`;
+
+export const ModalCancelButton = styled.button`
+  background: none;
+  color: white;
+  font-weight: 700;
+  opacity: 0.7;
+  padding: 0 16px;
+  transition: opacity 0.35s ${Easing.OUT};
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const ModalContent = styled.div``;

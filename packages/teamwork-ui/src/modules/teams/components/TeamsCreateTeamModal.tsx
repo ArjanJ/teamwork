@@ -9,18 +9,23 @@ import {
   FormikActions,
   FormikProps,
 } from 'formik';
-import { darken } from 'polished';
 import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
 import { TeamMember } from '../../../../functions/src/modules/teams/types';
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
+import { Button, ButtonKind } from '../../../components/button/Button';
 import { FormField } from '../../../components/form-field/FormField';
 import { AddIcon } from '../../../components/icons/AddIcon';
 import { TrashIcon } from '../../../components/icons/TrashIcon';
 import { Input } from '../../../components/input/Input';
-import { Modal } from '../../../components/modal/Modal';
+import {
+  Modal,
+  ModalCancelButton,
+  ModalSubheading,
+  ModalText,
+} from '../../../components/modal/Modal';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
 import { AsyncActionStatus } from '../../../utils/asyncAction';
@@ -39,7 +44,11 @@ interface CreateTeamFormValues {
   members: TeamMember[];
 }
 
-const newTeamMember: TeamMember = { email: '', firstName: '', lastName: '' };
+export const newTeamMember: TeamMember = {
+  email: '',
+  firstName: '',
+  lastName: '',
+};
 
 const initialValues = {
   members: [newTeamMember],
@@ -63,6 +72,7 @@ const EmailField = ({ field }: FieldProps<CreateTeamFormValues>) => (
     <Input {...field} placeholder="Email" required={true} type="email" />
   </FormField>
 );
+
 const FirstNameField = ({ field }: FieldProps<CreateTeamFormValues>) => (
   <FormField label="First Name">
     <Input {...field} placeholder="First Name" required={true} type="text" />
@@ -75,15 +85,15 @@ const LastNameField = ({ field }: FieldProps<CreateTeamFormValues>) => (
   </FormField>
 );
 
-interface TeamMemberFieldArrayProps extends ArrayHelpers {
-  values: CreateTeamFormValues;
+interface TeamMemberFieldArrayProps<T> extends ArrayHelpers {
+  values: T;
 }
 
-const TeamMemberFieldArray: FunctionComponent<TeamMemberFieldArrayProps> = ({
+export function TeamMemberFieldArray<T extends { members: TeamMember[] }>({
   push,
   remove,
   values,
-}) => {
+}: TeamMemberFieldArrayProps<T>) {
   const onAddClick = () => push(newTeamMember);
 
   return (
@@ -119,13 +129,17 @@ const TeamMemberFieldArray: FunctionComponent<TeamMemberFieldArrayProps> = ({
           })
         : null}
       <Box mt="6px">
-        <AddTeammateButton onClick={onAddClick} type="button">
+        <AddTeammateButton
+          kind={ButtonKind.PRIMARY}
+          onClick={onAddClick}
+          type="button"
+        >
           <AddIcon />
         </AddTeammateButton>
       </Box>
     </div>
   );
-};
+}
 
 interface CreateTeamFormProps extends FormikProps<CreateTeamFormValues> {
   hideModal(): void;
@@ -144,24 +158,24 @@ const CreateTeamForm: FunctionComponent<CreateTeamFormProps> = ({
   return (
     <Form>
       <FieldBox mb="48px">
-        <FieldTitle>What's your team name?</FieldTitle>
-        <P>Puns are encouraged.</P>
+        <ModalSubheading>What's your team name?</ModalSubheading>
+        <ModalText>Puns are encouraged.</ModalText>
         <Field name="name" render={TeamNameField} />
       </FieldBox>
       <FieldBox mb="48px">
-        <FieldTitle>Who's on your team?</FieldTitle>
-        <P>Add as many teammates as you'd like.</P>
+        <ModalSubheading>Who's on your team?</ModalSubheading>
+        <ModalText>Add as many teammates as you'd like.</ModalText>
         <FieldArray name="members" render={renderFieldArray} />
       </FieldBox>
       <Flex justifyContent="flex-end">
         <Flex>
-          <CancelButton
+          <ModalCancelButton
             disabled={isSubmitting}
             onClick={hideModal}
             type="button"
           >
             Cancel
-          </CancelButton>
+          </ModalCancelButton>
           <Box ml="16px">
             <ButtonSpinner
               disabled={isSubmitting}
@@ -243,34 +257,17 @@ export const TeamsCreateModal: FunctionComponent<TeamsCreateModalProps> = ({
   );
 };
 
-const FieldTitle = styled.p`
-  color: white;
-  display: block;
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 4px;
-`;
-
-const P = styled.p`
-  color: white;
-  margin-bottom: 16px;
-  opacity: 0.75;
-`;
-
-const FieldBox = styled(Box)`
+export const FieldBox = styled(Box)`
   flex: 1;
 `;
 
-const AddTeammateButton = styled.button`
-  background: ${Color.BLUE_SKY};
+const AddTeammateButton = styled(Button)`
   border-radius: 50%;
   height: 36px;
+  min-width: 0;
+  padding: 0;
   transition: background 0.35s ${Easing.OUT};
   width: 36px;
-
-  &:hover {
-    background: ${darken(0.1, Color.BLUE_SKY)};
-  }
 `;
 
 const RemoveTeammateButton = styled.button`
@@ -284,23 +281,4 @@ const RemoveTeammateButton = styled.button`
   &:hover {
     opacity: 1;
   }
-`;
-
-const CancelButton = styled.button`
-  background: none;
-  color: white;
-  font-weight: 700;
-  opacity: 0.7;
-  padding: 0 16px;
-  transition: opacity 0.35s ${Easing.OUT};
-
-  &:hover {
-    opacity: 1;
-  }
-`;
-
-const ErrorMessage = styled.p`
-  color: #ff7272;
-  font-weight: 700;
-  margin: 4px 12px;
 `;
