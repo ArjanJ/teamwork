@@ -19,6 +19,7 @@ export const TeamsCard = styled.div<LinkProps<void>>`
   border-radius: 4px;
   display: block;
   padding: 24px;
+  position: relative;
   text-decoration: none;
   transition: all 0.35s ${Easing.OUT};
   width: 100%;
