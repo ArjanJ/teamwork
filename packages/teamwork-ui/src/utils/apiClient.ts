@@ -1,6 +1,6 @@
 import { ApiError } from '../../functions/src/types/types';
-import { store } from '../store/store';
 import { firebase } from '../firebase';
+import { store } from '../store/store';
 
 interface ApiClient {
   body?: {};
