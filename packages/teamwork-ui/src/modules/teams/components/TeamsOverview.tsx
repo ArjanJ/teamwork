@@ -1,8 +1,6 @@
 import { Link } from '@reach/router';
-import { darken } from 'polished';
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useModal } from 'react-modal-hook';
-import posed from 'react-pose';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
 
@@ -11,9 +9,10 @@ import {
   TeamMember,
 } from '../../../../functions/src/modules/teams/types';
 import { Button, ButtonKind } from '../../../components/button/Button';
+import { PoseListStaggerListItem } from '../../../components/pose/PoseListStagger';
 import { Color } from '../../../styles/Color';
-import { Easing } from '../../../styles/Easing';
 import { TeamsCreateModal } from './TeamsCreateTeamModal';
+import { TeamsCard, TeamsDivider, TeamsGrid } from './TeamsShared';
 
 interface TeamsOverviewProps {
   teams: {
@@ -50,13 +49,13 @@ export const TeamsOverview: FunctionComponent<TeamsOverviewProps> = ({
       <Box as="header" mb="24px">
         <TeamsOverviewHeading>Your teams</TeamsOverviewHeading>
       </Box>
-      <StyledTeamsOverviewList pose={showTeams ? 'visible' : 'hidden'}>
+      <TeamsGrid pose={showTeams ? 'visible' : 'hidden'}>
         {teamKeys.map((key: string) => {
           const { displayName, name, members } = teams[key];
 
           return (
-            <TeamsOverviewListItem key={name}>
-              <TeamsOverviewListLink to={`/teams/${name}`}>
+            <PoseListStaggerListItem key={name}>
+              <TeamsCard as={Link} to={`/teams/${name}`}>
                 <Box>
                   <TeamsOverviewTeamName>{displayName}</TeamsOverviewTeamName>
                 </Box>
@@ -74,12 +73,12 @@ export const TeamsOverview: FunctionComponent<TeamsOverviewProps> = ({
                     ))}
                   </TeamsOverviewMembersList>
                 </Box>
-              </TeamsOverviewListLink>
-            </TeamsOverviewListItem>
+              </TeamsCard>
+            </PoseListStaggerListItem>
           );
         })}
-      </StyledTeamsOverviewList>
-      <Divider />
+      </TeamsGrid>
+      <TeamsDivider />
       <Flex justifyContent="flex-end">
         <Button kind={ButtonKind.PRIMARY} onClick={showModal} type="button">
           Add team
@@ -98,42 +97,6 @@ const TeamsOverviewWrapper = styled.div`
 const TeamsOverviewHeading = styled.h1`
   color: ${Color.MINT};
   font-size: 30px;
-`;
-
-const TeamsOverviewList = posed.ul({
-  visible: {
-    delayChildren: 600,
-    staggerChildren: 50,
-  },
-});
-
-const TeamsOverviewListItem = posed.li({
-  hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1 },
-});
-
-const StyledTeamsOverviewList = styled(TeamsOverviewList)`
-  display: grid;
-  grid-gap: 24px;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  list-style-type: none;
-  min-height: 94px;
-`;
-
-const TeamsOverviewListLink = styled(Link)`
-  background: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  border-radius: 4px;
-  display: block;
-  padding: 24px;
-  text-decoration: none;
-  transition: all 0.35s ${Easing.OUT};
-  width: 100%;
-
-  &:hover {
-    background: ${darken(0.08, 'white')};
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.16);
-  }
 `;
 
 const TeamsOverviewTeamName = styled.h2`
