@@ -26,3 +26,5 @@ keys/
 
 *.log
 .firebase/
+
+/notes
