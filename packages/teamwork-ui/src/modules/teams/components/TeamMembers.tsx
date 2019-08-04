@@ -57,7 +57,7 @@ export const TeamMembers: FunctionComponent<TeamMembersProps> = ({ team }) => {
 
           return (
             <PoseListStaggerListItem key={member.email}>
-              <TeamsCard as="li">
+              <TeamsCard>
                 <Flex justifyContent="space-between">
                   <Flex>
                     <TeamMembersIcon>
