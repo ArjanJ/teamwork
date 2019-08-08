@@ -9,3 +9,9 @@ export const getUser = async (uid: string) =>
     .collection(USERS_COLLECTION)
     .doc(uid)
     .get();
+
+export const getUserWhere = async <T>(property: string, value: T) =>
+  await db
+    .collection(USERS_COLLECTION)
+    .where(property, 'array-contains', value)
+    .get();

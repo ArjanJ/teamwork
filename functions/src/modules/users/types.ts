@@ -1,13 +1,12 @@
 export interface User {
   companies: UserCompany[];
+  email: string;
   firstName: string;
   id: string;
   lastName: string;
   role: string;
   teams: UserTeam[];
 }
-
-//firebaseAdmin.firestore.FieldValue
 export interface UserTeam {
   displayName: string;
   id: string;
