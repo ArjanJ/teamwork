@@ -8,7 +8,7 @@ import {
   FormikProps,
 } from 'formik';
 import React, { useEffect } from 'react';
-import { Flex } from 'rebass';
+import { Box, Flex } from 'rebass';
 
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
 import { FormField } from '../../../components/form-field/FormField';
@@ -49,7 +49,6 @@ const LastNameField = ({ field }: FieldProps<OnboardingFormValues>) => (
   <FormField label="Last Name">
     <Input
       {...field}
-      autoFocus={true}
       placeholder="Your Last Name"
       required={true}
       type="text"
@@ -59,25 +58,13 @@ const LastNameField = ({ field }: FieldProps<OnboardingFormValues>) => (
 
 const CompanyField = ({ field }: FieldProps<OnboardingFormValues>) => (
   <FormField label="Company">
-    <Input
-      {...field}
-      autoFocus={true}
-      placeholder="Your Company"
-      required={true}
-      type="text"
-    />
+    <Input {...field} placeholder="Your Company" required={true} type="text" />
   </FormField>
 );
 
 const RoleField = ({ field }: FieldProps<OnboardingFormValues>) => (
   <FormField label="Role">
-    <Input
-      {...field}
-      autoFocus={true}
-      placeholder="Your Role"
-      required={true}
-      type="text"
-    />
+    <Input {...field} placeholder="Your Role" required={true} type="text" />
   </FormField>
 );
 
@@ -85,10 +72,18 @@ const OnboardingFormComponent = (
   formikBag: FormikProps<OnboardingFormValues>,
 ) => (
   <Form>
-    <Field name="firstName" render={FirstNameField} />
-    <Field name="lastName" render={LastNameField} />
-    <Field name="company" render={CompanyField} />
-    <Field name="role" render={RoleField} />
+    <Box mb="24px">
+      <Field name="firstName" render={FirstNameField} />
+    </Box>
+    <Box mb="24px">
+      <Field name="lastName" render={LastNameField} />
+    </Box>
+    <Box mb="24px">
+      <Field name="company" render={CompanyField} />
+    </Box>
+    <Box mb="36px">
+      <Field name="role" render={RoleField} />
+    </Box>
     <Flex justifyContent="flex-end">
       <ButtonSpinner
         disabled={formikBag.isSubmitting}
@@ -128,6 +123,7 @@ export const OnboardingForm = () => {
           name: values.company,
         },
       ],
+      email: authUser.email,
       firstName: values.firstName,
       id: '',
       lastName: values.lastName,
