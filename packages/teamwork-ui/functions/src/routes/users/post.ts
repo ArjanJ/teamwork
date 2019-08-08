@@ -23,6 +23,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user: User = {
       companies,
+      email,
       firstName,
       id: uid,
       lastName,
