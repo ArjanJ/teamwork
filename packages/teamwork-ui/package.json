@@ -2,6 +2,21 @@
   "name": "teamwork",
   "version": "0.1.0",
   "private": false,
+  "scripts": {
+    "build": "sh -ac '. .env.${REACT_APP_ENV}; react-scripts build'",
+    "build:dev": "REACT_APP_ENV=dev npm run build",
+    "build:prod": "REACT_APP_ENV=prod npm run build",
+    "deploy:dev": "npm run build:dev && firebase deploy --project dev --only hosting",
+    "deploy:prod": "npm run build:prod && firebase deploy --project prod --only hosting",
+    "deploy:api:dev": "cd functions && npm run build && firebase deploy --project dev --only functions",
+    "deploy:api:prod": "cd functions && npm run build && firebase deploy --project prod --only functions",
+    "eject": "react-scripts eject",
+    "lint": "tslint -c tslint.json src/**/**/**/*.ts*",
+    "lint:fix": "tslint -c tslint.json src/**/**/**/*.ts* --fix",
+    "start": "sh -ac '. .env.dev; react-scripts start'",
+    "start:api": "cd functions && concurrently \"npm run watch\" \"npm run serve\"",
+    "test": "react-scripts test"
+  },
   "dependencies": {
     "@reach/router": "^1.2.1",
     "firebase": "^5.10.0",
@@ -20,17 +35,6 @@
     "typescript": "3.4.3"
   },
   "proxy": "http://localhost:5000/teamwork-dev-74882/us-central1/api",
-  "scripts": {
-    "build": "react-scripts build",
-    "deploy": "npm run build && firebase deploy --project dev --only hosting",
-    "deploy:api": "cd functions && firebase deploy --project dev --only functions",
-    "eject": "react-scripts eject",
-    "lint": "tslint -c tslint.json src/**/**/**/*.ts*",
-    "lint:fix": "tslint -c tslint.json src/**/**/**/*.ts* --fix",
-    "start": "react-scripts start",
-    "start:api": "cd functions && concurrently \"npm run watch\" \"npm run serve\"",
-    "test": "react-scripts test"
-  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -51,7 +55,7 @@
     "@types/rebass": "^3.0.3",
     "@types/styled-components": "^4.1.14",
     "concurrently": "^4.1.0",
-    "firebase-tools": "^6.7.0",
+    "firebase-tools": "^7.2.2",
     "polished": "^3.2.0",
     "prettier": "^1.16.4",
     "react-modal-hook": "^1.1.1",

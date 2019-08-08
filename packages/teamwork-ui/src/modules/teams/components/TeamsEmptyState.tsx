@@ -4,6 +4,7 @@ import { useModal } from 'react-modal-hook';
 import styled from 'styled-components';
 
 import { User } from '../../../../functions/src/modules/users/types';
+import { Button, ButtonKind } from '../../../components/button/Button';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
 import { TeamsCreateModal } from './TeamsCreateTeamModal';
@@ -33,9 +34,9 @@ export const TeamsEmptyState = React.memo(function TeamsEmptyStateComponent({
           team.
         </TeamsEmptyStateHeading>
         <div>
-          <TeamsEmptyStateCreateButton onClick={showModal} type="button">
+          <Button kind={ButtonKind.PRIMARY} onClick={showModal} type="button">
             Create your team
-          </TeamsEmptyStateCreateButton>
+          </Button>
         </div>
         <TeamsEmptyStateGraphicWrapper>
           <TeamsGraphic />
