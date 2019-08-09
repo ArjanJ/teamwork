@@ -6,6 +6,7 @@ import { Easing } from '../../styles/Easing';
 
 export enum ButtonKind {
   PRIMARY = 'PRIMARY',
+  PRIMARY_ALT = 'PRIMARY_ALT',
   SECONDARY = 'SECONDARY',
 }
 
@@ -19,6 +20,13 @@ const buttonThemeMap = {
 
     &::before {
       background: ${darken(0.06, Color.AQUA)};
+    }
+  `,
+  [ButtonKind.PRIMARY_ALT]: css`
+    background: ${Color.BLUE_SKY};
+
+    &::before {
+      background: ${darken(0.06, Color.BLUE_SKY)};
     }
   `,
   [ButtonKind.SECONDARY]: css`
