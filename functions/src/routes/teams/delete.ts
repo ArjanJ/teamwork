@@ -23,7 +23,7 @@ export const delete_ = async (
     await deleteTeam(id);
     res.status(200).send(wrapJsonResponse(team));
 
-    // If clause is here because TS thinks it could be undefined 🤔
+    // If block is here because TS thinks it could be undefined 🤔
     if (team) {
       // Update the user object teams.
       await updateUser(uid, {
