@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": false,
   "scripts": {
-    "build": "REACT_APP_STAGE=prod react-scripts build",
+    "build:dev": "REACT_APP_STAGE=dev react-scripts build",
+    "build:prod": "REACT_APP_STAGE=prod react-scripts build",
     "deploy:dev": "npm run build && firebase deploy -P dev --only hosting",
     "deploy:prod": "npm run build && firebase deploy -P prod --only hosting",
     "deploy:api:dev": "cd functions && npm run build && firebase deploy -P dev --only functions",
