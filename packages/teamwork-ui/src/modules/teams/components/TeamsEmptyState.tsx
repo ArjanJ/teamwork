@@ -34,7 +34,11 @@ export const TeamsEmptyState = React.memo(function TeamsEmptyStateComponent({
           team.
         </TeamsEmptyStateHeading>
         <div>
-          <Button kind={ButtonKind.PRIMARY} onClick={showModal} type="button">
+          <Button
+            kind={ButtonKind.PRIMARY_ALT}
+            onClick={showModal}
+            type="button"
+          >
             Create your team
           </Button>
         </div>
@@ -52,7 +56,7 @@ const TeamsEmptyStateWrapper = styled.div`
 
 const TeamsEmptyStateBox = styled.div`
   background: linear-gradient(111.12deg, #ff6f6f 1.35%, #f9d749 100%);
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0 4px 24px ${rgba('black', 0.06)};
   display: flex;
   flex-direction: column;
