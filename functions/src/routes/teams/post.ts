@@ -161,7 +161,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
       newFirebaseUsers.forEach(async firebaseUser => {
         if (firebaseUser.email) {
           await auth.sendSignInLinkToEmail(firebaseUser.email, {
-            url: `http://localhost:3000/invite?e=${firebaseUser.email}`,
+            url: `${req.get('origin')}/invite?e=${firebaseUser.email}`,
             handleCodeInApp: true,
           });
         }

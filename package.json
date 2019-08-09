@@ -5,8 +5,8 @@
   "scripts": {
     "build:dev": "REACT_APP_STAGE=dev react-scripts build",
     "build:prod": "REACT_APP_STAGE=prod react-scripts build",
-    "deploy:dev": "npm run build && firebase deploy -P dev --only hosting",
-    "deploy:prod": "npm run build && firebase deploy -P prod --only hosting",
+    "deploy:dev": "npm run build:dev && firebase deploy -P dev --only hosting",
+    "deploy:prod": "npm run build:prod && firebase deploy -P prod --only hosting",
     "deploy:api:dev": "cd functions && npm run build && firebase deploy -P dev --only functions",
     "deploy:api:prod": "cd functions && npm run build && firebase deploy -P prod --only functions",
     "eject": "react-scripts eject",
