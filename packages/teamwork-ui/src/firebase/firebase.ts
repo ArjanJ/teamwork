@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 if (!firebase.apps.length) {
-  if (process.env.REACT_APP_STAGE === 'dev') {
+  if (process.env.REACT_APP_ENV === 'dev') {
     firebase.initializeApp({
       apiKey: 'AIzaSyBAyJhpoLjME6L-XpuDlgXynv5NVC711LU',
       authDomain: 'teamwork-dev-74882.firebaseapp.com',
@@ -14,7 +14,7 @@ if (!firebase.apps.length) {
     });
   }
 
-  if (process.env.REACT_APP_STAGE === 'prod') {
+  if (process.env.REACT_APP_ENV === 'prod') {
     firebase.initializeApp({
       apiKey: 'AIzaSyDKHqFVQMj84FbHExF8_cJOK2WwrqwpjoU',
       authDomain: 'teamapp.work',

@@ -25,7 +25,7 @@ export const apiClient = async ({
   const { spaces } = store.getState();
 
   if (!currentUser) {
-    throw new Error('currentUser not found.');
+    throw new Error('Firebase currentUser not found, API call cannot be made.');
   }
 
   // Fetch idToken first, otherwise API will return 401.
@@ -46,7 +46,10 @@ export const apiClient = async ({
     request.body = JSON.stringify(body);
   }
 
-  const response = await fetch(`/api/${url}`, request);
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/${url}`,
+    request,
+  );
 
   return response.json();
 };
