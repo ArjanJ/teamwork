@@ -29,7 +29,7 @@ export const apiClient = async ({
   }
 
   // Fetch idToken first, otherwise API will return 401.
-  const token = await currentUser.getIdToken(true);
+  const token = await currentUser.getIdToken(false);
   headers.set('Authorization', `Bearer ${token}`);
 
   // Add company id to headers.

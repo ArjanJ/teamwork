@@ -6,5 +6,5 @@ import { usersRouter } from './users';
 
 export const routes = Router();
 
-routes.use('/teams', verifyIdToken, teamsRouter);
-routes.use('/users', verifyIdToken, usersRouter);
+routes.use('/api/teams', verifyIdToken, teamsRouter);
+routes.use('/api/users', verifyIdToken, usersRouter);

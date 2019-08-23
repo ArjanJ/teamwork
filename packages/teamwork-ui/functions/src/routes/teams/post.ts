@@ -161,6 +161,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
       // Wait until the users are created before sending them an email to login.
       await Promise.all(createTeamworkUsers);
       console.log('ORIGIN!!!!!!!!!', req.get('origin'));
+      console.log('REFERERR!!!!!!!!!', req.get('referer'));
       // Send the new users an email containing a sign in link.
       newFirebaseUsers.forEach(async firebaseUser => {
         if (firebaseUser.email) {
