@@ -1,5 +1,5 @@
 {
-  "name": "functions",
+  "name": "teamwork-api",
   "scripts": {
     "build-ts": "tsc",
     "build": "npm run build-ts",
