@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
+import { User, UserTeam } from 'teamwork-types';
 
-import { User, UserTeam } from '../../../functions/src/modules/users/types';
 import { AsyncAction } from '../../utils/asyncAction';
 import { createUser, getUser, updateUser } from './actions/index';
 import { UserState } from './reducer';

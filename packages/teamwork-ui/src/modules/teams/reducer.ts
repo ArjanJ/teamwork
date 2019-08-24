@@ -1,4 +1,5 @@
-import { Teams } from '../../../functions/src/modules/teams/types';
+import { Teams } from 'teamwork-types';
+
 import { TeamsActions } from './actions';
 import {
   CREATE_TEAM,

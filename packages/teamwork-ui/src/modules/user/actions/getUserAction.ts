@@ -1,4 +1,5 @@
-import { User } from '../../../../functions/src/modules/users/types';
+import { User } from 'teamwork-types';
+
 import { apiClient } from '../../../utils/apiClient';
 import { async, AsyncAction } from '../../../utils/asyncAction';
 

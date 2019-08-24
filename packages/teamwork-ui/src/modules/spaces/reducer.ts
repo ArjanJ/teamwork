@@ -1,4 +1,5 @@
-import { UserCompany } from '../../../functions/src/modules/users/types';
+import { UserCompany } from 'teamwork-types';
+
 import { SpacesActions } from './actions';
 import { SET_ACTIVE_SPACE, SET_SPACES } from './types';
 

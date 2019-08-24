@@ -1,4 +1,5 @@
-import { ApiError } from '../../functions/src/types/types';
+import { ApiError } from 'teamwork-types';
+
 import { firebase } from '../firebase';
 import { store } from '../store/store';
 

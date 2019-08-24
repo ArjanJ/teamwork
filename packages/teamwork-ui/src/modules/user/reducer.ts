@@ -1,5 +1,4 @@
-import { User } from '../../../functions/src/modules/users/types';
-import { ApiError } from '../../../functions/src/types/types';
+import { ApiError, User } from 'teamwork-types';
 import {
   CREATE_TEAM,
   CreateTeamAction,

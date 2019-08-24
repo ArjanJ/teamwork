@@ -2,8 +2,8 @@ import { darken, rgba } from 'polished';
 import React from 'react';
 import { useModal } from 'react-modal-hook';
 import styled from 'styled-components';
+import { User } from 'teamwork-types';
 
-import { User } from '../../../../functions/src/modules/users/types';
 import { Button, ButtonKind } from '../../../components/button/Button';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';

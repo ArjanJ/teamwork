@@ -12,8 +12,8 @@ import {
 import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
+import { TeamMember } from 'teamwork-types';
 
-import { TeamMember } from '../../../../functions/src/modules/teams/types';
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
 import { Button, ButtonKind } from '../../../components/button/Button';
 import { FormField } from '../../../components/form-field/FormField';

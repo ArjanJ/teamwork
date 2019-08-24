@@ -8,11 +8,8 @@ import {
 } from 'formik';
 import React, { FunctionComponent } from 'react';
 import { Box, Flex } from 'rebass';
+import { Team, TeamMember } from 'teamwork-types';
 
-import {
-  Team,
-  TeamMember,
-} from '../../../../functions/src/modules/teams/types';
 import { ButtonSpinner } from '../../../components/button-spinner/ButtonSpinner';
 import {
   Modal,

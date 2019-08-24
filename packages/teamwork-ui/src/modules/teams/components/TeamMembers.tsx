@@ -3,11 +3,8 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useModal } from 'react-modal-hook';
 import { Box, Flex } from 'rebass';
 import styled from 'styled-components';
+import { Team, TeamMember } from 'teamwork-types';
 
-import {
-  Team,
-  TeamMember,
-} from '../../../../functions/src/modules/teams/types';
 import { Button, ButtonKind } from '../../../components/button/Button';
 import { Dropdown, DropdownItem } from '../../../components/dropdown/Dropdown';
 import { MenuIcon } from '../../../components/icons/MenuIcon';
@@ -63,9 +60,7 @@ export const TeamMembers: FunctionComponent<TeamMembersProps> = ({ team }) => {
                     <TeamMembersIcon>
                       <img
                         alt={member.firstName}
-                        src={`https://identicon-1132.appspot.com/${
-                          member.firstName
-                        }?s=64`}
+                        src={`https://identicon-1132.appspot.com/${member.firstName}?s=64`}
                       />
                     </TeamMembersIcon>
                     <Box ml="12px">

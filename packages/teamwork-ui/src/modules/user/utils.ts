@@ -1,4 +1,4 @@
-import { User } from '../../../functions/src/modules/users/types';
+import { User } from 'teamwork-types';
 
 export const isEmptyUser = (user: User) => {
   if (!user) {

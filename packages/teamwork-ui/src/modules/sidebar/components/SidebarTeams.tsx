@@ -2,8 +2,8 @@ import { Link } from '@reach/router';
 import React, { FunctionComponent } from 'react';
 import { Box } from 'rebass';
 import styled from 'styled-components';
+import { User } from 'teamwork-types';
 
-import { User } from '../../../../functions/src/modules/users/types';
 import { Color } from '../../../styles/Color';
 import { Easing } from '../../../styles/Easing';
 import { useUser } from '../../user/useUser';
