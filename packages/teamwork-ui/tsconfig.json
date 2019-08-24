@@ -9,6 +9,8 @@
     ],
     "module": "esnext",
     "moduleResolution": "node",
+    "noEmit": true,
+    "outDir": ""
   },
   "include": [
     "src"

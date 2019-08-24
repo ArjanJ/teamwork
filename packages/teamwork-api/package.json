@@ -5,13 +5,16 @@
     "build": "npm run build-ts",
     "deploy:dev": "npm run build && gcloud --project teamwork-dev-74882 app deploy",
     "deploy:prod": "npm run build && gcloud --project teamwork-prod app deploy",
-    "dev": "npm-run-all build watch-node watch-ts",
+    "dev": "npm-run-all build watch-ts watch-node",
     "start": "npm run serve",
-    "serve": "node dist/index.js",
-    "watch-node": "nodemon dist/index.js",
+    "serve": "node lib/index.js",
+    "watch-node": "nodemon lib/index.js",
     "watch-ts": "tsc -w"
   },
-  "main": "dist/index.js",
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
@@ -32,7 +35,11 @@
     "node-env-run": "^3.0.2",
     "nodemon": "^1.19.1",
     "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
     "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
+    "tslint-react-hooks": "^2.2.1",
     "typescript": "^3.5.3"
   },
   "private": true

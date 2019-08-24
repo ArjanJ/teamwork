@@ -22,8 +22,6 @@ import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 export const post = async (req: Request, res: Response, next: NextFunction) => {
   const { body, decodedToken } = req;
   const companyId = req.get('X-Company');
-  console.log('ORIGIN', req.get('origin'));
-  console.log('REFERRER', req.get('referer'));
 
   if (!companyId) {
     return next({ message: 'X-Company header is required.' });
@@ -41,9 +39,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
 
       if (teamsWithSameName.length > 0) {
         return next({
-          message: `Team ${
-            body.displayName
-          } already exists within your organization.`,
+          message: `Team ${body.displayName} already exists within your organization.`,
           status: 400,
           type: CREATE_TEAM,
         });
@@ -87,21 +83,20 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
       id: team.id,
       name: team.name,
     };
-    console.log(0);
+
     // Update user doc with new team.
     await updateUser(decodedToken.uid, {
       teams: admin.firestore.FieldValue.arrayUnion(userTeam),
     });
 
-    console.log(1);
     const companyDetails = {
       id: company.id,
       name: company.name,
     };
-    console.log(2);
+
     // Fetch all users in company.
     const usersInCompanyDocs = await getUserWhere('companies', companyDetails);
-    console.log(3);
+
     // Reduce list of users to just their emails.
     const usersEmailsInCompany = usersInCompanyDocs.docs
       .map(userInCompany => userInCompany.data())
@@ -109,12 +104,12 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
         acc.push(curr.email);
         return acc;
       }, []);
-    console.log(4);
+
     // Filter list of team members to just the ones that don't exist.
     const usersThatNeedInviting = team.members.filter(
       teamMember => !usersEmailsInCompany.includes(teamMember.email),
     );
-    console.log({ usersThatNeedInviting });
+
     /**
      * If there are team members that don't exist (have an account) yet then we
      * create account for them in Firebase with a randomly generated password
@@ -158,22 +153,10 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
         }),
       );
 
-      // Wait until the users are created before sending them an email to login.
+      // Create users.
       await Promise.all(createTeamworkUsers);
-      console.log('ORIGIN!!!!!!!!!', req.get('origin'));
-      console.log('REFERERR!!!!!!!!!', req.get('referer'));
-      // Send the new users an email containing a sign in link.
-      newFirebaseUsers.forEach(async firebaseUser => {
-        if (firebaseUser.email) {
-          await auth.sendSignInLinkToEmail(firebaseUser.email, {
-            url: `${req.get('referer')}/invite?e=${firebaseUser.email}`,
-            handleCodeInApp: true,
-          });
-        }
-      });
     }
   } catch (error) {
-    console.log(error);
     next({ message: error.message, type: CREATE_TEAM });
   }
 };

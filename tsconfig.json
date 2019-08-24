@@ -8,7 +8,6 @@
     "lib": ["es6"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "noEmit": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
