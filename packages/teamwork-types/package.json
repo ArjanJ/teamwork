@@ -1,0 +1,21 @@
+{
+  "name": "teamwork-types",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Arjan Jassal <arjan.jassal.27@gmail.com>",
+  "license": "ISC",
+  "main": "lib/teamwork-types.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^3.5.3"
+  }
+}
