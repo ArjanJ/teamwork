@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { generateMultiple } from 'generate-password';
 
-import { admin, auth } from '../../config/firebase';
+import { admin } from '../../config/firebase';
 import { getCompany } from '../../modules/companies/models';
-import { inviteUsers } from '../../modules/invite/inviteUsers';
 import {
   CREATE_TEAM,
   createTeam,
