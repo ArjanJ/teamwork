@@ -42,5 +42,6 @@
     "tslint-react-hooks": "^2.2.1",
     "typescript": "^3.5.3"
   },
-  "private": true
+  "private": true,
+  "version": "0.0.1"
 }
