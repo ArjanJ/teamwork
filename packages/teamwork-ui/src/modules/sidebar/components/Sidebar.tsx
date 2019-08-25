@@ -3,6 +3,7 @@ import { Box } from 'rebass';
 import styled from 'styled-components';
 
 import { TeamworkLogo } from '../../../components/logos/logos';
+import { SidebarCompany } from './SidebarCompany';
 import { SidebarNav } from './SidebarNav';
 import { SidebarNewTeam } from './SidebarNewTeam';
 import { SidebarTeams } from './SidebarTeams';
@@ -12,6 +13,7 @@ export const Sidebar = () => (
     <Box mb="24px">
       <TeamworkLogo />
     </Box>
+    <SidebarCompany />
     <SidebarNav />
     <SidebarTeams />
     <SidebarNewTeam />

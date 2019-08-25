@@ -13,6 +13,9 @@ const initialState = {
   spaces: [],
 };
 
+export const selectActiveSpace = (state: SpacesState, activeSpace: string) =>
+  state.spaces.find(space => space.id === activeSpace);
+
 export default function(
   state: SpacesState = initialState,
   action: SpacesActions,

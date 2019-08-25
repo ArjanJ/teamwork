@@ -51,7 +51,7 @@ export const TeamsEmptyState = React.memo(function TeamsEmptyStateComponent({
 });
 
 const TeamsEmptyStateWrapper = styled.div`
-  padding: 48px 36px;
+  padding: 24px 36px;
 `;
 
 const TeamsEmptyStateBox = styled.div`
@@ -63,7 +63,7 @@ const TeamsEmptyStateBox = styled.div`
   justify-content: space-between;
   margin: auto;
   min-height: 304px;
-  max-width: 846px;
+  max-width: 876px;
   padding: 48px;
   position: relative;
 `;
