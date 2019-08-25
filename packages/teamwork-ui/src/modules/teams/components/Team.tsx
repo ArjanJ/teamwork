@@ -59,11 +59,11 @@ export const Team = React.memo<RouteComponentProps & TeamProps>(
                     <SettingsIcon />
                   </SettingsButton>
                   <Dropdown
-                    isOpen={isOpen}
-                    styles={css`
+                    css={css`
                       right: 0;
                       top: 36px;
                     `}
+                    isOpen={isOpen}
                   >
                     <DropdownItem type="button">Rename team</DropdownItem>
                     <DropdownItem onClick={onDeleteClick} type="button">

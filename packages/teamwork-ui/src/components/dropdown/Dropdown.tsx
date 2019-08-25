@@ -5,8 +5,8 @@ import { Color } from '../../styles/Color';
 import { Easing } from '../../styles/Easing';
 
 interface DropdownProps {
+  css?: CSSProp;
   isOpen: boolean;
-  styles?: CSSProp;
 }
 
 export const Dropdown = styled.div<DropdownProps>`
@@ -24,10 +24,10 @@ export const Dropdown = styled.div<DropdownProps>`
   width: 174px;
   z-index: 1;
 
-  ${props => props.styles}
+  ${props => props.css}
 `;
 
-export const DropdownItem = styled.button`
+export const DropdownItem = styled.button<{ css?: CSSProp }>`
   background: none;
   color: white;
   padding: 6px 12px;
@@ -38,4 +38,6 @@ export const DropdownItem = styled.button`
   &:hover {
     background: ${rgba('white', 0.1)};
   }
+
+  ${props => props.css}
 `;

@@ -6,14 +6,12 @@ import { TeamworkLogo } from '../../../components/logos/logos';
 import { SidebarNav } from './SidebarNav';
 import { SidebarNewTeam } from './SidebarNewTeam';
 import { SidebarTeams } from './SidebarTeams';
-import { SidebarUser } from './SidebarUser';
 
 export const Sidebar = () => (
   <SidebarWrapper>
     <Box mb="24px">
       <TeamworkLogo />
     </Box>
-    <SidebarUser />
     <SidebarNav />
     <SidebarTeams />
     <SidebarNewTeam />

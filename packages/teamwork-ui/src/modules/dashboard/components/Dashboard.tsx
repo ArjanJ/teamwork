@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { useAuthorization } from '../../auth/hooks/useAuthorization';
 import { useAuthUser } from '../../auth/hooks/useAuthUser';
+import { Header } from '../../header/components/Header';
 import { Sidebar } from '../../sidebar/components/Sidebar';
 import { useSpaces } from '../../spaces/useSpaces';
 import { useUser } from '../../user/useUser';
@@ -35,9 +36,12 @@ export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
   return (
     <DashboardWrapper>
       <Sidebar />
-      <VerifyEmail>
-        <Box flex={1}>{activeSpace && <DashboardRoutes />}</Box>
-      </VerifyEmail>
+      <Box flex={1}>
+        <VerifyEmail>
+          <Header />
+          <Box flex={1}>{activeSpace && <DashboardRoutes />}</Box>
+        </VerifyEmail>
+      </Box>
     </DashboardWrapper>
   );
 };

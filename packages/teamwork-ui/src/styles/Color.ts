@@ -8,4 +8,5 @@ export enum Color {
   MINT = '#bdf2d5',
   NAVY = '#03004B',
   ORANGE = '#f8cf83',
+  WHITE = '#FFFFFF'
 }

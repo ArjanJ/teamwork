@@ -63,3 +63,21 @@ Keep track of little things you owe people on your team.
 - Firebase Functions
 - Firebase Firestore
 - Firebase Authentication
+
+## Dev
+
+### Frontend
+```
+npm run start:ui
+```
+
+### Backend
+First start watching TypeScript source for changes.
+```
+npm run start:api:ts
+```
+
+Then watch JS files for changes.
+```
+npm run start:api:node
+```

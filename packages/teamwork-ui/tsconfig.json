@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "compilerOptions": {    
+  "compilerOptions": {
     "jsx": "preserve",
     "lib": [
       "dom",
@@ -10,7 +10,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
-    "outDir": ""
+    "outDir": "",
+    "allowJs": true
   },
   "include": [
     "src"

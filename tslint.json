@@ -18,6 +18,7 @@
     "no-console": false,
     "no-import-side-effect": false,
     "no-namespace": false,
+    "object-literal-sort-keys": true,
     "ordered-imports": true
   }
 }
