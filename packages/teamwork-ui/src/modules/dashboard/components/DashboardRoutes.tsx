@@ -17,10 +17,16 @@ const NotFound = Loadable({
   loading: () => null,
 });
 
+const Settings = Loadable({
+  loader: () => import('../../settings/components/Settings'),
+  loading: () => null,
+});
+
 export const DashboardRoutes: FunctionComponent = () => (
   <Router>
     <Team path="/teams/:teamName" />
     <Teams path="/" />
+    <Settings path="/settings" />
     <NotFound path="*" />
   </Router>
 );
