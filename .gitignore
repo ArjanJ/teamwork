@@ -5,3 +5,5 @@ build/
 lib/
 .env
 .env.*
+.DS_Store
+*.log
