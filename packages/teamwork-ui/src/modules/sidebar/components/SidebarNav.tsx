@@ -49,7 +49,7 @@ const StyledLink = styled(Link)<any>`
   color: white;
   display: flex;
   font-weight: 700;
-  padding-bottom: 16px;
+  padding-bottom: 18px;
   text-decoration: none;
   transition: opacity 0.35s ${Easing.OUT};
 
