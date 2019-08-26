@@ -36,18 +36,23 @@ export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
   return (
     <DashboardWrapper>
       <Sidebar />
-      <Box flex={1}>
+      <DashboardPageWrapper flex={1}>
         <VerifyEmail>
           <Header />
           <Box flex={1}>{activeSpace && <DashboardRoutes />}</Box>
         </VerifyEmail>
-      </Box>
+      </DashboardPageWrapper>
     </DashboardWrapper>
   );
 };
 
 const DashboardWrapper = styled(Flex)`
   min-height: 100vh;
+`;
+
+const DashboardPageWrapper = styled(Box)`
+  display: grid;
+  grid-template-rows: auto 1fr;
 `;
 
 export default Dashboard;

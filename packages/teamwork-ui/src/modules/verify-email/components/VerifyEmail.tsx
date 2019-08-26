@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Spinner } from '../../../components/spinner/Spinner';
@@ -42,7 +42,7 @@ export const VerifyEmail: FunctionComponent<VerifyEmailProps> = ({
   };
 
   return hasVerifiedEmail ? (
-    <React.Fragment>{children}</React.Fragment>
+    <>{children}</>
   ) : (
     <Wrapper>
       <Heading>Verify your email address</Heading>

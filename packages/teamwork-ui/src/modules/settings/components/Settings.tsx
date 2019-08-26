@@ -1,5 +1,6 @@
 import { RouteComponentProps } from '@reach/router';
 import React, { FunctionComponent } from 'react';
+import { Box, Flex } from 'rebass';
 
 import { PageHeading } from '../../../components/page-heading/PageHeading';
 import { PageWrapper } from '../../../components/page-wrapper/PageWrapper';
@@ -14,10 +15,10 @@ export const Settings: FunctionComponent<
 > = ({ children }) => (
   <PageWrapper>
     <PageHeading>Settings</PageHeading>
-    <div>
+    <Flex height="100%">
       <SettingsNav />
-      <div>{children}</div>
-    </div>
+      <Box flex={1}>{children}</Box>
+    </Flex>
   </PageWrapper>
 );
 

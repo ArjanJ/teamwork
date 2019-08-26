@@ -41,8 +41,9 @@ const SettingsUsers = Loadable({
   loading: () => null,
 });
 
+// 84px is height of the Header.
 export const DashboardRoutes: FunctionComponent = () => (
-  <Router>
+  <Router style={{ height: 'calc(100% - 84px)' }}>
     <Teams path="/" />
     <Team path="teams/:teamName" />
     <Settings path="settings">
