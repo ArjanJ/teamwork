@@ -26,7 +26,7 @@ export const Routes = () => (
   <Router>
     <Login path="/login" />
     <SignUp path="/signup" />
-    <Onboarding path="onboarding" />
+    <Onboarding path="/onboarding" />
     <Dashboard path="/*" />
   </Router>
 );

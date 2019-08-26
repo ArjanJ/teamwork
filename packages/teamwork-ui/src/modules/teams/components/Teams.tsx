@@ -29,10 +29,10 @@ export const Teams: FunctionComponent<RouteComponentProps> = () => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <TeamsOverview teams={teams} />
       <TeamsEmptyState user={user} />
-    </React.Fragment>
+    </>
   );
 };
 

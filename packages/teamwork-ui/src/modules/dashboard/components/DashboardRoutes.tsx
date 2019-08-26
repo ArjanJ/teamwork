@@ -22,11 +22,35 @@ const Settings = Loadable({
   loading: () => null,
 });
 
+const SettingsOrganization = Loadable({
+  loader: () =>
+    import(
+      '../../settings/components/SettingsOrganization/SettingsOrganization'
+    ),
+  loading: () => null,
+});
+
+const SettingsProfile = Loadable({
+  loader: () =>
+    import('../../settings/components/SettingsProfile/SettingsProfile'),
+  loading: () => null,
+});
+
+const SettingsUsers = Loadable({
+  loader: () => import('../../settings/components/SettingsUsers/SettingsUsers'),
+  loading: () => null,
+});
+
 export const DashboardRoutes: FunctionComponent = () => (
   <Router>
-    <Team path="/teams/:teamName" />
     <Teams path="/" />
-    <Settings path="/settings" />
+    <Team path="teams/:teamName" />
+    <Settings path="settings">
+      <SettingsProfile path="/" />
+      <SettingsOrganization path="organization" />
+      <SettingsProfile path="profile" />
+      <SettingsUsers path="users" />
+    </Settings>
     <NotFound path="*" />
   </Router>
 );
