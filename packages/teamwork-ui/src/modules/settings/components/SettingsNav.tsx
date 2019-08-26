@@ -3,6 +3,9 @@ import { rgba } from 'polished';
 import React from 'react';
 import styled from 'styled-components';
 
+import { Color } from '../../../styles/Color';
+import { Easing } from '../../../styles/Easing';
+
 export const SettingsNav = () => (
   <StyledNav>
     <SettingsNavList>
@@ -40,10 +43,30 @@ const SettingsNavList = styled.ul`
 `;
 
 const SettingsNavLink = styled(Link)<any>`
-  color: white;
+  color: ${Color.WHITE};
   display: block;
   font-weight: 700;
   margin-bottom: 24px;
   opacity: 0.75;
+  position: relative;
   text-decoration: none;
+  transition: opacity 0.35s ${Easing.OUT};
+
+  &:hover {
+    opacity: 1 !important;
+  }
+
+  &::before {
+    background: ${Color.MANGO};
+    content: '';
+    height: 18px;
+    left: -24px;
+    opacity: ${({ to = '' }) =>
+      window.location.pathname.includes(to) ? 1 : 0};
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 0.35s ${Easing.OUT};
+    width: 3px;
+  }
 `;
