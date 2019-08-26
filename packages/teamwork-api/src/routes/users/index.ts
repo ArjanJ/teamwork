@@ -8,4 +8,4 @@ export const usersRouter = Router();
 
 usersRouter.get('/:uid', get);
 usersRouter.post('/', post);
-usersRouter.post('/:uid', put);
+usersRouter.put('/:uid', put);
