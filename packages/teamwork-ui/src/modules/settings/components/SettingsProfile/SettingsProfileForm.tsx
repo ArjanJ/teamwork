@@ -13,6 +13,7 @@ import { ButtonSpinner } from '../../../../components/button-spinner/ButtonSpinn
 import { FormField } from '../../../../components/form-field/FormField';
 import { Input } from '../../../../components/input/Input';
 import { Color } from '../../../../styles/Color';
+import { delay } from '../../../../utils/delay';
 import { useUser } from '../../../user/useUser';
 
 interface SettingsProfileFormValues {
@@ -110,6 +111,7 @@ export const SettingsProfileForm: FunctionComponent = () => {
       return null;
     }
 
+    await delay(1500);
     await updateUser(user.id, values);
     actions.setSubmitting(false);
   };
