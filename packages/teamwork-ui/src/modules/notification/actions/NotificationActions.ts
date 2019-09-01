@@ -1,3 +1,6 @@
+import { Dispatch } from 'redux';
+
+import { delay } from '../../../utils/delay';
 import {
   DISMISS_NOTIFICATION,
   SHOW_NOTIFICATION,
@@ -16,14 +19,23 @@ interface DismissNotification {
 
 export type NotificationActions = ShowNotifcation | DismissNotification;
 
-export function showNotification(payload: Notification) {
+export function showNotification(payload: Notification, autoDismiss = true) {
   const id = new Date().valueOf();
   payload.id = id;
 
-  return {
-    payload,
-    type: SHOW_NOTIFICATION,
-  };
+  const showNotificationAction = { payload, type: SHOW_NOTIFICATION };
+
+  if (autoDismiss) {
+    return async (dispatch: Dispatch) => {
+      dispatch(showNotificationAction);
+
+      // Wait 3 secs then dismiss the notification
+      await delay(3000);
+      return dispatch({ payload: id, type: DISMISS_NOTIFICATION });
+    };
+  }
+
+  return showNotificationAction;
 }
 
 export function dismissNotification(payload: Notification['id']) {

@@ -13,7 +13,10 @@ import { ButtonSpinner } from '../../../../components/button-spinner/ButtonSpinn
 import { FormField } from '../../../../components/form-field/FormField';
 import { Input } from '../../../../components/input/Input';
 import { Color } from '../../../../styles/Color';
+import { AsyncActionStatus } from '../../../../utils/asyncAction';
 import { delay } from '../../../../utils/delay';
+import { NotificationType } from '../../../notification/types';
+import { useNotification } from '../../../notification/useNotification';
 import { useUser } from '../../../user/useUser';
 
 interface SettingsProfileFormValues {
@@ -89,6 +92,7 @@ const SettingsProfileFormComponent = ({
 
 export const SettingsProfileForm: FunctionComponent = () => {
   const { updateUser, user } = useUser();
+  const { showNotification } = useNotification();
 
   const getInitialValues = () => {
     if (user !== null) {
@@ -112,7 +116,22 @@ export const SettingsProfileForm: FunctionComponent = () => {
     }
 
     await delay(1500);
-    await updateUser(user.id, values);
+    const { status } = await updateUser(user.id, values);
+
+    if (status !== AsyncActionStatus.SUCCEEDED) {
+      showNotification({
+        id: 0,
+        message: 'Failed to save changes',
+        type: NotificationType.ERROR,
+      });
+    } else {
+      showNotification({
+        id: 0,
+        message: 'Successfully updated profile',
+        type: NotificationType.SUCCESS,
+      });
+    }
+
     actions.setSubmitting(false);
   };
 

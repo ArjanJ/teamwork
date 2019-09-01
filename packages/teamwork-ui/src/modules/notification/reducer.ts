@@ -5,7 +5,7 @@ import {
 } from './constants/ActionTypes';
 import { Notification } from './types';
 
-type NotificationState = Notification[];
+export type NotificationState = Notification[];
 
 const initialState: NotificationState = [];
 
