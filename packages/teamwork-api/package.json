@@ -27,6 +27,5 @@
     "ts-node-dev": "^1.0.0-pre.43"
   },
   "private": true,
-  "version": "0.0.1",
-  "devDependencies": {}
+  "version": "0.0.2"
 }
