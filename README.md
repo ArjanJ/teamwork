@@ -72,12 +72,9 @@ npm run start:ui
 ```
 
 ### Backend
-First start watching TypeScript source for changes.
 ```
-npm run start:api:ts
+npm run start:api
 ```
 
-Then watch JS files for changes.
-```
-npm run start:api:node
-```
+## Release
+Use lerna to bump the version https://github.com/lerna/lerna/tree/master/commands/version#readme
