@@ -5,7 +5,6 @@ import {
   dismissNotification,
   showNotification,
 } from './actions/NotificationActions';
-import { NotificationState } from './reducer';
 import { Notification } from './types';
 
 interface UseNotification {

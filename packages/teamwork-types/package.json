@@ -6,6 +6,7 @@
   "license": "ISC",
   "main": "lib/teamwork-types.js",
   "types": "lib/index.d.ts",
+  "private": true,
   "directories": {
     "lib": "lib"
   },
@@ -17,5 +18,6 @@
   },
   "dependencies": {
     "tslint-config-prettier": "^1.18.0"
-  }
+  },
+  "devDependencies": {}
 }

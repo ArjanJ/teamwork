@@ -1,24 +1,24 @@
 {
   "name": "teamwork-ui",
   "version": "0.0.1",
-  "private": false,
+  "private": true,
   "scripts": {
     "build": "sh -ac '. .env.${REACT_APP_ENV}; react-scripts build'",
     "build:dev": "REACT_APP_ENV=dev npm run build",
     "build:prod": "REACT_APP_ENV=prod npm run build",
     "deploy:dev": "npm run build:dev && firebase deploy -P dev --only hosting",
     "deploy:prod": "npm run build:prod && firebase deploy -P prod --only hosting",
+    "dev": "react-scripts start",
     "eject": "react-scripts eject",
     "lint": "tslint -c tslint.json src/**/**/**/*.ts*",
     "lint:fix": "tslint -c tslint.json src/**/**/**/*.ts* --fix",
-    "start": "react-scripts start",
-    "start:api": "cd functions && concurrently \"npm run watch\" \"npm run serve\"",
     "test": "react-scripts test"
   },
   "dependencies": {
     "@reach/router": "^1.2.1",
     "firebase": "^5.10.0",
     "formik": "^1.4.4",
+    "polished": "^3.4.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-firebase-hooks": "^2.0.0",

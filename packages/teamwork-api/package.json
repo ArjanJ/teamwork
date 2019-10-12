@@ -5,11 +5,9 @@
     "build": "npm run build-ts",
     "deploy:dev": "npm run build && gcloud --project teamwork-dev-74882 app deploy",
     "deploy:prod": "npm run build && gcloud --project teamwork-prod app deploy",
-    "dev": "npm-run-all build watch-ts watch-node",
+    "dev": "ts-node-dev --respawn --transpileOnly src/index.ts",
     "start": "npm run serve",
-    "serve": "node lib/index.js",
-    "watch-node": "nodemon lib/index.js",
-    "watch-ts": "tsc -w"
+    "serve": "node lib/index.js"
   },
   "files": [
     "lib"
@@ -25,8 +23,10 @@
     "firebase-admin": "^8.3.0",
     "firebase-functions": "^3.2.0",
     "generate-password": "^1.4.2",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "ts-node-dev": "^1.0.0-pre.43"
   },
   "private": true,
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "devDependencies": {}
 }
