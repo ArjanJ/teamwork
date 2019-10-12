@@ -1,4 +1,6 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import posed, { PoseGroup } from 'react-pose';
+import styled from 'styled-components';
 
 import { Notification } from '../types';
 import { useNotification } from '../useNotification';
@@ -7,25 +9,36 @@ import { NotificationAlert } from './NotificationAlert';
 export const Notifications = () => {
   const { dismissNotification, notifications } = useNotification();
 
-  if (notifications.length === 0) {
-    return null;
-  }
-
   return (
-    <>
-      {notifications.map(({ id, message, type }: Notification) => {
-        const onDismissClick = () => dismissNotification(id);
+    <NotificationsWrapper>
+      <PoseGroup>
+        {notifications.map(({ id, message, type }: Notification) => {
+          const onDismissClick = () => dismissNotification(id);
 
-        return (
-          <NotificationAlert
-            id={id}
-            key={id}
-            message={message}
-            onDismissClick={onDismissClick}
-            type={type}
-          />
-        );
-      })}
-    </>
+          return (
+            <NotificationAnimation key={id}>
+              <NotificationAlert
+                id={id}
+                message={message}
+                onDismissClick={onDismissClick}
+                type={type}
+              />
+            </NotificationAnimation>
+          );
+        })}
+      </PoseGroup>
+    </NotificationsWrapper>
   );
 };
+
+const NotificationAnimation = posed.div({
+  enter: { y: 0, opacity: 1 },
+  exit: { y: 20, opacity: 0 },
+});
+
+const NotificationsWrapper = styled(NotificationAnimation)`
+  bottom: 12px;
+  position: fixed;
+  right: 24px;
+  z-index: 10;
+`;

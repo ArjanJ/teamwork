@@ -3,7 +3,7 @@ import {
   DISMISS_NOTIFICATION,
   SHOW_NOTIFICATION,
 } from './constants/ActionTypes';
-import { Notification } from './types';
+import { Notification, NotificationType } from './types';
 
 export type NotificationState = Notification[];
 
