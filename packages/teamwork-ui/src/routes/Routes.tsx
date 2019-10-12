@@ -1,26 +1,17 @@
 import { Router } from '@reach/router';
-import React from 'react';
-import Loadable from 'react-loadable';
+import React, { lazy } from 'react';
 
-const Login = Loadable({
-  loader: () => import('../modules/login/components/Login'),
-  loading: () => null,
-});
+const Login = lazy(() => import('../modules/login/components/Login'));
 
-const SignUp = Loadable({
-  loader: () => import('../modules/signup/components/SignUp'),
-  loading: () => null,
-});
+const SignUp = lazy(() => import('../modules/signup/components/SignUp'));
 
-const Dashboard = Loadable({
-  loader: () => import('../modules/dashboard/components/Dashboard'),
-  loading: () => null,
-});
+const Dashboard = lazy(() =>
+  import('../modules/dashboard/components/Dashboard'),
+);
 
-const Onboarding = Loadable({
-  loader: () => import('../modules/onboarding/components/Onboarding'),
-  loading: () => null,
-});
+const Onboarding = lazy(() =>
+  import('../modules/onboarding/components/Onboarding'),
+);
 
 export const Routes = () => (
   <Router>

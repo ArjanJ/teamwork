@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { ModalProvider } from 'react-modal-hook';
 import { StoreContext } from 'redux-react-hook';
 
@@ -10,7 +10,9 @@ const App = () => (
   <StoreContext.Provider value={store}>
     <GlobalStyles />
     <ModalProvider>
-      <Routes />
+      <Suspense fallback={null}>
+        <Routes />
+      </Suspense>
     </ModalProvider>
   </StoreContext.Provider>
 );

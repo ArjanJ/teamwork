@@ -21,7 +21,7 @@ export const Sidebar = () => (
 );
 
 const SidebarWrapper = styled.aside`
-  background: #04002f;
+  background: #080528;
   padding: 36px;
   position: relative;
   width: 280px;

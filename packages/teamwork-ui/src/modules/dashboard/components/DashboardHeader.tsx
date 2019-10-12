@@ -3,14 +3,13 @@ import styled from 'styled-components';
 
 import { UserDropdown } from '../../user/components/UserDropdown';
 
-export const Header = () => (
-  <StyledHeader>
+export const DashboardHeader = () => (
+  <StyledDashboardHeader>
     <UserDropdown />
-  </StyledHeader>
+  </StyledDashboardHeader>
 );
 
-
-const StyledHeader = styled.header`
+const StyledDashboardHeader = styled.header`
   display: flex;
   justify-content: flex-end;
   padding: 24px;

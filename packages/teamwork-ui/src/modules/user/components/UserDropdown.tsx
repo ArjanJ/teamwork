@@ -38,9 +38,9 @@ export const UserDropdown: FunctionComponent = () => {
                   <UserDropdownName>{user && user.lastName}</UserDropdownName>
                 </span>
               </Flex>
-              <ChevronWraper isOpen={isOpen}>
+              <ChevronWrapper isOpen={isOpen}>
                 <ChevronDownIcon />
-              </ChevronWraper>
+              </ChevronWrapper>
             </Flex>
           </UserDropdownWrapper>
           <Dropdown
@@ -65,7 +65,7 @@ const UserDropdownWrapper = styled(Flex)`
   background: ${rgba('black', 0.3)};
   border-radius: 4px;
   cursor: pointer;
-  height: 36px;
+  height: 40px;
   min-width: 180px;
   padding: 6px 12px;
   position: relative;
@@ -84,7 +84,7 @@ const UserDropdownName = styled.span`
 
 const UserDropdownPic = styled(Flex)`
   align-items: center;
-  background: ${rgba('white', 0.75)};
+  background: ${rgba('white', 0.5)};
   border-radius: 50%;
   height: 24px;
   justify-content: center;
@@ -96,7 +96,7 @@ const UserDropdownPic = styled(Flex)`
   }
 `;
 
-const ChevronWraper = styled.span<{ isOpen: boolean }>`
+const ChevronWrapper = styled.span<{ isOpen: boolean }>`
   transform: rotate(${({ isOpen }) => (isOpen ? '180deg' : '0deg')});
   transition: all 0.35s ${Easing.OUT};
 `;

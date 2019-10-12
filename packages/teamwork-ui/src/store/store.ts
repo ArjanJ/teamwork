@@ -1,19 +1,16 @@
-import { applyMiddleware, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { applyMiddleware, createStore, Middleware } from 'redux';
+import { logger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import { rootReducer } from '../reducer/rootReducer';
 
-const middlewareEnhancer = composeWithDevTools(applyMiddleware(thunk));
+const middlewares: Middleware[] = [thunk];
 
-export const store = createStore(rootReducer, middlewareEnhancer);
-export type AppState = ReturnType<typeof rootReducer>;
-
-/**
- * Required for redux devtools chrome extension.
- */
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION__(): object;
-  }
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(logger);
 }
+
+const middleware = applyMiddleware(...middlewares);
+
+export const store = createStore(rootReducer, middleware);
+export type AppState = ReturnType<typeof rootReducer>;

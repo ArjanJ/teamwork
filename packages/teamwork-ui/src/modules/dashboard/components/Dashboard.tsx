@@ -5,12 +5,12 @@ import styled from 'styled-components';
 
 import { useAuthorization } from '../../auth/hooks/useAuthorization';
 import { useAuthUser } from '../../auth/hooks/useAuthUser';
-import { Header } from '../../header/components/Header';
 import { Notifications } from '../../notification/components/Notifications';
 import { Sidebar } from '../../sidebar/components/Sidebar';
 import { useSpaces } from '../../spaces/useSpaces';
 import { useUser } from '../../user/useUser';
 import { VerifyEmail } from '../../verify-email/components/VerifyEmail';
+import { DashboardHeader } from './DashboardHeader';
 import { DashboardRoutes } from './DashboardRoutes';
 
 export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
@@ -39,7 +39,7 @@ export const Dashboard: FunctionComponent<RouteComponentProps> = () => {
       <Sidebar />
       <DashboardPageWrapper flex={1}>
         <VerifyEmail>
-          <Header />
+          <DashboardHeader />
           <Box flex={1}>{activeSpace && <DashboardRoutes />}</Box>
         </VerifyEmail>
       </DashboardPageWrapper>

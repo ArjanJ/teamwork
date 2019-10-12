@@ -59,7 +59,7 @@ export const Separator = styled(Box)`
   }
 
   &::after {
-    background: ${Color.BLUE_PERSIAN};
+    background: ${Color.BLUE_RAGE};
     content: '';
     height: 100%;
     left: 50%;

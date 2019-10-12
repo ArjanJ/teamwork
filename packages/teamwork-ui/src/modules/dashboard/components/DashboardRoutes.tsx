@@ -1,45 +1,25 @@
 import { Router } from '@reach/router';
-import React, { FunctionComponent } from 'react';
-import Loadable from 'react-loadable';
+import React, { FunctionComponent, lazy } from 'react';
 
-const Teams = Loadable({
-  loader: () => import('../../teams/components/Teams'),
-  loading: () => null,
-});
+const Teams = lazy(() => import('../../teams/components/Teams'));
 
-const Team = Loadable({
-  loader: () => import('../../teams/components/Team'),
-  loading: () => null,
-});
+const Team = lazy(() => import('../../teams/components/Team'));
 
-const NotFound = Loadable({
-  loader: () => import('../../not-found/components/NotFound'),
-  loading: () => null,
-});
+const NotFound = lazy(() => import('../../not-found/components/NotFound'));
 
-const Settings = Loadable({
-  loader: () => import('../../settings/components/Settings'),
-  loading: () => null,
-});
+const Settings = lazy(() => import('../../settings/components/Settings'));
 
-const SettingsOrganization = Loadable({
-  loader: () =>
-    import(
-      '../../settings/components/SettingsOrganization/SettingsOrganization'
-    ),
-  loading: () => null,
-});
+const SettingsOrganization = lazy(() =>
+  import('../../settings/components/SettingsOrganization/SettingsOrganization'),
+);
 
-const SettingsProfile = Loadable({
-  loader: () =>
-    import('../../settings/components/SettingsProfile/SettingsProfile'),
-  loading: () => null,
-});
+const SettingsProfile = lazy(() =>
+  import('../../settings/components/SettingsProfile/SettingsProfile'),
+);
 
-const SettingsUsers = Loadable({
-  loader: () => import('../../settings/components/SettingsUsers/SettingsUsers'),
-  loading: () => null,
-});
+const SettingsUsers = lazy(() =>
+  import('../../settings/components/SettingsUsers/SettingsUsers'),
+);
 
 // 84px is height of the Header.
 export const DashboardRoutes: FunctionComponent = () => (

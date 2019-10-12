@@ -1,6 +1,7 @@
 export enum Color {
   AQUA = '#19c0cb',
-  BLUE_RAGE = '#0900c3',
+  BLACK = '#000000',
+  BLUE_RAGE = '#0900C3',
   BLUE_RHINO = '#2A355F',
   BLUE_PERSIAN = '#2f0ad0',
   BLUE_SKY = '#2d77ee',

@@ -27,5 +27,9 @@
     "ts-node-dev": "^1.0.0-pre.43"
   },
   "private": true,
-  "version": "0.0.2"
+  "version": "0.0.2",
+  "devDependencies": {
+    "@types/webpack-env": "^1.14.0",
+    "redux-logger": "^3.0.6"
+  }
 }
