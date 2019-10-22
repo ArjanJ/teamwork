@@ -1,5 +1,5 @@
 import { ErrorRequestHandler } from 'express';
-import { ApiError } from '../types/types';
+import { ApiError } from 'teamwork-types';
 
 const STATUS = 500;
 const MESSAGE = 'Something went wrong.';

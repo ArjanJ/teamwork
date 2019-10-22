@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { admin } from '../../config/firebase';
-import { DELETE_TEAM, deleteTeam, getTeam } from '../../modules/teams/models';
+import { DELETE_TEAM } from '../../modules/teams/constants';
+import { deleteTeam, getTeam } from '../../modules/teams/models';
 import { updateUser } from '../../modules/users/models';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 // _ suffix because delete is a reserved word.
+// tslint:disable-next-line: variable-name
 export const delete_ = async (
   req: Request,
   res: Response,

@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
+import { User } from 'teamwork-types';
 
 import {
   createCompany,
   getCompanyByName,
 } from '../../modules/companies/models';
-import { CREATE_USER, createUser } from '../../modules/users/models';
-import { User } from '../../modules/users/types';
+import { CREATE_USER } from '../../modules/users/constants';
+import { createUser } from '../../modules/users/models';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const post = async (req: Request, res: Response, next: NextFunction) => {
@@ -40,9 +41,7 @@ export const post = async (req: Request, res: Response, next: NextFunction) => {
       if (companiesQuery.docs.length > 0) {
         // If company exists return 401 error to user.
         return next({
-          message: `${
-            company.name
-          } already exists. You must be added by an administrator.`,
+          message: `${company.name} already exists. You must be added by an administrator.`,
           status: 400,
           type: CREATE_USER,
         });

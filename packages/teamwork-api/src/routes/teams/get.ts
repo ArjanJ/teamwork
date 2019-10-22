@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { GET_TEAM, getTeam } from '../../modules/teams/models';
+import { GET_TEAM } from '../../modules/teams/constants';
+import { getTeam } from '../../modules/teams/models';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const get = async (req: Request, res: Response, next: NextFunction) => {

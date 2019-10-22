@@ -29,8 +29,8 @@ const adminConfig = {
     getServiceAccount(GOOGLE_CLOUD_PROJECT),
   ),
   databaseURL: config[GOOGLE_CLOUD_PROJECT].databaseURL,
-  storageBucket: config[GOOGLE_CLOUD_PROJECT].storageBucket,
   projectId: config[GOOGLE_CLOUD_PROJECT].projectId,
+  storageBucket: config[GOOGLE_CLOUD_PROJECT].storageBucket,
 };
 
 const clientConfig = config[GOOGLE_CLOUD_PROJECT];

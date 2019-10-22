@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { GET_USER, getUser } from '../../modules/users/models';
+import { GET_USER } from '../../modules/users/constants';
+import { getUser } from '../../modules/users/models';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const get = async (req: Request, res: Response, next: NextFunction) => {

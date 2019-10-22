@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { getTeam, UPDATE_TEAM, updateTeam } from '../../modules/teams/models';
+import { UPDATE_TEAM } from '../../modules/teams/constants';
+import { getTeam, updateTeam } from '../../modules/teams/models';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const put = async (req: Request, res: Response, next: NextFunction) => {

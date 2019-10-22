@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { getUser, UPDATE_USER, updateUser } from '../../modules/users/models';
+import { UPDATE_USER } from '../../modules/users/constants';
+import { getUser, updateUser } from '../../modules/users/models';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const put = async (req: Request, res: Response, next: NextFunction) => {

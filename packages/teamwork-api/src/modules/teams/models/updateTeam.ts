@@ -1,8 +1,7 @@
+import { Team } from 'teamwork-types';
+
 import { db } from '../../../config/firebase';
 import { TEAMS_COLLECTION } from '../constants';
-import { Team } from '../types';
-
-export const UPDATE_TEAM = 'UPDATE_TEAM';
 
 interface UpdateTeam extends Omit<Team, 'id'> {}
 

@@ -1,21 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
 import { generateMultiple } from 'generate-password';
+import { Team, UserTeam } from 'teamwork-types';
 
 import { admin } from '../../config/firebase';
 import { getCompany } from '../../modules/companies/models';
-import {
-  CREATE_TEAM,
-  createTeam,
-  getTeamWhere,
-} from '../../modules/teams/models';
-import { Team } from '../../modules/teams/types';
+import { CREATE_TEAM } from '../../modules/teams/constants';
+import { createTeam, getTeamWhere } from '../../modules/teams/models';
 import {
   createFirebaseUser,
   createUser,
   getUserWhere,
   updateUser,
 } from '../../modules/users/models';
-import { UserTeam } from '../../modules/users/types';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const post = async (req: Request, res: Response, next: NextFunction) => {

@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
+import { Team, Teams } from 'teamwork-types';
 
-import { GET_TEAM, getTeamWhere } from '../../modules/teams/models';
-import { Team, Teams } from '../../modules/teams/types';
+import { GET_TEAM } from '../../modules/teams/constants';
+import { getTeamWhere } from '../../modules/teams/models';
 import { wrapJsonResponse } from '../../utils/wrapJsonResponse';
 
 export const getAll = async (
@@ -23,7 +24,7 @@ export const getAll = async (
 
     // Return docs list into Teams structure.
     const teams: Teams = teamsDocs.docs.reduce((acc, curr) => {
-      const team: Team = <Team>curr.data();
+      const team: Team = curr.data() as Team;
       acc[team.id] = team;
       return acc;
     }, teamsResponse);
