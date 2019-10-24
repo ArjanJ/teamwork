@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "teamwork-api": "file:packages/teamwork-api",
+    "teamwork-config": "file:packages/teamwork-config",
     "teamwork-types": "file:packages/teamwork-types",
     "teamwork-ui": "file:packages/teamwork-ui"
   }

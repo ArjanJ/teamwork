@@ -1,0 +1,27 @@
+{
+  "name": "teamwork-config",
+  "version": "0.0.2",
+  "description": "> TODO: description",
+  "author": "Arjan Jassal <arjan.jassal.27@gmail.com>",
+  "homepage": "https://github.com/ArjanJ/teamwork#readme",
+  "license": "ISC",
+  "private": true,
+  "main": "lib/index.js",
+  "scripts": {
+    "build-ts": "tsc",
+    "build": "npm run build-ts"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArjanJ/teamwork.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ArjanJ/teamwork/issues"
+  }
+}

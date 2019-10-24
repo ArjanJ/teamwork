@@ -1,7 +1,10 @@
 import firebase from 'firebase';
 import * as firebaseAdmin from 'firebase-admin';
-
-import { config } from './firebase-config';
+import {
+  firebase as firebaseConfig,
+  firebaseServiceAccount as serviceAccountConfig,
+} from 'teamwork-config';
+import { FirebaseConfig } from 'teamwork-config/lib/firebase';
 
 const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT;
 
@@ -11,33 +14,32 @@ if (!GOOGLE_CLOUD_PROJECT) {
   );
 }
 
-const getServiceAccount = (project: string) => {
-  switch (project) {
-    case 'teamwork-dev-74882': {
-      return require('../../keys/teamwork-dev-74882-firebase-adminsdk-zbdex-3cdaaf7b04.json');
-    }
-    case 'teamwork-prod': {
-      return require('../../keys/teamwork-prod-firebase-adminsdk-abp4h-2e776c2741.json');
-    }
-    default:
-      return null;
-  }
-};
+const getConfigkey = (projectId: string) =>
+  Object.keys(firebaseConfig).find(
+    key => firebaseConfig[key].projectId === projectId,
+  );
+const configKey = getConfigkey(GOOGLE_CLOUD_PROJECT);
 
-const adminConfig = {
-  credential: firebaseAdmin.credential.cert(
-    getServiceAccount(GOOGLE_CLOUD_PROJECT),
-  ),
-  databaseURL: config[GOOGLE_CLOUD_PROJECT].databaseURL,
-  projectId: config[GOOGLE_CLOUD_PROJECT].projectId,
-  storageBucket: config[GOOGLE_CLOUD_PROJECT].storageBucket,
-};
+if (!configKey) {
+  throw new Error('Firebase client config missing.');
+}
 
-const clientConfig = config[GOOGLE_CLOUD_PROJECT];
+const getServiceAccount = (env: string) => serviceAccountConfig[env];
+const getClientConfig = (env: string) => firebaseConfig[env];
+const getAdminConfig = (cert: object, config: FirebaseConfig) => ({
+  credential: firebaseAdmin.credential.cert(cert),
+  databaseURL: config.databaseURL,
+  projectId: config.projectId,
+  storageBucket: config.storageBucket,
+});
+
+const clientConfig = getClientConfig(configKey);
+const serviceAccount = getServiceAccount(configKey);
+const adminConfig = getAdminConfig(serviceAccount, clientConfig);
 
 firebaseAdmin.initializeApp(adminConfig);
 
-if (!firebase.apps.length && adminConfig.projectId) {
+if (!firebase.apps.length && clientConfig.projectId) {
   firebase.initializeApp(clientConfig);
 }
 

@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "alwaysStrict": true,
+    "declaration": true,
+    "isolatedModules": false,
+    "outDir": "lib",
+    "sourceMap": false
+  },
+  "include": ["src/**/**/*"]
+}

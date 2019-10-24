@@ -30,8 +30,7 @@
     "redux": "^4.0.1",
     "redux-react-hook": "^3.3.1",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.2.0",
-    "teamwork-types": "file:../teamwork-types"
+    "styled-components": "^4.2.0"
   },
   "eslintConfig": {
     "extends": "react-app"
