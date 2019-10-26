@@ -1,12 +1,12 @@
 import { ErrorRequestHandler } from 'express';
-import { ApiError } from 'teamwork-types';
+import { APIError } from 'teamwork-types';
 
 const STATUS = 500;
 const MESSAGE = 'Something went wrong.';
 const TYPE = 'BAD_IMPLEMENTATION';
 
 export const handleError: ErrorRequestHandler = (
-  err: ApiError,
+  err: APIError,
   req,
   res,
   next,
@@ -15,7 +15,7 @@ export const handleError: ErrorRequestHandler = (
   const message = err.message || MESSAGE;
   const type = err.type || TYPE;
 
-  const error: ApiError = {
+  const error: APIError = {
     message,
     status,
     type,

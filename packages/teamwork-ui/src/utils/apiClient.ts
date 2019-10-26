@@ -1,17 +1,12 @@
-import { ApiError } from 'teamwork-types';
+import { APIResponse } from 'teamwork-types';
 
 import { firebase } from '../firebase';
 import { store } from '../store/store';
 
-interface ApiClient {
+interface APIClient {
   body?: {};
   method: 'GET' | 'PUT' | 'POST' | 'DELETE';
   url: string;
-}
-
-export interface ApiResponse {
-  data?: any;
-  error?: ApiError;
 }
 
 const headers = new Headers();
@@ -21,7 +16,7 @@ export const apiClient = async ({
   body,
   method,
   url,
-}: ApiClient): Promise<ApiResponse> => {
+}: APIClient): Promise<APIResponse> => {
   const { currentUser } = firebase.auth;
   const { spaces } = store.getState();
 

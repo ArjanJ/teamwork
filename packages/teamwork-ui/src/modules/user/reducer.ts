@@ -1,4 +1,4 @@
-import { ApiError, User } from 'teamwork-types';
+import { APIError, User } from 'teamwork-types';
 import {
   CREATE_TEAM,
   CreateTeamAction,
@@ -16,7 +16,7 @@ import {
 } from './reducers/index';
 
 export interface UserState {
-  error: ApiError | null;
+  error: APIError | null;
   isCreating: boolean;
   isFetching: boolean;
   isUpdating: boolean;

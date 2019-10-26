@@ -1,7 +1,5 @@
 import { Dispatch } from 'redux';
-import { ApiError } from 'teamwork-types';
-
-import { ApiResponse } from './apiClient';
+import { APIError, APIResponse } from 'teamwork-types';
 
 export enum AsyncActionStatus {
   FAILED = 'FAILED',
@@ -23,7 +21,7 @@ export interface SucceededAsyncAction<T, P = any> {
 }
 
 export interface FailedAsyncAction<T> {
-  payload: ApiError;
+  payload: APIError;
   status: AsyncActionStatus.FAILED;
   type: T;
 }
@@ -52,7 +50,7 @@ function succeededAsyncAction<T, P>(
   };
 }
 
-function failedAsyncAction<T>(type: T, error: ApiError): FailedAsyncAction<T> {
+function failedAsyncAction<T>(type: T, error: APIError): FailedAsyncAction<T> {
   return {
     payload: error,
     status: AsyncActionStatus.FAILED,
@@ -60,7 +58,7 @@ function failedAsyncAction<T>(type: T, error: ApiError): FailedAsyncAction<T> {
   };
 }
 
-export function async<T, P extends ApiResponse>(
+export function async<T, P extends APIResponse>(
   type: T,
   action: (...args: any[]) => Promise<P>,
   ...args: any[]
