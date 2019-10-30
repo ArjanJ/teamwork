@@ -10,14 +10,6 @@ import { routes } from './routes/';
 const PORT = process.env.PORT || 8000;
 const app = express();
 
-/**
- * Without this, nodemon crashes on restart because
- * it doesn't close the port properly.
- */
-process.on('SIGUSR2', () => {
-  process.exit(0);
-});
-
 app.use(cors());
 app.use(morgan('combined'));
 app.use(bodyParser.json({ limit: '5mb' }));

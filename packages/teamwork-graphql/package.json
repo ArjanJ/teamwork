@@ -1,0 +1,32 @@
+{
+  "name": "teamwork-graphql",
+  "version": "0.0.2",
+  "description": "graphql schema and codegen",
+  "author": "Arjan Jassal <arjan.jassal.27@gmail.com>",
+  "homepage": "https://github.com/ArjanJ/teamwork#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArjanJ/teamwork.git"
+  },
+  "scripts": {
+    "generate": "graphql-codegen"
+  },
+  "bugs": {
+    "url": "https://github.com/ArjanJ/teamwork/issues"
+  },
+  "dependencies": {
+    "@graphql-codegen/cli": "^1.8.2",
+    "@graphql-codegen/typescript": "^1.8.2",
+    "@graphql-codegen/typescript-operations": "^1.8.2",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1"
+  }
+}

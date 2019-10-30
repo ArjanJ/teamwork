@@ -1,0 +1,5 @@
+schema: ./src/schema/*.ts
+generates:
+  lib/server/gen-types.ts:
+    plugins:
+      - typescript
