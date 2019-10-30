@@ -5,6 +5,7 @@
   ],
   "scripts": {
     "bootstrap": "lerna exec -- npm install",
+    "codegen": "lerna run generate --scope teamwork-graphql",
     "deploy:dev": "lerna run --parallel deploy:dev",
     "deploy:prod": "lerna run --parallel deploy:prod",
     "start:api": "lerna run dev --scope teamwork-api --stream",

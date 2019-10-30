@@ -1,0 +1,7 @@
+{
+  "printWidth": 80,
+  "parser": "graphql",
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "all"
+}
