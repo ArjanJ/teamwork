@@ -18,9 +18,5 @@
   },
   "dependencies": {
     "tslint-config-prettier": "^1.18.0"
-  },
-  "devDependencies": {
-    "@types/webpack-env": "^1.14.0",
-    "redux-logger": "^3.0.6"
   }
 }

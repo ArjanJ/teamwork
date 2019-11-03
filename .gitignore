@@ -1,9 +1,11 @@
 node_modules/
 keys/
 dist/
-lib/
 build/
 .env
 .env.*
 .DS_Store
 *.log
+
+packages/teamwork-api/lib
+packages/teamwork-ui/lib
