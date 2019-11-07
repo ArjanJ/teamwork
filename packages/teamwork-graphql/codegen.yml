@@ -1,6 +1,6 @@
 schema: ./lib/schema/*.ts
 generates:
-  lib/server/gen-types.ts:
+  lib/server/index.ts:
     plugins:
       - typescript
       - typescript-resolvers

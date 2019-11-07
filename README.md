@@ -68,13 +68,10 @@ Keep track of little things you owe people on your team.
 
 ### Frontend
 ```
-npm run start:ui
+yarnstart:ui
 ```
 
 ### Backend
 ```
-npm run start:api
+yarn start:api
 ```
-
-## Release
-Use lerna to bump the version https://github.com/lerna/lerna/tree/master/commands/version#readme

@@ -1,6 +1,10 @@
 import gql from 'graphql-tag';
 
 export const userSchema = gql`
+  extend type Query {
+    user(id: ID!): User!
+  }
+
   type User {
     companies: [Company!]!
     email: String!
@@ -15,13 +19,5 @@ export const userSchema = gql`
     displayName: String!
     id: ID!
     name: String!
-  }
-
-  type Query {
-    user(id: ID!): User!
-  }
-
-  schema {
-    query: Query
   }
 `;

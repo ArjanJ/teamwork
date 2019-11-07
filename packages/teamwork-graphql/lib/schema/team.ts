@@ -1,6 +1,11 @@
 import gql from 'graphql-tag';
 
 export const teamSchema = gql`
+  extend type Query {
+    team(teamId: ID!): Team!
+    teams: [Team!]!
+  }
+
   type Team {
     company: Company!
     displayName: String!
@@ -13,14 +18,5 @@ export const teamSchema = gql`
     email: String!
     firstName: String!
     lastName: String!
-  }
-
-  type Query {
-    team(teamId: ID!): Team!
-    teams: [Team!]!
-  }
-
-  schema {
-    query: Query
   }
 `;

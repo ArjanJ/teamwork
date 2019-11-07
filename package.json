@@ -5,11 +5,11 @@
   ],
   "private": true,
   "scripts": {
-    "codegen": "lerna run generate --scope teamwork-graphql",
-    "deploy:dev": "lerna run --parallel deploy:dev",
-    "deploy:prod": "lerna run --parallel deploy:prod",
-    "start:api": "lerna run dev --scope teamwork-api --stream",
-    "start:ui": "lerna run dev --scope teamwork-ui --stream"
+    "codegen": "yarn workspace teamwork-graphql run generate",
+    "deploy:dev": "yarn workspaces run deploy:dev",
+    "deploy:prod": "yarn workspaces run deploy:prod",
+    "start:api": "yarn workspace teamwork-api run dev",
+    "start:ui": "yarn workspace teamwork-ui run dev"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",

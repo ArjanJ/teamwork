@@ -1,6 +1,10 @@
 import gql from 'graphql-tag';
 
 export const companySchema = gql`
+  extend type Query {
+    company(companyId: ID!): Company!
+  }
+
   type Company {
     displayName: String!
     id: ID!
@@ -12,13 +16,5 @@ export const companySchema = gql`
     email: String!
     firstName: String!
     lastName: String!
-  }
-
-  type Query {
-    company(companyId: ID!): Company!
-  }
-
-  schema {
-    query: Query
   }
 `;
