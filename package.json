@@ -1,9 +1,13 @@
 {
   "name": "teamwork",
+  "packageManager": "yarn@1.22.22",
   "workspaces": [
     "packages/*"
   ],
   "private": true,
+  "resolutions": {
+    "tar": "7.5.21"
+  },
   "scripts": {
     "codegen": "yarn workspace teamwork-graphql run generate",
     "deploy:dev": "yarn workspaces run deploy:dev",
