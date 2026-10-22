@@ -31,6 +31,7 @@
     "graphql-tag": "^2.10.1"
   },
   "overrides": {
+    "json-schema": "0.4.0",
     "minimist": "1.2.6",
     "request": {
       "form-data": "2.5.6"
